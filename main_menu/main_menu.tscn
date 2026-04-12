@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://cxby1rpj5kclj"]
+
+[ext_resource type="Script" uid="uid://cw57xyc622x31" path="res://main_menu/game_button.gd" id="1_oa53l"]
+[ext_resource type="PackedScene" uid="uid://cn5blsogqeywr" path="res://infection_spreading/main/main.tscn" id="2_d3a7t"]
+
+[node name="MainMenu" type="Control" unique_id=1551978367]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=27514064]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameButton" type="Button" parent="VBoxContainer" unique_id=486813423]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Tower Defense"
+script = ExtResource("1_oa53l")
+
+[node name="GameButton2" type="Button" parent="VBoxContainer" unique_id=273885239]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Infection Spreading
+"
+script = ExtResource("1_oa53l")
+packed_scene = ExtResource("2_d3a7t")
+
+[connection signal="pressed" from="VBoxContainer/GameButton" to="VBoxContainer/GameButton" method="_on_pressed"]
+[connection signal="pressed" from="VBoxContainer/GameButton2" to="VBoxContainer/GameButton2" method="_on_pressed"]

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cn5blsogqeywr"]
+
+[ext_resource type="Script" uid="uid://qustt31vac3b" path="res://infection_spreading/main/main.gd" id="1_50gol"]
+
+[node name="Main" type="Node2D" unique_id=1513803029]
+script = ExtResource("1_50gol")
