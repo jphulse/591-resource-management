@@ -1,6 +1,11 @@
 [gd_scene format=3 uid="uid://cn5blsogqeywr"]
 
 [ext_resource type="Script" uid="uid://qustt31vac3b" path="res://infection_spreading/main/main.gd" id="1_50gol"]
+[ext_resource type="PackedScene" uid="uid://daqdtstnmpngs" path="res://infection_spreading/ui/main_ui.tscn" id="2_bgph4"]
 
 [node name="Main" type="Node2D" unique_id=1513803029]
 script = ExtResource("1_50gol")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=811699059]
+
+[node name="MainUi" parent="CanvasLayer" unique_id=1790486406 instance=ExtResource("2_bgph4")]
