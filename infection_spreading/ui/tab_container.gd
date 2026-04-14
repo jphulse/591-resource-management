@@ -20,3 +20,13 @@ func _center_node(node: Node2D) -> void:
 	area.position = size / 2.0
 	var rel_side: float = size.x if size.x < size.y else size.y
 	click_circle.radius =  rel_side * radius_size_percentage
+
+
+func _on_resized() -> void:
+	if area:
+		_center_node(area)
+	
+
+
+func _on_tab_changed(tab: int) -> void:
+	pass

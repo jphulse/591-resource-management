@@ -29,3 +29,6 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
+
+[connection signal="resized" from="TabContainer" to="TabContainer" method="_on_resized"]
+[connection signal="tab_changed" from="TabContainer" to="TabContainer" method="_on_tab_changed"]

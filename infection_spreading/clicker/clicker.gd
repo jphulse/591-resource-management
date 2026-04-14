@@ -1,6 +1,7 @@
 extends Panel
 
 
+#region Local fields
 ## The current toal score currently ina  float we may have to find a better way to represent this
 var count : float = 0
 ## Whether or not the click area is active
@@ -15,12 +16,13 @@ var score_per_second_format : String = "%.02f CPS"
 var click_value_per_second : float = 0.0
 ## Number of score gained every second passively
 var passive_clicks_per_second : float = 0.0
-
+#endregion
+#region onready vars
 ## The total label is used to show the player they're current score
 @onready var total_label : Label = %TotalLabel
 ## The score per second label displays the score per second including clicks over the past second
 @onready var score_per_second : Label = %ScorePerSecond
-
+#endregion
 
 #region Mouse interactions
 ## Activate when the mouse enters an area
@@ -53,3 +55,4 @@ func update_score_per_second_label() -> void:
 func _on_second_timer_timeout() -> void:
 	update_score_per_second_label()
 	click_value_per_second = 0
+	
