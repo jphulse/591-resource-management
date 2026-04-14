@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bhnt3nq04fpt8" path="res://infection_spreading/clicker/clicker.gd" id="1_c8eug"]
 [ext_resource type="Script" uid="uid://bc43eqcwiux3n" path="res://infection_spreading/clicker/passive_clicker.gd" id="2_hy3xo"]
 [ext_resource type="Shader" path="res://infection_spreading/clicker/infection_button.gdshader" id="3_8jdh8"]
+[ext_resource type="PackedScene" uid="uid://dqt48i3odii7u" path="res://infection_spreading/clicker/clicker_passive/clicker_passive_button.tscn" id="3_m3gyo"]
 
 [sub_resource type="Resource" id="Resource_m3gyo"]
 script = ExtResource("2_hy3xo")
