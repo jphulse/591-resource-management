@@ -1,5 +1,9 @@
 extends Panel
 
+#region Exported vars
+## Array of passives, mostly exported for testing
+@export var passives : Array[PlaguePassive] = []
+#endregion
 
 #region Local fields
 ## The current toal score currently ina  float we may have to find a better way to represent this
@@ -17,6 +21,7 @@ var click_value_per_second : float = 0.0
 ## Number of score gained every second passively
 var passive_clicks_per_second : float = 0.0
 #endregion
+
 #region onready vars
 ## The total label is used to show the player they're current score
 @onready var total_label : Label = %TotalLabel
@@ -51,8 +56,35 @@ func update_score_per_second_label() -> void:
 	score_per_second.text = score_per_second_format % (click_value_per_second + passive_clicks_per_second)
 #endregion
 
+#region Timer callbacks
 ## This is just hooked up to a timer that goes off every second and updates the cps label
 func _on_second_timer_timeout() -> void:
 	update_score_per_second_label()
 	click_value_per_second = 0
+#endregion
+
+#region Helper methods
+## Updates the passive clicks as needed
+func _update_passive_clicks() -> void:
+	passive_clicks_per_second = 0.0
+	for passive : PlaguePassive in passives:
+		passive_clicks_per_second += passive.get_passive_amount()
+## Gets the total frame contribution for the passive
+func _get_passive_frame_contribution(delta : float) -> float:
+	var ret_val : float = 0
+	for passive : PlaguePassive in passives:
+		ret_val += passive.get_process_amount(delta)
+	return ret_val
+#endregion
+
+#region Processing
+func _ready() -> void:
+	_update_passive_clicks()
+
+
+
+func _process(delta: float) -> void:
+	count += _get_passive_frame_contribution(delta)
+	update_score_label()
 	
+#endregion
