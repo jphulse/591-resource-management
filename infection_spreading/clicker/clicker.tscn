@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://8xasmib8wj0k"]
+
+[ext_resource type="Script" uid="uid://bhnt3nq04fpt8" path="res://infection_spreading/clicker/clicker.gd" id="1_c8eug"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4aye0"]
+radius = 134.8
+
+[node name="Clicker" type="Panel" unique_id=1813294204]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_c8eug")
+metadata/_tab_index = 0
+
+[node name="ClickerArea" type="Area2D" parent="." unique_id=1181639626]
+position = Vector2(593, 280)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickerArea" unique_id=1425611402]
+shape = SubResource("CircleShape2D_4aye0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=467301559]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="TotalLabel" type="Label" parent="VBoxContainer" unique_id=360236146]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+text = "TEST X Currency"
+
+[node name="ScorePerSecond" type="Label" parent="VBoxContainer" unique_id=748921390]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+text = "X CPS"
+horizontal_alignment = 1
+
+[node name="Timers" type="Node" parent="." unique_id=2138432576]
+
+[node name="SecondTimer" type="Timer" parent="Timers" unique_id=1279443939]
+unique_name_in_owner = true
+autostart = true
+
+[connection signal="mouse_entered" from="ClickerArea" to="." method="_on_clicker_area_mouse_entered"]
+[connection signal="mouse_exited" from="ClickerArea" to="." method="_on_clicker_area_mouse_exited"]
+[connection signal="timeout" from="Timers/SecondTimer" to="." method="_on_second_timer_timeout"]

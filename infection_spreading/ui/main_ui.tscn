@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://daqdtstnmpngs"]
 
 [ext_resource type="Script" uid="uid://cgcs6sq0f7wgf" path="res://infection_spreading/ui/tab_container.gd" id="1_glgr5"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_4aye0"]
+[ext_resource type="PackedScene" uid="uid://8xasmib8wj0k" path="res://infection_spreading/clicker/clicker.tscn" id="2_8v3b7"]
 
 [node name="MainUi" type="Control" unique_id=1790486406]
 layout_mode = 3
@@ -11,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 
 [node name="TabContainer" type="TabContainer" parent="." unique_id=1697270682]
 layout_mode = 1
@@ -22,14 +22,8 @@ grow_vertical = 2
 current_tab = 0
 script = ExtResource("1_glgr5")
 
-[node name="Clicker" type="Panel" parent="TabContainer" unique_id=1078766429]
+[node name="Clicker" parent="TabContainer" unique_id=1813294204 instance=ExtResource("2_8v3b7")]
 layout_mode = 2
-metadata/_tab_index = 0
-
-[node name="ClickerArea" type="Area2D" parent="TabContainer/Clicker" unique_id=1663432347]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TabContainer/Clicker/ClickerArea" unique_id=1006915376]
-shape = SubResource("CircleShape2D_4aye0")
 
 [node name="Upgrades" type="Panel" parent="TabContainer" unique_id=514701076]
 visible = false

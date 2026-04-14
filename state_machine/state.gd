@@ -8,24 +8,25 @@
 
 @warning_ignore("unused_signal") signal EmergencyTransition(caller : State, next_state_id : StringName)
 
-
+## The node that this scene is ultimately owned by (i.e. player, boss, door, etc.)
 var owner_node : Node
 
+## Sets the owner node of this state, typically done by the state machine
 func set_owner_node(n : Node) -> void:
 	owner_node = n
 
-# executes code of the next state after the state switch
+## Executed when this state is entered, think of this as a repeated ready function
 func enter() -> void:
 	pass
 
-# executes code right before a called state switch
+## Executes when this state is left think of this like a cleanup/ exit_tree function
 func exit() -> void:
 	pass
 
-# '_process's frame iteration is passed to the state's update to run every frame
+## '_process's frame iteration is passed to the state's update to run every frame
 func update(_delta : float) -> void:
 	pass
 
-# '_physics_process' frame iteration is passed to the state's update to run every fixed physics frame
+## '_physics_process' frame iteration is passed to the state's update to run every fixed physics frame
 func physics_update(_delta : float) -> void:
 	pass
