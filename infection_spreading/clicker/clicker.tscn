@@ -90,13 +90,14 @@ grow_horizontal = 0
 grow_vertical = 2
 horizontal_scroll_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PassiveVals" unique_id=1069886514]
+[node name="UpgradeContainer" type="VBoxContainer" parent="PassiveVals" unique_id=1069886514]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="PassiveButton" type="Button" parent="PassiveVals/VBoxContainer" unique_id=702656117]
+[node name="ClickerPassiveButton" parent="PassiveVals/UpgradeContainer" unique_id=1532006861 instance=ExtResource("3_m3gyo")]
 layout_mode = 2
-text = "Test"
 
 [connection signal="mouse_entered" from="ClickerArea" to="." method="_on_clicker_area_mouse_entered"]
 [connection signal="mouse_exited" from="ClickerArea" to="." method="_on_clicker_area_mouse_exited"]

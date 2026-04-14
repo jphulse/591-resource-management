@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://dqt48i3odii7u"]
+
+[ext_resource type="Texture2D" uid="uid://c37pm1sxrecbs" path="res://icon.svg" id="1_bwojt"]
+[ext_resource type="Script" uid="uid://droq8g1p5ejhr" path="res://infection_spreading/clicker/clicker_passive/clicker_passive_button.gd" id="1_idicg"]
+
+[node name="ClickerPassiveButton" type="Button" unique_id=1532006861]
+custom_minimum_size = Vector2(40, 80)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"
+script = ExtResource("1_idicg")
+
+[node name="Content" type="MarginContainer" parent="." unique_id=635899180]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Content" unique_id=1614725982]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Content/HBoxContainer" unique_id=967527149]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("1_bwojt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Content/HBoxContainer" unique_id=1821460859]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NameLabel" type="Label" parent="Content/HBoxContainer/VBoxContainer" unique_id=418269913]
+custom_minimum_size = Vector2(20, 10)
+layout_mode = 2
+size_flags_vertical = 3
+text = "Name"
+autowrap_mode = 1
+
+[node name="Description" type="Label" parent="Content/HBoxContainer/VBoxContainer" unique_id=1223302842]
+custom_minimum_size = Vector2(20, 10)
+layout_mode = 2
+size_flags_vertical = 3
+text = "DESCRIPTION"
+autowrap_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Content/HBoxContainer/VBoxContainer" unique_id=964399289]
+layout_mode = 2
+
+[node name="Cost" type="Label" parent="Content/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=963489644]
+custom_minimum_size = Vector2(20, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Cost:"
+autowrap_mode = 1
+
+[node name="CurrentQuantity" type="Label" parent="Content/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=347076723]
+custom_minimum_size = Vector2(20, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Quantity"
+autowrap_mode = 1
