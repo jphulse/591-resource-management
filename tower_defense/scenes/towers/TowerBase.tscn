@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://cwjk105x6ol4s"]
+
+[ext_resource type="Script" uid="uid://2ri6ww0g5tdo" path="res://tower_defense/scenes/towers/tower_base.gd" id="1_74yv8"]
+[ext_resource type="Texture2D" uid="uid://c37pm1sxrecbs" path="res://icon.svg" id="2_2saqb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lmoja"]
+size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bils4"]
+size = Vector2(416, 16)
+
+[node name="TowerBase" type="Node2D" unique_id=879173299]
+script = ExtResource("1_74yv8")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1950465526]
+texture = ExtResource("2_2saqb")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1402533722]
+
+[node name="HitboxCollisionShape" type="CollisionShape2D" parent="Hitbox" unique_id=1016612673]
+shape = SubResource("RectangleShape2D_lmoja")
+
+[node name="DetectionRange" type="Area2D" parent="." unique_id=431727381]
+
+[node name="DetectionRangeCollisionShape" type="CollisionShape2D" parent="DetectionRange" unique_id=1265304444]
+position = Vector2(200, 0)
+shape = SubResource("RectangleShape2D_bils4")
+
+[node name="Projectiles" type="Node2D" parent="." unique_id=281360252]
+
+[node name="AttackCooldownTimer" type="Timer" parent="." unique_id=1251600245]
+
+[connection signal="area_entered" from="DetectionRange" to="." method="_on_detection_range_area_entered"]
+[connection signal="area_exited" from="DetectionRange" to="." method="_on_detection_range_area_exited"]
+[connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_attack_cooldown_timer_timeout"]

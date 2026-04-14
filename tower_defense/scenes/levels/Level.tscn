@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://baq27ledf3wuj"]
+
+[ext_resource type="Script" uid="uid://bqjarvmmujla3" path="res://tower_defense/scenes/levels/level.gd" id="1_7ilpt"]
+[ext_resource type="PackedScene" uid="uid://cwjk105x6ol4s" path="res://tower_defense/scenes/towers/TowerBase.tscn" id="2_7g3i0"]
+
+[sub_resource type="Curve2D" id="Curve2D_7ilpt"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 358, 337, 0, 0, 0, 0, -382, 328)
+}
+point_count = 2
+
+[node name="Level" type="Node2D" unique_id=1179053228]
+script = ExtResource("1_7ilpt")
+
+[node name="Background" type="Node2D" parent="." unique_id=1733242158]
+
+[node name="Towers" type="Node2D" parent="." unique_id=1147190414]
+
+[node name="TowerBase" parent="Towers" unique_id=879173299 instance=ExtResource("2_7g3i0")]
+position = Vector2(193, 338)
+
+[node name="EnemyPaths" type="Node2D" parent="." unique_id=1432301337]
+
+[node name="Path2D" type="Path2D" parent="EnemyPaths" unique_id=689658589]
+position = Vector2(670, 0)
+curve = SubResource("Curve2D_7ilpt")

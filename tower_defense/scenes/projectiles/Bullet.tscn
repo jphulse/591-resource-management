@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dnp43e1e5jakt"]
+
+[ext_resource type="Texture2D" uid="uid://c37pm1sxrecbs" path="res://icon.svg" id="1_8liv5"]
+[ext_resource type="Script" uid="uid://bqaorl5yamn0q" path="res://tower_defense/scenes/projectiles/bullet.gd" id="1_uq68t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uq68t"]
+size = Vector2(48, 128)
+
+[node name="Bullet" type="Area2D" unique_id=2042272439]
+scale = Vector2(0.1, 0.1)
+script = ExtResource("1_uq68t")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=599003515]
+modulate = Color(18.892157, 16.568003, 0, 1)
+texture = ExtResource("1_8liv5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=88937077]
+shape = SubResource("RectangleShape2D_uq68t")
