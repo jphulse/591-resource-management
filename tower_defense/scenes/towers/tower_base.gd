@@ -1,14 +1,17 @@
 class_name TowerBase extends Node2D
 
 @onready var bullet_scene: PackedScene = preload("res://tower_defense/scenes/projectiles/Bullet.tscn")
+@onready var hitbox: Area2D = $TowerHitbox
+@onready var attack_area: Area2D = $TowerAttackRange
 @onready var attack_cooldown_timer: Timer = $AttackCooldownTimer
 @onready var projectiles_list: Node2D = $Projectiles
 
 @export var damage: float = 10.0
-@export var health: float = 10.0
+@export var health: float = 40.0
 @export var projectile_speed: float = 200.0
-@export var detection_range: float = 100.0
 @export var attack_cooldown: float = 0.5
+#@export var detection_range: float = 100.0
+
 
 var enemies: Array = []
 var can_attack: bool = true
@@ -16,7 +19,10 @@ var can_attack: bool = true
 func _ready() -> void:
 	#print("Local Position:", position)
 	#print("Global Position:", global_position)
-	pass
+	
+	hitbox.setup(self)
+	attack_area.setup(self, damage)
+
 
 func _process(delta: float) -> void:
 	if enemies:

@@ -1,4 +1,4 @@
-class_name EnemyAttackArea extends Area2D
+class_name TowerAttackRange extends Area2D
 
 var parent: Node2D
 var damage: float

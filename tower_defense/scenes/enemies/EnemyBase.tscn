@@ -14,29 +14,28 @@ size = Vector2(160, 80.000015)
 [node name="EnemyBase" type="Node2D" unique_id=1221308985]
 scale = Vector2(0.2, 0.2)
 script = ExtResource("1_coewb")
-damage = null
-health = null
-speed = null
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=752896387]
 modulate = Color(1, 0, 0, 1)
 texture = ExtResource("1_ihuah")
 
-[node name="Hitbox" type="Area2D" parent="." unique_id=938387276]
+[node name="EnemyHitbox" type="Area2D" parent="." unique_id=938387276]
 script = ExtResource("3_ndb33")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1974487812]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox" unique_id=1974487812]
 shape = SubResource("RectangleShape2D_coewb")
 
-[node name="AttackArea" type="Area2D" parent="." unique_id=1471568512]
+[node name="EnemyAttackArea" type="Area2D" parent="." unique_id=1471568512]
 script = ExtResource("4_10dr3")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=55715416]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyAttackArea" unique_id=55715416]
 position = Vector2(0, -1.1368684e-13)
 scale = Vector2(0.9999997, 0.9999997)
 shape = SubResource("RectangleShape2D_ndb33")
 
 [node name="AttackCooldownTimer" type="Timer" parent="." unique_id=501510785]
 
-[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
-[connection signal="area_entered" from="AttackArea" to="." method="_on_attack_area_area_entered"]
+[connection signal="area_entered" from="EnemyHitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_entered" from="EnemyAttackArea" to="." method="_on_attack_area_area_entered"]
+[connection signal="area_exited" from="EnemyAttackArea" to="." method="_on_attack_area_area_exited"]
+[connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_attack_cooldown_timer_timeout"]

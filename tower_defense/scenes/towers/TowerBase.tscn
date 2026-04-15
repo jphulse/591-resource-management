@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://2ri6ww0g5tdo" path="res://tower_defense/scenes/towers/tower_base.gd" id="1_74yv8"]
 [ext_resource type="Texture2D" uid="uid://c37pm1sxrecbs" path="res://icon.svg" id="2_2saqb"]
 [ext_resource type="Script" uid="uid://cs2i413p3lw3d" path="res://tower_defense/scenes/towers/tower_hitbox.gd" id="3_lmoja"]
+[ext_resource type="Script" uid="uid://dmve0q2u5uxl6" path="res://tower_defense/scenes/towers/tower_attack_range.gd" id="4_bils4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lmoja"]
 size = Vector2(128, 128)
@@ -22,9 +23,10 @@ script = ExtResource("3_lmoja")
 [node name="HitboxCollisionShape" type="CollisionShape2D" parent="TowerHitbox" unique_id=1016612673]
 shape = SubResource("RectangleShape2D_lmoja")
 
-[node name="DetectionRange" type="Area2D" parent="." unique_id=431727381]
+[node name="TowerAttackRange" type="Area2D" parent="." unique_id=431727381]
+script = ExtResource("4_bils4")
 
-[node name="DetectionRangeCollisionShape" type="CollisionShape2D" parent="DetectionRange" unique_id=1265304444]
+[node name="DetectionRangeCollisionShape" type="CollisionShape2D" parent="TowerAttackRange" unique_id=1265304444]
 position = Vector2(200, 0)
 shape = SubResource("RectangleShape2D_bils4")
 
@@ -33,6 +35,6 @@ shape = SubResource("RectangleShape2D_bils4")
 [node name="AttackCooldownTimer" type="Timer" parent="." unique_id=1251600245]
 
 [connection signal="area_entered" from="TowerHitbox" to="." method="_on_hitbox_area_entered"]
-[connection signal="area_entered" from="DetectionRange" to="." method="_on_detection_range_area_entered"]
-[connection signal="area_exited" from="DetectionRange" to="." method="_on_detection_range_area_exited"]
+[connection signal="area_entered" from="TowerAttackRange" to="." method="_on_detection_range_area_entered"]
+[connection signal="area_exited" from="TowerAttackRange" to="." method="_on_detection_range_area_exited"]
 [connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_attack_cooldown_timer_timeout"]

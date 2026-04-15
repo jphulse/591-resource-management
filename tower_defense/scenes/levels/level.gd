@@ -16,10 +16,12 @@ func _ready() -> void:
 		
 	for tower in tower_nodes.get_children():
 		tower.connect("tower_attack", _tower_attack)
+	
 
 func _process(_delta: float) -> void:
 	if randi() % 10 == 0:
 		spawn_enemy()
+	pass
 
 func spawn_enemy() -> void:
 	var enemy_path: Path2D = enemy_paths.pick_random()
