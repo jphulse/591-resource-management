@@ -16,3 +16,5 @@ texture = ExtResource("1_8liv5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=88937077]
 shape = SubResource("RectangleShape2D_uq68t")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

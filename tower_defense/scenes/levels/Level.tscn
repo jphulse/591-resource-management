@@ -5,7 +5,7 @@
 
 [sub_resource type="Curve2D" id="Curve2D_7ilpt"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 358, 337, 0, 0, 0, 0, -382, 328)
+"points": PackedVector2Array(0, 0, 0, 0, 360, 336, 0, 0, 0, 0, -152, 336)
 }
 point_count = 2
 
@@ -17,10 +17,13 @@ script = ExtResource("1_7ilpt")
 [node name="Towers" type="Node2D" parent="." unique_id=1147190414]
 
 [node name="TowerBase" parent="Towers" unique_id=879173299 instance=ExtResource("2_7g3i0")]
-position = Vector2(193, 338)
+position = Vector2(192, 256)
 
 [node name="EnemyPaths" type="Node2D" parent="." unique_id=1432301337]
 
 [node name="Path2D" type="Path2D" parent="EnemyPaths" unique_id=689658589]
-position = Vector2(670, 0)
+position = Vector2(368, -80)
+scale = Vector2(2, 1)
 curve = SubResource("Curve2D_7ilpt")
+
+[node name="Projectiles" type="Node2D" parent="." unique_id=446474833]
