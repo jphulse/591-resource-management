@@ -41,6 +41,6 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 	if area is Bullet:
 		take_damage(area.damage)
 
-
 func _on_attack_area_area_entered(area: Area2D) -> void:
-	if area is 
+	if area is TowerHitbox:
+		
