@@ -4,14 +4,14 @@ uniform float infection_level : hint_range(0.0, 1.0) = 0.0;
 uniform float pulse_strength : hint_range(0.0, 1.0) = 0.0;
 uniform vec2 tentacle_seed = vec2(0.0, 0.0);
 
-uniform vec4 button_color : source_color = vec4(0.01, 0.01, 0.02, 1.0);
-uniform vec4 button_edge_color : source_color = vec4(0.10, 0.10, 0.14, 1.0);
-uniform vec4 star_color : source_color = vec4(0.99, 0.95, 0.82, 1.0);
-uniform vec4 infected_color : source_color = vec4(0.88, 0.08, 0.15, 1.0);
-uniform vec4 infected_soft_color : source_color = vec4(0.96, 0.26, 0.33, 1.0);
-uniform vec4 infected_hot_color : source_color = vec4(1.00, 0.53, 0.58, 1.0);
-uniform vec4 infected_shadow_color : source_color = vec4(0.44, 0.03, 0.08, 1.0);
-uniform vec4 vein_color : source_color = vec4(0.73, 0.11, 0.18, 1.0);
+uniform vec4 button_color : source_color = vec4(0.93, 0.43, 0.06, 1.0);
+uniform vec4 button_edge_color : source_color = vec4(0.55, 0.13, 0.01, 1.0);
+uniform vec4 star_color : source_color = vec4(1.00, 0.95, 0.76, 1.0);
+uniform vec4 infected_color : source_color = vec4(0.80, 0.07, 0.10, 1.0);
+uniform vec4 infected_soft_color : source_color = vec4(0.98, 0.25, 0.08, 1.0);
+uniform vec4 infected_hot_color : source_color = vec4(1.00, 0.84, 0.28, 1.0);
+uniform vec4 infected_shadow_color : source_color = vec4(0.38, 0.03, 0.01, 1.0);
+uniform vec4 vein_color : source_color = vec4(0.82, 0.18, 0.03, 1.0);
 
 float hash(vec2 p) {
 	return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);

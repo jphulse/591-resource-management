@@ -10,6 +10,14 @@ const MANUAL_CPS_WINDOW : float = 1.0
 const VISUAL_CPS_FOR_MAX_INFECTION : float = 10.0
 const VISUAL_RESPONSE_SPEED : float = 4.0
 const INFECTION_SEED_THRESHOLD : float = 0.02
+const SUN_BUTTON_COLOR : Color = Color("ea6b10")
+const SUN_EDGE_COLOR : Color = Color("7b1d03")
+const SUN_STAR_COLOR : Color = Color("fff1b6")
+const SUN_INFECTED_COLOR : Color = Color("e01426")
+const SUN_INFECTED_SOFT_COLOR : Color = Color("f54254")
+const SUN_INFECTED_HOT_COLOR : Color = Color("ff8790")
+const SUN_INFECTED_SHADOW_COLOR : Color = Color("47030a")
+const SUN_VEIN_COLOR : Color = Color("b51b2a")
 
 ## The current toal score currently ina  float we may have to find a better way to represent this
 var count : float = 0
@@ -46,6 +54,7 @@ var infection_rng : RandomNumberGenerator = RandomNumberGenerator.new()
 @onready var infection_button : ColorRect = %InfectionButton
 ## Collision area used for clicking the button
 @onready var clicker_area : Area2D = %ClickerArea
+@onready var clicker_shape : CollisionShape2D = $ClickerArea/CollisionShape2D
 #endregion
 
 #region Mouse interactions
@@ -83,7 +92,12 @@ func _on_second_timer_timeout() -> void:
 #region Helper methods
 ## Keeps the click area centered on top of the button visual
 func _sync_clicker_area() -> void:
+	var viewport_center : Vector2 = get_viewport_rect().size * 0.5
+	infection_button.global_position = viewport_center - (infection_button.size * 0.5)
 	clicker_area.position = infection_button.position + (infection_button.size * 0.5)
+	var circle_shape : CircleShape2D = clicker_shape.shape as CircleShape2D
+	if circle_shape != null:
+		circle_shape.radius = min(infection_button.size.x, infection_button.size.y) * 0.31
 
 ## Records a click for scorekeeping and the rolling infection visual state
 func _register_click(amount : float) -> void:
@@ -142,6 +156,17 @@ func _randomize_infection_seed(material : ShaderMaterial) -> void:
 		)
 	)
 
+## Tunes the center shader so the clickable button visually reads as the system's sun
+func _style_button_as_sun(material : ShaderMaterial) -> void:
+	material.set_shader_parameter("button_color", SUN_BUTTON_COLOR)
+	material.set_shader_parameter("button_edge_color", SUN_EDGE_COLOR)
+	material.set_shader_parameter("star_color", SUN_STAR_COLOR)
+	material.set_shader_parameter("infected_color", SUN_INFECTED_COLOR)
+	material.set_shader_parameter("infected_soft_color", SUN_INFECTED_SOFT_COLOR)
+	material.set_shader_parameter("infected_hot_color", SUN_INFECTED_HOT_COLOR)
+	material.set_shader_parameter("infected_shadow_color", SUN_INFECTED_SHADOW_COLOR)
+	material.set_shader_parameter("vein_color", SUN_VEIN_COLOR)
+
 ## Updates the passive clicks as needed
 func _update_passive_clicks() -> void:
 	passive_clicks_per_second = 0.0
@@ -162,6 +187,7 @@ func _ready() -> void:
 	update_score_per_second_label()
 	infection_rng.randomize()
 	infection_button.material = infection_button.material.duplicate()
+	_style_button_as_sun(infection_button.material as ShaderMaterial)
 	_randomize_infection_seed(infection_button.material as ShaderMaterial)
 	_sync_clicker_area()
 	_update_infection_visuals(0.0)

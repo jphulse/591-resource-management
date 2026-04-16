@@ -1,11 +1,10 @@
-class_name PIMain extends Node2D
+class_name PIMain
+extends Node2D
+
+@onready var solar_system_stage : MapStage = %SolarSystemStage
+@onready var map_camera : Camera2D = %MapCamera
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	solar_system_stage.initialize_stage()
+	map_camera.zoom = Vector2.ONE
