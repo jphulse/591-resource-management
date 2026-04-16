@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://c37pm1sxrecbs" path="res://icon.svg" id="1_bwojt"]
 [ext_resource type="Script" uid="uid://droq8g1p5ejhr" path="res://infection_spreading/clicker/clicker_passive/clicker_passive_button.gd" id="1_idicg"]
 
-[node name="ClickerPassiveButton" type="Button" unique_id=1532006861]
+[node name="ClickerPassiveButton" type="Button" unique_id=1532006861 node_paths=PackedStringArray("texture_icon")]
 custom_minimum_size = Vector2(40, 80)
 anchors_preset = 15
 anchor_right = 1.0
@@ -42,6 +42,8 @@ text = "
 
 "
 script = ExtResource("1_idicg")
+texture_icon = NodePath("Content/HBoxContainer/TextureRect")
+sprite_texture = ExtResource("1_bwojt")
 
 [node name="Content" type="MarginContainer" parent="." unique_id=635899180]
 layout_mode = 1
