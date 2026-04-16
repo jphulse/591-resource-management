@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cgcs6sq0f7wgf" path="res://infection_spreading/ui/tab_container.gd" id="1_glgr5"]
 [ext_resource type="PackedScene" uid="uid://8xasmib8wj0k" path="res://infection_spreading/clicker/clicker.tscn" id="2_8v3b7"]
+[ext_resource type="Script" uid="uid://bc43eqcwiux3n" path="res://infection_spreading/clicker/passive_clicker.gd" id="3_xpojc"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1b4vf"]
 
@@ -21,12 +22,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_1b4vf")
 current_tab = 0
 script = ExtResource("1_glgr5")
-theme_override_styles/panel = SubResource("StyleBoxEmpty_1b4vf")
 
 [node name="Clicker" parent="TabContainer" unique_id=1813294204 instance=ExtResource("2_8v3b7")]
 layout_mode = 2
+passives = Array[ExtResource("3_xpojc")]([])
 
 [node name="Upgrades" type="Panel" parent="TabContainer" unique_id=514701076]
 visible = false

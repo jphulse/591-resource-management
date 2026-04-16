@@ -2,8 +2,10 @@
 
 [ext_resource type="Script" uid="uid://bhnt3nq04fpt8" path="res://infection_spreading/clicker/clicker.gd" id="1_c8eug"]
 [ext_resource type="Script" uid="uid://bc43eqcwiux3n" path="res://infection_spreading/clicker/passive_clicker.gd" id="2_hy3xo"]
-[ext_resource type="Shader" path="res://infection_spreading/clicker/infection_button.gdshader" id="3_8jdh8"]
+[ext_resource type="Shader" uid="uid://cpkbqna43nsve" path="res://infection_spreading/clicker/infection_button.gdshader" id="3_8jdh8"]
 [ext_resource type="PackedScene" uid="uid://dqt48i3odii7u" path="res://infection_spreading/clicker/clicker_passive/clicker_passive_button.tscn" id="3_m3gyo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0n0fn"]
 
 [sub_resource type="Resource" id="Resource_m3gyo"]
 script = ExtResource("2_hy3xo")
@@ -16,8 +18,17 @@ radius = 134.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uh1yl"]
 shader = ExtResource("3_8jdh8")
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0n0fn"]
+shader_parameter/infection_level = 0.0
+shader_parameter/pulse_strength = 0.0
+shader_parameter/tentacle_seed = Vector2(0, 0)
+shader_parameter/button_color = Color(0.01, 0.01, 0.02, 1)
+shader_parameter/button_edge_color = Color(0.1, 0.1, 0.14, 1)
+shader_parameter/star_color = Color(0.99, 0.95, 0.82, 1)
+shader_parameter/infected_color = Color(0.88, 0.08, 0.15, 1)
+shader_parameter/infected_soft_color = Color(0.96, 0.26, 0.33, 1)
+shader_parameter/infected_hot_color = Color(1, 0.53, 0.58, 1)
+shader_parameter/infected_shadow_color = Color(0.44, 0.03, 0.08, 1)
+shader_parameter/vein_color = Color(0.73, 0.11, 0.18, 1)
 
 [node name="Clicker" type="Panel" unique_id=1813294204]
 anchors_preset = 15
@@ -26,10 +37,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxEmpty_0n0fn")
 script = ExtResource("1_c8eug")
 passives = Array[ExtResource("2_hy3xo")]([SubResource("Resource_m3gyo")])
 metadata/_tab_index = 0
-theme_override_styles/panel = SubResource("StyleBoxEmpty_0n0fn")
 
 [node name="ClickerArea" type="Area2D" parent="." unique_id=1181639626]
 unique_name_in_owner = true
@@ -41,7 +52,7 @@ shape = SubResource("CircleShape2D_4aye0")
 [node name="InfectionButton" type="ColorRect" parent="." unique_id=1019283746]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_uh1yl")
-anchors_preset = 8
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -53,7 +64,6 @@ offset_bottom = 60.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(1, 1, 1, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=467301559]
 layout_mode = 1

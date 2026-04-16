@@ -124,8 +124,8 @@ func _get_recent_manual_cps(now : float) -> float:
 
 ## Drives the button shader based on recent clicking and passive spread
 func _update_infection_visuals(delta : float) -> void:
-	var material : ShaderMaterial = infection_button.material as ShaderMaterial
-	if material == null:
+	var material_var : ShaderMaterial = infection_button.material as ShaderMaterial
+	if material_var == null:
 		return
 
 	var now : float = Time.get_ticks_msec() / 1000.0
@@ -136,19 +136,19 @@ func _update_infection_visuals(delta : float) -> void:
 	var should_activate_infection : bool = target_infection_level > INFECTION_SEED_THRESHOLD
 
 	if should_activate_infection and not infection_is_active:
-		_randomize_infection_seed(material)
+		_randomize_infection_seed(material_var)
 
 	infection_is_active = should_activate_infection
 
 	visual_infection_level = move_toward(visual_infection_level, target_infection_level, VISUAL_RESPONSE_SPEED * delta)
 	visual_pulse_strength = move_toward(visual_pulse_strength, target_pulse_strength, (VISUAL_RESPONSE_SPEED + 1.5) * delta)
 
-	material.set_shader_parameter("infection_level", visual_infection_level)
-	material.set_shader_parameter("pulse_strength", visual_pulse_strength)
+	material_var.set_shader_parameter("infection_level", visual_infection_level)
+	material_var.set_shader_parameter("pulse_strength", visual_pulse_strength)
 
 ## Gives the shader a fresh seed so tentacles can originate from different regions each activation
-func _randomize_infection_seed(material : ShaderMaterial) -> void:
-	material.set_shader_parameter(
+func _randomize_infection_seed(material_param : ShaderMaterial) -> void:
+	material_param.set_shader_parameter(
 		"tentacle_seed",
 		Vector2(
 			infection_rng.randf_range(-1000.0, 1000.0),
@@ -157,15 +157,15 @@ func _randomize_infection_seed(material : ShaderMaterial) -> void:
 	)
 
 ## Tunes the center shader so the clickable button visually reads as the system's sun
-func _style_button_as_sun(material : ShaderMaterial) -> void:
-	material.set_shader_parameter("button_color", SUN_BUTTON_COLOR)
-	material.set_shader_parameter("button_edge_color", SUN_EDGE_COLOR)
-	material.set_shader_parameter("star_color", SUN_STAR_COLOR)
-	material.set_shader_parameter("infected_color", SUN_INFECTED_COLOR)
-	material.set_shader_parameter("infected_soft_color", SUN_INFECTED_SOFT_COLOR)
-	material.set_shader_parameter("infected_hot_color", SUN_INFECTED_HOT_COLOR)
-	material.set_shader_parameter("infected_shadow_color", SUN_INFECTED_SHADOW_COLOR)
-	material.set_shader_parameter("vein_color", SUN_VEIN_COLOR)
+func _style_button_as_sun(material_var : ShaderMaterial) -> void:
+	material_var.set_shader_parameter("button_color", SUN_BUTTON_COLOR)
+	material_var.set_shader_parameter("button_edge_color", SUN_EDGE_COLOR)
+	material_var.set_shader_parameter("star_color", SUN_STAR_COLOR)
+	material_var.set_shader_parameter("infected_color", SUN_INFECTED_COLOR)
+	material_var.set_shader_parameter("infected_soft_color", SUN_INFECTED_SOFT_COLOR)
+	material_var.set_shader_parameter("infected_hot_color", SUN_INFECTED_HOT_COLOR)
+	material_var.set_shader_parameter("infected_shadow_color", SUN_INFECTED_SHADOW_COLOR)
+	material_var.set_shader_parameter("vein_color", SUN_VEIN_COLOR)
 
 ## Updates the passive clicks as needed
 func _update_passive_clicks() -> void:

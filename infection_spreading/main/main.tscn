@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://qustt31vac3b" path="res://infection_spreading/main/main.gd" id="1_50gol"]
 [ext_resource type="PackedScene" uid="uid://daqdtstnmpngs" path="res://infection_spreading/ui/main_ui.tscn" id="2_bgph4"]
-[ext_resource type="PackedScene" path="res://infection_spreading/map/solar_system_stage.tscn" id="3_r17b6"]
+[ext_resource type="PackedScene" uid="uid://bsgkxn57si37m" path="res://infection_spreading/map/solar_system_stage.tscn" id="3_r17b6"]
 
 [node name="Main" type="Node2D" unique_id=1513803029]
 script = ExtResource("1_50gol")
@@ -10,7 +10,6 @@ script = ExtResource("1_50gol")
 [node name="MapCamera" type="Camera2D" parent="." unique_id=1971040055]
 unique_name_in_owner = true
 position = Vector2(576, 324)
-enabled = true
 
 [node name="SolarSystemStage" parent="." unique_id=1144462347 instance=ExtResource("3_r17b6")]
 unique_name_in_owner = true

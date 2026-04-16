@@ -1,7 +1,8 @@
 @tool
 extends Button
 
-@export var texture_icon : TextureRect
+@onready var texture_icon : TextureRect = $Content/HBoxContainer/TextureRect
+
 @export var sprite_texture : Texture2D :
 	set(val):
 		sprite_texture = val
