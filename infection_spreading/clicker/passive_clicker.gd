@@ -10,6 +10,10 @@ class_name PlaguePassive extends Resource
 @export var name : String = ""
 ## The texture associated with this item
 @export var sprite_texture : Texture2D
+## The multiplier given to cost after buying one increase for superlinear scaling
+@export var cost_mult : float = 1.0
+## The amount added to cost after buying one increase for linear scaling
+@export var cost_add : float = 1.0
 
 ## Gets the passive amount (per second) gained by this item for all copies
 func get_passive_amount() -> float:
@@ -26,3 +30,9 @@ func mult_value(val : float) -> void:
 ## Adds val to the value of each object
 func add_value(val : float) -> void:
 	passive_benefit += val
+
+
+func buy_another() -> void:
+	count += 1
+	cost += cost_add
+	cost *= cost_mult

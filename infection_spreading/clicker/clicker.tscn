@@ -3,15 +3,17 @@
 [ext_resource type="Script" uid="uid://bhnt3nq04fpt8" path="res://infection_spreading/clicker/clicker.gd" id="1_c8eug"]
 [ext_resource type="Script" uid="uid://bc43eqcwiux3n" path="res://infection_spreading/clicker/passive_clicker.gd" id="2_hy3xo"]
 [ext_resource type="Shader" uid="uid://cpkbqna43nsve" path="res://infection_spreading/clicker/infection_button.gdshader" id="3_8jdh8"]
-[ext_resource type="PackedScene" uid="uid://dqt48i3odii7u" path="res://infection_spreading/clicker/clicker_passive/clicker_passive_button.tscn" id="3_m3gyo"]
-[ext_resource type="Texture2D" uid="uid://c37pm1sxrecbs" path="res://icon.svg" id="5_4e6xj"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0n0fn"]
 
 [sub_resource type="Resource" id="Resource_m3gyo"]
 script = ExtResource("2_hy3xo")
-count = 1
 name = "Name"
+metadata/_custom_type_script = "uid://bc43eqcwiux3n"
+
+[sub_resource type="Resource" id="Resource_5y6s2"]
+script = ExtResource("2_hy3xo")
+name = "Click Upgrade"
 metadata/_custom_type_script = "uid://bc43eqcwiux3n"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4aye0"]
@@ -41,6 +43,7 @@ mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxEmpty_0n0fn")
 script = ExtResource("1_c8eug")
 passives = Array[ExtResource("2_hy3xo")]([SubResource("Resource_m3gyo")])
+clicker_passive = SubResource("Resource_5y6s2")
 metadata/_tab_index = 0
 
 [node name="ClickerArea" type="Area2D" parent="." unique_id=1181639626]
@@ -110,10 +113,6 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-
-[node name="ClickerPassiveButton" parent="PassiveVals/UpgradeContainer" unique_id=1532006861 instance=ExtResource("3_m3gyo")]
-layout_mode = 2
-sprite_texture = ExtResource("5_4e6xj")
 
 [connection signal="mouse_entered" from="ClickerArea" to="." method="_on_clicker_area_mouse_entered"]
 [connection signal="mouse_exited" from="ClickerArea" to="." method="_on_clicker_area_mouse_exited"]

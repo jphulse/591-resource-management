@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cgcs6sq0f7wgf" path="res://infection_spreading/ui/tab_container.gd" id="1_glgr5"]
 [ext_resource type="PackedScene" uid="uid://8xasmib8wj0k" path="res://infection_spreading/clicker/clicker.tscn" id="2_8v3b7"]
 [ext_resource type="Script" uid="uid://bc43eqcwiux3n" path="res://infection_spreading/clicker/passive_clicker.gd" id="3_xpojc"]
+[ext_resource type="Script" uid="uid://de7hbcn1psjwx" path="res://infection_spreading/ui/clicker_upgrades.gd" id="4_4c0v7"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1b4vf"]
 
@@ -33,7 +34,16 @@ passives = Array[ExtResource("3_xpojc")]([])
 [node name="Upgrades" type="Panel" parent="TabContainer" unique_id=514701076]
 visible = false
 layout_mode = 2
+script = ExtResource("4_4c0v7")
 metadata/_tab_index = 1
+
+[node name="GraphEdit" type="GraphEdit" parent="TabContainer/Upgrades" unique_id=419650698]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="resized" from="TabContainer" to="TabContainer" method="_on_resized"]
 [connection signal="tab_changed" from="TabContainer" to="TabContainer" method="_on_tab_changed"]

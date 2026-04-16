@@ -3,6 +3,8 @@ extends Panel
 #region Exported vars
 ## Array of passives, mostly exported for testing
 @export var passives : Array[PlaguePassive] = []
+
+@export var clicker_passive : PlaguePassive 
 #endregion
 
 #region Local fields
@@ -43,6 +45,10 @@ var visual_pulse_strength : float = 0.0
 var infection_is_active : bool = false
 ## Random source used to reseed the shader pattern
 var infection_rng : RandomNumberGenerator = RandomNumberGenerator.new()
+
+## Packed scene for the button scene
+var upgrade_button_scene : PackedScene = preload("uid://dqt48i3odii7u")
+
 #endregion
 
 #region onready vars
@@ -55,6 +61,8 @@ var infection_rng : RandomNumberGenerator = RandomNumberGenerator.new()
 ## Collision area used for clicking the button
 @onready var clicker_area : Area2D = %ClickerArea
 @onready var clicker_shape : CollisionShape2D = $ClickerArea/CollisionShape2D
+## Container for the upgrade buttons for the clicker game
+@onready var upgrade_container : VBoxContainer = %UpgradeContainer
 #endregion
 
 #region Mouse interactions
@@ -90,6 +98,33 @@ func _on_second_timer_timeout() -> void:
 #endregion
 
 #region Helper methods
+
+func _upgrade_click(item : PlaguePassive) -> void:
+	click_value += item.passive_benefit
+	
+func _on_upgrade_pressed(button : ClickerPassiveButton, passive : PlaguePassive) -> void:
+	if count >= passive.cost:
+		count -= passive.cost
+		passive.buy_another()
+		button.cost = passive.cost
+		button.count = passive.count
+		if passive != clicker_passive:
+			_update_passive_clicks()
+		else:
+			_upgrade_click(passive)
+
+func _add_button(item: PlaguePassive) -> void:
+	var button : ClickerPassiveButton = upgrade_button_scene.instantiate() as ClickerPassiveButton
+	upgrade_container.add_child(button)
+	button.setup(item)
+	button.pressed.connect(_on_upgrade_pressed.bind(button, item))
+	
+func _initialize_buttons() -> void:
+	_add_button(clicker_passive)
+	for i : PlaguePassive in passives:
+		_add_button(i)
+		
+
 ## Keeps the click area centered on top of the button visual
 func _sync_clicker_area() -> void:
 	var viewport_center : Vector2 = get_viewport_rect().size * 0.5
@@ -180,8 +215,15 @@ func _get_passive_frame_contribution(delta : float) -> float:
 	return ret_val
 #endregion
 
+#region public methods
+func add_new_passive(passive : PlaguePassive) -> void:
+	if not passives.has(passive):
+		passives.append(passive)
+#endregion
+
 #region Processing
 func _ready() -> void:
+	_initialize_buttons()
 	_update_passive_clicks()
 	update_score_label()
 	update_score_per_second_label()

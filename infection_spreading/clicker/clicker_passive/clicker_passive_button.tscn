@@ -63,6 +63,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="NameLabel" type="Label" parent="Content/HBoxContainer/VBoxContainer" unique_id=418269913]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(20, 10)
 layout_mode = 2
 size_flags_vertical = 3
@@ -70,6 +71,7 @@ text = "Name"
 autowrap_mode = 1
 
 [node name="Description" type="Label" parent="Content/HBoxContainer/VBoxContainer" unique_id=1223302842]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(20, 10)
 layout_mode = 2
 size_flags_vertical = 3
@@ -80,6 +82,7 @@ autowrap_mode = 1
 layout_mode = 2
 
 [node name="Cost" type="Label" parent="Content/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=963489644]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(20, 10)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -88,6 +91,7 @@ text = "Cost:"
 autowrap_mode = 1
 
 [node name="CurrentQuantity" type="Label" parent="Content/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=347076723]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(20, 10)
 layout_mode = 2
 size_flags_horizontal = 3
