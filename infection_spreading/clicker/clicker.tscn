@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bc43eqcwiux3n" path="res://infection_spreading/clicker/passive_clicker.gd" id="2_hy3xo"]
 [ext_resource type="Shader" uid="uid://cpkbqna43nsve" path="res://infection_spreading/clicker/infection_button.gdshader" id="3_8jdh8"]
 [ext_resource type="PackedScene" uid="uid://dqt48i3odii7u" path="res://infection_spreading/clicker/clicker_passive/clicker_passive_button.tscn" id="3_m3gyo"]
+[ext_resource type="Texture2D" uid="uid://c37pm1sxrecbs" path="res://icon.svg" id="5_4e6xj"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0n0fn"]
 
@@ -112,6 +113,7 @@ size_flags_vertical = 3
 
 [node name="ClickerPassiveButton" parent="PassiveVals/UpgradeContainer" unique_id=1532006861 instance=ExtResource("3_m3gyo")]
 layout_mode = 2
+sprite_texture = ExtResource("5_4e6xj")
 
 [connection signal="mouse_entered" from="ClickerArea" to="." method="_on_clicker_area_mouse_entered"]
 [connection signal="mouse_exited" from="ClickerArea" to="." method="_on_clicker_area_mouse_exited"]
