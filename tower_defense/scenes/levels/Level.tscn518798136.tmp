@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://bqjarvmmujla3" path="res://tower_defense/scenes/levels/level.gd" id="1_7ilpt"]
 [ext_resource type="PackedScene" uid="uid://cwjk105x6ol4s" path="res://tower_defense/scenes/towers/TowerBase.tscn" id="2_7g3i0"]
-[ext_resource type="PackedScene" uid="uid://43uex8sh2lp8" path="res://tower_defense/scenes/objective/LevelObjective.tscn" id="3_jlunc"]
 
 [sub_resource type="Curve2D" id="Curve2D_7ilpt"]
 _data = {
@@ -14,7 +13,6 @@ point_count = 2
 script = ExtResource("1_7ilpt")
 
 [node name="TileMap" type="Node2D" parent="." unique_id=654992282]
-visible = false
 
 [node name="PlacementManager" type="Node" parent="TileMap" unique_id=1719418753]
 
@@ -25,9 +23,6 @@ visible = false
 [node name="TowerBase" parent="Towers" unique_id=879173299 instance=ExtResource("2_7g3i0")]
 position = Vector2(192, 256)
 
-[node name="TowerBase2" parent="Towers" unique_id=1878300149 instance=ExtResource("2_7g3i0")]
-position = Vector2(192, 384)
-
 [node name="EnemyPaths" type="Node2D" parent="." unique_id=1432301337]
 
 [node name="Path2D" type="Path2D" parent="EnemyPaths" unique_id=689658589]
@@ -35,12 +30,4 @@ position = Vector2(368, -80)
 scale = Vector2(2, 1)
 curve = SubResource("Curve2D_7ilpt")
 
-[node name="Path2D2" type="Path2D" parent="EnemyPaths" unique_id=1356911320]
-position = Vector2(368, 48)
-scale = Vector2(2, 1)
-curve = SubResource("Curve2D_7ilpt")
-
 [node name="Projectiles" type="Node2D" parent="." unique_id=446474833]
-
-[node name="LevelObjective" parent="." unique_id=826272776 instance=ExtResource("3_jlunc")]
-position = Vector2(64, 256)

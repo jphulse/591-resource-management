@@ -34,6 +34,12 @@ shape = SubResource("RectangleShape2D_bils4")
 
 [node name="AttackCooldownTimer" type="Timer" parent="." unique_id=1251600245]
 
+[node name="HealthBar" type="TextureProgressBar" parent="." unique_id=1494138939]
+offset_left = -64.0
+offset_top = -88.0
+offset_right = 64.0
+offset_bottom = -72.0
+
 [connection signal="area_entered" from="TowerHitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_entered" from="TowerAttackRange" to="." method="_on_detection_range_area_entered"]
 [connection signal="area_exited" from="TowerAttackRange" to="." method="_on_detection_range_area_exited"]

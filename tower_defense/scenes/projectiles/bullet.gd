@@ -1,6 +1,6 @@
 class_name Bullet extends Area2D
 
-var projectile_speed: float = 200.0
+var projectile_speed: float = 500.0
 var direction: Vector2
 var damage: float
 

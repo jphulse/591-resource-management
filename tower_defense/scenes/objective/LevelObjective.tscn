@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://43uex8sh2lp8"]
+
+[ext_resource type="Script" uid="uid://c4luyxlu6rprm" path="res://tower_defense/scenes/objective/level_objective.gd" id="1_4fvrb"]
+[ext_resource type="Texture2D" uid="uid://c37pm1sxrecbs" path="res://icon.svg" id="2_erl8m"]
+[ext_resource type="Script" uid="uid://creltv5vgrcqu" path="res://tower_defense/scenes/objective/objective_area.gd" id="3_erl8m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y236r"]
+size = Vector2(32, 128)
+
+[node name="LevelObjective" type="Node2D" unique_id=826272776]
+scale = Vector2(1, 5)
+script = ExtResource("1_4fvrb")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1402185582]
+modulate = Color(1, 0, 1, 1)
+position = Vector2(-2.3841858e-07, 0)
+scale = Vector2(0.25, 1)
+texture = ExtResource("2_erl8m")
+
+[node name="ObjectiveArea" type="Area2D" parent="." unique_id=1033847207]
+script = ExtResource("3_erl8m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectiveArea" unique_id=1058520318]
+shape = SubResource("RectangleShape2D_y236r")

@@ -6,7 +6,7 @@ class_name Enemy extends Node2D
 
 @export var damage: float = 5.0
 @export var health: float = 10.0
-@export var movement_speed: float = 100.0
+@export var movement_speed: float = 80.0
 @export var attack_cooldown: float = 0.5
 
 var in_attack_range: bool = false
@@ -63,7 +63,7 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		#queue_free()
 
 func _on_attack_area_area_entered(area: Area2D) -> void:
-	if area is TowerHitbox:
+	if area is TowerHitbox or area is ObjectiveArea:
 		if area not in towers_in_range:
 			towers_in_range.append(area)
 
