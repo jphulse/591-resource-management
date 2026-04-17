@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dhfu6duxxuku5"
+path="res://.godot/imported/Final Zenith - Defenses Up.ogg-43152094cb98c3bb8f47381194fbe1ce.oggvorbisstr"
+
+[deps]
+
+source_file="res://tower_defense/music/Final Zenith - Defenses Up.ogg"
+dest_files=["res://.godot/imported/Final Zenith - Defenses Up.ogg-43152094cb98c3bb8f47381194fbe1ce.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

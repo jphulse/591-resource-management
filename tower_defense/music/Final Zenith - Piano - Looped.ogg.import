@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b71o86vc2mkvr"
+path="res://.godot/imported/Final Zenith - Piano - Looped.ogg-e06edcf302eda2dd0f4705f4b4deef6f.oggvorbisstr"
+
+[deps]
+
+source_file="res://tower_defense/music/Final Zenith - Piano - Looped.ogg"
+dest_files=["res://.godot/imported/Final Zenith - Piano - Looped.ogg-e06edcf302eda2dd0f4705f4b4deef6f.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

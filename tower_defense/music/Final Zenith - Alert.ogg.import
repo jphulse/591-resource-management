@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dhp2q2rkqajxa"
+path="res://.godot/imported/Final Zenith - Alert.ogg-ab821f934636d06a12c70465ba3c9dd1.oggvorbisstr"
+
+[deps]
+
+source_file="res://tower_defense/music/Final Zenith - Alert.ogg"
+dest_files=["res://.godot/imported/Final Zenith - Alert.ogg-ab821f934636d06a12c70465ba3c9dd1.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

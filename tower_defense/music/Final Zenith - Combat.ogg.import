@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cxpr35w4r46a4"
+path="res://.godot/imported/Final Zenith - Combat.ogg-28ac6e2a712fc90d67418005c4b73de7.oggvorbisstr"
+
+[deps]
+
+source_file="res://tower_defense/music/Final Zenith - Combat.ogg"
+dest_files=["res://.godot/imported/Final Zenith - Combat.ogg-28ac6e2a712fc90d67418005c4b73de7.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

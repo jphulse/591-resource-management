@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cw4g0yq1wvv1j"
+path="res://.godot/imported/Final Zenith - Desperation.ogg-b917f48bb64c94a600970efa1d851e81.oggvorbisstr"
+
+[deps]
+
+source_file="res://tower_defense/music/Final Zenith - Desperation.ogg"
+dest_files=["res://.godot/imported/Final Zenith - Desperation.ogg-b917f48bb64c94a600970efa1d851e81.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
