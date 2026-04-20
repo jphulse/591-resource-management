@@ -9,10 +9,12 @@ class_name Level extends Node2D
 @onready var frequency_timer : Timer = $frequency_timer
 
 @export var enemy_scene: PackedScene = preload("res://tower_defense/scenes/enemies/base_enemy/EnemyBase.tscn")
+@export var siege_scene: PackedScene = preload("res://tower_defense/scenes/enemies/base_enemy/SiegeBreaker.tscn")
 @export var wave_component: Node2D = null
 
 signal update_enemy(value : int)
 signal update_fortifications(value : int)
+signal ultimateEnemy(spawning : bool)
 
 const GRID_START = Vector2i(1, 1) # Example: starts at tile (2,2)
 const GRID_WIDTH = 10
@@ -23,7 +25,7 @@ var enemies: Array[Node2D] = []
 var enemy_paths: Array[Path2D] = []
 var objective_complete: bool = false
 
-var spawn_delay : Array[float] = [0.007, 0.01, 0.02, 0.04, 0.1, 0.2]
+var spawn_delay : Array[float] = [0.003, 0.004, 25, 0.01, 25, 0.006, 0.03, 0.08, 25]
 
 func _ready() -> void:
 	for enemy_path in enemy_paths_node.get_children():
@@ -34,11 +36,17 @@ func _ready() -> void:
 
 func _spawn_enemy_timer() -> void:
 	frequency_timer.wait_time = spawn_delay.pick_random()
+	if frequency_timer.wait_time == 25 && is_instance_valid(objective):
+		for lane in enemy_paths:
+			spawn_enemy(siege_scene, lane)
+			ultimateEnemy.emit(true)
+		frequency_timer.wait_time = .1
 
 func _frequency_timer() -> void:
 	if is_instance_valid(objective) && objective.health > 0.0:
 		if randi() % 10 == 0:
-			spawn_enemy()
+			var enemy_path: Path2D = enemy_paths.pick_random()
+			spawn_enemy(enemy_scene, enemy_path)
 
 func _process(_delta: float) -> void:
 	if objective.health <= 0.0:
@@ -49,18 +57,21 @@ func _process(_delta: float) -> void:
 			for enemy in enemies:
 				if is_instance_valid(enemy):
 					_update_enemies(-enemy.enemy_value)
+					if enemy.has_signal("ultimate_death") :
+						_ultimate_death()
 					enemy.queue_free()
 			enemies.clear() # ALWAYS clear the list after freeing the contents!
 
-func spawn_enemy() -> void:
-	var enemy_path: Path2D = enemy_paths.pick_random()
+func spawn_enemy(enemy : PackedScene, enemy_path : Path2D) -> void:
 	var path_to_follow: PathFollow2D = PathFollow2D.new()
-	var new_enemy: Enemy = enemy_scene.instantiate()
+	var new_enemy: Enemy = enemy.instantiate()
 	
 	new_enemy.add_path_follow(path_to_follow)
 	path_to_follow.add_child(new_enemy)
 	enemy_path.add_child(path_to_follow)
 	new_enemy.enemy_death.connect(_update_enemies)
+	if new_enemy.has_signal("ultimate_death"):
+		new_enemy.ultimate_death.connect(_ultimate_death)
 	enemies.append(new_enemy)
 	_update_enemies(new_enemy.enemy_value)
 
@@ -100,18 +111,19 @@ func is_cell_occupied(cell: Vector2i) -> bool:
 	
 	for i in range(enemies.size() - 1, -1, -1):
 		var e = enemies[i]
-		if not is_instance_valid(e):
-			enemies.remove_at(i)
+		if not is_instance_valid(e) or not e.is_inside_tree():
+			if not is_instance_valid(e):
+				enemies.remove_at(i)
 			continue
 			
 		var enemy_local = level_map.to_local(e.global_position)
 		var enemy_cell = level_map.local_to_map(enemy_local)
 		
 		if enemy_cell == cell:
-			print("Can't build here: Enemy in the way!")
+			print("Collision with enemy at: ", cell)
 			return true
 			
-	return false
+	return false 
 
 func spawn_tower(scene: PackedScene, local_pos: Vector2) -> void:
 	var new_tower = scene.instantiate()
@@ -122,7 +134,6 @@ func spawn_tower(scene: PackedScene, local_pos: Vector2) -> void:
 	tower_grid[cell] = new_tower
 	update_fortifications.emit(new_tower.building_value)
 	
-	new_tower.connect("tower_attack", _tower_attack)
 	new_tower.defense_destroyed.connect(_update_defense)
 	
 func _update_defense(value : int):
@@ -130,3 +141,6 @@ func _update_defense(value : int):
 	
 func _update_enemies(value : int):
 	update_enemy.emit(value)
+
+func _ultimate_death():
+	ultimateEnemy.emit(false)

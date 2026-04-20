@@ -10,10 +10,11 @@ extends Node2D
 var current_tower_scene: PackedScene = null
 var ghost_preview: Node2D = null
 
-var defense : int = 0;
-var combat : int = 0;
-var at_lab : bool = false;
-var desperation : bool = false;
+var defense : int = 0
+var combat : int = 0
+var at_lab : bool = false
+var desperation : bool = false
+var ultimate_enemies : int = 0
 
 var active_tweens : Dictionary = {} 
 
@@ -25,6 +26,7 @@ func _ready() -> void:
 	audio_system.play_game_audio()
 	level_node.update_enemy.connect(_adjust_combat_points)
 	level_node.update_fortifications.connect(_adjust_defense_points)
+	level_node.ultimateEnemy.connect(_adjust_ultimate_count)
 	
 func _process(_delta: float) -> void:
 	if ghost_preview:
@@ -35,6 +37,10 @@ func _process(_delta: float) -> void:
 		var local_snapped_pos = level_map.map_to_local(cell_coord)
 		
 		ghost_preview.global_position = level_map.to_global(local_snapped_pos)
+	if combat < 0:
+		combat = 0
+	if defense < 0:
+		defense = 0
 
 #if in place mode, do not place behind ui, right click to stop
 func _unhandled_input(event: InputEvent) -> void:
@@ -48,15 +54,19 @@ func start_placement(tower: PackedScene) -> void:
 	
 	ghost_preview = tower.instantiate() 
 	add_child(ghost_preview)
-	
 	ghost_preview.sprite_node.modulate.a = 0.5
+	ghost_preview.z_index = 100 
 	
-	ghost_preview.set_process(false) 
-	ghost_preview.get_node("TowerHitbox").monitorable = false
-	ghost_preview.get_node("TowerAttackRange").monitorable = false
+	ghost_preview.process_mode = Node.PROCESS_MODE_DISABLED 
+	
 
 func place_tower() -> void:
-	if level_node.request_tower_placement(current_tower_scene, ghost_preview.global_position) :
+	if not is_instance_valid(ghost_preview):
+		return
+
+	var target_pos = ghost_preview.global_position
+	
+	if level_node.request_tower_placement(current_tower_scene, target_pos):
 		cancel_placement()
 
 func cancel_placement() -> void:
@@ -72,6 +82,10 @@ func _evaluate_audio() -> void:
 		return
 	audio_system.update_combat(combat)
 	audio_system.update_defense(defense)
+	if ultimate_enemies > 0:
+		desperation = true
+	else :
+		desperation = false
 	audio_system.set_desperation(desperation)
 	
 func _lab_audio(entering: bool) -> void:
@@ -110,3 +124,9 @@ func _adjust_defense_points(value : int):
 	
 func _adjust_combat_points(value : int):
 	combat += value
+
+func _adjust_ultimate_count(spawning : bool) :
+	if spawning == true:
+		ultimate_enemies += 1
+	else :
+		ultimate_enemies -= 1

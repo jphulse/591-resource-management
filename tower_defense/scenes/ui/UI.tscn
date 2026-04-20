@@ -9,18 +9,11 @@
 script = ExtResource("1_wgpra")
 
 [node name="Button" type="Button" parent="." unique_id=1396520217]
-offset_left = 61.0
-offset_top = 80.0
-offset_right = 398.0
-offset_bottom = 239.0
+offset_left = 32.0
+offset_top = 33.0
+offset_right = 239.0
+offset_bottom = 118.0
 text = "TO LAB"
-
-[node name="Button3" type="Button" parent="." unique_id=1278092325]
-offset_left = 66.0
-offset_top = 349.0
-offset_right = 403.0
-offset_bottom = 508.0
-text = "Desperation"
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1797068010]
 offset_top = 908.0
@@ -60,7 +53,6 @@ layout_mode = 2
 tower_scene = ExtResource("4_3fy46")
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed"]
 [connection signal="tower_button_pressed" from="PanelContainer/HBoxContainer/tower_button" to="." method="_on_tower_button_pressed"]
 [connection signal="tower_button_pressed" from="PanelContainer/HBoxContainer/tower_button2" to="." method="_on_tower_button_pressed"]
 [connection signal="tower_button_pressed" from="PanelContainer/HBoxContainer/tower_button3" to="." method="_on_tower_button_pressed"]
