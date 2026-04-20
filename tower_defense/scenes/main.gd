@@ -41,6 +41,8 @@ func _process(_delta: float) -> void:
 		combat = 0
 	if defense < 0:
 		defense = 0
+	if Input.is_action_just_pressed("escape"):
+		get_tree().change_scene_to_file("uid://cxby1rpj5kclj")
 
 #if in place mode, do not place behind ui, right click to stop
 func _unhandled_input(event: InputEvent) -> void:

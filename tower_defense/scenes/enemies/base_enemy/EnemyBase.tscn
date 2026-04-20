@@ -9,10 +9,9 @@
 size = Vector2(128, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ndb33"]
-size = Vector2(160, 80.000015)
+size = Vector2(130.00003, 130.00006)
 
 [node name="EnemyBase" type="Node2D" unique_id=1221308985]
-scale = Vector2(0.2, 0.2)
 script = ExtResource("1_coewb")
 movement_speed = 50.0
 enemy_value = 50.0
@@ -31,8 +30,8 @@ shape = SubResource("RectangleShape2D_coewb")
 script = ExtResource("4_10dr3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyAttackArea" unique_id=55715416]
-position = Vector2(0, -1.1368684e-13)
-scale = Vector2(0.9999997, 0.9999997)
+position = Vector2(5.960461e-07, 8.344649e-06)
+scale = Vector2(0.9999994, 0.9999994)
 shape = SubResource("RectangleShape2D_ndb33")
 
 [node name="AttackCooldownTimer" type="Timer" parent="." unique_id=501510785]

@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://cxby1rpj5kclj"]
 
 [ext_resource type="Script" uid="uid://cw57xyc622x31" path="res://main_menu/game_button.gd" id="1_oa53l"]
+[ext_resource type="PackedScene" uid="uid://dlb8clby3j6aw" path="res://tower_defense/scenes/Main.tscn" id="2_3shxk"]
 [ext_resource type="PackedScene" uid="uid://cn5blsogqeywr" path="res://infection_spreading/main/main.tscn" id="2_d3a7t"]
+[ext_resource type="AudioStream" uid="uid://kdc3qjcbsc36" path="res://tower_defense/music/Harbinger.ogg" id="4_bws42"]
 
 [node name="MainMenu" type="Control" unique_id=1551978367]
 layout_mode = 3
@@ -24,6 +26,7 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "Tower Defense"
 script = ExtResource("1_oa53l")
+packed_scene = ExtResource("2_3shxk")
 
 [node name="GameButton2" type="Button" parent="VBoxContainer" unique_id=273885239]
 layout_mode = 2
@@ -32,6 +35,11 @@ text = "Infection Spreading
 "
 script = ExtResource("1_oa53l")
 packed_scene = ExtResource("2_d3a7t")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1435286758]
+stream = ExtResource("4_bws42")
+volume_db = -6.0
+autoplay = true
 
 [connection signal="pressed" from="VBoxContainer/GameButton" to="VBoxContainer/GameButton" method="_on_pressed"]
 [connection signal="pressed" from="VBoxContainer/GameButton2" to="VBoxContainer/GameButton2" method="_on_pressed"]

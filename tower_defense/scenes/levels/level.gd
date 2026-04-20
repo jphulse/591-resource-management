@@ -64,6 +64,7 @@ func _process(_delta: float) -> void:
 
 func spawn_enemy(enemy : PackedScene, enemy_path : Path2D) -> void:
 	var path_to_follow: PathFollow2D = PathFollow2D.new()
+	path_to_follow.rotates = false
 	var new_enemy: Enemy = enemy.instantiate()
 	
 	new_enemy.add_path_follow(path_to_follow)

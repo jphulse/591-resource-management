@@ -37,6 +37,7 @@ const TRACK_DESPERATION_LOOPED = preload("res://tower_defense/music/Final Zenith
 const TWEEN_SPEED = 0.2
 
 var active_tweens : Dictionary = {}
+var lost : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
