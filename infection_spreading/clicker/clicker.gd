@@ -1,10 +1,12 @@
-extends Panel
+class_name InfectionClicker extends Panel
 
 #region Exported vars
 ## Array of passives, mostly exported for testing
 @export var passives : Array[PlaguePassive] = []
 
 @export var clicker_passive : PlaguePassive 
+
+@export var upgrades : ClickerUpgrades = null
 #endregion
 
 #region Local fields
@@ -27,6 +29,8 @@ var count : float = 0
 var active : bool = false
 ## What the value added to count per click is
 var click_value : float = 1.0
+
+var init_click_value : float = 1.0
 ## Format string for the total label
 var total_label_format : String = "%.02f"
 ## Format string for the score per second label
@@ -84,6 +88,8 @@ func _input(event: InputEvent) -> void:
 ## Updates the score label to match the total count, done whenever count changes
 func update_score_label() -> void:
 	total_label.text = total_label_format % count
+	if upgrades and upgrades.is_node_ready():
+		upgrades.balance_label.text = total_label.text
 
 ## Updates the score per second label done once a second or when passive_clicks_per_second changes
 func update_score_per_second_label() -> void:
@@ -100,7 +106,8 @@ func _on_second_timer_timeout() -> void:
 #region Helper methods
 
 func _upgrade_click(item : PlaguePassive) -> void:
-	click_value += item.passive_benefit
+	print("UPGRADE", item.passive_benefit, " ",item.count, " ",item.upgrade_mult)
+	click_value = item.get_passive_amount() + init_click_value
 	
 func _on_upgrade_pressed(button : ClickerPassiveButton, passive : PlaguePassive) -> void:
 	if count >= passive.cost:
@@ -112,16 +119,33 @@ func _on_upgrade_pressed(button : ClickerPassiveButton, passive : PlaguePassive)
 			_update_passive_clicks()
 		else:
 			_upgrade_click(passive)
+func tree_upgrade_pressed( passive : PlaguePassive) -> bool:
+	if count >= passive.upgrade_cost:
+		count -= passive.upgrade_cost
+		passive.upgrade()
+		if passive != clicker_passive:
+			_update_passive_clicks()
+		else:
+			init_click_value *= passive.upgrade_mult
+			_upgrade_click(passive)
+			
+		return true
+	return false
 
 func _add_button(item: PlaguePassive) -> void:
 	var button : ClickerPassiveButton = upgrade_button_scene.instantiate() as ClickerPassiveButton
-	upgrade_container.add_child(button)
 	button.setup(item)
+	upgrade_container.add_child(button)
+	
 	button.pressed.connect(_on_upgrade_pressed.bind(button, item))
 	
 func _initialize_buttons() -> void:
+	if upgrades:
+		clicker_passive.bought_first.connect(upgrades._on_passive_bought)
 	_add_button(clicker_passive)
 	for i : PlaguePassive in passives:
+		if upgrades:
+			i.bought_first.connect(upgrades._on_passive_bought)
 		_add_button(i)
 		
 
@@ -223,6 +247,7 @@ func add_new_passive(passive : PlaguePassive) -> void:
 
 #region Processing
 func _ready() -> void:
+	init_click_value = click_value
 	_initialize_buttons()
 	_update_passive_clicks()
 	update_score_label()
