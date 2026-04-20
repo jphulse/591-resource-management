@@ -13,6 +13,10 @@ class_name TowerBase extends Node2D
 @export var health: float = 40.0
 @export var projectile_speed: float = 500.0
 @export var attack_cooldown: float = 0.5
+@export var building_value: float = 75.0
+
+signal defense_built(value : int)
+signal defense_destroyed(value: int)
 
 var enemies: Array = []
 var can_attack: bool = true
@@ -52,6 +56,7 @@ func take_damage(incoming_damage: float) -> void:
 	health = health - incoming_damage
 	
 	if health <= 0.0:
+		defense_destroyed.emit(-building_value)
 		queue_free()
 	update_health_bar()
 

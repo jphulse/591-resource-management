@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://sam0t7rk3qkk"]
+
+[ext_resource type="Script" uid="uid://c7w3vx72skuia" path="res://tower_defense/scenes/audio_system.gd" id="1_r3kvk"]
+
+[node name="AudioSystem" type="Node2D" unique_id=676463813]
+script = ExtResource("1_r3kvk")
+
+[node name="AudioCore" type="AudioStreamPlayer" parent="." unique_id=389846520]
+
+[node name="AudioCalm" type="AudioStreamPlayer" parent="." unique_id=796864299]
+
+[node name="AudioAlert" type="AudioStreamPlayer" parent="." unique_id=1721941855]
+
+[node name="AudioCombat" type="AudioStreamPlayer" parent="." unique_id=43925539]
+
+[node name="AudioFortified" type="AudioStreamPlayer" parent="." unique_id=1245670291]
+
+[node name="AudioDesperation" type="AudioStreamPlayer" parent="." unique_id=1240560944]
+
+[node name="AudioSFX" type="AudioStreamPlayer" parent="." unique_id=120523113]
+
+[connection signal="finished" from="AudioCore" to="." method="_on_audio_core_finished"]
