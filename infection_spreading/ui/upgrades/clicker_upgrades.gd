@@ -71,7 +71,13 @@ func _on_passive_bought(passive : PlaguePassive) -> void:
 	var button : ClickerTreeButton = ClickerTreeButton.new()
 	button.pressed.connect(_on_upgrade_pressed.bind(vbox, button, passive, label))
 	button.texture_normal = passive.sprite_texture
+	if passive.button_shader:
+		var mat := ShaderMaterial.new()
+		mat.shader = passive.button_shader
 	
+
+		button.material = mat
+		button.set_instance_shader_parameter("glitch_amount", randf_range(0.1, .2))
 	vbox.add_child(button)
 	update_lines()
 
@@ -82,6 +88,11 @@ func _on_upgrade_pressed(vbox : VBoxContainer, button : ClickerTreeButton, passi
 			var next_button : ClickerTreeButton = ClickerTreeButton.new()
 			next_button.pressed.connect(_on_upgrade_pressed.bind(vbox, next_button, passive, label))
 			next_button.texture_normal = passive.sprite_texture
+			if button.material:
+				button.set_instance_shader_parameter("glitch_amount", 0.0)
+				next_button.material = button.material.duplicate()
+				next_button.set_instance_shader_parameter("glitch_amount", randf_range(0.1, 0.2))
+
 			vbox.add_child(next_button)
 			label.text = str(passive.upgrade_cost)
 			draw_connection.call_deferred(button, next_button)

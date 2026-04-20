@@ -29,6 +29,9 @@ signal bought_first(passive : PlaguePassive)
 ## How much the upgrade cost should increase adds
 @export var upgrade_cost_add : float = 0.0
 
+
+@export var button_shader : Shader = preload("res://addons/jeremy_components/shaders/canvas_item/chromatic_glitch.gdshader")
+
 ## Gets the passive amount (per second) gained by this item for all copies
 func get_passive_amount() -> float:
 	return count * passive_benefit
