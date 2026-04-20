@@ -8,6 +8,9 @@ class_name Enemy extends Node2D
 @export var health: float = 10.0
 @export var movement_speed: float = 80.0
 @export var attack_cooldown: float = 0.5
+@export var enemy_value : float = 20.0
+
+signal enemy_death(value : int)
 
 var in_attack_range: bool = false
 var can_attack: bool = true
@@ -28,6 +31,7 @@ func _process(delta: float) -> void:
 				attack()
 		
 		if path_follow.progress_ratio >= 0.99:
+			enemy_death.emit(-enemy_value)
 			queue_free()
 
 func add_path_follow(new_path_follow: PathFollow2D) -> void:
@@ -52,6 +56,7 @@ func take_damage(incoming_damage: float) -> void:
 	
 	if health <= 0.0:
 		death_sequence()
+		enemy_death.emit(-enemy_value)
 		queue_free()
 
 func _on_hitbox_area_entered(area: Area2D) -> void:

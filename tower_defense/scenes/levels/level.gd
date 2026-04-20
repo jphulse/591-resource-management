@@ -5,6 +5,8 @@ class_name Level extends Node2D
 @onready var projectiles_list: Node2D = $Projectiles
 @onready var objective: Node2D = $LevelObjective
 @onready var level_map : TileMapLayer = $TileMapLayer
+@onready var spawn_timer : Timer = $spawn_timer
+@onready var frequency_timer : Timer = $frequency_timer
 
 @export var enemy_scene: PackedScene = preload("res://tower_defense/scenes/enemies/base_enemy/EnemyBase.tscn")
 @export var wave_component: Node2D = null
@@ -21,6 +23,8 @@ var enemies: Array[Node2D] = []
 var enemy_paths: Array[Path2D] = []
 var objective_complete: bool = false
 
+var spawn_delay : Array[float] = [0.007, 0.01, 0.02, 0.04, 0.1, 0.2]
+
 func _ready() -> void:
 	for enemy_path in enemy_paths_node.get_children():
 		enemy_paths.append(enemy_path)
@@ -28,14 +32,15 @@ func _ready() -> void:
 	for tower in tower_nodes.get_children():
 		tower.connect("tower_attack", _tower_attack)
 
-func _physics_process(delta: float) -> void: 
+func _spawn_enemy_timer() -> void:
+	frequency_timer.wait_time = spawn_delay.pick_random()
+
+func _frequency_timer() -> void:
 	if is_instance_valid(objective) && objective.health > 0.0:
 		if randi() % 10 == 0:
 			spawn_enemy()
 
 func _process(_delta: float) -> void:
-
-	
 	if objective.health <= 0.0:
 		if not objective_complete:
 			#get_tree().paused = true
@@ -43,6 +48,7 @@ func _process(_delta: float) -> void:
 			print("Objective Destroyed!")
 			for enemy in enemies:
 				if is_instance_valid(enemy):
+					_update_enemies(-enemy.enemy_value)
 					enemy.queue_free()
 			enemies.clear() # ALWAYS clear the list after freeing the contents!
 
@@ -54,8 +60,9 @@ func spawn_enemy() -> void:
 	new_enemy.add_path_follow(path_to_follow)
 	path_to_follow.add_child(new_enemy)
 	enemy_path.add_child(path_to_follow)
-	
+	new_enemy.enemy_death.connect(_update_enemies)
 	enemies.append(new_enemy)
+	_update_enemies(new_enemy.enemy_value)
 
 func setup_wave() -> void:
 	pass
@@ -116,7 +123,7 @@ func spawn_tower(scene: PackedScene, local_pos: Vector2) -> void:
 	update_fortifications.emit(new_tower.building_value)
 	
 	new_tower.connect("tower_attack", _tower_attack)
-	new_tower.connect("defense_destroyed", _update_defense)
+	new_tower.defense_destroyed.connect(_update_defense)
 	
 func _update_defense(value : int):
 	update_fortifications.emit(value)

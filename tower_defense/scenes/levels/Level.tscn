@@ -55,3 +55,14 @@ curve = SubResource("Curve2D_7ilpt")
 
 [node name="LevelObjective" parent="." unique_id=826272776 instance=ExtResource("3_jlunc")]
 position = Vector2(16, 505)
+
+[node name="spawn_timer" type="Timer" parent="." unique_id=895273598]
+wait_time = 20.0
+autostart = true
+
+[node name="frequency_timer" type="Timer" parent="." unique_id=545413658]
+wait_time = 0.2
+autostart = true
+
+[connection signal="timeout" from="spawn_timer" to="." method="_spawn_enemy_timer"]
+[connection signal="timeout" from="frequency_timer" to="." method="_frequency_timer"]

@@ -16,7 +16,7 @@ script = ExtResource("1_nqgnm")
 [node name="Level" parent="." unique_id=1179053228 instance=ExtResource("4_76xix")]
 
 [node name="Timer" type="Timer" parent="." unique_id=1542044680]
-wait_time = 4.0
+wait_time = 2.0
 autostart = true
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=438725450]

@@ -15,6 +15,7 @@ size = Vector2(160, 80.000015)
 scale = Vector2(0.2, 0.2)
 script = ExtResource("1_coewb")
 movement_speed = 50.0
+enemy_value = 40.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=752896387]
 modulate = Color(1, 0, 0, 1)

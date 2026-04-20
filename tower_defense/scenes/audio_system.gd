@@ -77,8 +77,8 @@ func update_combat(combat : int) -> void:
 
 func update_defense(defense : int) -> void:
 	var target_fortified_vol : float = 0.0
-	if defense > 300:
-		target_fortified_vol = clamp(remap(defense, 300, 800, 0.0, 0.5), 0.0, 0.5)
+	if defense > 400:
+		target_fortified_vol = clamp(remap(defense, 400, 1000, 0.0, 0.5), 0.0, 0.5)
 	_tween_volume(audio_fortified, target_fortified_vol)
 
 func set_desperation(desperate : bool) -> void:
