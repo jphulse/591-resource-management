@@ -5,16 +5,16 @@
 [ext_resource type="Script" uid="uid://creltv5vgrcqu" path="res://tower_defense/scenes/objective/objective_area.gd" id="3_erl8m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y236r"]
-size = Vector2(32, 128)
+size = Vector2(32, 120)
 
 [node name="LevelObjective" type="Node2D" unique_id=826272776]
-scale = Vector2(1, 5)
+scale = Vector2(1, 6)
 script = ExtResource("1_4fvrb")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1402185582]
 modulate = Color(1, 0, 1, 1)
-position = Vector2(-2.3841858e-07, 0)
-scale = Vector2(0.25, 1)
+position = Vector2(-2.3841858e-07, -4.3213367e-07)
+scale = Vector2(0.25, 0.9375)
 texture = ExtResource("2_erl8m")
 
 [node name="ObjectiveArea" type="Area2D" parent="." unique_id=1033847207]

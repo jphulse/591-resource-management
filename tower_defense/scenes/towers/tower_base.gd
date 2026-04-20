@@ -1,5 +1,6 @@
 class_name TowerBase extends Node2D
 
+@onready var sprite_node : Sprite2D = $Sprite2D
 @onready var bullet_scene: PackedScene = preload("res://tower_defense/scenes/projectiles/Bullet.tscn")
 @onready var hitbox: Area2D = $TowerHitbox
 @onready var attack_area: Area2D = $TowerAttackRange

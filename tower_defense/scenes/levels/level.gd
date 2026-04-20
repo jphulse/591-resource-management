@@ -22,7 +22,7 @@ func _ready() -> void:
 	
 
 func _process(_delta: float) -> void:
-	if objective.health > 0.0:
+	if is_instance_valid(objective) && objective.health > 0.0:
 		if randi() % 10 == 0:
 			spawn_enemy()
 	

@@ -13,34 +13,47 @@ point_count = 2
 [node name="Level" type="Node2D" unique_id=1179053228]
 script = ExtResource("1_7ilpt")
 
-[node name="TileMap" type="Node2D" parent="." unique_id=654992282]
-visible = false
-
-[node name="PlacementManager" type="Node" parent="TileMap" unique_id=1719418753]
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1749395261]
+enabled = false
 
 [node name="Background" type="Node2D" parent="." unique_id=1733242158]
 
 [node name="Towers" type="Node2D" parent="." unique_id=1147190414]
 
 [node name="TowerBase" parent="Towers" unique_id=879173299 instance=ExtResource("2_7g3i0")]
-position = Vector2(192, 256)
+position = Vector2(142, 226)
 
 [node name="TowerBase2" parent="Towers" unique_id=1878300149 instance=ExtResource("2_7g3i0")]
-position = Vector2(192, 384)
+position = Vector2(144, 372)
 
 [node name="EnemyPaths" type="Node2D" parent="." unique_id=1432301337]
 
 [node name="Path2D" type="Path2D" parent="EnemyPaths" unique_id=689658589]
-position = Vector2(368, -80)
-scale = Vector2(2, 1)
+position = Vector2(480, -252)
+scale = Vector2(3, 1)
 curve = SubResource("Curve2D_7ilpt")
 
 [node name="Path2D2" type="Path2D" parent="EnemyPaths" unique_id=1356911320]
-position = Vector2(368, 48)
-scale = Vector2(2, 1)
+position = Vector2(480, -108)
+scale = Vector2(3, 1)
+curve = SubResource("Curve2D_7ilpt")
+
+[node name="Path2D3" type="Path2D" parent="EnemyPaths" unique_id=986800351]
+position = Vector2(480, 36)
+scale = Vector2(3, 1)
+curve = SubResource("Curve2D_7ilpt")
+
+[node name="Path2D4" type="Path2D" parent="EnemyPaths" unique_id=943345777]
+position = Vector2(480, 180)
+scale = Vector2(3, 1)
+curve = SubResource("Curve2D_7ilpt")
+
+[node name="Path2D5" type="Path2D" parent="EnemyPaths" unique_id=207236811]
+position = Vector2(480, 324)
+scale = Vector2(3, 1)
 curve = SubResource("Curve2D_7ilpt")
 
 [node name="Projectiles" type="Node2D" parent="." unique_id=446474833]
 
 [node name="LevelObjective" parent="." unique_id=826272776 instance=ExtResource("3_jlunc")]
-position = Vector2(64, 256)
+position = Vector2(16, 370)
