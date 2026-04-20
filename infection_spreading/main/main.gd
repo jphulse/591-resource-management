@@ -8,3 +8,7 @@ extends Node2D
 func _ready() -> void:
 	solar_system_stage.initialize_stage()
 	map_camera.zoom = Vector2.ONE
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("escape"):
+		get_tree().change_scene_to_file("uid://cxby1rpj5kclj")
