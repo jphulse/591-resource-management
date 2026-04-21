@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cq552jjfvnnko"
+path="res://.godot/imported/Hive's Shadow.ogg-b8af366cdd34de48abfccad205cfb01e.oggvorbisstr"
+
+[deps]
+
+source_file="res://tower_defense/music/Hive's Shadow.ogg"
+dest_files=["res://.godot/imported/Hive's Shadow.ogg-b8af366cdd34de48abfccad205cfb01e.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

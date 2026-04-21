@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://qustt31vac3b" path="res://infection_spreading/main/main.gd" id="1_50gol"]
 [ext_resource type="PackedScene" uid="uid://daqdtstnmpngs" path="res://infection_spreading/ui/main_ui.tscn" id="2_bgph4"]
 [ext_resource type="PackedScene" uid="uid://bsgkxn57si37m" path="res://infection_spreading/map/solar_system_stage.tscn" id="3_r17b6"]
+[ext_resource type="AudioStream" uid="uid://cq552jjfvnnko" path="res://tower_defense/music/Hive's Shadow.ogg" id="4_hy057"]
 
 [node name="Main" type="Node2D" unique_id=1513803029]
 script = ExtResource("1_50gol")
@@ -18,3 +19,8 @@ position = Vector2(576, 324)
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=811699059]
 
 [node name="MainUi" parent="CanvasLayer" unique_id=1790486406 instance=ExtResource("2_bgph4")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2006779206]
+stream = ExtResource("4_hy057")
+volume_db = -6.0
+autoplay = true

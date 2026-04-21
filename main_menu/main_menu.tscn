@@ -24,7 +24,7 @@ grow_vertical = 2
 [node name="GameButton" type="Button" parent="VBoxContainer" unique_id=486813423]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Tower Defense"
+text = "Final Zenith - Tower Defense"
 script = ExtResource("1_oa53l")
 packed_scene = ExtResource("2_3shxk")
 

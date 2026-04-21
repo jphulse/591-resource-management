@@ -9,10 +9,9 @@
 size = Vector2(128, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ndb33"]
-size = Vector2(160, 80.000015)
+size = Vector2(150, 130)
 
 [node name="SiegeBreaker" type="Node2D" unique_id=1221308985]
-scale = Vector2(0.2, 0.2)
 script = ExtResource("1_mkpyu")
 damage = 100.0
 health = 1000.0
