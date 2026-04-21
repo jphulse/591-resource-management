@@ -6,11 +6,14 @@ signal infection_state_changed(region_name : String, infected : bool)
 const BORDER_COLOR : Color = Color("d6d9e0")
 const LABEL_COLOR : Color = Color("f1f3f8")
 const INFECTED_COLOR : Color = Color("d94452")
+const INFECTING_COLOR : Color = Color("ff0033")
 
 @export var region_name : String = ""
 @export var base_color : Color = Color.WHITE
 @export var radius : float = 18.0
 @export var infected : bool = false
+@export var infecting : bool = false
+@export var infection_progress : float = 0.0
 @export var visual_type : String = "planet"
 @export var hover_tint_strength : float = 0.1
 
@@ -38,6 +41,8 @@ func configure(display_name : String, region_position : Vector2, region_radius :
 	base_color = color
 	visual_type = type_name
 	infected = starts_infected
+	infecting = false
+	infection_progress = 1.0 if infected else 0.0
 	queue_redraw()
 
 
@@ -46,7 +51,27 @@ func set_infected(value : bool) -> void:
 		return
 
 	infected = value
+	infecting = false
+	infection_progress = 1.0 if infected else 0.0
 	infection_state_changed.emit(region_name, infected)
+	queue_redraw()
+
+
+func start_infection() -> void:
+	if infected or infecting:
+		return
+
+	infecting = true
+	infection_progress = 0.0
+	queue_redraw()
+
+
+func set_infection_progress(value : float) -> void:
+	var new_progress : float = clamp(value, 0.0, 1.0)
+	if is_equal_approx(infection_progress, new_progress):
+		return
+
+	infection_progress = new_progress
 	queue_redraw()
 
 
@@ -85,6 +110,8 @@ func _draw() -> void:
 		draw_circle(Vector2.ZERO, radius, INFECTED_COLOR.darkened(0.15))
 		draw_circle(Vector2.ZERO, radius * 0.82, INFECTED_COLOR)
 		draw_arc(Vector2.ZERO, radius + 4.0, 0.0, TAU, 40, INFECTED_COLOR.lightened(0.15), 2.5)
+	elif infecting:
+		_draw_infection_progress()
 
 	var highlight_offset : Vector2 = Vector2(-radius * 0.32, -radius * 0.34)
 	draw_circle(highlight_offset, radius * 0.26, Color(1, 1, 1, 0.22))
@@ -97,6 +124,22 @@ func _draw() -> void:
 		14,
 		LABEL_COLOR
 	)
+
+
+func _draw_infection_progress() -> void:
+	var progress : float = clamp(infection_progress, 0.0, 1.0)
+	var glow_color : Color = INFECTING_COLOR
+	glow_color.a = 0.16 + progress * 0.34
+	var fill_color : Color = INFECTED_COLOR
+	fill_color.a = 0.22 + progress * 0.46
+
+	draw_circle(Vector2.ZERO, radius + 5.0 + sin(Time.get_ticks_msec() / 180.0) * 1.5, glow_color)
+	draw_circle(Vector2.ZERO, radius * lerp(0.35, 0.9, progress), fill_color)
+
+	if progress > 0.0:
+		var start_angle : float = -PI * 0.5
+		var end_angle : float = start_angle + TAU * progress
+		draw_arc(Vector2.ZERO, radius + 6.0, start_angle, end_angle, 48, INFECTING_COLOR, 4.0, true)
 
 
 func _draw_rings() -> void:

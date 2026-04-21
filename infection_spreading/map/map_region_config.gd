@@ -12,5 +12,6 @@ extends Resource
 @export var visual_type : String = "planet"
 @export var starts_infected : bool = false
 @export var infection_cps_threshold : float = 100.0
+@export var takeover_duration : float = 24.0
 @export var outbreak_click_multiplier : float = 2.0
 @export var outbreak_duration : float = 10.0
