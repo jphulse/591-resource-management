@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://c6u6sh2xtmm01"]
 
 [ext_resource type="Script" uid="uid://c2t4vjqu5cdkj" path="res://tower_defense/scenes/ui/ui.gd" id="1_wgpra"]
-[ext_resource type="Texture2D" uid="uid://c37pm1sxrecbs" path="res://icon.svg" id="2_0nota"]
+[ext_resource type="Texture2D" uid="uid://cc7sewkhsdtt0" path="res://tower_defense/resources/Sprites/tower_window.png" id="2_38iro"]
 [ext_resource type="PackedScene" uid="uid://dfc1leipsd2ru" path="res://tower_defense/scenes/ui/tower_button.tscn" id="3_jnn03"]
 [ext_resource type="PackedScene" uid="uid://cwjk105x6ol4s" path="res://tower_defense/scenes/towers/TowerBase.tscn" id="4_3fy46"]
+[ext_resource type="Texture2D" uid="uid://dexjxls218pxo" path="res://tower_defense/resources/Sprites/info_window.png" id="5_5esc3"]
+[ext_resource type="Texture2D" uid="uid://p1orhg4mgpne" path="res://tower_defense/resources/Sprites/pew_pew.png" id="5_n8y3i"]
 
 [node name="Ui" type="CanvasLayer" unique_id=1856254877]
 script = ExtResource("1_wgpra")
@@ -17,12 +19,12 @@ text = "TO LAB"
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1797068010]
 offset_top = 908.0
-offset_right = 1268.0
+offset_right = 1288.0
 offset_bottom = 1080.0
 
 [node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer" unique_id=1106059427]
 layout_mode = 2
-texture = ExtResource("2_0nota")
+texture = ExtResource("2_38iro")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer" unique_id=1375117703]
 layout_mode = 2
@@ -31,32 +33,42 @@ theme_override_constants/separation = 0
 [node name="tower_button" parent="PanelContainer/HBoxContainer" unique_id=1108784237 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
 layout_mode = 2
 tower_scene = ExtResource("4_3fy46")
+texture_sprite = ExtResource("5_n8y3i")
 
 [node name="tower_button2" parent="PanelContainer/HBoxContainer" unique_id=557671376 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
 layout_mode = 2
 tower_scene = ExtResource("4_3fy46")
+texture_sprite = ExtResource("5_n8y3i")
 
 [node name="tower_button3" parent="PanelContainer/HBoxContainer" unique_id=2098349882 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
 layout_mode = 2
 tower_scene = ExtResource("4_3fy46")
+texture_sprite = ExtResource("5_n8y3i")
 
 [node name="tower_button4" parent="PanelContainer/HBoxContainer" unique_id=320091000 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
 layout_mode = 2
 tower_scene = ExtResource("4_3fy46")
+texture_sprite = ExtResource("5_n8y3i")
 
 [node name="tower_button5" parent="PanelContainer/HBoxContainer" unique_id=218386404 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
 layout_mode = 2
 tower_scene = ExtResource("4_3fy46")
+texture_sprite = ExtResource("5_n8y3i")
 
 [node name="tower_button6" parent="PanelContainer/HBoxContainer" unique_id=1898168800 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
 layout_mode = 2
 tower_scene = ExtResource("4_3fy46")
+texture_sprite = ExtResource("5_n8y3i")
 
-[node name="Panel" type="Panel" parent="." unique_id=581030707]
+[node name="Panel" type="PanelContainer" parent="." unique_id=1900489933]
 offset_left = 1268.0
 offset_top = 908.0
 offset_right = 1920.0
 offset_bottom = 1080.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Panel" unique_id=1244009300]
+layout_mode = 2
+texture = ExtResource("5_5esc3")
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="tower_button_pressed" from="PanelContainer/HBoxContainer/tower_button" to="." method="_on_tower_button_pressed"]

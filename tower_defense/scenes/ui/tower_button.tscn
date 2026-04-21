@@ -4,11 +4,11 @@
 [ext_resource type="Script" uid="uid://wueklo8vj7t3" path="res://tower_defense/scenes/ui/tower_button.gd" id="1_vouwu"]
 
 [node name="tower_button" type="MarginContainer" unique_id=1108784237]
-offset_right = 128.0
-offset_bottom = 128.0
-theme_override_constants/margin_left = 10
+offset_right = 134.0
+offset_bottom = 160.0
+theme_override_constants/margin_left = 3
 theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
+theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 10
 script = ExtResource("1_vouwu")
 

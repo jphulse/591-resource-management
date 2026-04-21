@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c6u6sh2xtmm01" path="res://tower_defense/scenes/ui/UI.tscn" id="2_h01mr"]
 [ext_resource type="PackedScene" uid="uid://sam0t7rk3qkk" path="res://tower_defense/scenes/audio_system.tscn" id="3_76xix"]
 [ext_resource type="PackedScene" uid="uid://baq27ledf3wuj" path="res://tower_defense/scenes/levels/Level.tscn" id="4_76xix"]
-[ext_resource type="Texture2D" uid="uid://c37pm1sxrecbs" path="res://icon.svg" id="5_8bkux"]
+[ext_resource type="Texture2D" uid="uid://d4jpx6ku13iam" path="res://tower_defense/resources/Sprites/expanded_lab_sprite.png" id="5_8bkux"]
 
 [node name="Main" type="Node2D" unique_id=268084963]
 script = ExtResource("1_nqgnm")
@@ -23,8 +23,7 @@ autostart = true
 offset = Vector2(960, 540)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=185012516]
-position = Vector2(-1094.0001, 556.00006)
-scale = Vector2(10, 10)
+position = Vector2(-1040, 540)
 texture = ExtResource("5_8bkux")
 
 [connection signal="tower_selected" from="Ui" to="." method="start_placement"]

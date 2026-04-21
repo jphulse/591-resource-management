@@ -1,14 +1,21 @@
-[gd_scene format=3 uid="uid://baq27ledf3wuj"]
+[gd_scene format=4 uid="uid://baq27ledf3wuj"]
 
 [ext_resource type="Script" uid="uid://bqjarvmmujla3" path="res://tower_defense/scenes/levels/level.gd" id="1_7ilpt"]
+[ext_resource type="Texture2D" uid="uid://cvl88r5u3os1r" path="res://tower_defense/resources/Sprites/tower_slot.png" id="2_jlunc"]
 [ext_resource type="PackedScene" uid="uid://43uex8sh2lp8" path="res://tower_defense/scenes/objective/LevelObjective.tscn" id="3_jlunc"]
 
-[sub_resource type="TileSet" id="TileSet_jlunc"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jlunc"]
+texture = ExtResource("2_jlunc")
+texture_region_size = Vector2i(144, 144)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_dnnkv"]
 tile_size = Vector2i(144, 144)
+sources/0 = SubResource("TileSetAtlasSource_jlunc")
 
 [sub_resource type="Curve2D" id="Curve2D_7ilpt"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 1600, 216, 0, 0, 0, 0, -100, 216)
+"points": PackedVector2Array(0, 0, 0, 0, 1800, 216, 0, 0, 0, 0, -100, 216)
 }
 point_count = 2
 
@@ -16,8 +23,9 @@ point_count = 2
 script = ExtResource("1_7ilpt")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1749395261]
-enabled = false
-tile_set = SubResource("TileSet_jlunc")
+tile_map_data = PackedByteArray("AAABAAEAAAAAAAAAAAACAAEAAAAAAAAAAAADAAEAAAAAAAAAAAAEAAEAAAAAAAAAAAAFAAEAAAAAAAAAAAAGAAEAAAAAAAAAAAAHAAEAAAAAAAAAAAAIAAEAAAAAAAAAAAAJAAEAAAAAAAAAAAAKAAEAAAAAAAAAAAAKAAIAAAAAAAAAAAAKAAMAAAAAAAAAAAAKAAQAAAAAAAAAAAAKAAUAAAAAAAAAAAAJAAUAAAAAAAAAAAAIAAUAAAAAAAAAAAAHAAUAAAAAAAAAAAAGAAUAAAAAAAAAAAAFAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAADAAUAAAAAAAAAAAACAAUAAAAAAAAAAAABAAUAAAAAAAAAAAABAAQAAAAAAAAAAAABAAMAAAAAAAAAAAABAAIAAAAAAAAAAAACAAIAAAAAAAAAAAACAAMAAAAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAAAAAAAAAADAAMAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAAQAAAAAAAAAAAADAAIAAAAAAAAAAAAFAAIAAAAAAAAAAAAGAAIAAAAAAAAAAAAHAAIAAAAAAAAAAAAFAAMAAAAAAAAAAAAGAAMAAAAAAAAAAAAHAAMAAAAAAAAAAAAIAAMAAAAAAAAAAAAJAAMAAAAAAAAAAAAJAAIAAAAAAAAAAAAIAAIAAAAAAAAAAAAFAAQAAAAAAAAAAAAGAAQAAAAAAAAAAAAHAAQAAAAAAAAAAAAIAAQAAAAAAAAAAAAJAAQAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_dnnkv")
+occlusion_enabled = false
 
 [node name="Background" type="Node2D" parent="." unique_id=1733242158]
 
