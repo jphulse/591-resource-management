@@ -10,6 +10,7 @@ const TITLE_COLOR : Color = Color("f5f5f5")
 const CONNECTION_COLOR : Color = Color("d94452", 0.36)
 
 @export var stage_config : MapStageConfig
+@export var clicker : InfectionClicker = null
 var region_lookup : Dictionary = {}
 
 @onready var spread_timer : Timer = %SpreadTimer
@@ -100,6 +101,7 @@ func _clear_regions() -> void:
 
 func _on_spread_timer_timeout() -> void:
 	var newly_infected : Array[MapRegion] = []
+	var effective_cps : float = _get_effective_infection_cps()
 
 	for region_config : MapRegionConfig in _get_region_configs():
 		var region_name : String = region_config.region_name
@@ -111,12 +113,16 @@ func _on_spread_timer_timeout() -> void:
 		if infected_neighbors <= 0:
 			continue
 
-		var spread_chance : float = clamp(float(infected_neighbors) * stage_config.base_neighbor_spread_chance, 0.0, 0.9)
+		if effective_cps < region_config.infection_cps_threshold:
+			continue
+
+		var spread_chance : float = _get_spread_chance(region_config, effective_cps, infected_neighbors)
 		if randf() <= spread_chance:
 			newly_infected.append(region)
 
 	for region : MapRegion in newly_infected:
 		region.set_infected(true)
+		_add_outbreak_boost_for_region(region.region_name)
 
 	if newly_infected.is_empty():
 		return
@@ -137,7 +143,31 @@ func _refresh_neighbor_pressure() -> void:
 		region.set_infected_neighbor_count(_count_infected_neighbors(region_config.neighbors))
 
 
-func _count_infected_neighbors(neighbors : Array) -> int:
+func _get_effective_infection_cps() -> float:
+	if clicker == null:
+		return 0.0
+	return clicker.get_effective_infection_cps()
+
+
+func _get_spread_chance(region_config : MapRegionConfig, effective_cps : float, infected_neighbors : int) -> float:
+	var threshold : float = max(region_config.infection_cps_threshold, 1.0)
+	var over_threshold_amount : float = (effective_cps / threshold) - 1.0
+	var chance_per_neighbor : float = stage_config.minimum_spread_chance + (over_threshold_amount * stage_config.cps_over_threshold_spread_scale)
+	var total_chance : float = chance_per_neighbor * infected_neighbors
+	return clamp(total_chance, 0.0, stage_config.maximum_spread_chance)
+
+
+func _add_outbreak_boost_for_region(region_name : String) -> void:
+	if clicker == null:
+		return
+
+	for region_config : MapRegionConfig in _get_region_configs():
+		if region_config.region_name == region_name:
+			clicker.add_outbreak_click_boost(region_config.outbreak_click_multiplier, region_config.outbreak_duration)
+			return
+
+
+func _count_infected_neighbors(neighbors : PackedStringArray) -> int:
 	var count : int = 0
 	for neighbor_name : String in neighbors:
 		var region : MapRegion = region_lookup.get(neighbor_name)

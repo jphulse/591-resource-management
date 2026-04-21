@@ -9,20 +9,37 @@
 
 [sub_resource type="Resource" id="Resource_m3gyo"]
 script = ExtResource("2_hy3xo")
-name = "Name"
+cost = 75.0
+passive_benefit = 2.0
+name = "Spore Colony"
 sprite_texture = ExtResource("3_5y6s2")
+cost_mult = 1.22
+upgrade_cost = 500.0
+upgrade_mult = 2.0
+upgrade_cost_mult = 3.0
 metadata/_custom_type_script = "uid://bc43eqcwiux3n"
 
 [sub_resource type="Resource" id="Resource_4e6xj"]
 script = ExtResource("2_hy3xo")
-name = "passive 2"
+cost = 300.0
+passive_benefit = 8.0
+name = "Mutation Hive"
 sprite_texture = ExtResource("3_5y6s2")
+cost_mult = 1.25
+upgrade_cost = 2000.0
+upgrade_mult = 2.25
+upgrade_cost_mult = 3.25
 metadata/_custom_type_script = "uid://bc43eqcwiux3n"
 
 [sub_resource type="Resource" id="Resource_5y6s2"]
 script = ExtResource("2_hy3xo")
-name = "Clicker Passive"
+cost = 25.0
+name = "Solar Tap"
 sprite_texture = ExtResource("3_5y6s2")
+cost_mult = 1.18
+upgrade_cost = 250.0
+upgrade_mult = 2.0
+upgrade_cost_mult = 3.0
 metadata/_custom_type_script = "uid://bc43eqcwiux3n"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4aye0"]

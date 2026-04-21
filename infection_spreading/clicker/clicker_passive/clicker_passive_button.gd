@@ -20,7 +20,7 @@ var cost : float = 1.0 :
 	set(val) :
 		if is_node_ready():
 			
-			cost_label.text = str(val)
+			cost_label.text = "%.0f" % val
 		cost = val
 var count : int = 0:
 	set(val):
@@ -39,7 +39,7 @@ var count : int = 0:
 
 func _ready() -> void:
 	name_label.text = upgrade_name
-	cost_label.text = str(cost)
+	cost_label.text = "%.0f" % cost
 	quant_label.text = str(count)
 	if sprite_texture != null:
 		texture_icon.texture = sprite_texture

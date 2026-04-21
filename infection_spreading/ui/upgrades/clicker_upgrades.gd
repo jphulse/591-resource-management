@@ -66,7 +66,7 @@ func _on_passive_bought(passive : PlaguePassive) -> void:
 	var label : Label = Label.new()
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	label.text = str(passive.upgrade_cost)
+	label.text = "%.0f" % passive.upgrade_cost
 	vbox.add_child(label)
 	var button : ClickerTreeButton = ClickerTreeButton.new()
 	button.pressed.connect(_on_upgrade_pressed.bind(vbox, button, passive, label))
@@ -94,5 +94,5 @@ func _on_upgrade_pressed(vbox : VBoxContainer, button : ClickerTreeButton, passi
 				next_button.set_instance_shader_parameter("glitch_amount", randf_range(0.1, 0.2))
 
 			vbox.add_child(next_button)
-			label.text = str(passive.upgrade_cost)
+			label.text = "%.0f" % passive.upgrade_cost
 			draw_connection.call_deferred(button, next_button)

@@ -75,6 +75,7 @@ void fragment() {
 	float pulse = sin(time * (2.2 + pulse_strength * 6.0) + branch_noise * 10.0 + surface_angle * 4.0) * 0.5 + 0.5;
 	float intensity = clamp(infection_level * 0.85 + pulse_strength * 0.35, 0.0, 1.0);
 	float infection_presence = smoothstep(0.015, 0.06, infection_level + pulse_strength * 0.2);
+	float takeover_presence = smoothstep(0.70, 1.0, infection_level);
 
 	float spread_progress = pow(clamp(infection_level, 0.0, 1.0), 0.85);
 	float invasion_depth = spread_progress * (0.23 + intensity * 0.06);
@@ -107,10 +108,10 @@ void fragment() {
 			sin(time * drift_speed + drift_phase) * drift_amp +
 			sin(time * drift_speed_2 + drift_phase_2) * drift_amp_2
 		);
-		float tentacle_present = step(0.30, hash(seed + vec2(5.4, 0.9)));
+		float tentacle_present = max(step(0.30, hash(seed + vec2(5.4, 0.9))), takeover_presence);
 		float depth_rand = hash(seed + vec2(8.8, 1.7));
-		float root_width = mix(0.014, 0.030, hash(seed + vec2(12.2, 2.6)));
-		float tip_width = mix(0.003, 0.008, hash(seed + vec2(15.6, 3.8)));
+		float root_width = mix(0.014, 0.030, hash(seed + vec2(12.2, 2.6))) * (1.0 + takeover_presence * 0.80);
+		float tip_width = mix(0.003, 0.008, hash(seed + vec2(15.6, 3.8))) * (1.0 + takeover_presence * 1.20);
 		float bend_phase = hash(seed + vec2(18.4, 4.4)) * tau;
 		float bend_phase_2 = hash(seed + vec2(21.7, 5.2)) * tau;
 		float bend_amp = mix(0.010, 0.045, hash(seed + vec2(24.1, 6.3))) * (0.35 + intensity * 0.9);
@@ -119,7 +120,7 @@ void fragment() {
 		float bend_freq_2 = mix(4.0, 8.0, hash(seed + vec2(31.9, 9.7)));
 		float bend_speed = mix(-0.9, 1.0, hash(seed + vec2(34.2, 10.4)));
 		float bend_speed_2 = mix(-1.4, 1.4, hash(seed + vec2(37.6, 11.2)));
-		float tip_depth = min(radius - 0.02, 0.010 + invasion_depth * mix(0.75, 1.25, depth_rand));
+		float tip_depth = min(radius - 0.02, 0.010 + invasion_depth * mix(0.75, 1.25, depth_rand) + takeover_presence * 0.10);
 		tip_depth *= tentacle_present;
 
 		float progress = clamp((radius - dist) / max(tip_depth, 0.0001), 0.0, 1.0);
@@ -148,6 +149,9 @@ void fragment() {
 	float veins = smoothstep(1.30 - intensity * 0.15, 1.70, vein_pattern) * (front_shadow * 0.06 + tentacles_inside * 0.92);
 	float center_pressure = smoothstep(0.08, 0.48, dist) * smoothstep(0.35, 1.0, infection_level) * infection_presence;
 	float hotspot = smoothstep(0.58, 1.0, pulse) * (tentacle_core * 0.85 + center_pressure * 0.22) * infection_presence;
+	float takeover_noise = fbm(surface_p * 9.0 + vec2(time * 0.18, -time * 0.13));
+	float takeover_web = smoothstep(0.30, 0.78, takeover_noise + fine_noise * 0.25 + veins * 0.35);
+	float takeover_mask = takeover_presence * button_mask * smoothstep(0.04, 0.55, center_distance);
 
 	float sphere_mask = clamp(1.0 - center_distance * center_distance, 0.0, 1.0);
 	float sphere_light = pow(sphere_mask, 0.65);
@@ -185,6 +189,9 @@ void fragment() {
 	color = mix(color, infected_mix, clamp(tentacles_inside * 0.92, 0.0, 1.0));
 	color = mix(color, infected_hot_color.rgb, tentacle_core * (0.42 + pulse * 0.20));
 	color = mix(color, vein_color.rgb, veins * 0.90);
+	color = mix(color, infected_shadow_color.rgb, takeover_mask * 0.22);
+	color = mix(color, infected_mix, takeover_mask * (0.26 + takeover_web * 0.38));
+	color = mix(color, infected_hot_color.rgb, takeover_mask * takeover_web * (0.10 + pulse * 0.08));
 	color += infected_hot_color.rgb * hotspot * (0.16 + intensity * 0.24);
 	color = mix(color, button_base, 1.0 - infection_presence);
 

@@ -11,9 +11,11 @@ class_name InfectionClicker extends Panel
 
 #region Local fields
 const MANUAL_CPS_WINDOW : float = 1.0
-const VISUAL_CPS_FOR_MAX_INFECTION : float = 10.0
+const VISUAL_CPS_FOR_MAX_INFECTION : float = 5500.0
+const VISUAL_INFECTION_CURVE : float = 0.55
 const VISUAL_RESPONSE_SPEED : float = 4.0
 const INFECTION_SEED_THRESHOLD : float = 0.02
+const MANUAL_INFECTION_CPS_WEIGHT : float = 1.5
 const SUN_BUTTON_COLOR : Color = Color("ea6b10")
 const SUN_EDGE_COLOR : Color = Color("7b1d03")
 const SUN_STAR_COLOR : Color = Color("fff1b6")
@@ -31,6 +33,8 @@ var active : bool = false
 var click_value : float = 1.0
 
 var init_click_value : float = 1.0
+## The click value before any timed infection boosts are applied
+var base_click_value : float = 1.0
 ## Format string for the total label
 var total_label_format : String = "%.02f"
 ## Format string for the score per second label
@@ -49,6 +53,8 @@ var visual_pulse_strength : float = 0.0
 var infection_is_active : bool = false
 ## Random source used to reseed the shader pattern
 var infection_rng : RandomNumberGenerator = RandomNumberGenerator.new()
+## Timed click value boosts granted when infection spreads to a new region
+var active_outbreak_boosts : Array[Dictionary] = []
 
 ## Packed scene for the button scene
 var upgrade_button_scene : PackedScene = preload("uid://dqt48i3odii7u")
@@ -107,7 +113,8 @@ func _on_second_timer_timeout() -> void:
 
 func _upgrade_click(item : PlaguePassive) -> void:
 	print("UPGRADE", item.passive_benefit, " ",item.count, " ",item.upgrade_mult)
-	click_value = item.get_passive_amount() + init_click_value
+	base_click_value = item.get_passive_amount() + init_click_value
+	_update_click_value()
 	
 func _on_upgrade_pressed(button : ClickerPassiveButton, passive : PlaguePassive) -> void:
 	if count >= passive.cost:
@@ -181,6 +188,32 @@ func _get_recent_manual_cps(now : float) -> float:
 		manual_cps += amount
 	return manual_cps
 
+## Updates the actual click value after timed outbreak boosts
+func _update_click_value() -> void:
+	click_value = base_click_value * _get_outbreak_click_multiplier()
+
+## Returns the current combined click boost multiplier from active outbreaks
+func _get_outbreak_click_multiplier() -> float:
+	var multiplier : float = 1.0
+	for boost : Dictionary in active_outbreak_boosts:
+		multiplier += max(float(boost.get("multiplier", 1.0)) - 1.0, 0.0)
+	return multiplier
+
+## Removes expired infection boosts and keeps click value synced
+func _update_outbreak_boosts(delta : float) -> void:
+	if active_outbreak_boosts.is_empty():
+		return
+
+	var boost_changed : bool = false
+	for index : int in range(active_outbreak_boosts.size() - 1, -1, -1):
+		active_outbreak_boosts[index]["time_left"] = float(active_outbreak_boosts[index]["time_left"]) - delta
+		if float(active_outbreak_boosts[index]["time_left"]) <= 0.0:
+			active_outbreak_boosts.remove_at(index)
+			boost_changed = true
+
+	if boost_changed:
+		_update_click_value()
+
 ## Drives the button shader based on recent clicking and passive spread
 func _update_infection_visuals(delta : float) -> void:
 	var material_var : ShaderMaterial = infection_button.material as ShaderMaterial
@@ -189,9 +222,9 @@ func _update_infection_visuals(delta : float) -> void:
 
 	var now : float = Time.get_ticks_msec() / 1000.0
 	var recent_manual_cps : float = _get_recent_manual_cps(now)
-	var total_visual_cps : float = recent_manual_cps + (passive_clicks_per_second * 0.4)
-	var target_infection_level : float = clamp(total_visual_cps / VISUAL_CPS_FOR_MAX_INFECTION, 0.0, 1.0)
-	var target_pulse_strength : float = clamp(recent_manual_cps / (VISUAL_CPS_FOR_MAX_INFECTION * 0.65), 0.0, 1.0)
+	var total_visual_cps : float = get_effective_infection_cps()
+	var target_infection_level : float = pow(clamp(total_visual_cps / VISUAL_CPS_FOR_MAX_INFECTION, 0.0, 1.0), VISUAL_INFECTION_CURVE)
+	var target_pulse_strength : float = clamp(recent_manual_cps / 600.0, 0.0, 1.0)
 	var should_activate_infection : bool = target_infection_level > INFECTION_SEED_THRESHOLD
 
 	if should_activate_infection and not infection_is_active:
@@ -243,11 +276,37 @@ func _get_passive_frame_contribution(delta : float) -> float:
 func add_new_passive(passive : PlaguePassive) -> void:
 	if not passives.has(passive):
 		passives.append(passive)
+
+## Gets manual cps over the recent rolling click window
+func get_manual_cps() -> float:
+	var now : float = Time.get_ticks_msec() / 1000.0
+	return _get_recent_manual_cps(now)
+
+## Gets passive cps from bought passive items
+func get_passive_cps() -> float:
+	return passive_clicks_per_second
+
+## Gets total cps without extra infection weighting
+func get_total_cps() -> float:
+	return get_manual_cps() + get_passive_cps()
+
+## Gets the cps value used by infection spreading
+func get_effective_infection_cps() -> float:
+	return get_passive_cps() + (get_manual_cps() * MANUAL_INFECTION_CPS_WEIGHT)
+
+## Adds a temporary click value boost when a new region becomes infected
+func add_outbreak_click_boost(multiplier : float, duration : float) -> void:
+	active_outbreak_boosts.append({
+		"multiplier": multiplier,
+		"time_left": duration,
+	})
+	_update_click_value()
 #endregion
 
 #region Processing
 func _ready() -> void:
 	init_click_value = click_value
+	base_click_value = click_value
 	_initialize_buttons()
 	_update_passive_clicks()
 	update_score_label()
@@ -264,6 +323,7 @@ func _notification(what: int) -> void:
 		_sync_clicker_area()
 
 func _process(delta: float) -> void:
+	_update_outbreak_boosts(delta)
 	count += _get_passive_frame_contribution(delta)
 	update_score_label()
 	_update_infection_visuals(delta)
