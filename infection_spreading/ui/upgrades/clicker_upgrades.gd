@@ -9,6 +9,8 @@ class_name ClickerUpgrades extends Panel
 @export var minimum_vertical_sep : int = 24
 @export var minimum_horizontal_sep : int = 24
 
+var upgrade_cost_labels : Dictionary = {}
+
 func _ready() -> void:
 	upgrade_holder.add_theme_constant_override("separation", minimum_horizontal_sep)
 	
@@ -55,6 +57,16 @@ func draw_connection(a: Control, b: Control) -> void:
 	line.add_point(line.to_local(a_center_global))
 	line.add_point(line.to_local(b_center_global))
 	
+func _get_upgrade_cost_text(passive : PlaguePassive) -> String:
+	if clicker:
+		return "%.0f" % clicker.get_upgrade_cost(passive)
+	return "%.0f" % passive.upgrade_cost
+
+func refresh_upgrade_cost_labels() -> void:
+	for passive : PlaguePassive in upgrade_cost_labels.keys():
+		var label : Label = upgrade_cost_labels[passive] as Label
+		if is_instance_valid(label):
+			label.text = _get_upgrade_cost_text(passive)
 
 func _on_passive_bought(passive : PlaguePassive) -> void:
 	var vbox : VBoxContainer = VBoxContainer.new()
@@ -66,7 +78,8 @@ func _on_passive_bought(passive : PlaguePassive) -> void:
 	var label : Label = Label.new()
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	label.text = "%.0f" % passive.upgrade_cost
+	label.text = _get_upgrade_cost_text(passive)
+	upgrade_cost_labels[passive] = label
 	vbox.add_child(label)
 	var button : ClickerTreeButton = ClickerTreeButton.new()
 	button.pressed.connect(_on_upgrade_pressed.bind(vbox, button, passive, label))
@@ -94,5 +107,5 @@ func _on_upgrade_pressed(vbox : VBoxContainer, button : ClickerTreeButton, passi
 				next_button.set_instance_shader_parameter("glitch_amount", randf_range(0.1, 0.2))
 
 			vbox.add_child(next_button)
-			label.text = "%.0f" % passive.upgrade_cost
+			label.text = _get_upgrade_cost_text(passive)
 			draw_connection.call_deferred(button, next_button)

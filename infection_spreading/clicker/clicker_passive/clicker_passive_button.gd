@@ -6,6 +6,9 @@ class_name ClickerPassiveButton extends Button
 @onready var description_label : Label = %Description
 @onready var cost_label : Label = %Cost
 @onready var quant_label : Label = %CurrentQuantity
+
+var passive : PlaguePassive = null
+
 var upgrade_name : String = "" :
 	set(val):
 		if is_node_ready():
@@ -45,6 +48,7 @@ func _ready() -> void:
 		texture_icon.texture = sprite_texture
 		
 func setup(item : PlaguePassive) -> void:
+	passive = item
 	upgrade_name = item.name
 	cost = item.cost
 	count = item.count

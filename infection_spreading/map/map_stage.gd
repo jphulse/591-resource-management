@@ -8,13 +8,16 @@ const BACKGROUND_COLOR : Color = Color("121212")
 const ORBIT_COLOR : Color = Color("bcbcbc", 0.48)
 const TITLE_COLOR : Color = Color("f5f5f5")
 const CONNECTION_COLOR : Color = Color("d94452", 0.36)
+const PULSE_SCENE = preload("res://infection_spreading/effects/viral_pulse.gd")
 
 @export var stage_config : MapStageConfig
 @export var clicker : InfectionClicker = null
 var region_lookup : Dictionary = {}
+var connection_pulse_strength : float = 0.0
 
 @onready var spread_timer : Timer = %SpreadTimer
 @onready var regions_root : Node2D = %RegionsRoot
+@onready var effects_root : Node2D = %EffectsRoot
 
 
 func initialize_stage() -> void:
@@ -53,7 +56,10 @@ func _draw() -> void:
 				continue
 
 			if source_region.infected or target_region.infected:
-				draw_line(source_region.position, target_region.position, CONNECTION_COLOR, 2.0, true)
+				var color : Color = CONNECTION_COLOR
+				color.a = clamp(color.a + (connection_pulse_strength * 0.45), 0.0, 0.95)
+				var width : float = lerp(2.0, 4.5, connection_pulse_strength)
+				draw_line(source_region.position, target_region.position, color, width, true)
 
 	var title_position : Vector2 = Vector2(-half_size.x + 54.0, -half_size.y + 62.0)
 	draw_string(
@@ -122,6 +128,8 @@ func _on_spread_timer_timeout() -> void:
 
 	for region : MapRegion in newly_infected:
 		region.set_infected(true)
+		region.play_infection_burst()
+		_spawn_region_pulse(region)
 		_add_outbreak_boost_for_region(region.region_name)
 
 	if newly_infected.is_empty():
@@ -133,6 +141,14 @@ func _on_spread_timer_timeout() -> void:
 	if _all_regions_infected():
 		spread_timer.stop()
 		stage_cleared.emit()
+
+
+func _process(delta : float) -> void:
+	if connection_pulse_strength <= 0.0:
+		return
+
+	connection_pulse_strength = move_toward(connection_pulse_strength, 0.0, delta * 2.4)
+	queue_redraw()
 
 
 func _refresh_neighbor_pressure() -> void:
@@ -165,6 +181,14 @@ func _add_outbreak_boost_for_region(region_name : String) -> void:
 		if region_config.region_name == region_name:
 			clicker.add_outbreak_click_boost(region_config.outbreak_click_multiplier, region_config.outbreak_duration)
 			return
+
+
+func _spawn_region_pulse(region : MapRegion) -> void:
+	var pulse : ViralPulse = PULSE_SCENE.new() as ViralPulse
+	effects_root.add_child(pulse)
+	pulse.position = region.position
+	pulse.setup(Color("ff0033"), region.radius * 5.5, 0.72, 5.0)
+	connection_pulse_strength = 1.0
 
 
 func _count_infected_neighbors(neighbors : PackedStringArray) -> int:

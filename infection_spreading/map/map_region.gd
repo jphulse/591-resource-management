@@ -58,6 +58,17 @@ func set_infected_neighbor_count(value : int) -> void:
 	queue_redraw()
 
 
+## Gives a newly infected region a quick gross pop
+func play_infection_burst() -> void:
+	var tween : Tween = create_tween()
+	tween.set_trans(Tween.TRANS_BACK)
+	tween.set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "scale", Vector2.ONE * 1.38, 0.14)
+	tween.parallel().tween_property(self, "modulate", Color("ff315b"), 0.14)
+	tween.tween_property(self, "scale", Vector2.ONE, 0.28)
+	tween.parallel().tween_property(self, "modulate", Color.WHITE, 0.28)
+
+
 func _draw() -> void:
 	if visual_type == "ringed_planet":
 		_draw_rings()

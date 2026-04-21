@@ -10,6 +10,9 @@ stage_config = ExtResource("2_v7c0g")
 [node name="RegionsRoot" type="Node2D" parent="." unique_id=778268637]
 unique_name_in_owner = true
 
+[node name="EffectsRoot" type="Node2D" parent="." unique_id=655017478]
+unique_name_in_owner = true
+
 [node name="SpreadTimer" type="Timer" parent="." unique_id=1408506374]
 unique_name_in_owner = true
 
