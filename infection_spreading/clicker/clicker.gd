@@ -63,6 +63,15 @@ const IDLE_WHISPER_MESSAGES : Array = [
 	"growth continues",
 	"the sun remembers",
 ]
+const SPORE_PASSIVE_NAME : String = "Spore Colony"
+const HIVE_PASSIVE_NAME : String = "Mutation Hive"
+const HIVE_SPORE_OUTPUT_BONUS : float = 0.03
+const HIVE_SPORE_OUTPUT_BONUS_CAP : float = 1.50
+const SPORE_HIVE_COST_DISCOUNT_STACK_SIZE : int = 10
+const SPORE_HIVE_COST_DISCOUNT_PER_STACK : float = 0.05
+const SPORE_HIVE_COST_DISCOUNT_CAP : float = 0.50
+const BALANCED_SOLAR_TAP_BONUS : float = 0.025
+const BALANCED_SOLAR_TAP_BONUS_CAP : float = 0.75
 
 ## The current toal score currently ina  float we may have to find a better way to represent this
 var count : float = 0
@@ -127,6 +136,8 @@ var upgrade_button_scene : PackedScene = preload("uid://dqt48i3odii7u")
 @onready var total_label : Label = %TotalLabel
 ## The score per second label displays the score per second including clicks over the past second
 @onready var score_per_second : Label = %ScorePerSecond
+## Small readout for cross-upgrade synergy bonuses
+@onready var ecosystem_label : Label = %EcosystemLabel
 ## Visual target for the infection shader
 @onready var infection_button : ColorRect = %InfectionButton
 ## Collision area used for clicking the button
@@ -187,8 +198,7 @@ func _on_second_timer_timeout() -> void:
 
 func _upgrade_click(item : PlaguePassive) -> void:
 	print("UPGRADE", item.passive_benefit, " ",item.count, " ",item.upgrade_mult)
-	base_click_value = item.get_passive_amount() + init_click_value
-	_update_click_value()
+	_update_base_click_value(item)
 	
 func _on_upgrade_pressed(button : ClickerPassiveButton, passive : PlaguePassive) -> void:
 	var current_cost : float = get_passive_cost(passive)
@@ -196,24 +206,24 @@ func _on_upgrade_pressed(button : ClickerPassiveButton, passive : PlaguePassive)
 		count -= current_cost
 		passive.buy_another()
 		_spawn_upgrade_flavor(passive)
-		button.cost = get_passive_cost(passive)
 		button.count = passive.count
 		if passive != clicker_passive:
-			_update_passive_clicks()
 			_update_auto_clicker_tendrils()
 		else:
 			_upgrade_click(passive)
+		_refresh_output_values()
+		_refresh_upgrade_costs()
 func tree_upgrade_pressed( passive : PlaguePassive) -> bool:
 	var current_cost : float = get_upgrade_cost(passive)
 	if count >= current_cost:
 		count -= current_cost
 		passive.upgrade()
 		_spawn_upgrade_flavor(passive)
-		if passive != clicker_passive:
-			_update_passive_clicks()
-		else:
+		if passive == clicker_passive:
 			init_click_value *= passive.upgrade_mult
 			_upgrade_click(passive)
+		_refresh_output_values()
+		_refresh_upgrade_costs()
 			
 		return true
 	return false
@@ -259,6 +269,24 @@ func _refresh_upgrade_costs() -> void:
 
 	if upgrades and upgrades.is_node_ready():
 		upgrades.refresh_upgrade_cost_labels()
+
+
+## Keeps all derived values synced after purchases, upgrades, or synergy changes
+func _refresh_output_values() -> void:
+	_update_passive_clicks()
+	_update_base_click_value()
+	_update_ecosystem_label()
+	update_score_per_second_label()
+
+
+## Recomputes manual click value, including the mixed-build Solar Tap bonus
+func _update_base_click_value(item : PlaguePassive = null) -> void:
+	var click_item : PlaguePassive = item if item != null else clicker_passive
+	if click_item == null:
+		return
+
+	base_click_value = (click_item.get_passive_amount() + init_click_value) * _get_solar_tap_ecosystem_multiplier()
+	_update_click_value()
 		
 
 ## Keeps the click area centered on top of the button visual
@@ -639,16 +667,97 @@ func _style_button_as_sun(material_var : ShaderMaterial) -> void:
 	material_var.set_shader_parameter("infected_shadow_color", SUN_INFECTED_SHADOW_COLOR)
 	material_var.set_shader_parameter("vein_color", SUN_VEIN_COLOR)
 
+## Gives the ecosystem label a quiet infected readout style
+func _style_ecosystem_label() -> void:
+	ecosystem_label.add_theme_font_size_override("font_size", 12)
+	ecosystem_label.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.78))
+	ecosystem_label.add_theme_constant_override("shadow_offset_x", 2)
+	ecosystem_label.add_theme_constant_override("shadow_offset_y", 2)
+	ecosystem_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+
+
+## Shows the current cross-upgrade bonuses so mixed builds feel intentional
+func _update_ecosystem_label() -> void:
+	if not is_node_ready():
+		return
+
+	var spore_bonus : int = int(round((_get_spore_output_multiplier() - 1.0) * 100.0))
+	var hive_discount : int = int(round((1.0 - _get_hive_cost_multiplier()) * 100.0))
+	var tap_bonus : int = int(round((_get_solar_tap_ecosystem_multiplier() - 1.0) * 100.0))
+
+	if spore_bonus <= 0 and hive_discount <= 0 and tap_bonus <= 0:
+		ecosystem_label.text = "Viral ecosystem dormant"
+		ecosystem_label.modulate = Color(1.0, 1.0, 1.0, 0.42)
+		return
+
+	ecosystem_label.text = "Ecosystem: spores +%d%% | hives -%d%% | taps +%d%%" % [spore_bonus, hive_discount, tap_bonus]
+	ecosystem_label.modulate = Color("ff9aa5", 0.82)
+
+
+func _get_passive_count(passive_name : String) -> int:
+	if clicker_passive != null and clicker_passive.name == passive_name:
+		return clicker_passive.count
+
+	for passive : PlaguePassive in passives:
+		if passive.name == passive_name:
+			return passive.count
+
+	return 0
+
+
+## Mutation Hives make Spore Colonies stronger, but the bonus is capped
+func _get_spore_output_multiplier() -> float:
+	var hive_count : int = _get_passive_count(HIVE_PASSIVE_NAME)
+	var bonus : float = min(float(hive_count) * HIVE_SPORE_OUTPUT_BONUS, HIVE_SPORE_OUTPUT_BONUS_CAP)
+	return 1.0 + bonus
+
+
+## Large Spore networks make Hive growth cheaper in chunky, readable steps
+func _get_hive_cost_multiplier() -> float:
+	var spore_count : int = _get_passive_count(SPORE_PASSIVE_NAME)
+	var discount_stacks : int = int(floor(float(spore_count) / float(SPORE_HIVE_COST_DISCOUNT_STACK_SIZE)))
+	var discount : float = min(float(discount_stacks) * SPORE_HIVE_COST_DISCOUNT_PER_STACK, SPORE_HIVE_COST_DISCOUNT_CAP)
+	return 1.0 - discount
+
+
+## Solar Tap rewards having both passive organs alive instead of only one
+func _get_solar_tap_ecosystem_multiplier() -> float:
+	if clicker_passive == null or clicker_passive.count <= 0:
+		return 1.0
+
+	var spore_count : int = _get_passive_count(SPORE_PASSIVE_NAME)
+	var hive_count : int = _get_passive_count(HIVE_PASSIVE_NAME)
+	if spore_count <= 0 or hive_count <= 0:
+		return 1.0
+
+	var balanced_count : int = min(spore_count, hive_count)
+	var bonus : float = min(float(balanced_count) * BALANCED_SOLAR_TAP_BONUS, BALANCED_SOLAR_TAP_BONUS_CAP)
+	return 1.0 + bonus
+
+
+func _get_passive_amount_with_synergy(passive : PlaguePassive) -> float:
+	var amount : float = passive.get_passive_amount()
+	if passive.name == SPORE_PASSIVE_NAME:
+		amount *= _get_spore_output_multiplier()
+	return amount
+
+
+func _get_passive_cost_multiplier(passive : PlaguePassive) -> float:
+	if passive.name == HIVE_PASSIVE_NAME:
+		return _get_hive_cost_multiplier()
+	return 1.0
+
+
 ## Updates the passive clicks as needed
 func _update_passive_clicks() -> void:
 	passive_clicks_per_second = 0.0
 	for passive : PlaguePassive in passives:
-		passive_clicks_per_second += passive.get_passive_amount()
+		passive_clicks_per_second += _get_passive_amount_with_synergy(passive)
 ## Gets the total frame contribution for the passive
 func _get_passive_frame_contribution(delta : float) -> float:
 	var ret_val : float = 0
 	for passive : PlaguePassive in passives:
-		ret_val += passive.get_process_amount(delta)
+		ret_val += _get_passive_amount_with_synergy(passive) * delta
 	return ret_val
 #endregion
 
@@ -663,12 +772,12 @@ func set_auto_clicker_tendrils(tendril_layer : AutoClickerTendrils) -> void:
 func get_passive_cost(passive : PlaguePassive) -> float:
 	if test_mode:
 		return 1.0
-	return passive.cost
+	return passive.cost * _get_passive_cost_multiplier(passive)
 
 func get_upgrade_cost(passive : PlaguePassive) -> float:
 	if test_mode:
 		return 1.0
-	return passive.upgrade_cost
+	return passive.upgrade_cost * _get_passive_cost_multiplier(passive)
 
 func add_new_passive(passive : PlaguePassive) -> void:
 	if not passives.has(passive):
@@ -714,12 +823,12 @@ func _ready() -> void:
 	idle_whisper_cooldown = 0.0
 	_initialize_buttons()
 	_sync_test_mode_toggle()
-	_update_passive_clicks()
+	_style_ecosystem_label()
+	_refresh_output_values()
 	_update_auto_clicker_tendrils()
 	_style_outbreak_multiplier_label()
 	_style_milestone_banner_label()
 	update_score_label()
-	update_score_per_second_label()
 	infection_rng.randomize()
 	infection_button.material = infection_button.material.duplicate()
 	_style_button_as_sun(infection_button.material as ShaderMaterial)

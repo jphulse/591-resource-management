@@ -42,6 +42,7 @@ var count : int = 0:
 
 func _ready() -> void:
 	name_label.text = upgrade_name
+	description_label.text = upgrade_desc
 	cost_label.text = "%.0f" % cost
 	quant_label.text = str(count)
 	if sprite_texture != null:
@@ -50,6 +51,7 @@ func _ready() -> void:
 func setup(item : PlaguePassive) -> void:
 	passive = item
 	upgrade_name = item.name
+	upgrade_desc = item.description
 	cost = item.cost
 	count = item.count
 	sprite_texture = item.sprite_texture

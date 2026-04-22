@@ -10,6 +10,8 @@ signal bought_first(passive : PlaguePassive)
 @export var passive_benefit :float =1.0
 ## The name of this passive item
 @export var name : String = ""
+## Short player-facing description of what role this passive fills
+@export var description : String = ""
 ## The texture associated with this item
 @export var sprite_texture : Texture2D
 ## The multiplier given to cost after buying one increase for superlinear scaling

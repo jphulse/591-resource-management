@@ -12,34 +12,37 @@ script = ExtResource("2_hy3xo")
 cost = 75.0
 passive_benefit = 2.0
 name = "Spore Colony"
+description = "Cheap steady idle growth. Mutation Hives make spores stronger."
 sprite_texture = ExtResource("3_5y6s2")
-cost_mult = 1.22
-upgrade_cost = 500.0
-upgrade_mult = 2.0
-upgrade_cost_mult = 3.0
+cost_mult = 1.2
+upgrade_cost = 450.0
+upgrade_mult = 1.85
+upgrade_cost_mult = 2.75
 metadata/_custom_type_script = "uid://bc43eqcwiux3n"
 
 [sub_resource type="Resource" id="Resource_4e6xj"]
 script = ExtResource("2_hy3xo")
-cost = 300.0
-passive_benefit = 8.0
+cost = 520.0
+passive_benefit = 10.0
 name = "Mutation Hive"
+description = "Expensive late growth. Spore networks make hives cheaper."
 sprite_texture = ExtResource("3_5y6s2")
-cost_mult = 1.25
-upgrade_cost = 2000.0
-upgrade_mult = 2.25
-upgrade_cost_mult = 3.25
+cost_mult = 1.26
+upgrade_cost = 2400.0
+upgrade_mult = 2.6
+upgrade_cost_mult = 3.35
 metadata/_custom_type_script = "uid://bc43eqcwiux3n"
 
 [sub_resource type="Resource" id="Resource_5y6s2"]
 script = ExtResource("2_hy3xo")
 cost = 25.0
 name = "Solar Tap"
+description = "Manual click power. Stronger when spores and hives both exist."
 sprite_texture = ExtResource("3_5y6s2")
-cost_mult = 1.18
+cost_mult = 1.22
 upgrade_cost = 250.0
 upgrade_mult = 2.0
-upgrade_cost_mult = 3.0
+upgrade_cost_mult = 3.2
 metadata/_custom_type_script = "uid://bc43eqcwiux3n"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4aye0"]
@@ -156,6 +159,13 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 1
 text = "X CPS"
+horizontal_alignment = 1
+
+[node name="EcosystemLabel" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+text = "Viral ecosystem dormant"
 horizontal_alignment = 1
 
 [node name="Timers" type="Node" parent="." unique_id=2138432576]
