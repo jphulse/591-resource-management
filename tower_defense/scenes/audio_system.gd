@@ -65,14 +65,18 @@ func lab(entering : bool) -> void:
 		_tween_volume(audio_alert, 0.5)
 		evaluate.emit()
 
-func update_combat(combat : int) -> void:
+func update_combat(combat : int, desperate : bool) -> void:
 	var target_combat_vol : float = 0.0
-	if combat > 500:
+	if desperate:
+		target_combat_vol = .5
+	elif combat > 500:
 		target_combat_vol = clamp(remap(combat, 500, 1000, 0.0, 0.5), 0.0, 0.5)
 	_tween_volume(audio_combat, target_combat_vol)
 
 	var target_calm_vol : float = 0.5
-	if combat > 750:
+	if desperate:
+		target_calm_vol = .0
+	elif combat > 750:
 		target_calm_vol = clamp(remap(combat, 750, 1000, 0.5, 0.0), 0.0, 0.5)
 	_tween_volume(audio_calm, target_calm_vol)
 

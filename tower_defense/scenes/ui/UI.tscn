@@ -7,6 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://cdy5r8of8noqd" path="res://tower_defense/resources/Sprites/pew_sprite.png" id="5_2ck2f"]
 [ext_resource type="Texture2D" uid="uid://dexjxls218pxo" path="res://tower_defense/resources/Sprites/info_window.png" id="5_5esc3"]
 [ext_resource type="Texture2D" uid="uid://p1orhg4mgpne" path="res://tower_defense/resources/Sprites/pew_pew.png" id="5_n8y3i"]
+[ext_resource type="PackedScene" uid="uid://cdk8cagq1ydgu" path="res://tower_defense/scenes/towers/Railgun.tscn" id="6_3rgc0"]
+[ext_resource type="PackedScene" uid="uid://bfgyiwr357g2w" path="res://tower_defense/scenes/towers/TowerPoing.tscn" id="6_24gx2"]
+[ext_resource type="Texture2D" uid="uid://nvwtb58h8bko" path="res://tower_defense/resources/Sprites/poing_sprite.png" id="6_uenyj"]
+[ext_resource type="Texture2D" uid="uid://b050p21jnop6t" path="res://tower_defense/resources/Sprites/railgun_sprite.png" id="7_uenyj"]
 
 [node name="Ui" type="CanvasLayer" unique_id=1856254877]
 script = ExtResource("1_wgpra")
@@ -36,15 +40,15 @@ layout_mode = 2
 tower_scene = ExtResource("4_3fy46")
 texture_sprite = ExtResource("5_2ck2f")
 
-[node name="tower_button2" parent="PanelContainer/HBoxContainer" unique_id=557671376 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
-layout_mode = 2
-tower_scene = ExtResource("4_3fy46")
-texture_sprite = ExtResource("5_n8y3i")
-
 [node name="tower_button3" parent="PanelContainer/HBoxContainer" unique_id=2098349882 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
 layout_mode = 2
-tower_scene = ExtResource("4_3fy46")
-texture_sprite = ExtResource("5_n8y3i")
+tower_scene = ExtResource("6_24gx2")
+texture_sprite = ExtResource("6_uenyj")
+
+[node name="tower_button2" parent="PanelContainer/HBoxContainer" unique_id=557671376 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
+layout_mode = 2
+tower_scene = ExtResource("6_3rgc0")
+texture_sprite = ExtResource("7_uenyj")
 
 [node name="tower_button4" parent="PanelContainer/HBoxContainer" unique_id=320091000 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
 layout_mode = 2
@@ -73,8 +77,8 @@ texture = ExtResource("5_5esc3")
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="tower_button_pressed" from="PanelContainer/HBoxContainer/tower_button" to="." method="_on_tower_button_pressed"]
-[connection signal="tower_button_pressed" from="PanelContainer/HBoxContainer/tower_button2" to="." method="_on_tower_button_pressed"]
 [connection signal="tower_button_pressed" from="PanelContainer/HBoxContainer/tower_button3" to="." method="_on_tower_button_pressed"]
+[connection signal="tower_button_pressed" from="PanelContainer/HBoxContainer/tower_button2" to="." method="_on_tower_button_pressed"]
 [connection signal="tower_button_pressed" from="PanelContainer/HBoxContainer/tower_button4" to="." method="_on_tower_button_pressed"]
 [connection signal="tower_button_pressed" from="PanelContainer/HBoxContainer/tower_button5" to="." method="_on_tower_button_pressed"]
 [connection signal="tower_button_pressed" from="PanelContainer/HBoxContainer/tower_button6" to="." method="_on_tower_button_pressed"]

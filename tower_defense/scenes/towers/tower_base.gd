@@ -1,7 +1,6 @@
 class_name TowerBase extends Node2D
 
 @onready var sprite_node : Sprite2D = $Sprite2D
-@onready var bullet_scene: PackedScene = preload("res://tower_defense/scenes/projectiles/Bullet.tscn")
 @onready var hitbox: Area2D = $TowerHitbox
 @onready var attack_area: Area2D = $TowerAttackRange
 @onready var attack_cooldown_timer: Timer = $AttackCooldownTimer
@@ -11,6 +10,7 @@ class_name TowerBase extends Node2D
 @onready var animated_barrel : AnimatedSprite2D = $AnimatedBarrel
 @onready var audio_player : AudioStreamPlayer2D = $AudioStreamPlayer2D
 
+@export var bullet_scene: PackedScene = preload("res://tower_defense/scenes/projectiles/Bullet.tscn")
 @export var damage: float = 10.0
 @export var max_health: float = 40.0
 @export var health: float = 40.0
@@ -53,7 +53,8 @@ func attack() -> void:
 		
 		var bullet: Bullet = bullet_scene.instantiate()
 		projectiles_list.add_child(bullet)
-		bullet.setup(self.global_position, PI/2, damage)
+		bullet.setup(self.global_position, PI/2, damage, projectile_speed)
+		animated_barrel.frame = 0
 		animated_barrel.play()
 		audio_player.stream = cannon_sounds.pick_random()
 		audio_player.play()

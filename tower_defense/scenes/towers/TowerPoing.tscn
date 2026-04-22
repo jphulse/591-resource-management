@@ -1,0 +1,177 @@
+[gd_scene format=3 uid="uid://bfgyiwr357g2w"]
+
+[ext_resource type="Script" uid="uid://2ri6ww0g5tdo" path="res://tower_defense/scenes/towers/tower_base.gd" id="1_2n1fp"]
+[ext_resource type="AudioStream" uid="uid://d1jxmm0t1qwc" path="res://tower_defense/resources/audio/Towers/Poing/poing-01.ogg" id="2_1isc7"]
+[ext_resource type="AudioStream" uid="uid://cuhxb2dsixg0d" path="res://tower_defense/resources/audio/Towers/Poing/poing-02.ogg" id="3_7okwx"]
+[ext_resource type="AudioStream" uid="uid://dkp1o47luixhu" path="res://tower_defense/resources/audio/Towers/Poing/poing-03.ogg" id="4_rfi2b"]
+[ext_resource type="AudioStream" uid="uid://cj7vs7jetoxus" path="res://tower_defense/resources/audio/Towers/Poing/poing-04.ogg" id="5_6d575"]
+[ext_resource type="AudioStream" uid="uid://b0y4ep8rgubuh" path="res://tower_defense/resources/audio/Towers/Poing/poing-05.ogg" id="6_mic6t"]
+[ext_resource type="AudioStream" uid="uid://44q6kv1aocx5" path="res://tower_defense/resources/audio/Towers/Poing/poing-06.ogg" id="7_5vu4n"]
+[ext_resource type="AudioStream" uid="uid://cv1p0cd3o4i7n" path="res://tower_defense/resources/audio/Towers/Poing/poing-07.ogg" id="8_qwd3c"]
+[ext_resource type="AudioStream" uid="uid://ddvcwtaxnprk" path="res://tower_defense/resources/audio/Towers/Poing/poing-08.ogg" id="9_wjvoe"]
+[ext_resource type="AudioStream" uid="uid://b4xdqvtp8w3h5" path="res://tower_defense/resources/audio/Towers/Poing/poing-09.ogg" id="10_lpc66"]
+[ext_resource type="AudioStream" uid="uid://cu7jxnknqoim0" path="res://tower_defense/resources/audio/Towers/Poing/poing-10.ogg" id="11_hwd7j"]
+[ext_resource type="AudioStream" uid="uid://bna7k508impcn" path="res://tower_defense/resources/audio/Towers/Poing/poing-11.ogg" id="12_raoav"]
+[ext_resource type="AudioStream" uid="uid://bh8c1xrk3uf65" path="res://tower_defense/resources/audio/Towers/Poing/poing-12.ogg" id="13_pwnts"]
+[ext_resource type="AudioStream" uid="uid://c4pwbxn3kdi7p" path="res://tower_defense/resources/audio/Towers/Poing/poing-13.ogg" id="14_j2po3"]
+[ext_resource type="AudioStream" uid="uid://buqmfn0v7uv3h" path="res://tower_defense/resources/audio/Towers/Poing/poing-14.ogg" id="15_p3odf"]
+[ext_resource type="AudioStream" uid="uid://cxe2qqqufb5sj" path="res://tower_defense/resources/audio/Towers/Poing/poing-15.ogg" id="16_60pp8"]
+[ext_resource type="AudioStream" uid="uid://c6ivns7tqilqu" path="res://tower_defense/resources/audio/Towers/Poing/poing-16.ogg" id="17_to8y7"]
+[ext_resource type="AudioStream" uid="uid://bwpup2rwxcrli" path="res://tower_defense/resources/audio/Towers/Poing/poing-17.ogg" id="18_1jegm"]
+[ext_resource type="Texture2D" uid="uid://miqk2sxy6s1u" path="res://tower_defense/resources/Sprites/poing_poing.png" id="19_1isc7"]
+[ext_resource type="Texture2D" uid="uid://bcpla2iyretj7" path="res://tower_defense/resources/Sprites/pew_radar1.png" id="20_howil"]
+[ext_resource type="Texture2D" uid="uid://bwur08yn71rit" path="res://tower_defense/resources/Sprites/pew_radar2.png" id="21_funip"]
+[ext_resource type="Texture2D" uid="uid://12joacshchui" path="res://tower_defense/resources/Sprites/pew_radar3.png" id="22_bgw73"]
+[ext_resource type="Texture2D" uid="uid://dqr2hen0lki8h" path="res://tower_defense/resources/Sprites/pew_radar4.png" id="23_c2hlp"]
+[ext_resource type="Texture2D" uid="uid://bp2evi76fvksw" path="res://tower_defense/resources/Sprites/pew_radar5.png" id="24_xuykp"]
+[ext_resource type="Texture2D" uid="uid://df3xqpuod8u0x" path="res://tower_defense/resources/Sprites/pew_radar6.png" id="25_r2txx"]
+[ext_resource type="Texture2D" uid="uid://bh15aegxrghr0" path="res://tower_defense/resources/Sprites/pew_barrel1.png" id="26_43dmb"]
+[ext_resource type="Texture2D" uid="uid://cb4vt6ha5op57" path="res://tower_defense/resources/Sprites/pew_barrel2.png" id="27_lghkq"]
+[ext_resource type="Texture2D" uid="uid://b6eloxdaiuh10" path="res://tower_defense/resources/Sprites/pew_barrel3.png" id="28_ydrxl"]
+[ext_resource type="Texture2D" uid="uid://bpu7f8ew7j63f" path="res://tower_defense/resources/Sprites/pew_barrel4.png" id="29_8nxdt"]
+[ext_resource type="Texture2D" uid="uid://snrdv1msr7rv" path="res://tower_defense/resources/Sprites/pew_barrel5.png" id="30_4u2uc"]
+[ext_resource type="Texture2D" uid="uid://q5xjvl5t86jj" path="res://tower_defense/resources/Sprites/pew_barrel6.png" id="31_gyb4f"]
+[ext_resource type="Texture2D" uid="uid://didpsml2p8ulo" path="res://tower_defense/resources/Sprites/pew_barrel7.png" id="32_rt4ja"]
+[ext_resource type="Texture2D" uid="uid://rh8v4ja4o0j3" path="res://tower_defense/resources/Sprites/pew_barrel8.png" id="33_18bpt"]
+[ext_resource type="Texture2D" uid="uid://dyd62oe6h6a0w" path="res://tower_defense/resources/Sprites/pew_barrel9.png" id="34_5lkpl"]
+[ext_resource type="Texture2D" uid="uid://b3gy7c07fhwyx" path="res://tower_defense/resources/Sprites/pew_barrel10.png" id="35_sieom"]
+[ext_resource type="Texture2D" uid="uid://bs4ayqxpmfopm" path="res://tower_defense/resources/Sprites/pew_barrel11.png" id="36_ryspr"]
+[ext_resource type="Texture2D" uid="uid://dk66chm0ee068" path="res://tower_defense/resources/Sprites/pew_barrel12.png" id="37_v6572"]
+[ext_resource type="Texture2D" uid="uid://gubeqt8qxnt8" path="res://tower_defense/resources/Sprites/pew_barrel13.png" id="38_td8d2"]
+[ext_resource type="Texture2D" uid="uid://bajhyrkxyj4m5" path="res://tower_defense/resources/Sprites/pew_barrel14.png" id="39_xub5o"]
+[ext_resource type="Script" uid="uid://cs2i413p3lw3d" path="res://tower_defense/scenes/towers/tower_hitbox.gd" id="40_vs6k3"]
+[ext_resource type="Script" uid="uid://dmve0q2u5uxl6" path="res://tower_defense/scenes/towers/tower_attack_range.gd" id="41_t8ur7"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6ebu4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_howil")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_funip")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_bgw73")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_c2hlp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_xuykp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_r2txx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 30.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w86bd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("26_43dmb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_lghkq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_ydrxl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_8nxdt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_4u2uc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_gyb4f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_rt4ja")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_18bpt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_5lkpl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_sieom")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_ryspr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_v6572")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_td8d2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_xub5o")
+}],
+"loop": false,
+"name": &"default",
+"speed": 30.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lmoja"]
+size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bils4"]
+size = Vector2(788, 16)
+
+[node name="TowerBase" type="Node2D" unique_id=879173299]
+script = ExtResource("1_2n1fp")
+projectile_speed = 750.0
+attack_cooldown = 1.1
+cannon_sounds = Array[AudioStream]([ExtResource("2_1isc7"), ExtResource("3_7okwx"), ExtResource("4_rfi2b"), ExtResource("5_6d575"), ExtResource("6_mic6t"), ExtResource("7_5vu4n"), ExtResource("8_qwd3c"), ExtResource("9_wjvoe"), ExtResource("10_lpc66"), ExtResource("11_hwd7j"), ExtResource("12_raoav"), ExtResource("13_pwnts"), ExtResource("14_j2po3"), ExtResource("15_p3odf"), ExtResource("16_60pp8"), ExtResource("17_to8y7"), ExtResource("18_1jegm")])
+
+[node name="Projectiles" type="Node2D" parent="." unique_id=281360252]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1950465526]
+texture = ExtResource("19_1isc7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1407166682]
+sprite_frames = SubResource("SpriteFrames_6ebu4")
+frame_progress = 0.7376101
+
+[node name="AnimatedBarrel" type="AnimatedSprite2D" parent="." unique_id=147636807]
+sprite_frames = SubResource("SpriteFrames_w86bd")
+frame = 13
+frame_progress = 1.0
+speed_scale = 0.4
+
+[node name="TowerHitbox" type="Area2D" parent="." unique_id=1402533722]
+script = ExtResource("40_vs6k3")
+
+[node name="HitboxCollisionShape" type="CollisionShape2D" parent="TowerHitbox" unique_id=1016612673]
+shape = SubResource("RectangleShape2D_lmoja")
+
+[node name="TowerAttackRange" type="Area2D" parent="." unique_id=431727381]
+script = ExtResource("41_t8ur7")
+
+[node name="DetectionRangeCollisionShape" type="CollisionShape2D" parent="TowerAttackRange" unique_id=1265304444]
+position = Vector2(386, 0)
+shape = SubResource("RectangleShape2D_bils4")
+
+[node name="AttackCooldownTimer" type="Timer" parent="." unique_id=1251600245]
+
+[node name="HealthBar" type="TextureProgressBar" parent="." unique_id=1494138939]
+offset_left = -64.0
+offset_top = -88.0
+offset_right = 64.0
+offset_bottom = -72.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1749661565]
+volume_db = -5.0
+attenuation = 0.32767916
+max_polyphony = 2
+
+[connection signal="area_entered" from="TowerHitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_entered" from="TowerAttackRange" to="." method="_on_detection_range_area_entered"]
+[connection signal="area_exited" from="TowerAttackRange" to="." method="_on_detection_range_area_exited"]
+[connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_attack_cooldown_timer_timeout"]
