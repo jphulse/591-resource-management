@@ -3,10 +3,17 @@
 [ext_resource type="Script" uid="uid://5m241y1ntqaw" path="res://infection_spreading/map/map_stage.gd" id="1_os4lm"]
 [ext_resource type="Resource" path="res://infection_spreading/map/solar_system_stage_data.tres" id="2_v7c0g"]
 [ext_resource type="Script" path="res://infection_spreading/effects/auto_clicker_tendrils.gd" id="3_vun12"]
+[ext_resource type="PackedScene" path="res://infection_spreading/map/region_node.tscn" id="4_region_node"]
+[ext_resource type="Resource" path="res://infection_spreading/map/solar_orb_profile.tres" id="5_solar_orb"]
+[ext_resource type="Resource" path="res://infection_spreading/map/solar_ringed_orb_profile.tres" id="6_solar_ringed_orb"]
+[ext_resource type="Script" path="res://infection_spreading/map/solar_orbit_rings.gd" id="7_orbit_rings"]
 
 [node name="SolarSystemStage" type="Node2D" unique_id=729470620]
 script = ExtResource("1_os4lm")
 stage_config = ExtResource("2_v7c0g")
+
+[node name="SolarOrbitRings" type="Node2D" parent="."]
+script = ExtResource("7_orbit_rings")
 
 [node name="AutoClickerTendrils" type="Node2D" parent="." unique_id=1904870640]
 unique_name_in_owner = true
@@ -14,6 +21,90 @@ script = ExtResource("3_vun12")
 
 [node name="RegionsRoot" type="Node2D" parent="." unique_id=778268637]
 unique_name_in_owner = true
+
+[node name="Mercury" parent="RegionsRoot" node_paths=PackedStringArray("neighbors") instance=ExtResource("4_region_node")]
+position = Vector2(63.4, -29.6)
+region_id = "mercury"
+display_name = "Mercury"
+visual_profile = ExtResource("5_solar_orb")
+radius = 10.0
+base_color = Color(0.611765, 0.627451, 0.654902, 1)
+neighbors = Array[NodePath]([NodePath("../Venus")])
+infection_cps_threshold = 250.0
+takeover_duration = 24.0
+
+[node name="Venus" parent="RegionsRoot" node_paths=PackedStringArray("neighbors") instance=ExtResource("4_region_node")]
+position = Vector2(-92.4, -43.1)
+region_id = "venus"
+display_name = "Venus"
+visual_profile = ExtResource("5_solar_orb")
+radius = 15.0
+base_color = Color(0.709804, 0.482353, 0.192157, 1)
+neighbors = Array[NodePath]([NodePath("../Mercury"), NodePath("../Earth")])
+takeover_duration = 22.0
+
+[node name="Earth" parent="RegionsRoot" node_paths=PackedStringArray("neighbors") instance=ExtResource("4_region_node")]
+position = Vector2(-70, 121.2)
+region_id = "earth"
+display_name = "Earth"
+visual_profile = ExtResource("5_solar_orb")
+base_color = Color(0.298039, 0.560784, 0.847059, 1)
+neighbors = Array[NodePath]([NodePath("../Venus"), NodePath("../Mars")])
+starts_infected = true
+infection_cps_threshold = 0.0
+
+[node name="Mars" parent="RegionsRoot" node_paths=PackedStringArray("neighbors") instance=ExtResource("4_region_node")]
+position = Vector2(65.9, -163.2)
+region_id = "mars"
+display_name = "Mars"
+visual_profile = ExtResource("5_solar_orb")
+radius = 15.0
+base_color = Color(0.788235, 0.482353, 0.290196, 1)
+neighbors = Array[NodePath]([NodePath("../Earth"), NodePath("../Jupiter")])
+takeover_duration = 24.0
+
+[node name="Jupiter" parent="RegionsRoot" node_paths=PackedStringArray("neighbors") instance=ExtResource("4_region_node")]
+position = Vector2(135.4, 173.4)
+region_id = "jupiter"
+display_name = "Jupiter"
+visual_profile = ExtResource("5_solar_orb")
+radius = 25.0
+base_color = Color(0.792157, 0.627451, 0.415686, 1)
+neighbors = Array[NodePath]([NodePath("../Mars"), NodePath("../Saturn")])
+infection_cps_threshold = 400.0
+takeover_duration = 30.0
+
+[node name="Saturn" parent="RegionsRoot" node_paths=PackedStringArray("neighbors") instance=ExtResource("4_region_node")]
+position = Vector2(259.4, -36.4)
+region_id = "saturn"
+display_name = "Saturn"
+visual_profile = ExtResource("6_solar_ringed_orb")
+radius = 23.0
+base_color = Color(0.784314, 0.690196, 0.478431, 1)
+neighbors = Array[NodePath]([NodePath("../Jupiter"), NodePath("../Uranus")])
+infection_cps_threshold = 900.0
+takeover_duration = 36.0
+
+[node name="Uranus" parent="RegionsRoot" node_paths=PackedStringArray("neighbors") instance=ExtResource("4_region_node")]
+position = Vector2(-228.9, -206.1)
+region_id = "uranus"
+display_name = "Uranus"
+visual_profile = ExtResource("5_solar_orb")
+base_color = Color(0.380392, 0.717647, 0.811765, 1)
+neighbors = Array[NodePath]([NodePath("../Saturn"), NodePath("../Neptune")])
+infection_cps_threshold = 2200.0
+takeover_duration = 42.0
+
+[node name="Neptune" parent="RegionsRoot" node_paths=PackedStringArray("neighbors") instance=ExtResource("4_region_node")]
+position = Vector2(-317.2, 147.9)
+region_id = "neptune"
+display_name = "Neptune"
+visual_profile = ExtResource("5_solar_orb")
+radius = 17.0
+base_color = Color(0.243137, 0.470588, 0.87451, 1)
+neighbors = Array[NodePath]([NodePath("../Uranus")])
+infection_cps_threshold = 5500.0
+takeover_duration = 50.0
 
 [node name="EffectsRoot" type="Node2D" parent="." unique_id=655017478]
 unique_name_in_owner = true

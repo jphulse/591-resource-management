@@ -3,7 +3,6 @@ extends Node2D
 
 signal stage_cleared
 
-const REGION_SCENE : PackedScene = preload("res://infection_spreading/map/map_region.tscn")
 const PULSE_SCENE = preload("res://infection_spreading/effects/viral_pulse.gd")
 const MAX_LOG_ENTRIES : int = 5
 const TAKEOVER_COMPLETE_PROGRESS : float = 0.985
@@ -12,19 +11,21 @@ const RANDOM_EVENT_MIN_INTERVAL : float = 15.0
 const RANDOM_EVENT_MAX_INTERVAL : float = 28.0
 const MEMORY_PULSE_INTERVAL : float = 4.25
 
-@export var stage_config : MapStageConfig
+@export var stage_config : MapStageConfig = null
 @export var clicker : InfectionClicker = null
-var region_lookup : Dictionary = {}
-var active_infections : Dictionary = {}
+
+var regions : Array[RegionNode] = []
+var active_infections : Array[RegionNode] = []
 var infection_log_entries : Array[String] = []
 var connection_pulse_strength : float = 0.0
 var takeover_banner_text : String = ""
 var takeover_banner_color : Color = Color("ff315b")
 var takeover_banner_timer : float = 0.0
 var random_event_timer : float = 0.0
-var infected_memory_order : Array[String] = []
+var infected_memory_order : Array[RegionNode] = []
 var memory_pulse_timer : float = MEMORY_PULSE_INTERVAL
 var memory_pulse_index : int = 0
+var fallback_stage_config : MapStageConfig = MapStageConfig.new()
 var fallback_flavor_config : MapStageFlavorConfig = MapStageFlavorConfig.new()
 
 @onready var spread_timer : Timer = %SpreadTimer
@@ -35,10 +36,10 @@ var fallback_flavor_config : MapStageFlavorConfig = MapStageFlavorConfig.new()
 
 func initialize_stage() -> void:
 	if stage_config == null:
-		push_warning("MapStage is missing a stage_config resource.")
-		return
+		push_warning("MapStage is missing a stage_config resource. Using fallback stage defaults.")
 
-	_clear_regions()
+	var config : MapStageConfig = _get_stage_config()
+	_discover_regions()
 	active_infections.clear()
 	infected_memory_order.clear()
 	takeover_banner_timer = 0.0
@@ -46,56 +47,25 @@ func initialize_stage() -> void:
 	memory_pulse_timer = MEMORY_PULSE_INTERVAL
 	memory_pulse_index = 0
 	auto_clicker_tendrils.position = Vector2.ZERO
-	_create_regions()
 	_refresh_neighbor_pressure()
 	_initialize_infection_log()
-	spread_timer.start(stage_config.spread_interval)
+	spread_timer.start(config.spread_interval)
 	queue_redraw()
 
 
 func _draw() -> void:
 	var flavor : MapStageFlavorConfig = _get_flavor_config()
+	var config : MapStageConfig = _get_stage_config()
 	var viewport_rect : Rect2 = get_viewport_rect()
 	var half_size : Vector2 = viewport_rect.size * 0.5
 	draw_rect(Rect2(-half_size, viewport_rect.size), flavor.background_color, true)
-
-	if stage_config != null and stage_config.show_orbits:
-		for region_config : MapRegionConfig in stage_config.regions:
-			draw_arc(Vector2.ZERO, region_config.orbit, 0.0, TAU, 100, flavor.orbit_color, 1.4, true)
-
-	for region_config : MapRegionConfig in _get_region_configs():
-		var source_name : String = region_config.region_name
-		var source_region : MapRegion = region_lookup.get(source_name)
-		if source_region == null:
-			continue
-
-		for neighbor_name : String in region_config.neighbors:
-			if source_name > neighbor_name:
-				continue
-
-			var target_region : MapRegion = region_lookup.get(neighbor_name)
-			if target_region == null:
-				continue
-
-			var has_infection_connection : bool = source_region.infected or target_region.infected or source_region.infecting or target_region.infecting
-			if has_infection_connection:
-				var color : Color = flavor.connection_color
-				var is_active_infection_connection : bool = source_region.infecting or target_region.infecting
-				if is_active_infection_connection:
-					var vein_pulse : float = sin(Time.get_ticks_msec() / 150.0) * 0.5 + 0.5
-					color = color.lerp(flavor.active_connection_color, 0.42)
-					color.a = clamp(color.a + vein_pulse * 0.28, 0.0, 0.95)
-				color.a = clamp(color.a + (connection_pulse_strength * 0.45), 0.0, 0.95)
-				var width : float = lerp(2.0, 4.5, connection_pulse_strength)
-				if is_active_infection_connection:
-					width = max(width, 2.6 + sin(Time.get_ticks_msec() / 150.0) * 1.4 + 1.4)
-				draw_line(source_region.position, target_region.position, color, width, true)
+	_draw_region_connections(flavor)
 
 	var title_position : Vector2 = Vector2(-half_size.x + 54.0, -half_size.y + 62.0)
 	draw_string(
 		ThemeDB.fallback_font,
 		title_position,
-		stage_config.stage_title if stage_config != null else "Stage",
+		config.stage_title,
 		HORIZONTAL_ALIGNMENT_LEFT,
 		-1.0,
 		30,
@@ -106,48 +76,63 @@ func _draw() -> void:
 	_draw_takeover_banners(half_size)
 
 
-func _create_regions() -> void:
-	for region_config : MapRegionConfig in _get_region_configs():
-		var region : MapRegion = REGION_SCENE.instantiate() as MapRegion
-		var region_position : Vector2 = _get_region_position(region_config)
+func _draw_region_connections(flavor : MapStageFlavorConfig) -> void:
+	for source_region : RegionNode in regions:
+		if not is_instance_valid(source_region):
+			continue
 
-		regions_root.add_child(region)
-		region.configure(
-			region_config.region_name,
-			region_position,
-			region_config.radius,
-			region_config.color,
-			region_config.starts_infected,
-			region_config.visual_type
-		)
-		region_lookup[region_config.region_name] = region
+		for target_region : RegionNode in source_region.get_neighbor_regions():
+			if not _is_region_in_stage(target_region):
+				continue
+
+			if source_region.get_instance_id() > target_region.get_instance_id():
+				continue
+
+			var has_infection_connection : bool = source_region.infected or target_region.infected or source_region.infecting or target_region.infecting
+			if not has_infection_connection:
+				continue
+
+			var color : Color = flavor.connection_color
+			var is_active_infection_connection : bool = source_region.infecting or target_region.infecting
+			if is_active_infection_connection:
+				var vein_pulse : float = sin(Time.get_ticks_msec() / 150.0) * 0.5 + 0.5
+				color = color.lerp(flavor.active_connection_color, 0.42)
+				color.a = clamp(color.a + vein_pulse * 0.28, 0.0, 0.95)
+			color.a = clamp(color.a + (connection_pulse_strength * 0.45), 0.0, 0.95)
+			var width : float = lerp(2.0, 4.5, connection_pulse_strength)
+			if is_active_infection_connection:
+				width = max(width, 2.6 + sin(Time.get_ticks_msec() / 150.0) * 1.4 + 1.4)
+			draw_line(source_region.position, target_region.position, color, width, true)
 
 
-func _get_region_position(region_config : MapRegionConfig) -> Vector2:
-	if region_config.use_explicit_position:
-		return region_config.position
+func _discover_regions() -> void:
+	regions.clear()
+	_collect_region_nodes(regions_root)
 
-	var orbit_radius : float = region_config.orbit
-	var angle_radians : float = deg_to_rad(region_config.angle)
-	return Vector2.RIGHT.rotated(angle_radians) * orbit_radius
+	var seen_region_ids : Dictionary = {}
+	for region : RegionNode in regions:
+		region.reset_for_stage()
+		var region_key : String = region.get_region_id()
+		if seen_region_ids.has(region_key):
+			push_warning("Duplicate RegionNode id detected: %s. Region ids should be unique within a stage." % region_key)
+		seen_region_ids[region_key] = true
 
 
-func _clear_regions() -> void:
-	region_lookup.clear()
-	active_infections.clear()
-	infection_log_entries.clear()
-	for child : Node in regions_root.get_children():
-		child.queue_free()
+func _collect_region_nodes(parent : Node) -> void:
+	for child : Node in parent.get_children():
+		if child is RegionNode:
+			regions.append(child as RegionNode)
+		_collect_region_nodes(child)
 
 
 func _initialize_infection_log() -> void:
 	var flavor : MapStageFlavorConfig = _get_flavor_config()
 	infection_log_entries.clear()
-	for region_config : MapRegionConfig in _get_region_configs():
-		if region_config.starts_infected:
-			if not infected_memory_order.has(region_config.region_name):
-				infected_memory_order.append(region_config.region_name)
-			_add_infection_log(flavor.patient_zero_log_format % region_config.region_name.to_upper())
+	for region : RegionNode in regions:
+		if region.infected:
+			if not infected_memory_order.has(region):
+				infected_memory_order.append(region)
+			_add_infection_log(flavor.patient_zero_log_format % region.get_display_name().to_upper())
 
 
 func _draw_infection_log(half_size : Vector2) -> void:
@@ -236,27 +221,25 @@ func _add_infection_log(message : String) -> void:
 
 
 func _on_spread_timer_timeout() -> void:
-	var newly_started : Array[MapRegion] = []
+	var newly_started : Array[RegionNode] = []
 	var effective_cps : float = _get_effective_infection_cps()
 
-	for region_config : MapRegionConfig in _get_region_configs():
-		var region_name : String = region_config.region_name
-		var region : MapRegion = region_lookup.get(region_name)
-		if region == null or region.infected or region.infecting:
+	for region : RegionNode in regions:
+		if not is_instance_valid(region) or region.infected or region.infecting:
 			continue
 
-		var infected_neighbors : int = _count_infected_neighbors(region_config.neighbors)
+		var infected_neighbors : int = _count_infected_neighbors(region)
 		if infected_neighbors <= 0:
 			continue
 
-		if effective_cps < region_config.infection_cps_threshold:
+		if effective_cps < region.infection_cps_threshold:
 			continue
 
-		var spread_chance : float = _get_spread_chance(region_config, effective_cps, infected_neighbors)
+		var spread_chance : float = _get_spread_chance(region, effective_cps, infected_neighbors)
 		if randf() <= spread_chance:
 			newly_started.append(region)
 
-	for region : MapRegion in newly_started:
+	for region : RegionNode in newly_started:
 		_start_region_infection(region)
 
 	if newly_started.is_empty():
@@ -314,10 +297,9 @@ func _update_memory_pulses(delta : float) -> bool:
 		return false
 
 	for _attempt : int in range(infected_memory_order.size()):
-		var region_name : String = infected_memory_order[memory_pulse_index % infected_memory_order.size()]
+		var region : RegionNode = infected_memory_order[memory_pulse_index % infected_memory_order.size()]
 		memory_pulse_index += 1
-		var region : MapRegion = region_lookup.get(region_name)
-		if region != null and region.infected:
+		if _is_region_in_stage(region) and region.infected:
 			region.play_memory_pulse()
 			break
 
@@ -326,11 +308,8 @@ func _update_memory_pulses(delta : float) -> bool:
 
 
 func _refresh_neighbor_pressure() -> void:
-	for region_config : MapRegionConfig in _get_region_configs():
-		var region : MapRegion = region_lookup.get(region_config.region_name)
-		if region == null:
-			continue
-		region.set_infected_neighbor_count(_count_infected_neighbors(region_config.neighbors))
+	for region : RegionNode in regions:
+		region.set_infected_neighbor_count(_count_infected_neighbors(region))
 
 
 func _get_effective_infection_cps() -> float:
@@ -339,21 +318,23 @@ func _get_effective_infection_cps() -> float:
 	return clicker.get_effective_infection_cps()
 
 
-func _get_spread_chance(region_config : MapRegionConfig, effective_cps : float, infected_neighbors : int) -> float:
-	var threshold : float = max(region_config.infection_cps_threshold, 1.0)
+func _get_spread_chance(region : RegionNode, effective_cps : float, infected_neighbors : int) -> float:
+	var config : MapStageConfig = _get_stage_config()
+	var threshold : float = max(region.infection_cps_threshold, 1.0)
 	var over_threshold_amount : float = (effective_cps / threshold) - 1.0
-	var chance_per_neighbor : float = stage_config.minimum_spread_chance + (over_threshold_amount * stage_config.cps_over_threshold_spread_scale)
+	var chance_per_neighbor : float = config.minimum_spread_chance + (over_threshold_amount * config.cps_over_threshold_spread_scale)
 	var total_chance : float = chance_per_neighbor * infected_neighbors
-	return clamp(total_chance, 0.0, stage_config.maximum_spread_chance)
+	return clamp(total_chance, 0.0, config.maximum_spread_chance)
 
 
-func _start_region_infection(region : MapRegion) -> void:
+func _start_region_infection(region : RegionNode) -> void:
 	var flavor : MapStageFlavorConfig = _get_flavor_config()
 	region.start_infection()
-	active_infections[region.region_name] = true
-	_show_takeover_banner(flavor.infecting_banner_format % region.region_name.to_upper(), flavor.infection_start_color)
+	if not active_infections.has(region):
+		active_infections.append(region)
+	_show_takeover_banner(flavor.infecting_banner_format % region.get_display_name().to_upper(), flavor.infection_start_color)
 	_spawn_region_pulse(region, flavor.infection_start_color, region.radius * 3.2, 0.5)
-	_add_infection_log(_get_start_log_message(region.region_name))
+	_add_infection_log(_get_start_log_message(region))
 	connection_pulse_strength = max(connection_pulse_strength, 0.7)
 
 
@@ -362,14 +343,12 @@ func _update_active_infections(delta : float) -> bool:
 		return false
 
 	var changed : bool = false
-	var completed_regions : Array[MapRegion] = []
+	var completed_regions : Array[RegionNode] = []
 	var effective_cps : float = _get_effective_infection_cps()
 
-	for region_name : String in active_infections.keys():
-		var region_config : MapRegionConfig = _get_region_config(region_name)
-		var region : MapRegion = region_lookup.get(region_name)
-		if region_config == null or region == null or region.infected:
-			active_infections.erase(region_name)
+	for region : RegionNode in active_infections.duplicate():
+		if not _is_region_in_stage(region) or region.infected:
+			active_infections.erase(region)
 			changed = true
 			continue
 
@@ -377,50 +356,51 @@ func _update_active_infections(delta : float) -> bool:
 			completed_regions.append(region)
 			continue
 
-		var infected_neighbors : int = _count_infected_neighbors(region_config.neighbors)
-		if infected_neighbors <= 0 or effective_cps < region_config.infection_cps_threshold:
+		var infected_neighbors : int = _count_infected_neighbors(region)
+		if infected_neighbors <= 0 or effective_cps < region.infection_cps_threshold:
 			continue
 
-		var progress_rate : float = _get_takeover_progress_rate(region_config, effective_cps, infected_neighbors)
+		var progress_rate : float = _get_takeover_progress_rate(region, effective_cps, infected_neighbors)
 		region.set_infection_progress(region.infection_progress + (progress_rate * delta))
 		changed = true
 
 		if _is_region_takeover_complete(region):
 			completed_regions.append(region)
 
-	for region : MapRegion in completed_regions:
+	for region : RegionNode in completed_regions:
 		_complete_region_infection(region)
 		changed = true
 
 	return changed
 
 
-func _get_takeover_progress_rate(region_config : MapRegionConfig, effective_cps : float, infected_neighbors : int) -> float:
-	var threshold : float = max(region_config.infection_cps_threshold, 1.0)
-	var takeover_duration : float = max(region_config.takeover_duration, stage_config.minimum_takeover_duration)
+func _get_takeover_progress_rate(region : RegionNode, effective_cps : float, infected_neighbors : int) -> float:
+	var config : MapStageConfig = _get_stage_config()
+	var threshold : float = max(region.infection_cps_threshold, 1.0)
+	var takeover_duration : float = max(region.takeover_duration, config.minimum_takeover_duration)
 	var cps_pressure : float = log(1.0 + (effective_cps / threshold)) / log(2.0)
-	var neighbor_pressure : float = 1.0 + max(infected_neighbors - 1, 0) * stage_config.neighbor_takeover_bonus
+	var neighbor_pressure : float = 1.0 + max(infected_neighbors - 1, 0) * config.neighbor_takeover_bonus
 	var progress_rate : float = (1.0 / takeover_duration) * cps_pressure * neighbor_pressure
-	var max_progress_rate : float = 1.0 / max(stage_config.minimum_takeover_duration, 0.1)
+	var max_progress_rate : float = 1.0 / max(config.minimum_takeover_duration, 0.1)
 	return clamp(progress_rate, 0.0, max_progress_rate)
 
 
-func _is_region_takeover_complete(region : MapRegion) -> bool:
+func _is_region_takeover_complete(region : RegionNode) -> bool:
 	return region.infection_progress >= TAKEOVER_COMPLETE_PROGRESS
 
 
-func _complete_region_infection(region : MapRegion) -> void:
+func _complete_region_infection(region : RegionNode) -> void:
 	var flavor : MapStageFlavorConfig = _get_flavor_config()
 	var outbreak_name : String = _get_outbreak_name()
-	active_infections.erase(region.region_name)
+	active_infections.erase(region)
 	region.set_infected(true)
-	if not infected_memory_order.has(region.region_name):
-		infected_memory_order.append(region.region_name)
+	if not infected_memory_order.has(region):
+		infected_memory_order.append(region)
 	region.play_infection_death_animation()
-	_show_takeover_banner(flavor.consumed_banner_format % region.region_name.to_upper(), flavor.infection_complete_color)
+	_show_takeover_banner(flavor.consumed_banner_format % region.get_display_name().to_upper(), flavor.infection_complete_color)
 	_spawn_region_pulse(region, flavor.infection_complete_color, region.radius * 5.5, 0.72)
-	_add_infection_log(_get_complete_log_message(region.region_name, outbreak_name))
-	_add_outbreak_boost_for_region(region.region_name, outbreak_name)
+	_add_infection_log(_get_complete_log_message(region, outbreak_name))
+	_add_outbreak_boost_for_region(region, outbreak_name)
 	_refresh_neighbor_pressure()
 	queue_redraw()
 
@@ -429,24 +409,21 @@ func _complete_region_infection(region : MapRegion) -> void:
 		stage_cleared.emit()
 
 
-func _add_outbreak_boost_for_region(region_name : String, outbreak_name : String) -> void:
+func _add_outbreak_boost_for_region(region : RegionNode, outbreak_name : String) -> void:
 	if clicker == null:
 		return
 
-	for region_config : MapRegionConfig in _get_region_configs():
-		if region_config.region_name == region_name:
-			clicker.add_outbreak_click_boost(region_config.outbreak_click_multiplier, region_config.outbreak_duration, outbreak_name)
-			return
+	clicker.add_outbreak_click_boost(region.outbreak_click_multiplier, region.outbreak_duration, outbreak_name)
 
 
-func _get_start_log_message(region_name : String) -> String:
+func _get_start_log_message(region : RegionNode) -> String:
 	var message_format : String = _get_random_flavor_text(_get_flavor_config().infection_start_messages, "%s containment failure detected")
-	return message_format % region_name.to_upper()
+	return message_format % region.get_display_name().to_upper()
 
 
-func _get_complete_log_message(region_name : String, outbreak_name : String) -> String:
+func _get_complete_log_message(region : RegionNode, outbreak_name : String) -> String:
 	var message_format : String = _get_random_flavor_text(_get_flavor_config().infection_complete_messages, "%s consumed by %s")
-	return message_format % [region_name.to_upper(), outbreak_name]
+	return message_format % [region.get_display_name().to_upper(), outbreak_name]
 
 
 func _get_outbreak_name() -> String:
@@ -465,20 +442,22 @@ func _reset_random_event_timer() -> void:
 
 
 func _get_corruption_percent() -> float:
-	if region_lookup.is_empty():
+	if regions.is_empty():
 		return 0.0
 
 	var corruption_amount : float = 0.0
-	for region : MapRegion in region_lookup.values():
+	for region : RegionNode in regions:
+		if not is_instance_valid(region):
+			continue
 		if region.infected:
 			corruption_amount += 1.0
 		elif region.infecting:
 			corruption_amount += region.infection_progress
 
-	return clamp(corruption_amount / float(region_lookup.size()), 0.0, 1.0)
+	return clamp(corruption_amount / float(regions.size()), 0.0, 1.0)
 
 
-func _spawn_region_pulse(region : MapRegion, color : Color, target_radius : float, duration : float) -> void:
+func _spawn_region_pulse(region : RegionNode, color : Color, target_radius : float, duration : float) -> void:
 	var pulse : ViralPulse = PULSE_SCENE.new() as ViralPulse
 	effects_root.add_child(pulse)
 	pulse.position = region.position
@@ -486,38 +465,38 @@ func _spawn_region_pulse(region : MapRegion, color : Color, target_radius : floa
 	connection_pulse_strength = 1.0
 
 
-func _count_infected_neighbors(neighbors : PackedStringArray) -> int:
+func _count_infected_neighbors(region : RegionNode) -> int:
 	var count : int = 0
-	for neighbor_name : String in neighbors:
-		var region : MapRegion = region_lookup.get(neighbor_name)
-		if region != null and region.infected:
+	for neighbor : RegionNode in region.get_neighbor_regions():
+		if _is_region_in_stage(neighbor) and neighbor.infected:
 			count += 1
 	return count
 
 
 func _all_regions_infected() -> bool:
-	for region : MapRegion in region_lookup.values():
-		if not region.infected:
+	if regions.is_empty():
+		return false
+
+	for region : RegionNode in regions:
+		if is_instance_valid(region) and not region.infected:
 			return false
 	return true
 
 
-func _get_region_config(region_name : String) -> MapRegionConfig:
-	for region_config : MapRegionConfig in _get_region_configs():
-		if region_config.region_name == region_name:
-			return region_config
-	return null
+func _is_region_in_stage(region : RegionNode) -> bool:
+	return region != null and is_instance_valid(region) and regions.has(region)
 
 
-func _get_region_configs() -> Array[MapRegionConfig]:
-	if stage_config == null:
-		return []
-	return stage_config.regions
+func _get_stage_config() -> MapStageConfig:
+	if stage_config != null:
+		return stage_config
+	return fallback_stage_config
 
 
 func _get_flavor_config() -> MapStageFlavorConfig:
-	if stage_config != null and stage_config.flavor_config != null:
-		return stage_config.flavor_config
+	var config : MapStageConfig = _get_stage_config()
+	if config.flavor_config != null:
+		return config.flavor_config
 	return fallback_flavor_config
 
 

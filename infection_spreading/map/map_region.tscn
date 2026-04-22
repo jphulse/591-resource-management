@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://dlk5jgsbq5qwk"]
+[gd_scene format=3 uid="uid://cdcf10qop5nto"]
 
-[ext_resource type="Script" uid="uid://milqxkkwvnpv" path="res://infection_spreading/map/map_region.gd" id="1_jj1bb"]
+[ext_resource type="Script" path="res://infection_spreading/map/map_region.gd" id="1_jj1bb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vib10"]
 radius = 26.0
