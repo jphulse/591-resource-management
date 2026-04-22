@@ -7,6 +7,7 @@ extends Node2D
 
 
 func _ready() -> void:
+	clicker.set_auto_clicker_tendrils(solar_system_stage.auto_clicker_tendrils)
 	solar_system_stage.clicker = clicker
 	solar_system_stage.initialize_stage()
 	map_camera.zoom = Vector2.ONE

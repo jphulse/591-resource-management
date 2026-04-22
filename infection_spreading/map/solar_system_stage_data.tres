@@ -91,4 +91,5 @@ takeover_duration = 50.0
 [resource]
 script = ExtResource("1_p31on")
 stage_title = "The Solar System"
+minimum_takeover_duration = 30.0
 regions = Array[ExtResource("2_67y44")]([SubResource("Resource_mercury"), SubResource("Resource_venus"), SubResource("Resource_earth"), SubResource("Resource_mars"), SubResource("Resource_jupiter"), SubResource("Resource_saturn"), SubResource("Resource_uranus"), SubResource("Resource_neptune")])

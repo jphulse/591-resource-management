@@ -2,10 +2,15 @@
 
 [ext_resource type="Script" uid="uid://5m241y1ntqaw" path="res://infection_spreading/map/map_stage.gd" id="1_os4lm"]
 [ext_resource type="Resource" path="res://infection_spreading/map/solar_system_stage_data.tres" id="2_v7c0g"]
+[ext_resource type="Script" path="res://infection_spreading/effects/auto_clicker_tendrils.gd" id="3_vun12"]
 
 [node name="SolarSystemStage" type="Node2D" unique_id=729470620]
 script = ExtResource("1_os4lm")
 stage_config = ExtResource("2_v7c0g")
+
+[node name="AutoClickerTendrils" type="Node2D" parent="." unique_id=1904870640]
+unique_name_in_owner = true
+script = ExtResource("3_vun12")
 
 [node name="RegionsRoot" type="Node2D" parent="." unique_id=778268637]
 unique_name_in_owner = true
