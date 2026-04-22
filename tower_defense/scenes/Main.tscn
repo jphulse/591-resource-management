@@ -23,7 +23,7 @@ autostart = true
 offset = Vector2(960, 540)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=185012516]
-position = Vector2(-1040, 540)
+position = Vector2(-1540, 540)
 texture = ExtResource("5_8bkux")
 
 [connection signal="tower_selected" from="Ui" to="." method="start_placement"]

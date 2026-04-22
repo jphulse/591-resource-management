@@ -82,7 +82,7 @@ func cancel_placement() -> void:
 func _evaluate_audio() -> void:
 	if at_lab:
 		return
-	audio_system.update_combat(combat)
+	audio_system.update_combat(combat, desperation)
 	audio_system.update_defense(defense)
 	if ultimate_enemies > 0:
 		desperation = true
@@ -94,8 +94,8 @@ func _lab_audio(entering: bool) -> void:
 	at_lab = entering
 	audio_system.lab(at_lab)
 	
-	var target_x = -2000.0 if entering else 0
-	var total_distance = 2000.0
+	var target_x = -2500.0 if entering else 0
+	var total_distance = 2500.0
 	var full_duration = 1.5
 	var current_distance = abs(camera.position.x - target_x)
 	var dynamic_duration = (current_distance / total_distance) * full_duration

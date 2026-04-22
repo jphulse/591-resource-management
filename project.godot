@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 buses/default_bus_layout="uid://dogpmewqatfh8"
 
+[autoload]
+
+SaveManager="*res://addons/jeremy_components/autoloads/save_manager/save_manager.gd"
+
 [debug]
 
 gdscript/warnings/unused_parameter=0
