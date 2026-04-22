@@ -25,7 +25,7 @@ var enemies: Array[Node2D] = []
 var enemy_paths: Array[Path2D] = []
 var objective_complete: bool = false
 
-var spawn_delay : Array[float] = [0.003, 0.004, 25, 0.01, 25, 0.006, 0.03, 0.08, 25]
+var spawn_delay : Array[float] = [0.003, 0.004, 0.01, 25, 0.006, 0.03, 0.08, 25]
 
 func _ready() -> void:
 	for enemy_path in enemy_paths_node.get_children():

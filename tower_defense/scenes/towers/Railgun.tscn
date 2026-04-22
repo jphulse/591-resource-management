@@ -122,7 +122,7 @@ size = Vector2(1998, 16)
 
 [node name="TowerBase" type="Node2D" unique_id=879173299]
 script = ExtResource("1_0w01h")
-damage = 250.0
+damage = 500.0
 projectile_speed = 2500.0
 attack_cooldown = 10.0
 building_value = 100.0
