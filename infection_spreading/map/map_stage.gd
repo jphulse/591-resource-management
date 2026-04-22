@@ -4,50 +4,13 @@ extends Node2D
 signal stage_cleared
 
 const REGION_SCENE : PackedScene = preload("res://infection_spreading/map/map_region.tscn")
-const BACKGROUND_COLOR : Color = Color("121212")
-const ORBIT_COLOR : Color = Color("bcbcbc", 0.48)
-const TITLE_COLOR : Color = Color("f5f5f5")
-const CONNECTION_COLOR : Color = Color("d94452", 0.36)
 const PULSE_SCENE = preload("res://infection_spreading/effects/viral_pulse.gd")
-const LOG_COLOR : Color = Color("ff9aa5", 0.78)
-const LOG_HEADER_COLOR : Color = Color("ff315b", 0.9)
 const MAX_LOG_ENTRIES : int = 5
 const TAKEOVER_COMPLETE_PROGRESS : float = 0.985
-const INFECTION_START_MESSAGES : Array = [
-	"%s containment failure detected",
-	"%s reports abnormal solar fever",
-	"%s orbital quarantine breached",
-	"%s transmission bloom beginning",
-	"%s surface signals destabilizing",
-]
-const INFECTION_COMPLETE_MESSAGES : Array = [
-	"%s consumed by %s",
-	"%s signal lost: %s confirmed",
-	"%s biosphere rewritten by %s",
-	"%s goes dark under %s",
-]
-const OUTBREAK_NAMES : Array = [
-	"Crimson Bloom",
-	"Helios Rot",
-	"Red Choir",
-	"Spore Surge",
-	"Solar Fever",
-	"Black Vein",
-	"Cathedral Strain",
-	"Burning Lattice",
-]
 const TAKEOVER_BANNER_DURATION : float = 2.15
 const RANDOM_EVENT_MIN_INTERVAL : float = 15.0
 const RANDOM_EVENT_MAX_INTERVAL : float = 28.0
 const MEMORY_PULSE_INTERVAL : float = 4.25
-const RANDOM_EVENT_MESSAGES : Array = [
-	"Solar winds accelerate loose spores",
-	"Human satellites detect impossible heat",
-	"Radio prayers collapse into static",
-	"Quarantine math no longer balances",
-	"Deep space telescopes blink red",
-	"Heliospheric pressure rising",
-]
 
 @export var stage_config : MapStageConfig
 @export var clicker : InfectionClicker = null
@@ -62,6 +25,7 @@ var random_event_timer : float = 0.0
 var infected_memory_order : Array[String] = []
 var memory_pulse_timer : float = MEMORY_PULSE_INTERVAL
 var memory_pulse_index : int = 0
+var fallback_flavor_config : MapStageFlavorConfig = MapStageFlavorConfig.new()
 
 @onready var spread_timer : Timer = %SpreadTimer
 @onready var auto_clicker_tendrils : AutoClickerTendrils = %AutoClickerTendrils
@@ -90,13 +54,14 @@ func initialize_stage() -> void:
 
 
 func _draw() -> void:
+	var flavor : MapStageFlavorConfig = _get_flavor_config()
 	var viewport_rect : Rect2 = get_viewport_rect()
 	var half_size : Vector2 = viewport_rect.size * 0.5
-	draw_rect(Rect2(-half_size, viewport_rect.size), BACKGROUND_COLOR, true)
+	draw_rect(Rect2(-half_size, viewport_rect.size), flavor.background_color, true)
 
 	if stage_config != null and stage_config.show_orbits:
 		for region_config : MapRegionConfig in stage_config.regions:
-			draw_arc(Vector2.ZERO, region_config.orbit, 0.0, TAU, 100, ORBIT_COLOR, 1.4, true)
+			draw_arc(Vector2.ZERO, region_config.orbit, 0.0, TAU, 100, flavor.orbit_color, 1.4, true)
 
 	for region_config : MapRegionConfig in _get_region_configs():
 		var source_name : String = region_config.region_name
@@ -114,11 +79,11 @@ func _draw() -> void:
 
 			var has_infection_connection : bool = source_region.infected or target_region.infected or source_region.infecting or target_region.infecting
 			if has_infection_connection:
-				var color : Color = CONNECTION_COLOR
+				var color : Color = flavor.connection_color
 				var is_active_infection_connection : bool = source_region.infecting or target_region.infecting
 				if is_active_infection_connection:
 					var vein_pulse : float = sin(Time.get_ticks_msec() / 150.0) * 0.5 + 0.5
-					color = color.lerp(Color("ff0033"), 0.42)
+					color = color.lerp(flavor.active_connection_color, 0.42)
 					color.a = clamp(color.a + vein_pulse * 0.28, 0.0, 0.95)
 				color.a = clamp(color.a + (connection_pulse_strength * 0.45), 0.0, 0.95)
 				var width : float = lerp(2.0, 4.5, connection_pulse_strength)
@@ -134,7 +99,7 @@ func _draw() -> void:
 		HORIZONTAL_ALIGNMENT_LEFT,
 		-1.0,
 		30,
-		TITLE_COLOR
+		flavor.title_color
 	)
 	_draw_infection_log(half_size)
 	_draw_corruption_percent(half_size)
@@ -176,23 +141,25 @@ func _clear_regions() -> void:
 
 
 func _initialize_infection_log() -> void:
+	var flavor : MapStageFlavorConfig = _get_flavor_config()
 	infection_log_entries.clear()
 	for region_config : MapRegionConfig in _get_region_configs():
 		if region_config.starts_infected:
 			if not infected_memory_order.has(region_config.region_name):
 				infected_memory_order.append(region_config.region_name)
-			_add_infection_log("%s: patient zero confirmed" % region_config.region_name.to_upper())
+			_add_infection_log(flavor.patient_zero_log_format % region_config.region_name.to_upper())
 
 
 func _draw_infection_log(half_size : Vector2) -> void:
 	if infection_log_entries.is_empty():
 		return
 
+	var flavor : MapStageFlavorConfig = _get_flavor_config()
 	var start_position : Vector2 = Vector2(-half_size.x + 34.0, half_size.y - 132.0)
-	draw_string(ThemeDB.fallback_font, start_position, "INFECTION LOG", HORIZONTAL_ALIGNMENT_LEFT, 280.0, 14, LOG_HEADER_COLOR)
+	draw_string(ThemeDB.fallback_font, start_position, flavor.infection_log_title, HORIZONTAL_ALIGNMENT_LEFT, 280.0, 14, flavor.log_header_color)
 
 	for index : int in range(infection_log_entries.size()):
-		var entry_color : Color = LOG_COLOR
+		var entry_color : Color = flavor.log_color
 		entry_color.a *= 1.0 - float(index) * 0.11
 		draw_string(
 			ThemeDB.fallback_font,
@@ -206,9 +173,10 @@ func _draw_infection_log(half_size : Vector2) -> void:
 
 
 func _draw_corruption_percent(half_size : Vector2) -> void:
+	var flavor : MapStageFlavorConfig = _get_flavor_config()
 	var corruption_percent : float = _get_corruption_percent()
-	var corruption_color : Color = Color("ff315b").lerp(Color("ffb0ba"), corruption_percent * 0.34)
-	var label_text : String = "SYSTEM CONTAMINATION: %d%%" % int(round(corruption_percent * 100.0))
+	var corruption_color : Color = flavor.corruption_start_color.lerp(flavor.corruption_end_color, corruption_percent * 0.34)
+	var label_text : String = flavor.corruption_label_format % int(round(corruption_percent * 100.0))
 	draw_string(
 		ThemeDB.fallback_font,
 		Vector2(-half_size.x + 54.0, -half_size.y + 92.0),
@@ -229,13 +197,14 @@ func _draw_center_banner(half_size : Vector2, display_text : String, color : Col
 	if display_text.is_empty():
 		return
 
+	var flavor : MapStageFlavorConfig = _get_flavor_config()
 	var age : float = duration - timer
 	var fade_in : float = clamp(age / 0.18, 0.0, 1.0)
 	var fade_out : float = clamp(timer / 0.5, 0.0, 1.0)
 	var alpha : float = min(fade_in, fade_out)
 	var pulse : float = sin(Time.get_ticks_msec() / 95.0) * 0.5 + 0.5
-	var banner_color : Color = color.lerp(Color("fff1b6"), pulse * 0.18)
-	var shadow_color : Color = Color(0, 0, 0, 0.82)
+	var banner_color : Color = color.lerp(flavor.banner_highlight_color, pulse * 0.18)
+	var shadow_color : Color = flavor.banner_shadow_color
 	banner_color.a = alpha
 	shadow_color.a *= alpha
 
@@ -331,7 +300,7 @@ func _update_random_events(delta : float) -> bool:
 	if random_event_timer > 0.0:
 		return false
 
-	_add_infection_log(str(RANDOM_EVENT_MESSAGES[randi() % RANDOM_EVENT_MESSAGES.size()]))
+	_add_infection_log(_get_random_flavor_text(_get_flavor_config().random_event_messages, "Deep space static thickens"))
 	_reset_random_event_timer()
 	return true
 
@@ -379,10 +348,11 @@ func _get_spread_chance(region_config : MapRegionConfig, effective_cps : float, 
 
 
 func _start_region_infection(region : MapRegion) -> void:
+	var flavor : MapStageFlavorConfig = _get_flavor_config()
 	region.start_infection()
 	active_infections[region.region_name] = true
-	_show_takeover_banner("INFECTING %s..." % region.region_name.to_upper(), Color("ff6b18"))
-	_spawn_region_pulse(region, Color("ff6b18"), region.radius * 3.2, 0.5)
+	_show_takeover_banner(flavor.infecting_banner_format % region.region_name.to_upper(), flavor.infection_start_color)
+	_spawn_region_pulse(region, flavor.infection_start_color, region.radius * 3.2, 0.5)
 	_add_infection_log(_get_start_log_message(region.region_name))
 	connection_pulse_strength = max(connection_pulse_strength, 0.7)
 
@@ -440,14 +410,15 @@ func _is_region_takeover_complete(region : MapRegion) -> bool:
 
 
 func _complete_region_infection(region : MapRegion) -> void:
+	var flavor : MapStageFlavorConfig = _get_flavor_config()
 	var outbreak_name : String = _get_outbreak_name()
 	active_infections.erase(region.region_name)
 	region.set_infected(true)
 	if not infected_memory_order.has(region.region_name):
 		infected_memory_order.append(region.region_name)
 	region.play_infection_death_animation()
-	_show_takeover_banner("%s CONSUMED" % region.region_name.to_upper(), Color("ff0033"))
-	_spawn_region_pulse(region, Color("ff0033"), region.radius * 5.5, 0.72)
+	_show_takeover_banner(flavor.consumed_banner_format % region.region_name.to_upper(), flavor.infection_complete_color)
+	_spawn_region_pulse(region, flavor.infection_complete_color, region.radius * 5.5, 0.72)
 	_add_infection_log(_get_complete_log_message(region.region_name, outbreak_name))
 	_add_outbreak_boost_for_region(region.region_name, outbreak_name)
 	_refresh_neighbor_pressure()
@@ -469,17 +440,17 @@ func _add_outbreak_boost_for_region(region_name : String, outbreak_name : String
 
 
 func _get_start_log_message(region_name : String) -> String:
-	var message_format : String = str(INFECTION_START_MESSAGES[randi() % INFECTION_START_MESSAGES.size()])
+	var message_format : String = _get_random_flavor_text(_get_flavor_config().infection_start_messages, "%s containment failure detected")
 	return message_format % region_name.to_upper()
 
 
 func _get_complete_log_message(region_name : String, outbreak_name : String) -> String:
-	var message_format : String = str(INFECTION_COMPLETE_MESSAGES[randi() % INFECTION_COMPLETE_MESSAGES.size()])
+	var message_format : String = _get_random_flavor_text(_get_flavor_config().infection_complete_messages, "%s consumed by %s")
 	return message_format % [region_name.to_upper(), outbreak_name]
 
 
 func _get_outbreak_name() -> String:
-	return str(OUTBREAK_NAMES[randi() % OUTBREAK_NAMES.size()])
+	return _get_random_flavor_text(_get_flavor_config().outbreak_names, "Crimson Bloom")
 
 
 func _show_takeover_banner(display_text : String, color : Color) -> void:
@@ -542,3 +513,15 @@ func _get_region_configs() -> Array[MapRegionConfig]:
 	if stage_config == null:
 		return []
 	return stage_config.regions
+
+
+func _get_flavor_config() -> MapStageFlavorConfig:
+	if stage_config != null and stage_config.flavor_config != null:
+		return stage_config.flavor_config
+	return fallback_flavor_config
+
+
+func _get_random_flavor_text(messages : PackedStringArray, fallback : String) -> String:
+	if messages.is_empty():
+		return fallback
+	return str(messages[randi() % messages.size()])

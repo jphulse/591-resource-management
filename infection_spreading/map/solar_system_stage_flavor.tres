@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="MapStageFlavorConfig" format=3 uid="uid://bqldxow5ci72m"]
+
+[ext_resource type="Script" path="res://infection_spreading/map/map_stage_flavor_config.gd" id="1_stage_flavor"]
+
+[resource]
+script = ExtResource("1_stage_flavor")
+background_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+orbit_color = Color(0.737255, 0.737255, 0.737255, 0.48)
+title_color = Color(0.960784, 0.960784, 0.960784, 1)
+connection_color = Color(0.85098, 0.266667, 0.321569, 0.36)
+active_connection_color = Color(1, 0, 0.2, 1)
+log_color = Color(1, 0.603922, 0.647059, 0.78)
+log_header_color = Color(1, 0.192157, 0.356863, 0.9)
+corruption_start_color = Color(1, 0.192157, 0.356863, 1)
+corruption_end_color = Color(1, 0.690196, 0.729412, 1)
+infection_start_color = Color(1, 0.419608, 0.0941176, 1)
+infection_complete_color = Color(1, 0, 0.2, 1)
+banner_highlight_color = Color(1, 0.945098, 0.713725, 1)
+banner_shadow_color = Color(0, 0, 0, 0.82)
+infection_log_title = "INFECTION LOG"
+corruption_label_format = "SYSTEM CONTAMINATION: %d%%"
+patient_zero_log_format = "%s: patient zero confirmed"
+infecting_banner_format = "INFECTING %s..."
+consumed_banner_format = "%s CONSUMED"
+infection_start_messages = PackedStringArray("%s containment failure detected", "%s reports abnormal solar fever", "%s orbital quarantine breached", "%s transmission bloom beginning", "%s surface signals destabilizing")
+infection_complete_messages = PackedStringArray("%s consumed by %s", "%s signal lost: %s confirmed", "%s biosphere rewritten by %s", "%s goes dark under %s")
+outbreak_names = PackedStringArray("Crimson Bloom", "Helios Rot", "Red Choir", "Spore Surge", "Solar Fever", "Black Vein", "Cathedral Strain", "Burning Lattice")
+random_event_messages = PackedStringArray("Solar winds accelerate loose spores", "Human satellites detect impossible heat", "Radio prayers collapse into static", "Quarantine math no longer balances", "Deep space telescopes blink red", "Heliospheric pressure rising")

@@ -9,4 +9,5 @@ extends Resource
 @export var minimum_takeover_duration : float = 30.0
 @export var neighbor_takeover_bonus : float = 0.35
 @export var show_orbits : bool = true
+@export var flavor_config : MapStageFlavorConfig = null
 @export var regions : Array[MapRegionConfig] = []

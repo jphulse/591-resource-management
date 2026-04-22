@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dbxkyihaly3uq" path="res://infection_spreading/map/map_stage_config.gd" id="1_p31on"]
 [ext_resource type="Script" uid="uid://c6r4irsf210tn" path="res://infection_spreading/map/map_region_config.gd" id="2_67y44"]
+[ext_resource type="Resource" uid="uid://bqldxow5ci72m" path="res://infection_spreading/map/solar_system_stage_flavor.tres" id="3_flavor"]
 
 [sub_resource type="Resource" id="Resource_mercury"]
 script = ExtResource("2_67y44")
@@ -92,4 +93,5 @@ takeover_duration = 50.0
 script = ExtResource("1_p31on")
 stage_title = "The Solar System"
 minimum_takeover_duration = 30.0
+flavor_config = ExtResource("3_flavor")
 regions = Array[ExtResource("2_67y44")]([SubResource("Resource_mercury"), SubResource("Resource_venus"), SubResource("Resource_earth"), SubResource("Resource_mars"), SubResource("Resource_jupiter"), SubResource("Resource_saturn"), SubResource("Resource_uranus"), SubResource("Resource_neptune")])

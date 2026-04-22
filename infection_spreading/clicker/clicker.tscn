@@ -4,8 +4,23 @@
 [ext_resource type="Script" uid="uid://bc43eqcwiux3n" path="res://infection_spreading/clicker/passive_clicker.gd" id="2_hy3xo"]
 [ext_resource type="Texture2D" uid="uid://c37pm1sxrecbs" path="res://icon.svg" id="3_5y6s2"]
 [ext_resource type="Shader" uid="uid://cpkbqna43nsve" path="res://infection_spreading/clicker/infection_button.gdshader" id="3_8jdh8"]
+[ext_resource type="Resource" path="res://infection_spreading/clicker/solar_clicker_flavor.tres" id="4_clicker_flavor"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0n0fn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_score_hud"]
+bg_color = Color(0.025, 0.006, 0.011, 0.72)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.105882, 0.196078, 0.45)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+shadow_color = Color(0, 0, 0, 0.46)
+shadow_size = 14
 
 [sub_resource type="Resource" id="Resource_m3gyo"]
 script = ExtResource("2_hy3xo")
@@ -53,14 +68,14 @@ shader = ExtResource("3_8jdh8")
 shader_parameter/infection_level = 0.0
 shader_parameter/pulse_strength = 0.0
 shader_parameter/tentacle_seed = Vector2(0, 0)
-shader_parameter/button_color = Color(0.01, 0.01, 0.02, 1)
-shader_parameter/button_edge_color = Color(0.1, 0.1, 0.14, 1)
-shader_parameter/star_color = Color(0.99, 0.95, 0.82, 1)
-shader_parameter/infected_color = Color(0.88, 0.08, 0.15, 1)
-shader_parameter/infected_soft_color = Color(0.96, 0.26, 0.33, 1)
-shader_parameter/infected_hot_color = Color(1, 0.53, 0.58, 1)
-shader_parameter/infected_shadow_color = Color(0.44, 0.03, 0.08, 1)
-shader_parameter/vein_color = Color(0.73, 0.11, 0.18, 1)
+shader_parameter/button_color = Color(0.917647, 0.419608, 0.0627451, 1)
+shader_parameter/button_edge_color = Color(0.482353, 0.113725, 0.0117647, 1)
+shader_parameter/star_color = Color(1, 0.945098, 0.713725, 1)
+shader_parameter/infected_color = Color(0.878431, 0.0784314, 0.14902, 1)
+shader_parameter/infected_soft_color = Color(0.960784, 0.258824, 0.329412, 1)
+shader_parameter/infected_hot_color = Color(1, 0.529412, 0.564706, 1)
+shader_parameter/infected_shadow_color = Color(0.278431, 0.0117647, 0.0392157, 1)
+shader_parameter/vein_color = Color(0.709804, 0.105882, 0.164706, 1)
 
 [node name="Clicker" type="Panel" unique_id=1813294204]
 anchors_preset = 15
@@ -73,6 +88,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_0n0fn")
 script = ExtResource("1_c8eug")
 passives = Array[ExtResource("2_hy3xo")]([SubResource("Resource_m3gyo"), SubResource("Resource_4e6xj")])
 clicker_passive = SubResource("Resource_5y6s2")
+flavor_config = ExtResource("4_clicker_flavor")
 metadata/_tab_index = 0
 
 [node name="ClickerArea" type="Area2D" parent="." unique_id=1181639626]
@@ -104,8 +120,22 @@ unique_name_in_owner = true
 [node name="OutbreakMultiplierLabel" type="Label" parent="." unique_id=447846841]
 unique_name_in_owner = true
 visible = false
-offset_right = 108.0
-offset_bottom = 38.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.0
+offset_top = 64.0
+offset_right = 54.0
+offset_bottom = 102.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.85)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_font_sizes/font_size = 30
 text = "x2.0"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -117,13 +147,18 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -300.0
-offset_top = 82.0
+offset_top = 168.0
 offset_right = 300.0
-offset_bottom = 134.0
+offset_bottom = 220.0
 grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_font_sizes/font_size = 34
 text = "THE INFECTION LEARNS"
 horizontal_alignment = 1
 vertical_alignment = 1
+modulate = Color(1, 0.12, 0.22, 0)
 
 [node name="TestModeToggle" type="CheckButton" parent="." unique_id=1931881253]
 unique_name_in_owner = true
@@ -138,35 +173,72 @@ offset_bottom = -8.0
 grow_vertical = 0
 text = "TEST: $1 costs"
 
+[node name="ScoreHudBackdrop" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -380.0
+offset_top = 10.0
+offset_right = 380.0
+offset_bottom = 160.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_score_hud")
+
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=467301559]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 40.0
+offset_left = -350.0
+offset_top = 20.0
+offset_right = 350.0
+offset_bottom = 150.0
 grow_horizontal = 2
+theme_override_constants/separation = 4
 
 [node name="TotalLabel" type="Label" parent="VBoxContainer" unique_id=360236146]
 unique_name_in_owner = true
 layout_mode = 2
+custom_minimum_size = Vector2(700, 64)
 size_flags_vertical = 1
-text = "TEST X Currency"
+theme_override_colors/font_color = Color(1, 0.84, 0.56, 1)
+theme_override_colors/font_shadow_color = Color(0.12, 0, 0.02, 0.92)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_font_sizes/font_size = 56
+text = "0.00 Viral Mass"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ScorePerSecond" type="Label" parent="VBoxContainer" unique_id=748921390]
 unique_name_in_owner = true
 layout_mode = 2
+custom_minimum_size = Vector2(700, 36)
 size_flags_vertical = 1
-text = "X CPS"
+theme_override_colors/font_color = Color(1, 0.92, 0.88, 1)
+theme_override_colors/font_shadow_color = Color(0.08, 0, 0.01, 0.86)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_font_sizes/font_size = 28
+text = "0.00 CPS"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="EcosystemLabel" type="Label" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+custom_minimum_size = Vector2(700, 24)
 size_flags_vertical = 1
+theme_override_colors/font_color = Color(1, 0.603922, 0.647059, 0.82)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.78)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 14
 text = "Viral ecosystem dormant"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Timers" type="Node" parent="." unique_id=2138432576]
 

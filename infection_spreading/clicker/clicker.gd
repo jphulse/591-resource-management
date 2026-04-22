@@ -8,6 +8,8 @@ class_name InfectionClicker extends Panel
 
 @export var upgrades : ClickerUpgrades = null
 
+@export var flavor_config : ClickerFlavorConfig = null
+
 @export var test_mode : bool = false
 #endregion
 
@@ -18,51 +20,11 @@ const VISUAL_INFECTION_CURVE : float = 0.55
 const VISUAL_RESPONSE_SPEED : float = 4.0
 const INFECTION_SEED_THRESHOLD : float = 0.02
 const MANUAL_INFECTION_CPS_WEIGHT : float = 1.5
-const SUN_BUTTON_COLOR : Color = Color("ea6b10")
-const SUN_EDGE_COLOR : Color = Color("7b1d03")
-const SUN_STAR_COLOR : Color = Color("fff1b6")
-const SUN_INFECTED_COLOR : Color = Color("e01426")
-const SUN_INFECTED_SOFT_COLOR : Color = Color("f54254")
-const SUN_INFECTED_HOT_COLOR : Color = Color("ff8790")
-const SUN_INFECTED_SHADOW_COLOR : Color = Color("47030a")
-const SUN_VEIN_COLOR : Color = Color("b51b2a")
 const PULSE_SCENE = preload("res://infection_spreading/effects/viral_pulse.gd")
 const FLOATING_TEXT_SCENE = preload("res://infection_spreading/effects/floating_text.gd")
 const CLICK_TEXT_INTERVAL : float = 0.18
 const CLICK_PULSE_INTERVAL : float = 0.05
 const CLICK_STREAK_TEXT_INTERVAL : float = 2.2
-const CPS_MILESTONE_THRESHOLDS : Array = [100.0, 400.0, 900.0, 2200.0, 5500.0]
-const CPS_MILESTONE_MESSAGES : Array = [
-	"THE INFECTION LEARNS",
-	"SOLAR FEVER DETECTED",
-	"THE SUN IS LISTENING",
-	"ORBITAL CONTAINMENT FAILING",
-	"THE SYSTEM IS RAVENOUS",
-]
-const UPGRADE_FLAVOR_COOLDOWN : float = 1.2
-const IDLE_WHISPER_DELAY : float = 8.0
-const IDLE_WHISPER_INTERVAL : float = 9.0
-const SOLAR_TAP_FLAVOR_MESSAGES : Array = [
-	"solar tap widens",
-	"sun plasma rerouted",
-	"the star bleeds faster",
-]
-const SPORE_COLONY_FLAVOR_MESSAGES : Array = [
-	"spore colony blooms",
-	"new tendrils answer",
-	"red roots find orbit",
-]
-const MUTATION_HIVE_FLAVOR_MESSAGES : Array = [
-	"mutation hive awakens",
-	"thicker nerves growing",
-	"the hive thinks louder",
-]
-const IDLE_WHISPER_MESSAGES : Array = [
-	"it waits",
-	"the spores breathe",
-	"growth continues",
-	"the sun remembers",
-]
 const SPORE_PASSIVE_NAME : String = "Spore Colony"
 const HIVE_PASSIVE_NAME : String = "Mutation Hive"
 const HIVE_SPORE_OUTPUT_BONUS : float = 0.03
@@ -83,10 +45,6 @@ var click_value : float = 1.0
 var init_click_value : float = 1.0
 ## The click value before any timed infection boosts are applied
 var base_click_value : float = 1.0
-## Format string for the total label
-var total_label_format : String = "%.02f Viral Mass"
-## Format string for the score per second label
-var score_per_second_format : String = "%.02f CPS"
 ## Number of score gained in the previous second by clicking alone
 var click_value_per_second : float = 0.0
 ## Number of score gained every second passively
@@ -125,6 +83,8 @@ var upgrade_flavor_cooldown : float = 0.0
 var idle_whisper_cooldown : float = 0.0
 ## Last time the player manually clicked the sun
 var last_click_time : float = 0.0
+## Safe default used when a scene has not assigned a flavor resource yet
+var fallback_flavor_config : ClickerFlavorConfig = ClickerFlavorConfig.new()
 
 ## Packed scene for the button scene
 var upgrade_button_scene : PackedScene = preload("uid://dqt48i3odii7u")
@@ -173,14 +133,14 @@ func _input(event: InputEvent) -> void:
 #region Score label updating
 ## Updates the score label to match the total count, done whenever count changes
 func update_score_label() -> void:
-	total_label.text = total_label_format % count
+	total_label.text = _get_flavor_config().total_label_format % count
 	if upgrades and upgrades.is_node_ready():
 		upgrades.balance_label.text = total_label.text
 
 ## Updates the score per second label done once a second or when passive_clicks_per_second changes
 func update_score_per_second_label() -> void:
 	var current_cps : float = click_value_per_second + passive_clicks_per_second
-	score_per_second.text = score_per_second_format % current_cps
+	score_per_second.text = _get_flavor_config().score_per_second_format % current_cps
 	_update_cps_label_style()
 	if not is_equal_approx(current_cps, last_displayed_cps):
 		_animate_cps_label(false)
@@ -195,6 +155,12 @@ func _on_second_timer_timeout() -> void:
 #endregion
 
 #region Helper methods
+
+func _get_flavor_config() -> ClickerFlavorConfig:
+	if flavor_config != null:
+		return flavor_config
+	return fallback_flavor_config
+
 
 func _upgrade_click(item : PlaguePassive) -> void:
 	print("UPGRADE", item.passive_benefit, " ",item.count, " ",item.upgrade_mult)
@@ -291,6 +257,7 @@ func _update_base_click_value(item : PlaguePassive = null) -> void:
 
 ## Keeps the click area centered on top of the button visual
 func _sync_clicker_area() -> void:
+	# The sun must align with the world map center, not the TabContainer content area.
 	var viewport_center : Vector2 = get_viewport_rect().size * 0.5
 	infection_button.global_position = viewport_center - (infection_button.size * 0.5)
 	clicker_area.position = infection_button.position + (infection_button.size * 0.5)
@@ -326,25 +293,22 @@ func _spawn_upgrade_flavor(passive : PlaguePassive) -> void:
 		return
 
 	_spawn_floating_text(flavor_text, _get_upgrade_flavor_color(passive), _get_sun_center() + _get_upgrade_flavor_offset(), Vector2(0.0, -46.0), 1.0)
-	upgrade_flavor_cooldown = UPGRADE_FLAVOR_COOLDOWN
+	upgrade_flavor_cooldown = _get_flavor_config().upgrade_flavor_cooldown
 
 
 func _get_upgrade_flavor_text(passive : PlaguePassive) -> String:
-	var flavor_messages : Array = SOLAR_TAP_FLAVOR_MESSAGES
-	if passive.name == "Mutation Hive":
-		flavor_messages = MUTATION_HIVE_FLAVOR_MESSAGES
-	elif passive.name == "Spore Colony":
-		flavor_messages = SPORE_COLONY_FLAVOR_MESSAGES
-
-	return str(flavor_messages[randi() % flavor_messages.size()])
+	var flavor_messages : PackedStringArray = _get_flavor_config().get_upgrade_flavor_messages(passive.name)
+	return _get_random_flavor_text(flavor_messages, "")
 
 
 func _get_upgrade_flavor_color(passive : PlaguePassive) -> Color:
-	if passive.name == "Mutation Hive":
-		return Color("ff2ca8")
-	if passive.name == "Spore Colony":
-		return Color("ff315b")
-	return Color("ffb35a")
+	return _get_flavor_config().get_upgrade_flavor_color(passive.name)
+
+
+func _get_random_flavor_text(messages : PackedStringArray, fallback : String) -> String:
+	if messages.is_empty():
+		return fallback
+	return str(messages[randi() % messages.size()])
 
 
 func _get_upgrade_flavor_offset() -> Vector2:
@@ -399,8 +363,9 @@ func _update_outbreak_multiplier_label() -> void:
 		return
 
 	var pulse : float = sin(hud_pulse_time * 10.0) * 0.5 + 0.5
+	var flavor : ClickerFlavorConfig = _get_flavor_config()
 	outbreak_multiplier_label.text = _get_multiplier_text(multiplier)
-	outbreak_multiplier_label.modulate = Color("ff0033").lerp(Color("ffb0ba"), pulse * 0.45)
+	outbreak_multiplier_label.modulate = flavor.outbreak_label_hot_color.lerp(flavor.outbreak_label_soft_color, pulse * 0.45)
 	outbreak_multiplier_label.scale = Vector2.ONE * (1.0 + pulse * 0.18)
 
 ## Counts bought passive auto clickers by type for visual tendrils
@@ -429,14 +394,6 @@ func _update_auto_clicker_tendrils() -> void:
 	last_auto_clicker_tendril_key = auto_clicker_key
 	auto_clicker_tendrils.set_tendril_counts(int(counts["spores"]), int(counts["hives"]))
 
-## Gives the persistent outbreak multiplier label a more arcade infected style
-func _style_outbreak_multiplier_label() -> void:
-	outbreak_multiplier_label.add_theme_font_size_override("font_size", 30)
-	outbreak_multiplier_label.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.85))
-	outbreak_multiplier_label.add_theme_constant_override("shadow_offset_x", 3)
-	outbreak_multiplier_label.add_theme_constant_override("shadow_offset_y", 3)
-	outbreak_multiplier_label.pivot_offset = outbreak_multiplier_label.size * 0.5
-
 ## Formats multiplier text without noisy decimals when possible
 func _get_multiplier_text(multiplier : float) -> String:
 	if is_equal_approx(multiplier, round(multiplier)):
@@ -447,18 +404,19 @@ func _get_multiplier_text(multiplier : float) -> String:
 func _spawn_click_feedback(amount : float) -> void:
 	var now : float = Time.get_ticks_msec() / 1000.0
 	var manual_cps : float = _get_recent_manual_cps(now)
+	var flavor : ClickerFlavorConfig = _get_flavor_config()
 
 	if click_pulse_cooldown <= 0.0:
 		var pulse : ViralPulse = PULSE_SCENE.new() as ViralPulse
 		effects_root.add_child(pulse)
 		pulse.global_position = infection_button.global_position + (infection_button.size * 0.5)
 		var pulse_radius : float = lerp(58.0, 118.0, clamp(manual_cps / 600.0, 0.0, 1.0))
-		var pulse_color : Color = Color("ff6b18").lerp(Color("d70424"), clamp(manual_cps / 600.0, 0.0, 1.0))
+		var pulse_color : Color = flavor.click_pulse_start_color.lerp(flavor.click_pulse_end_color, clamp(manual_cps / 600.0, 0.0, 1.0))
 		pulse.setup(pulse_color, pulse_radius, 0.42, 4.0)
 		click_pulse_cooldown = CLICK_PULSE_INTERVAL
 
 	if click_text_cooldown <= 0.0:
-		_spawn_floating_text("+%.0f" % amount, Color("ffb35a"), _get_sun_center() + _get_click_text_offset(), Vector2(0.0, -42.0), 0.65)
+		_spawn_floating_text("+%.0f" % amount, flavor.click_number_color, _get_sun_center() + _get_click_text_offset(), Vector2(0.0, -42.0), 0.65)
 		click_text_cooldown = CLICK_TEXT_INTERVAL
 
 	_spawn_click_streak_text(manual_cps)
@@ -473,20 +431,17 @@ func _spawn_click_streak_text(manual_cps : float) -> void:
 	if streak_text.is_empty():
 		return
 
-	_spawn_floating_text(streak_text, Color("ff315b"), _get_sun_center() + Vector2(-74.0, -102.0), Vector2(0.0, -36.0), 0.9)
+	_spawn_floating_text(streak_text, _get_flavor_config().click_streak_color, _get_sun_center() + Vector2(-74.0, -102.0), Vector2(0.0, -36.0), 0.9)
 	click_streak_text_cooldown = CLICK_STREAK_TEXT_INTERVAL
 
 
 func _get_click_streak_text(manual_cps : float) -> String:
-	if manual_cps >= 850.0:
-		return "SOLAR PARASITE"
-	if manual_cps >= 450.0:
-		return "RAVENOUS"
-	if manual_cps >= 180.0:
-		return "UNSTABLE"
-	if manual_cps >= 60.0:
-		return "FEVERISH"
-	return ""
+	var flavor : ClickerFlavorConfig = _get_flavor_config()
+	var ret_val : String = ""
+	for index : int in range(min(flavor.click_streak_thresholds.size(), flavor.click_streak_messages.size())):
+		if manual_cps >= float(flavor.click_streak_thresholds[index]):
+			ret_val = str(flavor.click_streak_messages[index])
+	return ret_val
 
 
 ## Returns the visual center of the sun button
@@ -527,22 +482,16 @@ func _animate_cps_label(is_outbreak : bool) -> void:
 ## Keeps the cps label color tied to infection power tiers
 func _update_cps_label_style() -> void:
 	var effective_cps : float = get_effective_infection_cps()
-	var tier_color : Color = Color("f2f2f2")
+	var flavor : ClickerFlavorConfig = _get_flavor_config()
+	var tier_color : Color = flavor.default_cps_color
 
-	if effective_cps >= 5500.0:
-		tier_color = Color("ff1f4f")
-	elif effective_cps >= 2200.0:
-		tier_color = Color("ff315b")
-	elif effective_cps >= 900.0:
-		tier_color = Color("d70424")
-	elif effective_cps >= 400.0:
-		tier_color = Color("ff4a2f")
-	elif effective_cps >= 100.0:
-		tier_color = Color("ff8a72")
+	for index : int in range(min(flavor.cps_tier_thresholds.size(), flavor.cps_tier_colors.size())):
+		if effective_cps >= float(flavor.cps_tier_thresholds[index]):
+			tier_color = flavor.cps_tier_colors[index]
 
 	if not active_outbreak_boosts.is_empty():
 		var pulse : float = sin(hud_pulse_time * 10.0) * 0.5 + 0.5
-		tier_color = tier_color.lerp(Color("ff0033"), 0.35 + (pulse * 0.35))
+		tier_color = tier_color.lerp(flavor.outbreak_cps_color, 0.35 + (pulse * 0.35))
 
 	score_per_second.modulate = tier_color
 
@@ -554,14 +503,19 @@ func _update_cps_milestone_banner() -> void:
 	if milestone_index <= highest_cps_milestone_index:
 		return
 
+	var messages : PackedStringArray = _get_flavor_config().cps_milestone_messages
 	highest_cps_milestone_index = milestone_index
-	_show_milestone_banner(str(CPS_MILESTONE_MESSAGES[milestone_index]))
+	if milestone_index >= messages.size():
+		return
+
+	_show_milestone_banner(str(messages[milestone_index]))
 
 
 func _get_cps_milestone_index(effective_cps : float) -> int:
+	var thresholds : Array[float] = _get_flavor_config().cps_milestone_thresholds
 	var ret_val : int = -1
-	for index : int in range(CPS_MILESTONE_THRESHOLDS.size()):
-		if effective_cps >= float(CPS_MILESTONE_THRESHOLDS[index]):
+	for index : int in range(thresholds.size()):
+		if effective_cps >= float(thresholds[index]):
 			ret_val = index
 	return ret_val
 
@@ -571,7 +525,7 @@ func _show_milestone_banner(display_text : String) -> void:
 	milestone_banner_label.text = display_text
 	milestone_banner_label.pivot_offset = milestone_banner_label.size * 0.5
 	milestone_banner_label.scale = Vector2.ONE * 0.84
-	milestone_banner_label.modulate = Color("ff315b")
+	milestone_banner_label.modulate = _get_flavor_config().milestone_banner_color
 	_spawn_mutation_flare()
 
 	var tween : Tween = create_tween()
@@ -580,16 +534,7 @@ func _show_milestone_banner(display_text : String) -> void:
 	tween.tween_property(milestone_banner_label, "scale", Vector2.ONE * 1.12, 0.18)
 	tween.tween_property(milestone_banner_label, "scale", Vector2.ONE, 0.26)
 	tween.tween_interval(1.05)
-	tween.tween_property(milestone_banner_label, "modulate", Color(1.0, 0.12, 0.22, 0.0), 0.5)
-
-
-## Gives the big milestone banner a heavy infected arcade style
-func _style_milestone_banner_label() -> void:
-	milestone_banner_label.add_theme_font_size_override("font_size", 34)
-	milestone_banner_label.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.9))
-	milestone_banner_label.add_theme_constant_override("shadow_offset_x", 4)
-	milestone_banner_label.add_theme_constant_override("shadow_offset_y", 4)
-	milestone_banner_label.modulate = Color(1.0, 0.12, 0.22, 0.0)
+	tween.tween_property(milestone_banner_label, "modulate", _get_flavor_config().milestone_banner_fade_color, 0.5)
 
 
 ## Gives cps milestones a bigger rare mutation flare around the sun
@@ -600,7 +545,7 @@ func _spawn_mutation_flare() -> void:
 	var pulse : ViralPulse = PULSE_SCENE.new() as ViralPulse
 	effects_root.add_child(pulse)
 	pulse.global_position = _get_sun_center()
-	pulse.setup(Color("ff0033"), 190.0, 0.72, 8.0)
+	pulse.setup(_get_flavor_config().mutation_flare_color, 190.0, 0.72, 8.0)
 	visual_pulse_strength = 1.0
 
 	var material_var : ShaderMaterial = infection_button.material as ShaderMaterial
@@ -611,16 +556,20 @@ func _spawn_mutation_flare() -> void:
 ## Adds subtle idle flavor when the player lets the infection breathe
 func _update_idle_whispers(delta : float) -> void:
 	var now : float = Time.get_ticks_msec() / 1000.0
-	if now - last_click_time < IDLE_WHISPER_DELAY:
+	var flavor : ClickerFlavorConfig = _get_flavor_config()
+	if now - last_click_time < flavor.idle_whisper_delay:
 		return
 
 	idle_whisper_cooldown -= delta
 	if idle_whisper_cooldown > 0.0:
 		return
 
-	var whisper_text : String = str(IDLE_WHISPER_MESSAGES[randi() % IDLE_WHISPER_MESSAGES.size()])
-	_spawn_floating_text(whisper_text, Color("ff9aa5"), _get_sun_center() + Vector2(randf_range(-84.0, 50.0), -92.0), Vector2(0.0, -28.0), 1.4)
-	idle_whisper_cooldown = IDLE_WHISPER_INTERVAL
+	var whisper_text : String = _get_random_flavor_text(flavor.idle_whisper_messages, "")
+	idle_whisper_cooldown = flavor.idle_whisper_interval
+	if whisper_text.is_empty():
+		return
+
+	_spawn_floating_text(whisper_text, flavor.idle_whisper_color, _get_sun_center() + Vector2(randf_range(-84.0, 50.0), -92.0), Vector2(0.0, -28.0), 1.4)
 
 ## Drives the button shader based on recent clicking and passive spread
 func _update_infection_visuals(delta : float) -> void:
@@ -656,42 +605,23 @@ func _randomize_infection_seed(material_param : ShaderMaterial) -> void:
 		)
 	)
 
-## Tunes the center shader so the clickable button visually reads as the system's sun
-func _style_button_as_sun(material_var : ShaderMaterial) -> void:
-	material_var.set_shader_parameter("button_color", SUN_BUTTON_COLOR)
-	material_var.set_shader_parameter("button_edge_color", SUN_EDGE_COLOR)
-	material_var.set_shader_parameter("star_color", SUN_STAR_COLOR)
-	material_var.set_shader_parameter("infected_color", SUN_INFECTED_COLOR)
-	material_var.set_shader_parameter("infected_soft_color", SUN_INFECTED_SOFT_COLOR)
-	material_var.set_shader_parameter("infected_hot_color", SUN_INFECTED_HOT_COLOR)
-	material_var.set_shader_parameter("infected_shadow_color", SUN_INFECTED_SHADOW_COLOR)
-	material_var.set_shader_parameter("vein_color", SUN_VEIN_COLOR)
-
-## Gives the ecosystem label a quiet infected readout style
-func _style_ecosystem_label() -> void:
-	ecosystem_label.add_theme_font_size_override("font_size", 12)
-	ecosystem_label.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.78))
-	ecosystem_label.add_theme_constant_override("shadow_offset_x", 2)
-	ecosystem_label.add_theme_constant_override("shadow_offset_y", 2)
-	ecosystem_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-
-
 ## Shows the current cross-upgrade bonuses so mixed builds feel intentional
 func _update_ecosystem_label() -> void:
 	if not is_node_ready():
 		return
 
+	var flavor : ClickerFlavorConfig = _get_flavor_config()
 	var spore_bonus : int = int(round((_get_spore_output_multiplier() - 1.0) * 100.0))
 	var hive_discount : int = int(round((1.0 - _get_hive_cost_multiplier()) * 100.0))
 	var tap_bonus : int = int(round((_get_solar_tap_ecosystem_multiplier() - 1.0) * 100.0))
 
 	if spore_bonus <= 0 and hive_discount <= 0 and tap_bonus <= 0:
-		ecosystem_label.text = "Viral ecosystem dormant"
-		ecosystem_label.modulate = Color(1.0, 1.0, 1.0, 0.42)
+		ecosystem_label.text = flavor.ecosystem_dormant_text
+		ecosystem_label.modulate = flavor.ecosystem_dormant_color
 		return
 
-	ecosystem_label.text = "Ecosystem: spores +%d%% | hives -%d%% | taps +%d%%" % [spore_bonus, hive_discount, tap_bonus]
-	ecosystem_label.modulate = Color("ff9aa5", 0.82)
+	ecosystem_label.text = flavor.ecosystem_active_format % [spore_bonus, hive_discount, tap_bonus]
+	ecosystem_label.modulate = flavor.ecosystem_active_color
 
 
 func _get_passive_count(passive_name : String) -> int:
@@ -809,10 +739,11 @@ func add_outbreak_click_boost(multiplier : float, duration : float, outbreak_nam
 	_update_click_value()
 	_update_outbreak_multiplier_label()
 	_animate_cps_label(true)
-	var outbreak_text : String = "OUTBREAK %s" % _get_multiplier_text(multiplier)
+	var flavor : ClickerFlavorConfig = _get_flavor_config()
+	var outbreak_text : String = flavor.outbreak_text_format % _get_multiplier_text(multiplier)
 	if not outbreak_name.is_empty():
-		outbreak_text = "%s: %s" % [outbreak_text, outbreak_name]
-	_spawn_floating_text(outbreak_text, Color("ff0033"), _get_sun_center() + Vector2(-92.0, -76.0), Vector2(0.0, -64.0), 1.15)
+		outbreak_text = flavor.outbreak_named_text_format % [outbreak_text, outbreak_name]
+	_spawn_floating_text(outbreak_text, flavor.outbreak_text_color, _get_sun_center() + Vector2(-92.0, -76.0), Vector2(0.0, -64.0), 1.15)
 #endregion
 
 #region Processing
@@ -823,15 +754,11 @@ func _ready() -> void:
 	idle_whisper_cooldown = 0.0
 	_initialize_buttons()
 	_sync_test_mode_toggle()
-	_style_ecosystem_label()
 	_refresh_output_values()
 	_update_auto_clicker_tendrils()
-	_style_outbreak_multiplier_label()
-	_style_milestone_banner_label()
 	update_score_label()
 	infection_rng.randomize()
 	infection_button.material = infection_button.material.duplicate()
-	_style_button_as_sun(infection_button.material as ShaderMaterial)
 	_randomize_infection_seed(infection_button.material as ShaderMaterial)
 	_sync_clicker_area()
 	_update_infection_visuals(0.0)

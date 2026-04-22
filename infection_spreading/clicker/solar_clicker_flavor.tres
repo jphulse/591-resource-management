@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="ClickerFlavorConfig" format=3]
+
+[ext_resource type="Script" path="res://infection_spreading/clicker/clicker_flavor_config.gd" id="1_clicker_flavor"]
+
+[resource]
+script = ExtResource("1_clicker_flavor")
+total_label_format = "%.02f Viral Mass"
+score_per_second_format = "%.02f CPS"
+ecosystem_dormant_text = "Viral ecosystem dormant"
+ecosystem_active_format = "Ecosystem: spores +%d%% | hives -%d%% | taps +%d%%"
+outbreak_text_format = "OUTBREAK %s"
+outbreak_named_text_format = "%s: %s"
+upgrade_flavor_cooldown = 1.2
+idle_whisper_delay = 8.0
+idle_whisper_interval = 9.0
+cps_milestone_thresholds = Array[float]([100.0, 400.0, 900.0, 2200.0, 5500.0])
+cps_milestone_messages = PackedStringArray("THE INFECTION LEARNS", "SOLAR FEVER DETECTED", "THE SUN IS LISTENING", "ORBITAL CONTAINMENT FAILING", "THE SYSTEM IS RAVENOUS")
+click_streak_thresholds = Array[float]([60.0, 180.0, 450.0, 850.0])
+click_streak_messages = PackedStringArray("FEVERISH", "UNSTABLE", "RAVENOUS", "SOLAR PARASITE")
+idle_whisper_messages = PackedStringArray("it waits", "the spores breathe", "growth continues", "the sun remembers")
+default_cps_color = Color(0.94902, 0.94902, 0.94902, 1)
+outbreak_cps_color = Color(1, 0, 0.2, 1)
+cps_tier_thresholds = Array[float]([100.0, 400.0, 900.0, 2200.0, 5500.0])
+cps_tier_colors = Array[Color]([Color(1, 0.541176, 0.447059, 1), Color(1, 0.290196, 0.184314, 1), Color(0.843137, 0.0156863, 0.141176, 1), Color(1, 0.192157, 0.356863, 1), Color(1, 0.121569, 0.309804, 1)])
+click_number_color = Color(1, 0.701961, 0.352941, 1)
+click_streak_color = Color(1, 0.192157, 0.356863, 1)
+click_pulse_start_color = Color(1, 0.419608, 0.0941176, 1)
+click_pulse_end_color = Color(0.843137, 0.0156863, 0.141176, 1)
+idle_whisper_color = Color(1, 0.603922, 0.647059, 1)
+outbreak_text_color = Color(1, 0, 0.2, 1)
+outbreak_label_hot_color = Color(1, 0, 0.2, 1)
+outbreak_label_soft_color = Color(1, 0.690196, 0.729412, 1)
+milestone_banner_color = Color(1, 0.192157, 0.356863, 1)
+milestone_banner_fade_color = Color(1, 0.12, 0.22, 0)
+mutation_flare_color = Color(1, 0, 0.2, 1)
+ecosystem_active_color = Color(1, 0.603922, 0.647059, 0.82)
+ecosystem_dormant_color = Color(1, 1, 1, 0.42)
+solar_tap_passive_name = "Solar Tap"
+spore_colony_passive_name = "Spore Colony"
+mutation_hive_passive_name = "Mutation Hive"
+default_upgrade_flavor_messages = PackedStringArray("the infection adapts", "new tissue answers", "growth finds a path")
+solar_tap_flavor_messages = PackedStringArray("solar tap widens", "sun plasma rerouted", "the star bleeds faster")
+spore_colony_flavor_messages = PackedStringArray("spore colony blooms", "new tendrils answer", "red roots find orbit")
+mutation_hive_flavor_messages = PackedStringArray("mutation hive awakens", "thicker nerves growing", "the hive thinks louder")
+default_upgrade_flavor_color = Color(1, 0.701961, 0.352941, 1)
+solar_tap_flavor_color = Color(1, 0.701961, 0.352941, 1)
+spore_colony_flavor_color = Color(1, 0.192157, 0.356863, 1)
+mutation_hive_flavor_color = Color(1, 0.172549, 0.658824, 1)
