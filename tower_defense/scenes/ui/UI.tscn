@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cc7sewkhsdtt0" path="res://tower_defense/resources/Sprites/tower_window.png" id="2_38iro"]
 [ext_resource type="PackedScene" uid="uid://dfc1leipsd2ru" path="res://tower_defense/scenes/ui/tower_button.tscn" id="3_jnn03"]
 [ext_resource type="PackedScene" uid="uid://cwjk105x6ol4s" path="res://tower_defense/scenes/towers/TowerBase.tscn" id="4_3fy46"]
+[ext_resource type="Texture2D" uid="uid://cdy5r8of8noqd" path="res://tower_defense/resources/Sprites/pew_sprite.png" id="5_2ck2f"]
 [ext_resource type="Texture2D" uid="uid://dexjxls218pxo" path="res://tower_defense/resources/Sprites/info_window.png" id="5_5esc3"]
 [ext_resource type="Texture2D" uid="uid://p1orhg4mgpne" path="res://tower_defense/resources/Sprites/pew_pew.png" id="5_n8y3i"]
 
@@ -33,7 +34,7 @@ theme_override_constants/separation = 0
 [node name="tower_button" parent="PanelContainer/HBoxContainer" unique_id=1108784237 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
 layout_mode = 2
 tower_scene = ExtResource("4_3fy46")
-texture_sprite = ExtResource("5_n8y3i")
+texture_sprite = ExtResource("5_2ck2f")
 
 [node name="tower_button2" parent="PanelContainer/HBoxContainer" unique_id=557671376 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
 layout_mode = 2
