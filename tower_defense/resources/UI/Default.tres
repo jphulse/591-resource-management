@@ -1,0 +1,6 @@
+[gd_resource type="Theme" format=3 uid="uid://dgnp4nqf51qkl"]
+
+[ext_resource type="FontFile" uid="uid://b3mj1tsqveak4" path="res://tower_defense/resources/UI/VCR_OSD_MONO_1.001.ttf" id="1_23kuq"]
+
+[resource]
+default_font = ExtResource("1_23kuq")

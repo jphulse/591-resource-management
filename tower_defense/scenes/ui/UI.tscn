@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c6u6sh2xtmm01"]
 
 [ext_resource type="Script" uid="uid://c2t4vjqu5cdkj" path="res://tower_defense/scenes/ui/ui.gd" id="1_wgpra"]
+[ext_resource type="Theme" uid="uid://dgnp4nqf51qkl" path="res://tower_defense/resources/UI/Default.tres" id="2_6qse1"]
 [ext_resource type="Texture2D" uid="uid://cc7sewkhsdtt0" path="res://tower_defense/resources/Sprites/tower_window.png" id="2_38iro"]
 [ext_resource type="PackedScene" uid="uid://dfc1leipsd2ru" path="res://tower_defense/scenes/ui/tower_button.tscn" id="3_jnn03"]
 [ext_resource type="PackedScene" uid="uid://cwjk105x6ol4s" path="res://tower_defense/scenes/towers/TowerBase.tscn" id="4_3fy46"]
@@ -20,48 +21,58 @@ offset_left = 32.0
 offset_top = 33.0
 offset_right = 239.0
 offset_bottom = 118.0
+theme = ExtResource("2_6qse1")
 text = "TO LAB"
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1797068010]
 offset_top = 908.0
 offset_right = 1288.0
 offset_bottom = 1080.0
+theme = ExtResource("2_6qse1")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer" unique_id=1106059427]
 layout_mode = 2
+theme = ExtResource("2_6qse1")
 texture = ExtResource("2_38iro")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer" unique_id=1375117703]
 layout_mode = 2
+theme = ExtResource("2_6qse1")
 theme_override_constants/separation = 0
 
 [node name="tower_button" parent="PanelContainer/HBoxContainer" unique_id=1108784237 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
 layout_mode = 2
+theme = ExtResource("2_6qse1")
 tower_scene = ExtResource("4_3fy46")
 texture_sprite = ExtResource("5_2ck2f")
 
 [node name="tower_button3" parent="PanelContainer/HBoxContainer" unique_id=2098349882 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
 layout_mode = 2
+theme = ExtResource("2_6qse1")
 tower_scene = ExtResource("6_24gx2")
 texture_sprite = ExtResource("6_uenyj")
 
 [node name="tower_button2" parent="PanelContainer/HBoxContainer" unique_id=557671376 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
 layout_mode = 2
+theme = ExtResource("2_6qse1")
 tower_scene = ExtResource("6_3rgc0")
 texture_sprite = ExtResource("7_uenyj")
 
 [node name="tower_button4" parent="PanelContainer/HBoxContainer" unique_id=320091000 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
 layout_mode = 2
+theme = ExtResource("2_6qse1")
 tower_scene = ExtResource("4_3fy46")
 texture_sprite = ExtResource("5_n8y3i")
 
 [node name="tower_button5" parent="PanelContainer/HBoxContainer" unique_id=218386404 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
 layout_mode = 2
+theme = ExtResource("2_6qse1")
 tower_scene = ExtResource("4_3fy46")
 texture_sprite = ExtResource("5_n8y3i")
 
 [node name="tower_button6" parent="PanelContainer/HBoxContainer" unique_id=1898168800 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
 layout_mode = 2
+theme = ExtResource("2_6qse1")
 tower_scene = ExtResource("4_3fy46")
 texture_sprite = ExtResource("5_n8y3i")
 
@@ -70,10 +81,92 @@ offset_left = 1268.0
 offset_top = 908.0
 offset_right = 1920.0
 offset_bottom = 1080.0
+theme = ExtResource("2_6qse1")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Panel" unique_id=1244009300]
 layout_mode = 2
+theme = ExtResource("2_6qse1")
 texture = ExtResource("5_5esc3")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=307848913]
+layout_mode = 2
+theme = ExtResource("2_6qse1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=716912593]
+layout_mode = 2
+theme = ExtResource("2_6qse1")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=409785155]
+layout_mode = 2
+theme = ExtResource("2_6qse1")
+theme_override_constants/margin_left = 27
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 27
+theme_override_constants/margin_bottom = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/MarginContainer" unique_id=1067611317]
+layout_mode = 2
+theme = ExtResource("2_6qse1")
+
+[node name="health_label" type="Label" parent="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=1591063891]
+layout_mode = 2
+theme = ExtResource("2_6qse1")
+theme_override_font_sizes/font_size = 40
+text = "Health : "
+
+[node name="health_value" type="Label" parent="Panel/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=1294107346]
+layout_mode = 2
+theme = ExtResource("2_6qse1")
+theme_override_font_sizes/font_size = 40
+text = "0"
+
+[node name="MarginContainer2" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=1491522952]
+layout_mode = 2
+theme = ExtResource("2_6qse1")
+theme_override_constants/margin_left = 27
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 27
+theme_override_constants/margin_bottom = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/MarginContainer2" unique_id=926507703]
+layout_mode = 2
+theme = ExtResource("2_6qse1")
+
+[node name="power_label" type="Label" parent="Panel/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer" unique_id=1668063361]
+layout_mode = 2
+theme = ExtResource("2_6qse1")
+theme_override_font_sizes/font_size = 40
+text = "Power : "
+
+[node name="power_value" type="Label" parent="Panel/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer" unique_id=137078033]
+layout_mode = 2
+theme = ExtResource("2_6qse1")
+theme_override_font_sizes/font_size = 40
+text = "0"
+
+[node name="MarginContainer3" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=707942102]
+layout_mode = 2
+theme = ExtResource("2_6qse1")
+theme_override_constants/margin_left = 27
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 27
+theme_override_constants/margin_bottom = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/MarginContainer3" unique_id=1597628412]
+layout_mode = 2
+theme = ExtResource("2_6qse1")
+
+[node name="tech_label" type="Label" parent="Panel/MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer" unique_id=1025398473]
+layout_mode = 2
+theme = ExtResource("2_6qse1")
+theme_override_font_sizes/font_size = 40
+text = "Tech Level : "
+
+[node name="FloatingText2" type="Label" parent="Panel/MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer" unique_id=522858626]
+layout_mode = 2
+theme = ExtResource("2_6qse1")
+theme_override_font_sizes/font_size = 40
+text = "0"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="tower_button_pressed" from="PanelContainer/HBoxContainer/tower_button" to="." method="_on_tower_button_pressed"]

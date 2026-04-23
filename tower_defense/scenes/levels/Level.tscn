@@ -65,5 +65,10 @@ autostart = true
 wait_time = 0.2
 autostart = true
 
+[node name="resource_timer" type="Timer" parent="." unique_id=1141919481]
+wait_time = 0.1
+autostart = true
+
 [connection signal="timeout" from="spawn_timer" to="." method="_spawn_enemy_timer"]
 [connection signal="timeout" from="frequency_timer" to="." method="_frequency_timer"]
+[connection signal="timeout" from="resource_timer" to="." method="_on_resource_timer_timeout"]

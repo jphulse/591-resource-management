@@ -27,4 +27,7 @@ position = Vector2(-1540, 540)
 texture = ExtResource("5_8bkux")
 
 [connection signal="tower_selected" from="Ui" to="." method="start_placement"]
+[connection signal="update_health" from="Level" to="Ui" method="_on_health_update"]
+[connection signal="update_resource" from="Level" to="Ui" method="_on_resource_update"]
+[connection signal="update_tech" from="Level" to="Ui" method="_on_tech_update"]
 [connection signal="timeout" from="Timer" to="." method="_evaluate_audio"]

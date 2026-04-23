@@ -7,6 +7,7 @@ class_name Level extends Node2D
 @onready var level_map : TileMapLayer = $TileMapLayer
 @onready var spawn_timer : Timer = $spawn_timer
 @onready var frequency_timer : Timer = $frequency_timer
+@onready var resource_timer : Timer = $resource_timer
 
 @export var enemy_scene: PackedScene = preload("res://tower_defense/scenes/enemies/base_enemy/EnemyBase.tscn")
 @export var siege_scene: PackedScene = preload("res://tower_defense/scenes/enemies/base_enemy/SiegeBreaker.tscn")
@@ -15,6 +16,9 @@ class_name Level extends Node2D
 signal update_enemy(value : int)
 signal update_fortifications(value : int)
 signal ultimateEnemy(spawning : bool)
+signal update_resource(value : int)
+signal update_health(value : int)
+signal update_tech(value : int)
 
 const GRID_START = Vector2i(1, 1) # Example: starts at tile (2,2)
 const GRID_WIDTH = 10
@@ -24,6 +28,8 @@ var tower_grid: Dictionary = {} # Key: Vector2i, Value: Node2D
 var enemies: Array[Node2D] = []
 var enemy_paths: Array[Path2D] = []
 var objective_complete: bool = false
+var total_resources : int = 0
+var tech_level : int = 0
 
 var spawn_delay : Array[float] = [0.003, 0.004, 0.01, 25, 0.006, 0.03, 0.08, 25]
 
@@ -149,3 +155,8 @@ func _update_enemies(value : int):
 
 func _ultimate_death():
 	ultimateEnemy.emit(false)
+
+
+func _on_resource_timer_timeout() -> void:
+	total_resources += 1
+	update_resource.emit(total_resources)
