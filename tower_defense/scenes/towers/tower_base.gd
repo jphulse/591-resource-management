@@ -36,6 +36,7 @@ func _process(delta: float) -> void:
 		attack()
 
 func _on_detection_range_area_entered(area: Area2D) -> void:
+	print("enemy entered")
 	if area is EnemyHitbox and area not in enemies:
 		enemies.append(area)
 
