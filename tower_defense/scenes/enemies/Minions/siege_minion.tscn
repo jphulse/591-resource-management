@@ -1,47 +1,46 @@
-[gd_scene format=3 uid="uid://dviv0q6mmlssq"]
+[gd_scene format=3 uid="uid://cwnqtjx0ht44a"]
 
-[ext_resource type="Script" uid="uid://pe7qteg782ss" path="res://tower_defense/scenes/enemies/base_enemy/enemy_base.gd" id="1_coewb"]
-[ext_resource type="Texture2D" uid="uid://c37pm1sxrecbs" path="res://icon.svg" id="1_ihuah"]
-[ext_resource type="Script" uid="uid://cdvwi26nfaljx" path="res://tower_defense/scenes/enemies/base_enemy/enemy_hitbox.gd" id="3_ndb33"]
-[ext_resource type="Script" uid="uid://l5pesthk0cvw" path="res://tower_defense/scenes/enemies/base_enemy/attack_area.gd" id="4_10dr3"]
+[ext_resource type="Script" uid="uid://pe7qteg782ss" path="res://tower_defense/scenes/enemies/base_enemy/enemy_base.gd" id="1_s178j"]
+[ext_resource type="Texture2D" uid="uid://c37pm1sxrecbs" path="res://icon.svg" id="2_83hh3"]
+[ext_resource type="Script" uid="uid://cdvwi26nfaljx" path="res://tower_defense/scenes/enemies/base_enemy/enemy_hitbox.gd" id="3_m5ux1"]
+[ext_resource type="Script" uid="uid://l5pesthk0cvw" path="res://tower_defense/scenes/enemies/base_enemy/attack_area.gd" id="4_tdttk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_coewb"]
-size = Vector2(64, 128)
+size = Vector2(128, 312)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ndb33"]
-size = Vector2(66.00004, 130)
+size = Vector2(150, 313.00015)
 
 [node name="EnemyBase" type="Node2D" unique_id=1221308985]
-script = ExtResource("1_coewb")
-movement_speed = 50.0
-enemy_value = 50.0
+position = Vector2(0, 50)
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_s178j")
+damage = 2.0
+health = 4.0
+movement_speed = 100.0
+attack_cooldown = 0.1
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=752896387]
-modulate = Color(1, 0, 0, 1)
-position = Vector2(0, 30)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_ihuah")
+modulate = Color(6.0644747e-06, 0.57930917, 0.8010333, 1)
+texture = ExtResource("2_83hh3")
 
 [node name="EnemyHitbox" type="Area2D" parent="." unique_id=938387276]
-collision_mask = 258
-script = ExtResource("3_ndb33")
+script = ExtResource("3_m5ux1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox" unique_id=1974487812]
+position = Vector2(0, -92)
 shape = SubResource("RectangleShape2D_coewb")
 
 [node name="EnemyAttackArea" type="Area2D" parent="." unique_id=1471568512]
-script = ExtResource("4_10dr3")
+collision_mask = 258
+script = ExtResource("4_tdttk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyAttackArea" unique_id=55715416]
-position = Vector2(1.9073486e-06, 8.344649e-06)
+position = Vector2(4.7683716e-07, -91.500015)
 scale = Vector2(0.9999994, 0.9999994)
 shape = SubResource("RectangleShape2D_ndb33")
 
 [node name="AttackCooldownTimer" type="Timer" parent="." unique_id=501510785]
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=832542231]
-
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." unique_id=2034609650]
 
 [connection signal="area_entered" from="EnemyHitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_entered" from="EnemyAttackArea" to="." method="_on_attack_area_area_entered"]

@@ -10,6 +10,8 @@ class_name Enemy extends Node2D
 @export var attack_cooldown: float = 0.5
 @export var enemy_value : float = 20.0
 
+var current_move_speed : float = 80
+
 signal enemy_death(value : int)
 
 var in_attack_range: bool = false
@@ -24,14 +26,17 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if path_follow:
-		if not towers_in_range:
+		if towers_in_range.size() < 1:
+			current_move_speed = movement_speed
 			path_follow.progress += movement_speed * delta
 		else:
+			current_move_speed = 0
 			if can_attack:
 				attack()
 		
 		if path_follow.progress_ratio >= 0.99:
 			enemy_death.emit(-enemy_value)
+			path_follow.queue_free()
 			queue_free()
 
 func add_path_follow(new_path_follow: PathFollow2D) -> void:
@@ -41,7 +46,7 @@ func death_sequence() -> void:
 	pass
 
 func attack() -> void:
-	if not towers_in_range:
+	if towers_in_range.size() < 1:
 		return
 	can_attack = false
 	
@@ -57,6 +62,7 @@ func take_damage(incoming_damage: float) -> void:
 	if health <= 0.0:
 		death_sequence()
 		enemy_death.emit(-enemy_value)
+		path_follow.queue_free()
 		queue_free()
 
 func _on_hitbox_area_entered(area: Area2D) -> void:

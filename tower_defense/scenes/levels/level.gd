@@ -71,8 +71,12 @@ func spawn_enemy(enemy : PackedScene, enemy_path : Path2D) -> void:
 	path_to_follow.add_child(new_enemy)
 	enemy_path.add_child(path_to_follow)
 	new_enemy.enemy_death.connect(_update_enemies)
+	if new_enemy.health == 2 : 
+		breakpoint
 	if new_enemy.has_signal("ultimate_death"):
 		new_enemy.ultimate_death.connect(_ultimate_death)
+		new_enemy.parent_path = enemy_path
+		new_enemy.summon_minion.connect(spawn_enemy)
 	enemies.append(new_enemy)
 	_update_enemies(new_enemy.enemy_value)
 

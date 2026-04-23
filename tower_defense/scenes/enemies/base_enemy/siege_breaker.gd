@@ -1,6 +1,15 @@
 extends Enemy
 
 signal ultimate_death()
+signal summon_minion(minion : PackedScene, path : Path2D)
+
+@export var minion : PackedScene
+@export var MINION_SQUAD = 5
+@onready var summon_timer : Timer = $Summon_Timer
+@onready var delay_summon_timer : Timer = $Summon_Delay
+
+var remaining_summons = 0
+var parent_path : Path2D
 
 func _process(delta: float) -> void:
 	if path_follow:
@@ -13,6 +22,7 @@ func _process(delta: float) -> void:
 		if path_follow.progress_ratio >= 0.99:
 			enemy_death.emit(-enemy_value)
 			ultimate_death.emit()
+			path_follow.queue_free()
 			queue_free()
 
 func take_damage(incoming_damage: float) -> void:
@@ -22,6 +32,7 @@ func take_damage(incoming_damage: float) -> void:
 		death_sequence()
 		ultimate_death.emit()
 		enemy_death.emit(-enemy_value)
+		path_follow.queue_free()
 		queue_free()
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
@@ -43,3 +54,15 @@ func _on_attack_area_area_exited(area: Area2D) -> void:
 
 func _on_attack_cooldown_timer_timeout() -> void:
 	can_attack = true
+
+func _on_summon_timer_timeout() -> void:
+	summon_timer.start(randf_range(4.5, 7.5))
+	delay_summon_timer.start(.3)
+	remaining_summons = MINION_SQUAD
+	
+func _on_summon_delay_timeout() -> void:
+	if(remaining_summons == 0):
+		return
+	delay_summon_timer.start(.3)
+	remaining_summons -= 1
+	summon_minion.emit(minion, parent_path)

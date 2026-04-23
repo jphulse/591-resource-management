@@ -126,7 +126,11 @@ size = Vector2(378, 16)
 
 [node name="TowerBase" type="Node2D" unique_id=879173299]
 script = ExtResource("1_74yv8")
+bullet_scene = null
 damage = 2.0
+max_health = null
+health = null
+projectile_speed = null
 attack_cooldown = 0.2
 building_value = 50.0
 cannon_sounds = Array[AudioStream]([ExtResource("2_uk4n0"), ExtResource("3_pgi8r"), ExtResource("4_pew07"), ExtResource("5_rc8ip"), ExtResource("6_itfr2"), ExtResource("7_k7tsi"), ExtResource("8_d5k8c"), ExtResource("9_i1uey"), ExtResource("10_kxr6e"), ExtResource("11_6s8gv"), ExtResource("12_wlydn"), ExtResource("13_bgqky"), ExtResource("14_sfleb"), ExtResource("15_mlltw"), ExtResource("16_mdofm"), ExtResource("17_hdfo0"), ExtResource("18_pbpi1")])
@@ -147,6 +151,8 @@ frame_progress = 1.0
 speed_scale = 1.5
 
 [node name="TowerHitbox" type="Area2D" parent="." unique_id=1402533722]
+collision_layer = 257
+collision_mask = 257
 script = ExtResource("3_lmoja")
 
 [node name="HitboxCollisionShape" type="CollisionShape2D" parent="TowerHitbox" unique_id=1016612673]
@@ -168,11 +174,10 @@ offset_right = 64.0
 offset_bottom = -72.0
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1749661565]
-volume_db = -7.5
+volume_db = -13.0
 attenuation = 0.32767916
 max_polyphony = 2
 
 [connection signal="area_entered" from="TowerHitbox" to="." method="_on_hitbox_area_entered"]
-[connection signal="area_entered" from="TowerAttackRange" to="." method="_on_detection_range_area_entered"]
-[connection signal="area_exited" from="TowerAttackRange" to="." method="_on_detection_range_area_exited"]
+[connection signal="area_shape_entered" from="TowerAttackRange" to="." method="_on_tower_attack_range_area_shape_entered"]
 [connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_attack_cooldown_timer_timeout"]
