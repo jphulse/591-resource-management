@@ -22,7 +22,7 @@ script = ExtResource("3_vun12")
 [node name="RegionsRoot" type="Node2D" parent="." unique_id=778268637]
 unique_name_in_owner = true
 
-[node name="Mercury" parent="RegionsRoot" node_paths=PackedStringArray("neighbors") instance=ExtResource("4_region_node")]
+[node name="Mercury" parent="RegionsRoot" instance=ExtResource("4_region_node")]
 position = Vector2(63.4, -29.6)
 region_id = "mercury"
 display_name = "Mercury"
@@ -33,7 +33,7 @@ neighbors = Array[NodePath]([NodePath("../Venus")])
 infection_cps_threshold = 250.0
 takeover_duration = 24.0
 
-[node name="Venus" parent="RegionsRoot" node_paths=PackedStringArray("neighbors") instance=ExtResource("4_region_node")]
+[node name="Venus" parent="RegionsRoot" instance=ExtResource("4_region_node")]
 position = Vector2(-92.4, -43.1)
 region_id = "venus"
 display_name = "Venus"
@@ -43,7 +43,7 @@ base_color = Color(0.709804, 0.482353, 0.192157, 1)
 neighbors = Array[NodePath]([NodePath("../Mercury"), NodePath("../Earth")])
 takeover_duration = 22.0
 
-[node name="Earth" parent="RegionsRoot" node_paths=PackedStringArray("neighbors") instance=ExtResource("4_region_node")]
+[node name="Earth" parent="RegionsRoot" instance=ExtResource("4_region_node")]
 position = Vector2(-70, 121.2)
 region_id = "earth"
 display_name = "Earth"
@@ -53,7 +53,7 @@ neighbors = Array[NodePath]([NodePath("../Venus"), NodePath("../Mars")])
 starts_infected = true
 infection_cps_threshold = 0.0
 
-[node name="Mars" parent="RegionsRoot" node_paths=PackedStringArray("neighbors") instance=ExtResource("4_region_node")]
+[node name="Mars" parent="RegionsRoot" instance=ExtResource("4_region_node")]
 position = Vector2(65.9, -163.2)
 region_id = "mars"
 display_name = "Mars"
@@ -63,7 +63,7 @@ base_color = Color(0.788235, 0.482353, 0.290196, 1)
 neighbors = Array[NodePath]([NodePath("../Earth"), NodePath("../Jupiter")])
 takeover_duration = 24.0
 
-[node name="Jupiter" parent="RegionsRoot" node_paths=PackedStringArray("neighbors") instance=ExtResource("4_region_node")]
+[node name="Jupiter" parent="RegionsRoot" instance=ExtResource("4_region_node")]
 position = Vector2(135.4, 173.4)
 region_id = "jupiter"
 display_name = "Jupiter"
@@ -74,7 +74,7 @@ neighbors = Array[NodePath]([NodePath("../Mars"), NodePath("../Saturn")])
 infection_cps_threshold = 400.0
 takeover_duration = 30.0
 
-[node name="Saturn" parent="RegionsRoot" node_paths=PackedStringArray("neighbors") instance=ExtResource("4_region_node")]
+[node name="Saturn" parent="RegionsRoot" instance=ExtResource("4_region_node")]
 position = Vector2(259.4, -36.4)
 region_id = "saturn"
 display_name = "Saturn"
@@ -85,7 +85,7 @@ neighbors = Array[NodePath]([NodePath("../Jupiter"), NodePath("../Uranus")])
 infection_cps_threshold = 900.0
 takeover_duration = 36.0
 
-[node name="Uranus" parent="RegionsRoot" node_paths=PackedStringArray("neighbors") instance=ExtResource("4_region_node")]
+[node name="Uranus" parent="RegionsRoot" instance=ExtResource("4_region_node")]
 position = Vector2(-228.9, -206.1)
 region_id = "uranus"
 display_name = "Uranus"
@@ -95,7 +95,7 @@ neighbors = Array[NodePath]([NodePath("../Saturn"), NodePath("../Neptune")])
 infection_cps_threshold = 2200.0
 takeover_duration = 42.0
 
-[node name="Neptune" parent="RegionsRoot" node_paths=PackedStringArray("neighbors") instance=ExtResource("4_region_node")]
+[node name="Neptune" parent="RegionsRoot" instance=ExtResource("4_region_node")]
 position = Vector2(-317.2, 147.9)
 region_id = "neptune"
 display_name = "Neptune"
