@@ -17,8 +17,6 @@ var at_lab : bool = false
 var desperation : bool = false
 var ultimate_enemies : int = 0
 
-var active_tweens : Dictionary = {} 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	ui_node.to_lab.connect(_lab_audio)
@@ -96,22 +94,10 @@ func _lab_audio(entering: bool) -> void:
 	at_lab = entering
 	audio_system.lab(at_lab)
 	
-	var target_x = -2500.0 if entering else 0
-	var total_distance = 2500.0
-	var full_duration = 1.5
-	var current_distance = abs(camera.position.x - target_x)
-	var dynamic_duration = (current_distance / total_distance) * full_duration
-	
-	if active_tweens.has("camera_move"):
-		active_tweens["camera_move"].kill() # Stop the previous move
-		
-	var tween = create_tween()
-	tween.set_ease(Tween.EASE_OUT)
-	tween.set_trans(Tween.TRANS_QUAD)
-	
-	tween.tween_property(camera, "position:x", target_x, dynamic_duration)
-	
-	active_tweens["camera_move"] = tween
+	if entering :
+		ui_node._tween_object(camera, Vector2(-2500, 0), 1500)
+	else :
+		ui_node._tween_object(camera, Vector2(0, 0), 1500)
 
 func _desperation_audio (desperate : bool) -> void:
 	desperation = desperate
