@@ -98,7 +98,7 @@ func is_within_placement_bounds(cell_coord: Vector2i) -> bool:
 	
 	return inside_x and inside_y
 
-func request_tower_placement(tower_scene: PackedScene, global_pos: Vector2) -> bool:
+func request_tower_placement(tower_scene: PackedScene, global_pos: Vector2, cost : int) -> bool:
 	var local_pos = level_map.to_local(global_pos)
 	var cell_coord = level_map.local_to_map(local_pos)
 	
@@ -109,7 +109,8 @@ func request_tower_placement(tower_scene: PackedScene, global_pos: Vector2) -> b
 	if is_cell_occupied(cell_coord):
 		print("Space occupied!")
 		return false
-		
+	
+	total_resources -= cost
 	spawn_tower(tower_scene, level_map.map_to_local(cell_coord))
 	return true
 

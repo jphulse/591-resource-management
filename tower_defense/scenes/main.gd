@@ -9,6 +9,7 @@ extends Node2D
 # We store the PackedScene so we can 'instantiate' it later
 var current_tower_scene: PackedScene = null
 var ghost_preview: Node2D = null
+var current_cost = 0
 
 var defense : int = 0
 var combat : int = 0
@@ -51,7 +52,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_pressed("right_click"):
 		cancel_placement()
 
-func start_placement(tower: PackedScene) -> void:
+func start_placement(tower: PackedScene, cost : int) -> void:
+	current_cost = cost
 	current_tower_scene = tower
 	
 	ghost_preview = tower.instantiate() 
@@ -68,7 +70,7 @@ func place_tower() -> void:
 
 	var target_pos = ghost_preview.global_position
 	
-	if level_node.request_tower_placement(current_tower_scene, target_pos):
+	if level_node.request_tower_placement(current_tower_scene, target_pos, current_cost):
 		cancel_placement()
 
 func cancel_placement() -> void:

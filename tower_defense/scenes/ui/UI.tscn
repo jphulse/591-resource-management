@@ -36,43 +36,69 @@ theme = ExtResource("2_6qse1")
 texture = ExtResource("2_38iro")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer" unique_id=1375117703]
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
+size_flags_vertical = 4
 theme = ExtResource("2_6qse1")
 theme_override_constants/separation = 0
 
 [node name="tower_button" parent="PanelContainer/HBoxContainer" unique_id=1108784237 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
 layout_mode = 2
 theme = ExtResource("2_6qse1")
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
 tower_scene = ExtResource("4_3fy46")
 texture_sprite = ExtResource("5_2ck2f")
+tower_cost = 10
+cost_label = "10"
 
 [node name="tower_button3" parent="PanelContainer/HBoxContainer" unique_id=2098349882 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
 layout_mode = 2
 theme = ExtResource("2_6qse1")
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
 tower_scene = ExtResource("6_24gx2")
 texture_sprite = ExtResource("6_uenyj")
+tower_cost = 15
+cost_label = "15"
 
 [node name="tower_button2" parent="PanelContainer/HBoxContainer" unique_id=557671376 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
 layout_mode = 2
 theme = ExtResource("2_6qse1")
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
 tower_scene = ExtResource("6_3rgc0")
 texture_sprite = ExtResource("7_uenyj")
+tower_cost = 30
+cost_label = "30"
 
 [node name="tower_button4" parent="PanelContainer/HBoxContainer" unique_id=320091000 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
 layout_mode = 2
 theme = ExtResource("2_6qse1")
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
 tower_scene = ExtResource("4_3fy46")
 texture_sprite = ExtResource("5_n8y3i")
 
 [node name="tower_button5" parent="PanelContainer/HBoxContainer" unique_id=218386404 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
 layout_mode = 2
 theme = ExtResource("2_6qse1")
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
 tower_scene = ExtResource("4_3fy46")
 texture_sprite = ExtResource("5_n8y3i")
 
 [node name="tower_button6" parent="PanelContainer/HBoxContainer" unique_id=1898168800 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
 layout_mode = 2
 theme = ExtResource("2_6qse1")
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
 tower_scene = ExtResource("4_3fy46")
 texture_sprite = ExtResource("5_n8y3i")
 
