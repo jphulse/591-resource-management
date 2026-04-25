@@ -18,6 +18,7 @@ const MANUAL_CPS_WINDOW : float = 1.0
 const VISUAL_CPS_FOR_MAX_INFECTION : float = 5500.0
 const VISUAL_INFECTION_CURVE : float = 0.55
 const VISUAL_RESPONSE_SPEED : float = 4.0
+const BLACK_HOLE_RESPONSE_SPEED : float = 0.85
 const INFECTION_SEED_THRESHOLD : float = 0.02
 const MANUAL_INFECTION_CPS_WEIGHT : float = 1.5
 const PULSE_SCENE = preload("res://infection_spreading/effects/viral_pulse.gd")
@@ -55,6 +56,8 @@ var recent_click_amounts : Array[float] = []
 ## Smoothed shader parameters so the infection responds fluidly
 var visual_infection_level : float = 0.0
 var visual_pulse_strength : float = 0.0
+var visual_black_hole_amount : float = 0.0
+var black_hole_target_amount : float = 0.0
 ## Tracks whether the infection is currently active so we can reroll its pattern
 var infection_is_active : bool = false
 ## Random source used to reseed the shader pattern
@@ -591,9 +594,11 @@ func _update_infection_visuals(delta : float) -> void:
 
 	visual_infection_level = move_toward(visual_infection_level, target_infection_level, VISUAL_RESPONSE_SPEED * delta)
 	visual_pulse_strength = move_toward(visual_pulse_strength, target_pulse_strength, (VISUAL_RESPONSE_SPEED + 1.5) * delta)
+	visual_black_hole_amount = move_toward(visual_black_hole_amount, black_hole_target_amount, BLACK_HOLE_RESPONSE_SPEED * delta)
 
 	material_var.set_shader_parameter("infection_level", visual_infection_level)
 	material_var.set_shader_parameter("pulse_strength", visual_pulse_strength)
+	material_var.set_shader_parameter("black_hole_amount", visual_black_hole_amount)
 
 ## Gives the shader a fresh seed so tentacles can originate from different regions each activation
 func _randomize_infection_seed(material_param : ShaderMaterial) -> void:
@@ -698,6 +703,11 @@ func set_auto_clicker_tendrils(tendril_layer : AutoClickerTendrils) -> void:
 	last_auto_clicker_tendril_key = ""
 	if is_node_ready():
 		_update_auto_clicker_tendrils()
+
+
+## Swaps the center clicker from a sun into a black hole for later stages.
+func set_black_hole_mode(enabled : bool) -> void:
+	black_hole_target_amount = 1.0 if enabled else 0.0
 
 func get_passive_cost(passive : PlaguePassive) -> float:
 	if test_mode:

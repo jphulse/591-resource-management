@@ -6,6 +6,7 @@ extends Resource
 @export var minimum_spread_chance : float = 0.03
 @export var cps_over_threshold_spread_scale : float = 0.08
 @export var maximum_spread_chance : float = 0.35
-@export var minimum_takeover_duration : float = 30.0
+# Change this later
+@export var minimum_takeover_duration : float = 1.0
 @export var neighbor_takeover_bonus : float = 0.35
 @export var flavor_config : MapStageFlavorConfig = null

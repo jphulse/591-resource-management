@@ -1,12 +1,12 @@
-[gd_scene format=3 uid="uid://c2xx4i2rw03wy"]
+[gd_scene format=3 uid="uid://dbmhyng0qv155"]
 
 [ext_resource type="Script" path="res://infection_spreading/map/region_node.gd" id="1_region_node"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_region_node"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_yo01n"]
 radius = 26.0
 
-[node name="RegionNode" type="Area2D"]
+[node name="RegionNode" type="Area2D" unique_id=284863733]
 script = ExtResource("1_region_node")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_region_node")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1681544668]
+shape = SubResource("CircleShape2D_yo01n")

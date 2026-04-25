@@ -2,8 +2,23 @@
 
 [ext_resource type="Script" uid="uid://qustt31vac3b" path="res://infection_spreading/main/main.gd" id="1_50gol"]
 [ext_resource type="PackedScene" uid="uid://daqdtstnmpngs" path="res://infection_spreading/ui/main_ui.tscn" id="2_bgph4"]
+[ext_resource type="PackedScene" uid="uid://b6no7tb0m5iky" path="res://infection_spreading/map/galaxy_stage.tscn" id="3_m2fj1"]
 [ext_resource type="PackedScene" uid="uid://bsgkxn57si37m" path="res://infection_spreading/map/solar_system_stage.tscn" id="3_r17b6"]
 [ext_resource type="AudioStream" uid="uid://cq552jjfvnnko" path="res://tower_defense/music/Hive's Shadow.ogg" id="4_hy057"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lm3j7"]
+bg_color = Color(0.0431373, 0.0196078, 0.0588235, 0.921569)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.721569, 0.0901961, 0.235294, 0.901961)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+shadow_color = Color(0, 0, 0, 0.4)
+shadow_size = 14
 
 [node name="Main" type="Node2D" unique_id=1513803029]
 script = ExtResource("1_50gol")
@@ -16,11 +31,95 @@ position = Vector2(576, 324)
 unique_name_in_owner = true
 position = Vector2(576, 324)
 
+[node name="GalaxyStage" parent="." unique_id=189728348 instance=ExtResource("3_m2fj1")]
+unique_name_in_owner = true
+position = Vector2(576, 324)
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=811699059]
 
 [node name="MainUi" parent="CanvasLayer" unique_id=1790486406 instance=ExtResource("2_bgph4")]
+
+[node name="SkipStageButton" type="Button" parent="CanvasLayer" unique_id=1074581520]
+z_index = 4096
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -177.0
+offset_top = 14.0
+offset_right = -14.0
+offset_bottom = 50.0
+theme_override_colors/font_color = Color(1, 0.815686, 0.835294, 1)
+theme_override_colors/font_focus_color = Color(1, 0.815686, 0.835294, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.670588, 0.717647, 1)
+theme_override_colors/font_hover_color = Color(1, 0.905882, 0.921569, 1)
+theme_override_colors/font_outline_color = Color(0.141176, 0.0196078, 0.0392157, 1)
+theme_override_constants/outline_size = 1
+text = "Skip To Galaxy"
+
+[node name="EndgameOverlay" type="Control" parent="CanvasLayer" unique_id=1245492245]
+visible = false
+z_index = 4096
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Backdrop" type="ColorRect" parent="CanvasLayer/EndgameOverlay" unique_id=466305517]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0156863, 0.00784314, 0.027451, 0.701961)
+
+[node name="CenterPanel" type="PanelContainer" parent="CanvasLayer/EndgameOverlay" unique_id=853474494]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -240.0
+offset_top = -102.0
+offset_right = 240.0
+offset_bottom = 102.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lm3j7")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/EndgameOverlay/CenterPanel" unique_id=1165656291]
+layout_mode = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/EndgameOverlay/CenterPanel/MarginContainer" unique_id=2141629190]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/EndgameOverlay/CenterPanel/MarginContainer/VBoxContainer" unique_id=1526027784]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.827451, 0.607843, 1)
+theme_override_font_sizes/font_size = 34
+text = "THE GALAXY FALLS"
+horizontal_alignment = 1
+
+[node name="BodyLabel" type="Label" parent="CanvasLayer/EndgameOverlay/CenterPanel/MarginContainer/VBoxContainer" unique_id=1875539589]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.713726, 0.764706, 0.94902)
+theme_override_font_sizes/font_size = 18
+text = "Your infection has consumed every galaxy in sight.
+Press Esc to return to the title screen."
+horizontal_alignment = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2006779206]
 stream = ExtResource("4_hy057")
 volume_db = -6.0
 autoplay = true
+
+[editable path="GalaxyStage"]

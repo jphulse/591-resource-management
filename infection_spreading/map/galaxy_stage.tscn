@@ -1,0 +1,187 @@
+[gd_scene format=3 uid="uid://b6no7tb0m5iky"]
+
+[ext_resource type="Script" uid="uid://5m241y1ntqaw" path="res://infection_spreading/map/map_stage.gd" id="1_stage"]
+[ext_resource type="Resource" path="res://infection_spreading/map/galaxy_stage_data.tres" id="2_stage_data"]
+[ext_resource type="Script" uid="uid://cwx7ixfe3o5mv" path="res://infection_spreading/effects/auto_clicker_tendrils.gd" id="3_tendrils"]
+[ext_resource type="PackedScene" uid="uid://dbmhyng0qv155" path="res://infection_spreading/map/region_node.tscn" id="4_region"]
+[ext_resource type="Resource" path="res://infection_spreading/map/galaxy_spiral_profile.tres" id="5_galaxy_profile"]
+[ext_resource type="Resource" path="res://infection_spreading/map/galaxy_barred_profile.tres" id="6_barred_profile"]
+[ext_resource type="Resource" path="res://infection_spreading/map/galaxy_ring_profile.tres" id="7_ring_profile"]
+[ext_resource type="Resource" path="res://infection_spreading/map/galaxy_grand_design_profile.tres" id="8_grand_profile"]
+
+[node name="GalaxyStage" type="Node2D"]
+script = ExtResource("1_stage")
+stage_config = ExtResource("2_stage_data")
+
+[node name="MapContent" type="Node2D" parent="."]
+
+[node name="AutoClickerTendrils" type="Node2D" parent="MapContent"]
+unique_name_in_owner = true
+script = ExtResource("3_tendrils")
+
+[node name="RegionsRoot" type="Node2D" parent="MapContent"]
+unique_name_in_owner = true
+
+[node name="GlassHalo" parent="MapContent/RegionsRoot" instance=ExtResource("4_region")]
+position = Vector2(-445, -182)
+region_id = "glass_halo"
+display_name = "Glass Halo"
+visual_profile = ExtResource("7_ring_profile")
+radius = 34.0
+base_color = Color(0.623529, 0.772549, 0.964706, 1)
+neighbors = Array[NodePath]([NodePath("../CentaurusA"), NodePath("../Cartwheel")])
+infection_cps_threshold = 54000.0
+takeover_duration = 86.0
+outbreak_click_multiplier = 1.85
+outbreak_duration = 14.0
+
+[node name="Cartwheel" parent="MapContent/RegionsRoot" instance=ExtResource("4_region")]
+position = Vector2(-118, -306)
+region_id = "cartwheel"
+display_name = "Cartwheel"
+visual_profile = ExtResource("7_ring_profile")
+radius = 30.0
+base_color = Color(0.356863, 0.556863, 0.929412, 1)
+neighbors = Array[NodePath]([NodePath("../GlassHalo"), NodePath("../Whirlpool")])
+infection_cps_threshold = 42000.0
+takeover_duration = 78.0
+outbreak_click_multiplier = 1.72
+outbreak_duration = 13.5
+
+[node name="Whirlpool" parent="MapContent/RegionsRoot" instance=ExtResource("4_region")]
+position = Vector2(92, -128)
+region_id = "whirlpool"
+display_name = "Whirlpool"
+visual_profile = ExtResource("5_galaxy_profile")
+radius = 36.0
+base_color = Color(0.380392, 0.717647, 0.811765, 1)
+neighbors = Array[NodePath]([NodePath("../Cartwheel"), NodePath("../Triangulum")])
+infection_cps_threshold = 30500.0
+takeover_duration = 72.0
+outbreak_click_multiplier = 1.66
+outbreak_duration = 13.0
+
+[node name="Triangulum" parent="MapContent/RegionsRoot" instance=ExtResource("4_region")]
+position = Vector2(372, -258)
+region_id = "triangulum"
+display_name = "Triangulum"
+visual_profile = ExtResource("8_grand_profile")
+radius = 38.0
+base_color = Color(0.784314, 0.690196, 0.478431, 1)
+neighbors = Array[NodePath]([NodePath("../Whirlpool"), NodePath("../NacreVeil")])
+infection_cps_threshold = 24800.0
+takeover_duration = 68.0
+outbreak_click_multiplier = 1.58
+outbreak_duration = 12.5
+
+[node name="NacreVeil" parent="MapContent/RegionsRoot" instance=ExtResource("4_region")]
+position = Vector2(558, -58)
+region_id = "nacre_veil"
+display_name = "Nacre Veil"
+visual_profile = ExtResource("7_ring_profile")
+radius = 32.0
+base_color = Color(0.811765, 0.909804, 0.980392, 1)
+neighbors = Array[NodePath]([NodePath("../Triangulum"), NodePath("../BearPaw")])
+infection_cps_threshold = 18800.0
+takeover_duration = 62.0
+outbreak_click_multiplier = 1.5
+outbreak_duration = 12.0
+
+[node name="BearPaw" parent="MapContent/RegionsRoot" instance=ExtResource("4_region")]
+position = Vector2(534, 152)
+region_id = "bear_paw"
+display_name = "Bear Paw"
+visual_profile = ExtResource("8_grand_profile")
+radius = 44.0
+base_color = Color(0.792157, 0.627451, 0.415686, 1)
+neighbors = Array[NodePath]([NodePath("../NacreVeil"), NodePath("../MorrowCoil")])
+infection_cps_threshold = 15800.0
+takeover_duration = 58.0
+outbreak_click_multiplier = 1.46
+outbreak_duration = 11.5
+
+[node name="MorrowCoil" parent="MapContent/RegionsRoot" instance=ExtResource("4_region")]
+position = Vector2(336, 324)
+region_id = "morrow_coil"
+display_name = "Morrow Coil"
+visual_profile = ExtResource("6_barred_profile")
+radius = 38.0
+base_color = Color(0.737255, 0.654902, 0.552941, 1)
+neighbors = Array[NodePath]([NodePath("../BearPaw"), NodePath("../Sombrero")])
+infection_cps_threshold = 21400.0
+takeover_duration = 66.0
+outbreak_click_multiplier = 1.54
+outbreak_duration = 12.2
+
+[node name="Sombrero" parent="MapContent/RegionsRoot" instance=ExtResource("4_region")]
+position = Vector2(172, 214)
+region_id = "sombrero"
+display_name = "Sombrero"
+visual_profile = ExtResource("6_barred_profile")
+radius = 36.0
+base_color = Color(0.788235, 0.482353, 0.290196, 1)
+neighbors = Array[NodePath]([NodePath("../MorrowCoil"), NodePath("../MilkyWay")])
+infection_cps_threshold = 11200.0
+takeover_duration = 52.0
+outbreak_click_multiplier = 1.34
+outbreak_duration = 10.5
+
+[node name="MilkyWay" parent="MapContent/RegionsRoot" instance=ExtResource("4_region")]
+position = Vector2(-88, 292)
+region_id = "milky_way"
+display_name = "Milky Way"
+visual_profile = ExtResource("5_galaxy_profile")
+radius = 42.0
+base_color = Color(0.298039, 0.560784, 0.847059, 1)
+neighbors = Array[NodePath]([NodePath("../Sombrero"), NodePath("../ShiverBurn")])
+starts_infected = true
+infection_cps_threshold = 0.0
+outbreak_click_multiplier = 1.0
+outbreak_duration = 0.0
+
+[node name="ShiverBurn" parent="MapContent/RegionsRoot" instance=ExtResource("4_region")]
+position = Vector2(-304, 226)
+region_id = "shiver_burn"
+display_name = "Shiver Burn"
+visual_profile = ExtResource("6_barred_profile")
+radius = 34.0
+base_color = Color(0.709804, 0.482353, 0.192157, 1)
+neighbors = Array[NodePath]([NodePath("../MilkyWay"), NodePath("../AshSpiral")])
+infection_cps_threshold = 9800.0
+takeover_duration = 50.0
+outbreak_click_multiplier = 1.3
+outbreak_duration = 10.0
+
+[node name="AshSpiral" parent="MapContent/RegionsRoot" instance=ExtResource("4_region")]
+position = Vector2(-474, 72)
+region_id = "ash_spiral"
+display_name = "Ash Spiral"
+visual_profile = ExtResource("8_grand_profile")
+radius = 36.0
+base_color = Color(0.733333, 0.560784, 0.392157, 1)
+neighbors = Array[NodePath]([NodePath("../ShiverBurn"), NodePath("../CentaurusA")])
+infection_cps_threshold = 13800.0
+takeover_duration = 56.0
+outbreak_click_multiplier = 1.42
+outbreak_duration = 11.0
+
+[node name="CentaurusA" parent="MapContent/RegionsRoot" instance=ExtResource("4_region")]
+position = Vector2(-332, -56)
+region_id = "centaurus_a"
+display_name = "Centaurus A"
+visual_profile = ExtResource("6_barred_profile")
+radius = 28.0
+base_color = Color(0.611765, 0.627451, 0.654902, 1)
+neighbors = Array[NodePath]([NodePath("../AshSpiral"), NodePath("../GlassHalo")])
+infection_cps_threshold = 17600.0
+takeover_duration = 60.0
+outbreak_click_multiplier = 1.46
+outbreak_duration = 11.6
+
+[node name="EffectsRoot" type="Node2D" parent="MapContent"]
+unique_name_in_owner = true
+
+[node name="SpreadTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[connection signal="timeout" from="SpreadTimer" to="." method="_on_spread_timer_timeout"]

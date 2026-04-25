@@ -2,11 +2,15 @@ shader_type canvas_item;
 
 uniform float infection_level : hint_range(0.0, 1.0) = 0.0;
 uniform float pulse_strength : hint_range(0.0, 1.0) = 0.0;
+uniform float black_hole_amount : hint_range(0.0, 1.0) = 0.0;
 uniform vec2 tentacle_seed = vec2(0.0, 0.0);
 
 uniform vec4 button_color : source_color = vec4(0.93, 0.43, 0.06, 1.0);
 uniform vec4 button_edge_color : source_color = vec4(0.55, 0.13, 0.01, 1.0);
 uniform vec4 star_color : source_color = vec4(1.00, 0.95, 0.76, 1.0);
+uniform vec4 accretion_color : source_color = vec4(0.96, 0.46, 0.10, 1.0);
+uniform vec4 accretion_hot_color : source_color = vec4(1.00, 0.90, 0.60, 1.0);
+uniform vec4 lens_color : source_color = vec4(0.42, 0.28, 0.68, 1.0);
 uniform vec4 infected_color : source_color = vec4(0.80, 0.07, 0.10, 1.0);
 uniform vec4 infected_soft_color : source_color = vec4(0.98, 0.25, 0.08, 1.0);
 uniform vec4 infected_hot_color : source_color = vec4(1.00, 0.84, 0.28, 1.0);
@@ -176,12 +180,23 @@ void fragment() {
 	float stars = clamp(star_a * 0.9 + star_b * 1.35, 0.0, 1.0);
 	stars *= sphere_mask * button_mask;
 	float star_twinkle = 0.88 + 0.12 * sin(time * 1.1 + hash(star_cell_a + vec2(1.0, 5.0)) * 21.0 + hash(star_cell_b + vec2(8.0, 2.0)) * 17.0);
+	float accretion_band = smoothstep(radius * 0.30, radius * 0.54, dist) * (1.0 - smoothstep(radius * 0.74, radius * 0.96, dist)) * button_mask;
+	float event_horizon = 1.0 - smoothstep(radius * 0.10, radius * 0.34, dist);
+	float lens_ring = smoothstep(radius * 0.56, radius * 0.70, dist) * (1.0 - smoothstep(radius * 0.84, radius * 1.02, dist));
+	float accretion_swirl = clamp(base_noise * 0.55 + branch_noise * 0.25 + pulse * 0.35, 0.0, 1.0);
 
 	vec3 button_base = mix(button_color.rgb, button_edge_color.rgb, button_border * 0.9);
 	button_base += sphere_light * 0.10;
 	button_base += highlight;
 	button_base -= rim_light * 0.10;
 	button_base += stars * star_color.rgb * (0.38 + sphere_light * 0.30) * star_twinkle;
+
+	vec3 black_hole_base = mix(vec3(0.02, 0.015, 0.03), vec3(0.06, 0.03, 0.08), sphere_light * 0.18);
+	black_hole_base = mix(black_hole_base, lens_color.rgb, lens_ring * 0.42);
+	black_hole_base = mix(black_hole_base, accretion_color.rgb, accretion_band * (0.36 + accretion_swirl * 0.28));
+	black_hole_base += accretion_hot_color.rgb * accretion_band * (0.12 + pulse * 0.16);
+	black_hole_base = mix(black_hole_base, vec3(0.0), event_horizon * 0.96);
+	button_base = mix(button_base, black_hole_base, black_hole_amount);
 
 	vec3 infected_mix = mix(infected_color.rgb, infected_soft_color.rgb, clamp(0.28 + pulse_strength * 0.25 + pulse * 0.18, 0.0, 1.0));
 	vec3 color = button_base;

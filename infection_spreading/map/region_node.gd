@@ -250,6 +250,8 @@ func _draw_procedural_body(profile : RegionVisualProfile) -> void:
 			_draw_cloud_body(profile)
 		RegionVisualProfile.ShapeMode.LANE:
 			_draw_lane_body(profile)
+		RegionVisualProfile.ShapeMode.SPIRAL_GALAXY:
+			_draw_spiral_galaxy_body(profile)
 		_:
 			_draw_orb_body(profile)
 
@@ -303,6 +305,99 @@ func _draw_lane_body(profile : RegionVisualProfile) -> void:
 	draw_circle(Vector2.ZERO, radius, display_color.darkened(0.24))
 	draw_arc(Vector2.ZERO, radius + 2.0, 0.0, TAU, 48, profile.border_color, 1.5)
 	draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
+
+
+func _draw_spiral_galaxy_body(profile : RegionVisualProfile) -> void:
+	var display_color : Color = _get_body_color(profile)
+	if is_hovered:
+		display_color = display_color.lightened(profile.hover_tint_strength)
+
+	draw_set_transform(Vector2.ZERO, deg_to_rad(profile.galaxy_rotation_degrees), Vector2(1.0, profile.galaxy_disc_aspect))
+
+	var halo_color : Color = display_color.darkened(0.55)
+	halo_color.a = 0.24
+	draw_circle(Vector2.ZERO, radius * 1.24 + infected_neighbor_count * 1.5, halo_color)
+
+	var outer_haze : Color = display_color
+	outer_haze.a = 0.11
+	draw_circle(Vector2.ZERO, radius * 1.05, outer_haze)
+
+	var inner_haze : Color = display_color.lightened(0.12)
+	inner_haze.a = 0.22
+	draw_circle(Vector2.ZERO, radius * 0.78, inner_haze)
+
+	var core_color : Color = display_color.lightened(0.42)
+	core_color.a = 0.95
+	draw_circle(Vector2.ZERO, radius * 0.28, core_color)
+	draw_circle(Vector2.ZERO, radius * 0.12, Color(1.0, 0.98, 0.92, 0.88))
+
+	if profile.galaxy_bar_strength > 0.0:
+		_draw_galaxy_bar(profile, display_color)
+
+	if profile.galaxy_ring_strength > 0.0:
+		_draw_galaxy_ring(profile, display_color)
+
+	var time : float = Time.get_ticks_msec() / 1400.0
+	var arm_count : int = max(profile.galaxy_arm_count, 2)
+	for arm_index : int in range(arm_count):
+		var arm_points : PackedVector2Array = PackedVector2Array()
+		for step : int in range(17):
+			var arm_progress : float = float(step) / 16.0
+			var curve_angle : float = float(arm_index) * (TAU / float(arm_count))
+			curve_angle += arm_progress * PI * profile.galaxy_arm_curve
+			curve_angle += sin(time + float(arm_index) * 0.7) * 0.08
+			var arm_distance : float = lerp(radius * 0.12, radius * 1.04, pow(arm_progress, 0.86))
+			var side_wave : float = sin((arm_progress * PI * 3.4) + time * 1.2 + float(arm_index)) * radius * 0.035
+			var point_direction : Vector2 = Vector2.RIGHT.rotated(curve_angle)
+			var point_normal : Vector2 = point_direction.orthogonal()
+			arm_points.append((point_direction * arm_distance) + (point_normal * side_wave))
+
+		var arm_shadow : Color = Color(0.0, 0.0, 0.0, 0.32)
+		var arm_color : Color = display_color.lightened(0.12 + float(arm_index % 2) * 0.08)
+		var arm_glow : Color = profile.border_color.lightened(0.08)
+		arm_color.a = 0.52
+		arm_glow.a = 0.34
+		draw_polyline(arm_points, arm_shadow, radius * 0.16, true)
+		draw_polyline(arm_points, arm_color, radius * 0.11, true)
+		draw_polyline(arm_points, arm_glow, max(radius * 0.04, 1.2), true)
+
+	_draw_galaxy_starfield(profile, display_color)
+	draw_arc(Vector2.ZERO, radius + 1.5, 0.0, TAU, 48, profile.border_color, 1.5)
+	draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
+
+
+func _draw_galaxy_bar(profile : RegionVisualProfile, display_color : Color) -> void:
+	var bar_shadow : Color = Color(0.0, 0.0, 0.0, 0.36)
+	var bar_color : Color = display_color.lightened(0.18)
+	var bar_highlight : Color = profile.border_color
+	var bar_length : float = radius * lerp(0.72, 1.12, profile.galaxy_bar_strength)
+	var bar_width : float = radius * lerp(0.12, 0.22, profile.galaxy_bar_strength)
+	bar_color.a = 0.48 + profile.galaxy_bar_strength * 0.2
+	bar_highlight.a = 0.26 + profile.galaxy_bar_strength * 0.18
+	draw_line(Vector2(-bar_length, 0.0), Vector2(bar_length, 0.0), bar_shadow, bar_width + 5.0, true)
+	draw_line(Vector2(-bar_length, 0.0), Vector2(bar_length, 0.0), bar_color, bar_width + 1.8, true)
+	draw_line(Vector2(-bar_length * 0.82, 0.0), Vector2(bar_length * 0.82, 0.0), bar_highlight, max(bar_width * 0.34, 1.2), true)
+
+
+func _draw_galaxy_ring(profile : RegionVisualProfile, display_color : Color) -> void:
+	var ring_radius : float = radius * lerp(0.62, 0.82, profile.galaxy_ring_strength)
+	var ring_width : float = radius * lerp(0.08, 0.18, profile.galaxy_ring_strength)
+	var ring_color : Color = display_color.lightened(0.22)
+	var ring_glow : Color = profile.border_color
+	ring_color.a = 0.22 + profile.galaxy_ring_strength * 0.18
+	ring_glow.a = 0.12 + profile.galaxy_ring_strength * 0.14
+	draw_arc(Vector2.ZERO, ring_radius, 0.0, TAU, 72, ring_glow, ring_width + 2.0)
+	draw_arc(Vector2.ZERO, ring_radius, 0.0, TAU, 72, ring_color, ring_width)
+
+
+func _draw_galaxy_starfield(profile : RegionVisualProfile, display_color : Color) -> void:
+	for star_index : int in range(profile.galaxy_star_count):
+		var star_angle : float = float(star_index) * 2.171 + float(get_region_id().length()) * 0.13
+		var star_distance : float = radius * (0.28 + float((star_index * 7) % 9) / 10.5)
+		var star_radius : float = radius * (0.028 + float((star_index * 3) % 4) / 110.0)
+		var star_color : Color = display_color.lightened(0.4 + float(star_index % 3) * 0.08)
+		star_color.a = 0.24 + float(star_index % 4) * 0.08
+		draw_circle(Vector2.RIGHT.rotated(star_angle) * star_distance, star_radius, star_color)
 
 
 func _draw_texture_body(profile : RegionVisualProfile) -> void:

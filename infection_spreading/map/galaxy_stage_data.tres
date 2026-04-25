@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MapStageConfig" format=3 uid="uid://c4n6clim1vnbe"]
+
+[ext_resource type="Script" uid="uid://dbxkyihaly3uq" path="res://infection_spreading/map/map_stage_config.gd" id="1_stage_config"]
+[ext_resource type="Resource" path="res://infection_spreading/map/galaxy_stage_flavor.tres" id="2_stage_flavor"]
+
+[resource]
+script = ExtResource("1_stage_config")
+stage_title = "The Galaxy"
+minimum_spread_chance = 0.012
+cps_over_threshold_spread_scale = 0.03
+maximum_spread_chance = 0.2
+minimum_takeover_duration = 5.0
+neighbor_takeover_bonus = 0.22
+flavor_config = ExtResource("2_stage_flavor")

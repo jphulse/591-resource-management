@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="MapStageFlavorConfig" format=3]
+
+[ext_resource type="Script" path="res://infection_spreading/map/map_stage_flavor_config.gd" id="1_stage_flavor"]
+
+[resource]
+script = ExtResource("1_stage_flavor")
+background_color = Color(0.0313726, 0.0392157, 0.0705882, 1)
+orbit_color = Color(0.576471, 0.65098, 0.796078, 0.22)
+title_color = Color(0.917647, 0.94902, 1, 1)
+connection_color = Color(0.705882, 0.215686, 0.356863, 0.32)
+active_connection_color = Color(1, 0.129412, 0.301961, 1)
+log_color = Color(0.984314, 0.607843, 0.678431, 0.76)
+log_header_color = Color(1, 0.266667, 0.454902, 0.9)
+corruption_start_color = Color(1, 0.192157, 0.356863, 1)
+corruption_end_color = Color(1, 0.784314, 0.839216, 1)
+infection_start_color = Color(1, 0.482353, 0.129412, 1)
+infection_complete_color = Color(1, 0.054902, 0.254902, 1)
+banner_highlight_color = Color(1, 0.94902, 0.756863, 1)
+banner_shadow_color = Color(0, 0, 0, 0.82)
+infection_log_title = "GALACTIC LOG"
+corruption_label_format = "GALACTIC CONTAMINATION: %d%%"
+patient_zero_log_format = "%s: first spiral breach confirmed"
+infecting_banner_format = "INFECTING %s..."
+consumed_banner_format = "%s CONSUMED"
+infection_start_messages = PackedStringArray("%s jump lanes destabilizing", "%s deep-space quarantine breached", "%s transit lattice infected", "%s long-range signals corrupting", "%s outer colonies report impossible heat")
+infection_complete_messages = PackedStringArray("%s consumed by %s", "%s signal lost: %s confirmed", "%s darkens beneath %s", "%s trade spine rewritten by %s")
+outbreak_names = PackedStringArray("Crimson Bloom", "Helios Rot", "Red Choir", "Spore Surge", "Black Vein", "Cathedral Strain", "Void Bloom", "Spiral Fever")
+random_event_messages = PackedStringArray("Outer colonies report impossible heat", "Subspace traffic collapses into static", "Stellar quarantine maps fail to reconcile", "The spiral arms pulse red", "Deep void sensors blink in chorus", "Transmission pressure spreads along the rim")

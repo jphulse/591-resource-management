@@ -39,6 +39,8 @@ func initialize_stage() -> void:
 		push_warning("MapStage is missing a stage_config resource. Using fallback stage defaults.")
 
 	var config : MapStageConfig = _get_stage_config()
+	set_process(true)
+	spread_timer.stop()
 	_discover_regions()
 	active_infections.clear()
 	infected_memory_order.clear()
@@ -50,6 +52,15 @@ func initialize_stage() -> void:
 	_refresh_neighbor_pressure()
 	_initialize_infection_log()
 	spread_timer.start(config.spread_interval)
+	queue_redraw()
+
+
+func deactivate_stage() -> void:
+	spread_timer.stop()
+	active_infections.clear()
+	connection_pulse_strength = 0.0
+	takeover_banner_timer = 0.0
+	set_process(false)
 	queue_redraw()
 
 
