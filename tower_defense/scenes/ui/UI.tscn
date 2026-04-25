@@ -22,12 +22,13 @@ offset_top = 33.0
 offset_right = 239.0
 offset_bottom = 118.0
 theme = ExtResource("2_6qse1")
-text = "Retreat To Laboratory"
+text = "Retreat To 
+Laboratory"
 
 [node name="Button2" type="Button" parent="." unique_id=1203602310]
-offset_left = 1960.0
+offset_left = 2260.0
 offset_top = 33.0
-offset_right = 2167.0
+offset_right = 2467.0
 offset_bottom = 118.0
 theme = ExtResource("2_6qse1")
 theme_override_font_sizes/font_size = 20
@@ -180,6 +181,11 @@ theme = ExtResource("2_6qse1")
 theme_override_font_sizes/font_size = 40
 text = "0"
 
+[node name="power_storage" type="Label" parent="Info_Menu/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer" unique_id=436568100]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "/"
+
 [node name="MarginContainer3" type="MarginContainer" parent="Info_Menu/MarginContainer/VBoxContainer" unique_id=707942102]
 layout_mode = 2
 theme = ExtResource("2_6qse1")
@@ -198,7 +204,7 @@ theme = ExtResource("2_6qse1")
 theme_override_font_sizes/font_size = 40
 text = "Tech Level : "
 
-[node name="FloatingText2" type="Label" parent="Info_Menu/MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer" unique_id=522858626]
+[node name="tech_value" type="Label" parent="Info_Menu/MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer" unique_id=522858626]
 layout_mode = 2
 theme = ExtResource("2_6qse1")
 theme_override_font_sizes/font_size = 40
@@ -208,29 +214,31 @@ text = "0"
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Button3" type="Button" parent="." unique_id=937738786]
+[node name="Power_Storage" type="Button" parent="." unique_id=937738786]
 offset_left = 809.0
-offset_top = -116.0
+offset_top = -400.0
 offset_right = 1016.0
-offset_bottom = -31.0
+offset_bottom = -315.0
 theme = ExtResource("2_6qse1")
-text = "Retreat To Laboratory"
+text = "Increase Power 
+Storage
+"
 
-[node name="Button4" type="Button" parent="." unique_id=935746273]
-offset_left = 1335.0
-offset_top = -118.0
-offset_right = 1542.0
-offset_bottom = -33.0
+[node name="Power_Generation" type="Button" parent="." unique_id=935746273]
+offset_left = 1065.0
+offset_top = -400.0
+offset_right = 1272.0
+offset_bottom = -315.0
 theme = ExtResource("2_6qse1")
-text = "Retreat To Laboratory"
+text = "Increase Power Generation"
 
-[node name="Button5" type="Button" parent="." unique_id=2014386552]
-offset_left = 1080.0
-offset_top = -114.0
-offset_right = 1287.0
-offset_bottom = -29.0
+[node name="Tech_Level" type="Button" parent="." unique_id=2014386552]
+offset_left = 1349.0
+offset_top = -400.0
+offset_right = 1592.0
+offset_bottom = -315.0
 theme = ExtResource("2_6qse1")
-text = "Retreat To Laboratory"
+text = "Increase Tech Level"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
@@ -240,3 +248,5 @@ text = "Retreat To Laboratory"
 [connection signal="tower_button_pressed" from="Tower_Selection/HBoxContainer/tower_button4" to="." method="_on_tower_button_pressed"]
 [connection signal="tower_button_pressed" from="Tower_Selection/HBoxContainer/tower_button5" to="." method="_on_tower_button_pressed"]
 [connection signal="tower_button_pressed" from="Tower_Selection/HBoxContainer/tower_button6" to="." method="_on_tower_button_pressed"]
+[connection signal="pressed" from="Power_Storage" to="." method="_on_power_storage_pressed"]
+[connection signal="pressed" from="Power_Generation" to="." method="_on_power_generation_pressed"]

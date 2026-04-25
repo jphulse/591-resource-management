@@ -12,13 +12,17 @@ class_name Level extends Node2D
 @export var enemy_scene: PackedScene = preload("res://tower_defense/scenes/enemies/base_enemy/EnemyBase.tscn")
 @export var siege_scene: PackedScene = preload("res://tower_defense/scenes/enemies/base_enemy/SiegeBreaker.tscn")
 @export var wave_component: Node2D = null
+@export var max_storage : int = 50
+@export var generation_rate : float = .4
 
 signal update_enemy(value : int)
 signal update_fortifications(value : int)
 signal ultimateEnemy(spawning : bool)
 signal update_resource(value : int)
 signal update_health(value : int)
-signal update_tech(value : int)
+signal update_tech(value : float)
+signal update_storage(value : float)
+signal update_generation(value : float)
 
 const GRID_START = Vector2i(1, 1) # Example: starts at tile (2,2)
 const GRID_WIDTH = 10
@@ -31,6 +35,8 @@ var objective_complete: bool = false
 var total_resources : int = 0
 var tech_level : int = 0
 
+var difficulty_ramp : int = 3
+
 var spawn_delay : Array[float] = [0.003, 0.004, 0.01, 25, 0.006, 0.03, 0.08, 25]
 
 func _ready() -> void:
@@ -39,8 +45,17 @@ func _ready() -> void:
 		
 	for tower in tower_nodes.get_children():
 		tower.connect("tower_attack", _tower_attack)
+	
+	resource_timer.wait_time = generation_rate
+	update_generation.emit(10/generation_rate)
+	update_storage.emit(max_storage/2)
+	update_generation.emit(10/generation_rate)
 
 func _spawn_enemy_timer() -> void:
+	if difficulty_ramp > 0 :
+		frequency_timer.wait_time *= 1.5
+		difficulty_ramp -= 1
+		return
 	frequency_timer.wait_time = spawn_delay.pick_random()
 	if frequency_timer.wait_time == 25 && is_instance_valid(objective):
 		for lane in enemy_paths:
@@ -53,6 +68,24 @@ func _frequency_timer() -> void:
 		if randi() % 10 == 0:
 			var enemy_path: Path2D = enemy_paths.pick_random()
 			spawn_enemy(enemy_scene, enemy_path)
+
+func _on_resource_timer_timeout() -> void:
+	if total_resources < max_storage :
+		total_resources += 1
+		update_resource.emit(total_resources)
+
+func _on_generation_increase_attempt() :
+	if total_resources >= 10/generation_rate :
+		total_resources -= 10/generation_rate
+		generation_rate /= 2
+		resource_timer.wait_time = generation_rate
+		update_generation.emit(10/generation_rate)
+
+func _on_attempt_storage_upgrade() -> void:
+	if total_resources >= max_storage/2 :
+		total_resources -= max_storage/2
+		max_storage *= 2
+		update_storage.emit(max_storage/2)
 
 func _process(_delta: float) -> void:
 	if objective.health <= 0.0:
@@ -147,7 +180,7 @@ func spawn_tower(scene: PackedScene, local_pos: Vector2) -> void:
 	update_fortifications.emit(new_tower.building_value)
 	
 	new_tower.defense_destroyed.connect(_update_defense)
-	
+
 func _update_defense(value : int):
 	update_fortifications.emit(value)
 	
@@ -156,8 +189,3 @@ func _update_enemies(value : int):
 
 func _ultimate_death():
 	ultimateEnemy.emit(false)
-
-
-func _on_resource_timer_timeout() -> void:
-	total_resources += 1
-	update_resource.emit(total_resources)
