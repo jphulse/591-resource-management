@@ -2,25 +2,14 @@
 
 [ext_resource type="Script" uid="uid://bhnt3nq04fpt8" path="res://infection_spreading/clicker/clicker.gd" id="1_c8eug"]
 [ext_resource type="Script" uid="uid://bc43eqcwiux3n" path="res://infection_spreading/clicker/passive_clicker.gd" id="2_hy3xo"]
-[ext_resource type="Texture2D" uid="uid://c37pm1sxrecbs" path="res://icon.svg" id="3_5y6s2"]
 [ext_resource type="Shader" uid="uid://cpkbqna43nsve" path="res://infection_spreading/clicker/infection_button.gdshader" id="3_8jdh8"]
-[ext_resource type="Resource" path="res://infection_spreading/clicker/solar_clicker_flavor.tres" id="4_clicker_flavor"]
+[ext_resource type="Shader" uid="uid://ditc0sa8chxwp" path="res://addons/jeremy_components/shaders/canvas_item/chromatic_glitch.gdshader" id="3_nrrfm"]
+[ext_resource type="Resource" uid="uid://bcrc5mbgoxuu1" path="res://infection_spreading/clicker/solar_clicker_flavor.tres" id="4_clicker_flavor"]
+[ext_resource type="Texture2D" uid="uid://c7dksk0s3mqwx" path="res://infection_spreading/spore_colony.png" id="4_or1nx"]
+[ext_resource type="Texture2D" uid="uid://c3udwid17yhjp" path="res://infection_spreading/mutation hive.png" id="5_6v1a5"]
+[ext_resource type="Texture2D" uid="uid://q77367cp11wd" path="res://infection_spreading/solar_tap.png" id="5_or1nx"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0n0fn"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_score_hud"]
-bg_color = Color(0.025, 0.006, 0.011, 0.72)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 0.105882, 0.196078, 0.45)
-corner_radius_top_left = 22
-corner_radius_top_right = 22
-corner_radius_bottom_right = 22
-corner_radius_bottom_left = 22
-shadow_color = Color(0, 0, 0, 0.46)
-shadow_size = 14
 
 [sub_resource type="Resource" id="Resource_m3gyo"]
 script = ExtResource("2_hy3xo")
@@ -28,7 +17,7 @@ cost = 75.0
 passive_benefit = 2.0
 name = "Spore Colony"
 description = "Cheap steady idle growth. Mutation Hives make spores stronger."
-sprite_texture = ExtResource("3_5y6s2")
+sprite_texture = ExtResource("4_or1nx")
 cost_mult = 1.2
 upgrade_cost = 450.0
 upgrade_mult = 1.85
@@ -41,7 +30,7 @@ cost = 520.0
 passive_benefit = 10.0
 name = "Mutation Hive"
 description = "Expensive late growth. Spore networks make hives cheaper."
-sprite_texture = ExtResource("3_5y6s2")
+sprite_texture = ExtResource("5_6v1a5")
 cost_mult = 1.26
 upgrade_cost = 2400.0
 upgrade_mult = 2.6
@@ -53,10 +42,9 @@ script = ExtResource("2_hy3xo")
 cost = 25.0
 name = "Solar Tap"
 description = "Manual click power. Stronger when spores and hives both exist."
-sprite_texture = ExtResource("3_5y6s2")
+sprite_texture = ExtResource("5_or1nx")
 cost_mult = 1.22
 upgrade_cost = 250.0
-upgrade_mult = 2.0
 upgrade_cost_mult = 3.2
 metadata/_custom_type_script = "uid://bc43eqcwiux3n"
 
@@ -76,6 +64,20 @@ shader_parameter/infected_soft_color = Color(0.960784, 0.258824, 0.329412, 1)
 shader_parameter/infected_hot_color = Color(1, 0.529412, 0.564706, 1)
 shader_parameter/infected_shadow_color = Color(0.278431, 0.0117647, 0.0392157, 1)
 shader_parameter/vein_color = Color(0.709804, 0.105882, 0.164706, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_score_hud"]
+bg_color = Color(0.025, 0.006, 0.011, 0.72)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.105882, 0.196078, 0.45)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+shadow_color = Color(0, 0, 0, 0.46)
+shadow_size = 14
 
 [node name="Clicker" type="Panel" unique_id=1813294204]
 anchors_preset = 15
@@ -142,6 +144,7 @@ vertical_alignment = 1
 
 [node name="MilestoneBannerLabel" type="Label" parent="." unique_id=2109065162]
 unique_name_in_owner = true
+modulate = Color(1, 0.12, 0.22, 0)
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -158,7 +161,6 @@ theme_override_font_sizes/font_size = 34
 text = "THE INFECTION LEARNS"
 horizontal_alignment = 1
 vertical_alignment = 1
-modulate = Color(1, 0.12, 0.22, 0)
 
 [node name="TestModeToggle" type="CheckButton" parent="." unique_id=1931881253]
 unique_name_in_owner = true
@@ -173,7 +175,7 @@ offset_bottom = -8.0
 grow_vertical = 0
 text = "TEST: $1 costs"
 
-[node name="ScoreHudBackdrop" type="Panel" parent="."]
+[node name="ScoreHudBackdrop" type="Panel" parent="." unique_id=1165630726]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -200,8 +202,8 @@ theme_override_constants/separation = 4
 
 [node name="TotalLabel" type="Label" parent="VBoxContainer" unique_id=360236146]
 unique_name_in_owner = true
-layout_mode = 2
 custom_minimum_size = Vector2(700, 64)
+layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(1, 0.84, 0.56, 1)
 theme_override_colors/font_shadow_color = Color(0.12, 0, 0.02, 0.92)
@@ -214,8 +216,8 @@ vertical_alignment = 1
 
 [node name="ScorePerSecond" type="Label" parent="VBoxContainer" unique_id=748921390]
 unique_name_in_owner = true
-layout_mode = 2
 custom_minimum_size = Vector2(700, 36)
+layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(1, 0.92, 0.88, 1)
 theme_override_colors/font_shadow_color = Color(0.08, 0, 0.01, 0.86)
@@ -226,10 +228,10 @@ text = "0.00 CPS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="EcosystemLabel" type="Label" parent="VBoxContainer"]
+[node name="EcosystemLabel" type="Label" parent="VBoxContainer" unique_id=238091392]
 unique_name_in_owner = true
-layout_mode = 2
 custom_minimum_size = Vector2(700, 24)
+layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(1, 0.603922, 0.647059, 0.82)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.78)

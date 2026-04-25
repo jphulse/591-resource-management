@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ClickerFlavorConfig" format=3 uid="uid://bcrc5mbgoxuu1"]
 
-[ext_resource type="Script" uid="uid://dferqqcqqkivo" path="res://infection_spreading/clicker/clicker_flavor_config.gd" id="1_clicker_flavor"]
+[ext_resource type="Script" path="res://infection_spreading/clicker/clicker_flavor_config.gd" id="1_clicker_flavor"]
 
 [resource]
 script = ExtResource("1_clicker_flavor")
