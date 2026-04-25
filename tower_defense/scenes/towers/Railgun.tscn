@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cdk8cagq1ydgu"]
 
-[ext_resource type="Script" uid="uid://2ri6ww0g5tdo" path="res://tower_defense/scenes/towers/tower_base.gd" id="1_0w01h"]
+[ext_resource type="Script" uid="uid://u2kodhvqtvme" path="res://tower_defense/scenes/towers/railgun.gd" id="1_n3akg"]
 [ext_resource type="AudioStream" uid="uid://c8fyww38thxuq" path="res://tower_defense/resources/audio/Towers/Railgun/railgun.mp3" id="2_366m1"]
 [ext_resource type="Texture2D" uid="uid://fvikn8o5ryii" path="res://tower_defense/resources/Sprites/railgun.png" id="3_kqsw0"]
 [ext_resource type="Texture2D" uid="uid://2o74ayvd3jnh" path="res://tower_defense/resources/Sprites/railgun_radar1.png" id="4_agb44"]
@@ -26,8 +26,186 @@
 [ext_resource type="Texture2D" uid="uid://m3ieto63wi0f" path="res://tower_defense/resources/Sprites/railgun_barrel15.png" id="24_sy5th"]
 [ext_resource type="Texture2D" uid="uid://dal7r3rwdh7ip" path="res://tower_defense/resources/Sprites/railgun_barrel16.png" id="25_d5flu"]
 [ext_resource type="Texture2D" uid="uid://bixxjqrml248g" path="res://tower_defense/resources/Sprites/railgun_barrel17.png" id="26_q00jf"]
+[ext_resource type="Texture2D" uid="uid://drxxlb4k4871a" path="res://tower_defense/resources/Sprites/railgun_shot1.png" id="29_mlyed"]
+[ext_resource type="Script" uid="uid://wjx72euut02e" path="res://tower_defense/scenes/towers/rail_projectile.gd" id="29_w6p0c"]
+[ext_resource type="Texture2D" uid="uid://c2ecso6k5kift" path="res://tower_defense/resources/Sprites/railgun_shot2.png" id="30_w6p0c"]
+[ext_resource type="Texture2D" uid="uid://co13j5q532t2n" path="res://tower_defense/resources/Sprites/railgun_shot3.png" id="31_agvma"]
+[ext_resource type="Texture2D" uid="uid://crdaeyj4c4lwd" path="res://tower_defense/resources/Sprites/railgun_shot4.png" id="32_ovvl3"]
+[ext_resource type="Texture2D" uid="uid://bp3qn61h4nlc2" path="res://tower_defense/resources/Sprites/railgun_shot5.png" id="33_dphra"]
+[ext_resource type="Texture2D" uid="uid://m0ba6f5grlk8" path="res://tower_defense/resources/Sprites/railgun_shot6.png" id="34_rrceq"]
+[ext_resource type="Texture2D" uid="uid://cw6vk3x1de64y" path="res://tower_defense/resources/Sprites/railgun_shot7.png" id="35_iqd83"]
+[ext_resource type="Texture2D" uid="uid://cwknu0erf6v25" path="res://tower_defense/resources/Sprites/railgun_shot8.png" id="36_m8smf"]
+[ext_resource type="Texture2D" uid="uid://coinllpcd2to2" path="res://tower_defense/resources/Sprites/railgun_shot9.png" id="37_nl0wd"]
+[ext_resource type="Texture2D" uid="uid://dg17344fbhjt7" path="res://tower_defense/resources/Sprites/railgun_shot10.png" id="38_knw3t"]
+[ext_resource type="Texture2D" uid="uid://bjssrom1j4xjf" path="res://tower_defense/resources/Sprites/railgun_shot11.png" id="39_v7pxm"]
+[ext_resource type="Texture2D" uid="uid://bfoixsub8sf6m" path="res://tower_defense/resources/Sprites/railgun_shot12.png" id="40_4gmhc"]
 [ext_resource type="Script" uid="uid://cs2i413p3lw3d" path="res://tower_defense/scenes/towers/tower_hitbox.gd" id="40_qfken"]
+[ext_resource type="Texture2D" uid="uid://dkfi5nle6mskx" path="res://tower_defense/resources/Sprites/railgun_shot13.png" id="41_s71pg"]
 [ext_resource type="Script" uid="uid://dmve0q2u5uxl6" path="res://tower_defense/scenes/towers/tower_attack_range.gd" id="41_s5887"]
+[ext_resource type="Texture2D" uid="uid://bss28xhqbtyjj" path="res://tower_defense/resources/Sprites/railgun_shot14.png" id="42_sy3up"]
+[ext_resource type="Texture2D" uid="uid://ckk4utps7cfr7" path="res://tower_defense/resources/Sprites/railgun_shot15.png" id="43_kv0h2"]
+[ext_resource type="Texture2D" uid="uid://c7h7br5rtexx0" path="res://tower_defense/resources/Sprites/railgun_shot16.png" id="44_w8a5l"]
+[ext_resource type="Texture2D" uid="uid://0o2y2jfr1rk6" path="res://tower_defense/resources/Sprites/railgun_shot17.png" id="45_v5p42"]
+[ext_resource type="Texture2D" uid="uid://b7a5l53c5nhpj" path="res://tower_defense/resources/Sprites/railgun_shot18.png" id="46_8rmqb"]
+[ext_resource type="Texture2D" uid="uid://lcbk2lcrrx72" path="res://tower_defense/resources/Sprites/railgun_shot19.png" id="47_kfp6m"]
+[ext_resource type="Texture2D" uid="uid://dr8kqwjkqdj2n" path="res://tower_defense/resources/Sprites/railgun_shot20.png" id="48_7lypl"]
+[ext_resource type="Texture2D" uid="uid://d1jeq3nagll0i" path="res://tower_defense/resources/Sprites/railgun_shot21.png" id="49_ddbgu"]
+[ext_resource type="Texture2D" uid="uid://dey3cjqj88v1q" path="res://tower_defense/resources/Sprites/railgun_shot22.png" id="50_qfken"]
+[ext_resource type="Texture2D" uid="uid://dxf3ntxkkdetv" path="res://tower_defense/resources/Sprites/railgun_shot23.png" id="51_s5887"]
+[ext_resource type="Texture2D" uid="uid://bjbue3u73r60r" path="res://tower_defense/resources/Sprites/railgun_shot24.png" id="52_1b4eq"]
+[ext_resource type="Texture2D" uid="uid://c3cbtr16yrk6n" path="res://tower_defense/resources/Sprites/railgun_shot25.png" id="53_r8a8e"]
+[ext_resource type="Texture2D" uid="uid://dttpf2vnyyiim" path="res://tower_defense/resources/Sprites/railgun_shot26.png" id="54_7dnpe"]
+[ext_resource type="Texture2D" uid="uid://dh13ftiovk31p" path="res://tower_defense/resources/Sprites/railgun_shot27.png" id="55_bk2b0"]
+[ext_resource type="Texture2D" uid="uid://ch8rqm4s3er7n" path="res://tower_defense/resources/Sprites/railgun_shot28.png" id="56_nw6vw"]
+[ext_resource type="Texture2D" uid="uid://ba5e8bdbmk718" path="res://tower_defense/resources/Sprites/railgun_shot29.png" id="57_ogomw"]
+[ext_resource type="Texture2D" uid="uid://rqko4wy2b5vg" path="res://tower_defense/resources/Sprites/railgun_shot30.png" id="58_3nhyw"]
+[ext_resource type="Texture2D" uid="uid://bk44uatnmsldl" path="res://tower_defense/resources/Sprites/railgun_shot31.png" id="59_6qxmk"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_galob"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("29_mlyed")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_w6p0c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_agvma")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_ovvl3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_dphra")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_rrceq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_iqd83")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_m8smf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_nl0wd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_knw3t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_v7pxm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_4gmhc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_s71pg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_sy3up")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_kv0h2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_w8a5l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_v5p42")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_v7pxm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_4gmhc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_s71pg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_sy3up")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_kv0h2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_w8a5l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_v7pxm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_4gmhc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_s71pg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_sy3up")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_kv0h2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_w8a5l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_v5p42")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_v5p42")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46_8rmqb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_kfp6m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_7lypl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_ddbgu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_qfken")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_s5887")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_1b4eq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_r8a8e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_7dnpe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("55_bk2b0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56_nw6vw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("57_ogomw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_3nhyw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("59_6qxmk")
+}],
+"loop": false,
+"name": &"default",
+"speed": 60.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w6p0c"]
+size = Vector2(2000, 20)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6ebu4"]
 animations = [{
@@ -121,14 +299,28 @@ size = Vector2(128, 128)
 size = Vector2(1998, 16)
 
 [node name="TowerBase" type="Node2D" unique_id=879173299]
-script = ExtResource("1_0w01h")
-damage = 500.0
-projectile_speed = 2500.0
-attack_cooldown = 10.0
+script = ExtResource("1_n3akg")
+damage = 20.0
+projectile_speed = 0.0
+attack_cooldown = 9.0
 building_value = 100.0
 cannon_sounds = Array[AudioStream]([ExtResource("2_366m1")])
 
 [node name="Projectiles" type="Node2D" parent="." unique_id=281360252]
+
+[node name="rail_projectile" type="Area2D" parent="." unique_id=1011696677]
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("29_w6p0c")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="rail_projectile" unique_id=146803968]
+position = Vector2(1000, 0)
+sprite_frames = SubResource("SpriteFrames_galob")
+frame = 44
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="rail_projectile" unique_id=288118702]
+position = Vector2(1000, 0)
+shape = SubResource("RectangleShape2D_w6p0c")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1950465526]
 texture = ExtResource("3_kqsw0")
@@ -169,7 +361,12 @@ offset_bottom = -72.0
 volume_db = -15.0
 max_polyphony = 2
 
+[node name="Delay_Timer" type="Timer" parent="." unique_id=589420036]
+one_shot = true
+
+[connection signal="body_entered" from="rail_projectile" to="rail_projectile" method="_on_area_entered"]
 [connection signal="area_entered" from="TowerHitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_entered" from="TowerAttackRange" to="." method="_on_detection_range_area_entered"]
 [connection signal="area_exited" from="TowerAttackRange" to="." method="_on_detection_range_area_exited"]
 [connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_attack_cooldown_timer_timeout"]
+[connection signal="timeout" from="Delay_Timer" to="." method="_on_delay_timer_timeout"]

@@ -25,12 +25,6 @@ signal defense_destroyed(value: int)
 var enemies: Array = []
 var can_attack: bool = true
 
-func _ready() -> void:
-	animated_radar.play()
-	hitbox.setup(self)
-	attack_area.setup(self, damage)
-	update_health_bar()
-
 func _process(delta: float) -> void:
 	if enemies:
 		attack()
