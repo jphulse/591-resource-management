@@ -25,6 +25,10 @@ signal defense_destroyed(value: int)
 var enemies: Array = []
 var can_attack: bool = true
 
+func _ready() -> void:
+	if animated_barrel.material:
+		animated_barrel.material = animated_barrel.material.duplicate()
+
 func _process(delta: float) -> void:
 	if enemies:
 		attack()
@@ -41,17 +45,29 @@ func _on_attack_cooldown_timer_timeout() -> void:
 	can_attack = true
 
 func attack() -> void:
-	# Fire a projectile or something
 	if can_attack:
 		can_attack = false
 		
+		#MUZZLE FLASH LOGIC
+		var barrel_material = animated_barrel.material as ShaderMaterial
+		
+		if barrel_material:
+			var flash_tween = create_tween()
+			
+			barrel_material.set_shader_parameter("flash_intensity", .4)
+			
+			flash_tween.tween_property(barrel_material, 
+				"shader_parameter/flash_intensity", 0.0, attack_cooldown/1.5).set_ease(Tween.EASE_OUT)
+
 		var bullet: Bullet = bullet_scene.instantiate()
 		projectiles_list.add_child(bullet)
 		bullet.setup(self.global_position, PI/2, damage, projectile_speed)
+		
 		animated_barrel.frame = 0
 		animated_barrel.play()
 		audio_player.stream = cannon_sounds.pick_random()
 		audio_player.play()
+		
 		attack_cooldown_timer.start(attack_cooldown)
 
 func take_damage(incoming_damage: float) -> void:

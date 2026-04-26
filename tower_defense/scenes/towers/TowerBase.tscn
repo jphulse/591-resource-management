@@ -41,6 +41,7 @@
 [ext_resource type="Texture2D" uid="uid://dk66chm0ee068" path="res://tower_defense/resources/Sprites/pew_barrel12.png" id="20_8mywb"]
 [ext_resource type="Texture2D" uid="uid://gubeqt8qxnt8" path="res://tower_defense/resources/Sprites/pew_barrel13.png" id="21_iph4x"]
 [ext_resource type="Texture2D" uid="uid://bajhyrkxyj4m5" path="res://tower_defense/resources/Sprites/pew_barrel14.png" id="22_iiv8f"]
+[ext_resource type="Shader" uid="uid://bkq2bcr8i4u0m" path="res://tower_defense/resources/Shaders/muzzle_flash.gdshader" id="26_pgi8r"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6ebu4"]
 animations = [{
@@ -67,6 +68,13 @@ animations = [{
 "name": &"default",
 "speed": 30.0
 }]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pew07"]
+shader = ExtResource("26_pgi8r")
+shader_parameter/flash_intensity = 0.0
+shader_parameter/tightness = 0.20000000787006
+shader_parameter/flash_offset = Vector2(0.9, 0.5)
+shader_parameter/flash_color = Color(0.80496097, 0.6696224, 0, 1)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_w86bd"]
 animations = [{
@@ -141,6 +149,7 @@ sprite_frames = SubResource("SpriteFrames_6ebu4")
 frame_progress = 0.5718703
 
 [node name="AnimatedBarrel" type="AnimatedSprite2D" parent="." unique_id=147636807]
+material = SubResource("ShaderMaterial_pew07")
 sprite_frames = SubResource("SpriteFrames_w86bd")
 frame = 13
 speed_scale = 1.25

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5lcv3emrx7ol"
-path="res://.godot/imported/cave_entrance.png-43e29a523997fa6c991ddf6948f80d1e.ctex"
+uid="uid://8k0juiu05j53"
+path="res://.godot/imported/cave_entrance_2.png-74377b50d17ebff749774ba91d8cd7f4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tower_defense/assets/sprites/world/cave_entrance.png"
-dest_files=["res://.godot/imported/cave_entrance.png-43e29a523997fa6c991ddf6948f80d1e.ctex"]
+source_file="res://tower_defense/assets/sprites/world/cave_entrance_2.png"
+dest_files=["res://.godot/imported/cave_entrance_2.png-74377b50d17ebff749774ba91d8cd7f4.ctex"]
 
 [params]
 

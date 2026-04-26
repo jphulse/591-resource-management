@@ -42,6 +42,7 @@
 [ext_resource type="Script" uid="uid://cs2i413p3lw3d" path="res://tower_defense/scenes/towers/tower_hitbox.gd" id="40_qfken"]
 [ext_resource type="Texture2D" uid="uid://dkfi5nle6mskx" path="res://tower_defense/resources/Sprites/railgun_shot13.png" id="41_s71pg"]
 [ext_resource type="Script" uid="uid://dmve0q2u5uxl6" path="res://tower_defense/scenes/towers/tower_attack_range.gd" id="41_s5887"]
+[ext_resource type="Shader" uid="uid://bkq2bcr8i4u0m" path="res://tower_defense/resources/Shaders/muzzle_flash.gdshader" id="41_w6p0c"]
 [ext_resource type="Texture2D" uid="uid://bss28xhqbtyjj" path="res://tower_defense/resources/Sprites/railgun_shot14.png" id="42_sy3up"]
 [ext_resource type="Texture2D" uid="uid://ckk4utps7cfr7" path="res://tower_defense/resources/Sprites/railgun_shot15.png" id="43_kv0h2"]
 [ext_resource type="Texture2D" uid="uid://c7h7br5rtexx0" path="res://tower_defense/resources/Sprites/railgun_shot16.png" id="44_w8a5l"]
@@ -229,6 +230,14 @@ animations = [{
 "speed": 30.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_agvma"]
+shader = ExtResource("41_w6p0c")
+shader_parameter/flash_intensity = 0.0
+shader_parameter/tightness = 0.15700000582756002
+shader_parameter/flash_offset = Vector2(0.88, 0.5)
+shader_parameter/flash_color = Color(0.4, 0.7, 1, 1)
+shader_parameter/glow_radius_decay = 4.000000142499999
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_w86bd"]
 animations = [{
 "frames": [{
@@ -326,6 +335,7 @@ sprite_frames = SubResource("SpriteFrames_6ebu4")
 frame_progress = 0.5718703
 
 [node name="AnimatedBarrel" type="AnimatedSprite2D" parent="." unique_id=147636807]
+material = SubResource("ShaderMaterial_agvma")
 sprite_frames = SubResource("SpriteFrames_w86bd")
 frame = 16
 speed_scale = 0.7

@@ -4,6 +4,7 @@ extends TowerBase
 @onready var delay : Timer = $Delay_Timer
 
 func _ready() -> void:
+	super()
 	animated_radar.play()
 	hitbox.setup(self)
 	attack_area.setup(self, damage)
@@ -21,6 +22,17 @@ func attack() -> void:
 	if can_attack:
 		can_attack = false
 		
+		#MUZZLE FLASH LOGIC
+		var barrel_material = animated_barrel.material as ShaderMaterial
+		
+		if barrel_material:
+			var flash_tween = create_tween()
+			
+			barrel_material.set_shader_parameter("flash_intensity", .5)
+			
+			flash_tween.tween_property(barrel_material, 
+				"shader_parameter/flash_intensity", 0.0, 4).set_ease(Tween.EASE_OUT)
+				
 		var space_state = get_world_2d().direct_space_state
 		var query = PhysicsShapeQueryParameters2D.new()
 		

@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://dqr2hen0lki8h" path="res://tower_defense/resources/Sprites/pew_radar4.png" id="23_c2hlp"]
 [ext_resource type="Texture2D" uid="uid://bp2evi76fvksw" path="res://tower_defense/resources/Sprites/pew_radar5.png" id="24_xuykp"]
 [ext_resource type="Texture2D" uid="uid://df3xqpuod8u0x" path="res://tower_defense/resources/Sprites/pew_radar6.png" id="25_r2txx"]
+[ext_resource type="Shader" uid="uid://bkq2bcr8i4u0m" path="res://tower_defense/resources/Shaders/muzzle_flash.gdshader" id="26_7okwx"]
 [ext_resource type="Texture2D" uid="uid://bh15aegxrghr0" path="res://tower_defense/resources/Sprites/pew_barrel1.png" id="26_43dmb"]
 [ext_resource type="Texture2D" uid="uid://cb4vt6ha5op57" path="res://tower_defense/resources/Sprites/pew_barrel2.png" id="27_lghkq"]
 [ext_resource type="Texture2D" uid="uid://b6eloxdaiuh10" path="res://tower_defense/resources/Sprites/pew_barrel3.png" id="28_ydrxl"]
@@ -67,6 +68,14 @@ animations = [{
 "name": &"default",
 "speed": 30.0
 }]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rfi2b"]
+shader = ExtResource("26_7okwx")
+shader_parameter/flash_intensity = 0.0
+shader_parameter/tightness = 0.15
+shader_parameter/flash_offset = Vector2(0.8, 0.5)
+shader_parameter/flash_color = Color(0.7473468, 0.6957548, 0, 1)
+shader_parameter/glow_radius_decay = 2.5
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_w86bd"]
 animations = [{
@@ -140,6 +149,7 @@ sprite_frames = SubResource("SpriteFrames_6ebu4")
 frame_progress = 0.7376101
 
 [node name="AnimatedBarrel" type="AnimatedSprite2D" parent="." unique_id=147636807]
+material = SubResource("ShaderMaterial_rfi2b")
 sprite_frames = SubResource("SpriteFrames_w86bd")
 frame = 13
 frame_progress = 1.0
