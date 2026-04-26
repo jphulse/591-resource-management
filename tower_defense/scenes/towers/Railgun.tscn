@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cdk8cagq1ydgu"]
 
+[ext_resource type="Shader" uid="uid://cwxxq8ntwpae4" path="res://addons/jeremy_components/shaders/canvas_item/wave_distort.gdshader" id="1_agvma"]
 [ext_resource type="Script" uid="uid://u2kodhvqtvme" path="res://tower_defense/scenes/towers/railgun.gd" id="1_n3akg"]
-[ext_resource type="AudioStream" uid="uid://c8fyww38thxuq" path="res://tower_defense/resources/audio/Towers/Railgun/railgun.mp3" id="2_366m1"]
 [ext_resource type="Texture2D" uid="uid://fvikn8o5ryii" path="res://tower_defense/resources/Sprites/railgun.png" id="3_kqsw0"]
 [ext_resource type="Texture2D" uid="uid://2o74ayvd3jnh" path="res://tower_defense/resources/Sprites/railgun_radar1.png" id="4_agb44"]
 [ext_resource type="Texture2D" uid="uid://brrdupvls3n6w" path="res://tower_defense/resources/Sprites/railgun_radar2.png" id="5_3wqkm"]
@@ -60,6 +60,12 @@
 [ext_resource type="Texture2D" uid="uid://ch8rqm4s3er7n" path="res://tower_defense/resources/Sprites/railgun_shot28.png" id="56_nw6vw"]
 [ext_resource type="Texture2D" uid="uid://ba5e8bdbmk718" path="res://tower_defense/resources/Sprites/railgun_shot29.png" id="57_ogomw"]
 [ext_resource type="Texture2D" uid="uid://bk44uatnmsldl" path="res://tower_defense/resources/Sprites/railgun_shot31.png" id="59_6qxmk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ovvl3"]
+shader = ExtResource("1_agvma")
+shader_parameter/wave_speed = 4.0
+shader_parameter/wave_frequency = 12.0
+shader_parameter/wave_strength = 0.01
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_galob"]
 animations = [{
@@ -304,12 +310,12 @@ size = Vector2(128, 128)
 size = Vector2(1998, 16)
 
 [node name="TowerBase" type="Node2D" unique_id=879173299]
+material = SubResource("ShaderMaterial_ovvl3")
 script = ExtResource("1_n3akg")
 damage = 20.0
 projectile_speed = 0.0
 attack_cooldown = 10.0
 building_value = 100.0
-cannon_sounds = Array[AudioStream]([ExtResource("2_366m1")])
 
 [node name="Projectiles" type="Node2D" parent="." unique_id=281360252]
 

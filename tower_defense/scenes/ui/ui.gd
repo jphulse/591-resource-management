@@ -16,7 +16,7 @@ signal win()
 @onready var tower_bar : PanelContainer = self.find_child("Tower_Selection")
 @onready var progress_bar : PanelContainer = self.find_child("Progress_Bar")
 @onready var win_bar : ProgressBar = self.find_child("Win_Bar")
-@onready var info_bar : PanelContainer = self.find_child("Info_Menu")
+@onready var info_bar : SubViewportContainer = self.find_child("Info_Menu")
 @onready var to_lab_button : Button = $Button
 @onready var from_lab_button : Button = $Button2
 @onready var power_storage : Button = $Power_Storage

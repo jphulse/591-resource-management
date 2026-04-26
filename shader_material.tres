@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://jj6c3taoagw4"]
+
+[ext_resource type="Shader" uid="uid://c3w842aqov3h" path="res://tower_defense/resources/Shaders/vhs_cctv_ui.gdshader" id="1_yj07x"]
+
+[resource]
+shader = ExtResource("1_yj07x")
+shader_parameter/enable_scanlines = true
+shader_parameter/enable_noise = true
+shader_parameter/enable_chromatic_aberration = true
+shader_parameter/enable_warp = true
+shader_parameter/enable_roll_bar = true
+shader_parameter/enable_vignette = true
+shader_parameter/enable_desaturate = true
