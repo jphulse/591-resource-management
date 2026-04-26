@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://c37pm1sxrecbs" path="res://icon.svg" id="2_83hh3"]
 [ext_resource type="Script" uid="uid://cdvwi26nfaljx" path="res://tower_defense/scenes/enemies/base_enemy/enemy_hitbox.gd" id="3_m5ux1"]
 [ext_resource type="Script" uid="uid://l5pesthk0cvw" path="res://tower_defense/scenes/enemies/base_enemy/attack_area.gd" id="4_tdttk"]
+[ext_resource type="StyleBox" uid="uid://bp5rpbwor3asu" path="res://background_health_enemy.tres" id="5_ubxkr"]
+[ext_resource type="StyleBox" uid="uid://j4h4udfe7ew3" path="res://background_fill_health_enemy.tres" id="6_v7mwp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_coewb"]
 size = Vector2(128, 312)
@@ -41,6 +43,18 @@ scale = Vector2(0.9999994, 0.9999994)
 shape = SubResource("RectangleShape2D_ndb33")
 
 [node name="AttackCooldownTimer" type="Timer" parent="." unique_id=501510785]
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1582177156]
+offset_left = -60.0
+offset_top = 65.0
+offset_right = 180.0
+offset_bottom = 92.0
+scale = Vector2(0.5, 0.5)
+theme_override_styles/background = ExtResource("5_ubxkr")
+theme_override_styles/fill = ExtResource("6_v7mwp")
+max_value = 1000.0
+step = 0.0
+show_percentage = false
 
 [connection signal="area_entered" from="EnemyHitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_entered" from="EnemyAttackArea" to="." method="_on_attack_area_area_entered"]

@@ -1,13 +1,17 @@
 [gd_scene format=3 uid="uid://dlb8clby3j6aw"]
 
 [ext_resource type="Script" uid="uid://bdr4anafrwan0" path="res://tower_defense/scenes/main.gd" id="1_nqgnm"]
+[ext_resource type="PackedScene" uid="uid://dshbvmngpcixx" path="res://tower_defense/scenes/win.tscn" id="2_8gfb2"]
 [ext_resource type="PackedScene" uid="uid://c6u6sh2xtmm01" path="res://tower_defense/scenes/ui/UI.tscn" id="2_h01mr"]
 [ext_resource type="PackedScene" uid="uid://sam0t7rk3qkk" path="res://tower_defense/scenes/audio_system.tscn" id="3_76xix"]
+[ext_resource type="PackedScene" uid="uid://citkpaec8qvgi" path="res://tower_defense/scenes/lose.tscn" id="3_diwjb"]
 [ext_resource type="PackedScene" uid="uid://baq27ledf3wuj" path="res://tower_defense/scenes/levels/Level.tscn" id="4_76xix"]
 [ext_resource type="Texture2D" uid="uid://d4jpx6ku13iam" path="res://tower_defense/resources/Sprites/expanded_lab_sprite.png" id="5_8bkux"]
 
 [node name="Main" type="Node2D" unique_id=268084963]
 script = ExtResource("1_nqgnm")
+win_scene = ExtResource("2_8gfb2")
+lose_scene = ExtResource("3_diwjb")
 
 [node name="Ui" parent="." unique_id=1856254877 instance=ExtResource("2_h01mr")]
 
@@ -29,6 +33,8 @@ texture = ExtResource("5_8bkux")
 [connection signal="attempt_generation_upgrade" from="Ui" to="Level" method="_on_generation_increase_attempt"]
 [connection signal="attempt_storage_upgrade" from="Ui" to="Level" method="_on_attempt_storage_upgrade"]
 [connection signal="tower_selected" from="Ui" to="." method="start_placement"]
+[connection signal="win" from="Ui" to="." method="_win"]
+[connection signal="lose" from="Level" to="." method="_lose"]
 [connection signal="update_generation" from="Level" to="Ui" method="_on_generation_update"]
 [connection signal="update_health" from="Level" to="Ui" method="_on_health_update"]
 [connection signal="update_resource" from="Level" to="Ui" method="_on_resource_update"]

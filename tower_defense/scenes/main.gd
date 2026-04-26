@@ -6,6 +6,9 @@ extends Node2D
 @onready var level_map: TileMapLayer = $Level/TileMapLayer
 @onready var camera : Camera2D = $Camera2D
 
+@export var win_scene : PackedScene
+@export var lose_scene : PackedScene
+
 # We store the PackedScene so we can 'instantiate' it later
 var current_tower_scene: PackedScene = null
 var ghost_preview: Node2D = null
@@ -120,3 +123,9 @@ func _adjust_ultimate_count(spawning : bool) :
 		ultimate_enemies += 1
 	else :
 		ultimate_enemies -= 1
+		
+func _win() -> void:
+	get_tree().change_scene_to_packed(win_scene)
+	
+func _lose() -> void :
+	get_tree().change_scene_to_packed(lose_scene)

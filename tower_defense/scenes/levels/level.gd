@@ -23,6 +23,7 @@ signal update_health(value : int)
 signal update_tech(value : float)
 signal update_storage(value : float)
 signal update_generation(value : float)
+signal lose()
 
 const GRID_START = Vector2i(1, 1) # Example: starts at tile (2,2)
 const GRID_WIDTH = 10
@@ -75,11 +76,11 @@ func _on_resource_timer_timeout() -> void:
 		update_resource.emit(total_resources)
 
 func _on_generation_increase_attempt() :
-	if total_resources >= 10/generation_rate :
-		total_resources -= 10/generation_rate
-		generation_rate /= 2
+	if total_resources >= 10/generation_rate * 1.5 :
+		total_resources -= 10/generation_rate * 1.5
+		generation_rate /= 1.1
 		resource_timer.wait_time = generation_rate
-		update_generation.emit(10/generation_rate)
+		update_generation.emit(10/generation_rate * 1.5)
 
 func _on_attempt_storage_upgrade() -> void:
 	if total_resources >= max_storage/2 :
@@ -93,13 +94,7 @@ func _process(_delta: float) -> void:
 			#get_tree().paused = true
 			objective_complete = true
 			print("Objective Destroyed!")
-			for enemy in enemies:
-				if is_instance_valid(enemy):
-					_update_enemies(-enemy.enemy_value)
-					if enemy.has_signal("ultimate_death") :
-						_ultimate_death()
-					enemy.queue_free()
-			enemies.clear() # ALWAYS clear the list after freeing the contents!
+			lose.emit()
 
 func spawn_enemy(enemy : PackedScene, enemy_path : Path2D) -> void:
 	var path_to_follow: PathFollow2D = PathFollow2D.new()
