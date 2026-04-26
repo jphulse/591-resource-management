@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://cwnqtjx0ht44a" path="res://tower_defense/scenes/enemies/Minions/siege_minion.tscn" id="2_ony3k"]
 [ext_resource type="Script" uid="uid://cdvwi26nfaljx" path="res://tower_defense/scenes/enemies/base_enemy/enemy_hitbox.gd" id="3_7t0vp"]
 [ext_resource type="Script" uid="uid://l5pesthk0cvw" path="res://tower_defense/scenes/enemies/base_enemy/attack_area.gd" id="4_7psap"]
+[ext_resource type="StyleBox" uid="uid://bp5rpbwor3asu" path="res://background_health_enemy.tres" id="6_0b2tj"]
+[ext_resource type="StyleBox" uid="uid://j4h4udfe7ew3" path="res://background_fill_health_enemy.tres" id="7_vfmkw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_coewb"]
 size = Vector2(128, 128)
@@ -50,6 +52,17 @@ autostart = true
 [node name="Summon_Delay" type="Timer" parent="." unique_id=1116558090]
 wait_time = 0.5
 one_shot = true
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=289585760]
+offset_left = -60.0
+offset_top = 65.0
+offset_right = 180.0
+offset_bottom = 92.0
+scale = Vector2(0.5, 0.5)
+theme_override_styles/background = ExtResource("6_0b2tj")
+theme_override_styles/fill = ExtResource("7_vfmkw")
+max_value = 1000.0
+step = 0.0
 
 [connection signal="area_entered" from="EnemyHitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_entered" from="EnemyAttackArea" to="." method="_on_attack_area_area_entered"]

@@ -12,6 +12,19 @@
 [ext_resource type="PackedScene" uid="uid://bfgyiwr357g2w" path="res://tower_defense/scenes/towers/TowerPoing.tscn" id="6_24gx2"]
 [ext_resource type="Texture2D" uid="uid://nvwtb58h8bko" path="res://tower_defense/resources/Sprites/poing_sprite.png" id="6_uenyj"]
 [ext_resource type="Texture2D" uid="uid://b050p21jnop6t" path="res://tower_defense/resources/Sprites/railgun_sprite.png" id="7_uenyj"]
+[ext_resource type="Texture2D" uid="uid://fa7ff3c2vryg" path="res://tower_defense/resources/Sprites/progress_window.png" id="12_6qse1"]
+[ext_resource type="StyleBox" uid="uid://bp5rpbwor3asu" path="res://background_health_enemy.tres" id="13_lena1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w2cth"]
+bg_color = Color(0.18973774, 0.7204785, 7.70092e-07, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lena1"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
 
 [node name="Ui" type="CanvasLayer" unique_id=1856254877]
 script = ExtResource("1_wgpra")
@@ -112,6 +125,138 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 tower_scene = ExtResource("4_3fy46")
 texture_sprite = ExtResource("5_n8y3i")
+
+[node name="Progress_Bar" type="PanelContainer" parent="." unique_id=1717258816]
+offset_left = -4000.0
+offset_top = 908.0
+offset_right = -2712.0
+offset_bottom = 1080.0
+theme = ExtResource("2_6qse1")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Progress_Bar" unique_id=571265248]
+layout_mode = 2
+theme = ExtResource("2_6qse1")
+texture = ExtResource("12_6qse1")
+
+[node name="MarginContainer" type="MarginContainer" parent="Progress_Bar" unique_id=1466661649]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 60
+theme_override_constants/margin_bottom = 50
+
+[node name="Win_Bar" type="ProgressBar" parent="Progress_Bar/MarginContainer" unique_id=1363285170]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/background = ExtResource("13_lena1")
+theme_override_styles/fill = SubResource("StyleBoxFlat_w2cth")
+max_value = 900.0
+step = 45.0
+show_percentage = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Progress_Bar/MarginContainer" unique_id=998895276]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Panel" type="Panel" parent="Progress_Bar/MarginContainer/HBoxContainer" unique_id=1174105953]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
+
+[node name="Panel2" type="Panel" parent="Progress_Bar/MarginContainer/HBoxContainer" unique_id=830066997]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
+
+[node name="Panel3" type="Panel" parent="Progress_Bar/MarginContainer/HBoxContainer" unique_id=736009573]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
+
+[node name="Panel4" type="Panel" parent="Progress_Bar/MarginContainer/HBoxContainer" unique_id=892737600]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
+
+[node name="Panel5" type="Panel" parent="Progress_Bar/MarginContainer/HBoxContainer" unique_id=1948709721]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
+
+[node name="Panel6" type="Panel" parent="Progress_Bar/MarginContainer/HBoxContainer" unique_id=732467932]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
+
+[node name="Panel7" type="Panel" parent="Progress_Bar/MarginContainer/HBoxContainer" unique_id=411986356]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
+
+[node name="Panel8" type="Panel" parent="Progress_Bar/MarginContainer/HBoxContainer" unique_id=1173885982]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
+
+[node name="Panel9" type="Panel" parent="Progress_Bar/MarginContainer/HBoxContainer" unique_id=1947509072]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
+
+[node name="Panel10" type="Panel" parent="Progress_Bar/MarginContainer/HBoxContainer" unique_id=950616699]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
+
+[node name="Panel11" type="Panel" parent="Progress_Bar/MarginContainer/HBoxContainer" unique_id=1433886310]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
+
+[node name="Panel12" type="Panel" parent="Progress_Bar/MarginContainer/HBoxContainer" unique_id=713826150]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
+
+[node name="Panel13" type="Panel" parent="Progress_Bar/MarginContainer/HBoxContainer" unique_id=48102665]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
+
+[node name="Panel14" type="Panel" parent="Progress_Bar/MarginContainer/HBoxContainer" unique_id=1107433429]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
+
+[node name="Panel15" type="Panel" parent="Progress_Bar/MarginContainer/HBoxContainer" unique_id=1354700156]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
+
+[node name="Panel16" type="Panel" parent="Progress_Bar/MarginContainer/HBoxContainer" unique_id=113595606]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
+
+[node name="Panel17" type="Panel" parent="Progress_Bar/MarginContainer/HBoxContainer" unique_id=1033349002]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
+
+[node name="Panel18" type="Panel" parent="Progress_Bar/MarginContainer/HBoxContainer" unique_id=1227864675]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
+
+[node name="Panel19" type="Panel" parent="Progress_Bar/MarginContainer/HBoxContainer" unique_id=1490840270]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
+
+[node name="Panel20" type="Panel" parent="Progress_Bar/MarginContainer/HBoxContainer" unique_id=1399250610]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
 
 [node name="Info_Menu" type="PanelContainer" parent="." unique_id=1900489933]
 offset_left = 1268.0
@@ -224,6 +369,16 @@ text = "Increase Power
 Storage
 "
 
+[node name="Win" type="Button" parent="." unique_id=1056102437]
+offset_left = 523.0
+offset_top = -400.0
+offset_right = 766.0
+offset_bottom = -315.0
+theme = ExtResource("2_6qse1")
+theme_override_colors/font_color = Color(0.8745098, 0.8745098, 0.8745098, 0.47843137)
+theme_override_font_sizes/font_size = 32
+text = "ACTIVATE"
+
 [node name="Power_Generation" type="Button" parent="." unique_id=935746273]
 offset_left = 1065.0
 offset_top = -400.0
@@ -240,6 +395,14 @@ offset_bottom = -315.0
 theme = ExtResource("2_6qse1")
 text = "Increase Tech Level"
 
+[node name="Victory_Timer" type="Timer" parent="." unique_id=1857756451]
+wait_time = 900.0
+one_shot = true
+autostart = true
+
+[node name="Update_Timer" type="Timer" parent="." unique_id=477957586]
+autostart = true
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
 [connection signal="tower_button_pressed" from="Tower_Selection/HBoxContainer/tower_button" to="." method="_on_tower_button_pressed"]
@@ -249,4 +412,7 @@ text = "Increase Tech Level"
 [connection signal="tower_button_pressed" from="Tower_Selection/HBoxContainer/tower_button5" to="." method="_on_tower_button_pressed"]
 [connection signal="tower_button_pressed" from="Tower_Selection/HBoxContainer/tower_button6" to="." method="_on_tower_button_pressed"]
 [connection signal="pressed" from="Power_Storage" to="." method="_on_power_storage_pressed"]
+[connection signal="pressed" from="Win" to="." method="_on_win_pressed"]
 [connection signal="pressed" from="Power_Generation" to="." method="_on_power_generation_pressed"]
+[connection signal="timeout" from="Victory_Timer" to="." method="_on_victory_timer_timeout"]
+[connection signal="timeout" from="Update_Timer" to="." method="_on_update_timer_timeout"]

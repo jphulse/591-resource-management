@@ -27,7 +27,8 @@ func _process(delta: float) -> void:
 
 func take_damage(incoming_damage: float) -> void:
 	health = health - incoming_damage
-	
+	health_bar.value = health
+
 	if health <= 0.0:
 		death_sequence()
 		ultimate_death.emit()

@@ -3,6 +3,7 @@ class_name Enemy extends Node2D
 @onready var hitbox: Area2D = $EnemyHitbox
 @onready var attack_area: Area2D = $EnemyAttackArea
 @onready var attack_cooldown_timer: Timer = $AttackCooldownTimer
+@onready var health_bar : ProgressBar = $ProgressBar
 
 @export var damage: float = 5.0
 @export var health: float = 10.0
@@ -23,6 +24,8 @@ var path_follow: PathFollow2D
 func _ready() -> void:
 	hitbox.setup(self)
 	attack_area.setup(self, damage)
+	health_bar.value = health
+	health_bar.max_value = health
 
 func _process(delta: float) -> void:
 	if path_follow:
@@ -51,13 +54,14 @@ func attack() -> void:
 	can_attack = false
 	
 	var target: Area2D = towers_in_range[0]
-	if target and is_instance_valid(target):
+	if is_instance_valid(target) and is_instance_valid(target.parent):
 		target.parent.take_damage(damage)
 	
 	attack_cooldown_timer.start(attack_cooldown)
 
 func take_damage(incoming_damage: float) -> void:
 	health = health - incoming_damage
+	health_bar.value = health
 	
 	if health <= 0.0:
 		death_sequence()

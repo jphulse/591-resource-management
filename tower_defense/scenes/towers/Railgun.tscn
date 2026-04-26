@@ -58,7 +58,6 @@
 [ext_resource type="Texture2D" uid="uid://dh13ftiovk31p" path="res://tower_defense/resources/Sprites/railgun_shot27.png" id="55_bk2b0"]
 [ext_resource type="Texture2D" uid="uid://ch8rqm4s3er7n" path="res://tower_defense/resources/Sprites/railgun_shot28.png" id="56_nw6vw"]
 [ext_resource type="Texture2D" uid="uid://ba5e8bdbmk718" path="res://tower_defense/resources/Sprites/railgun_shot29.png" id="57_ogomw"]
-[ext_resource type="Texture2D" uid="uid://rqko4wy2b5vg" path="res://tower_defense/resources/Sprites/railgun_shot30.png" id="58_3nhyw"]
 [ext_resource type="Texture2D" uid="uid://bk44uatnmsldl" path="res://tower_defense/resources/Sprites/railgun_shot31.png" id="59_6qxmk"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_galob"]
@@ -194,9 +193,6 @@ animations = [{
 "texture": ExtResource("57_ogomw")
 }, {
 "duration": 1.0,
-"texture": ExtResource("58_3nhyw")
-}, {
-"duration": 1.0,
 "texture": ExtResource("59_6qxmk")
 }],
 "loop": false,
@@ -302,7 +298,7 @@ size = Vector2(1998, 16)
 script = ExtResource("1_n3akg")
 damage = 20.0
 projectile_speed = 0.0
-attack_cooldown = 9.0
+attack_cooldown = 10.0
 building_value = 100.0
 cannon_sounds = Array[AudioStream]([ExtResource("2_366m1")])
 
@@ -316,7 +312,7 @@ script = ExtResource("29_w6p0c")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="rail_projectile" unique_id=146803968]
 position = Vector2(1000, 0)
 sprite_frames = SubResource("SpriteFrames_galob")
-frame = 44
+frame = 43
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="rail_projectile" unique_id=288118702]
 position = Vector2(1000, 0)
@@ -332,7 +328,7 @@ frame_progress = 0.5718703
 [node name="AnimatedBarrel" type="AnimatedSprite2D" parent="." unique_id=147636807]
 sprite_frames = SubResource("SpriteFrames_w86bd")
 frame = 16
-speed_scale = 0.8
+speed_scale = 0.7
 
 [node name="TowerHitbox" type="Area2D" parent="." unique_id=1402533722]
 collision_layer = 257
