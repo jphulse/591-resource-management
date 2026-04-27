@@ -10,6 +10,7 @@ class_name Enemy extends Node2D
 @export var movement_speed: float = 80.0
 @export var attack_cooldown: float = 0.5
 @export var enemy_value : float = 20.0
+@export var armour : int = 0
 
 var current_move_speed : float = 80
 
@@ -53,14 +54,51 @@ func attack() -> void:
 		return
 	can_attack = false
 	
-	var target: Area2D = towers_in_range[0]
-	if is_instance_valid(target) and is_instance_valid(target.parent):
-		target.parent.take_damage(damage)
+	#grab link to the physics engine
+	var space_state = get_world_2d().direct_space_state
+	#specify to search for 2D physics shapes (2D colliders I believe)
+	var query = PhysicsShapeQueryParameters2D.new()
+	
+	#this assumes that the collider for the railgun projectile - the thing being used to scan
+	# for enemies exists - checks if it has an assigned shape
+	if attack_area.collider.shape:
+		
+		#grab the ID - will be used to query the physics engine
+		query.shape_rid = attack_area.collider.shape.get_rid()
+		
+		#adjust to be accurate with real space railgun bar
+		query.transform = attack_area.global_transform * attack_area.collider.transform
+		
+		# match collision mask of railgun bar
+		query.collision_mask = attack_area.collision_mask
+		
+		# we want area2D thingies only
+		query.collide_with_areas = true
+		query.collide_with_bodies = false
+		
+		#send it to engine
+		var results = space_state.intersect_shape(query, 1000)
+		
+		var targets_hit = []
+		
+		for dictionary in results:
+			var hit_area = dictionary["collider"]
+			
+			if hit_area is TowerHitbox:
+				var root_node = hit_area.owner
+				
+				if root_node is TowerBase:
+					if not root_node in targets_hit:
+						root_node.take_damage(damage)
+						targets_hit.append(root_node)
 	
 	attack_cooldown_timer.start(attack_cooldown)
 
 func take_damage(incoming_damage: float) -> void:
-	health = health - incoming_damage
+	var total_incoming_damage = incoming_damage - armour
+	if total_incoming_damage < .5 :
+		total_incoming_damage = .2
+	health = health - total_incoming_damage
 	health_bar.value = health
 	
 	if health <= 0.0:
@@ -72,6 +110,8 @@ func take_damage(incoming_damage: float) -> void:
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	if area is Bullet:
 		take_damage(area.damage)
+		area.monitorable = false
+		area.monitoring = false
 		area.queue_free()
 		
 	# Check to see if this is the end target to attack

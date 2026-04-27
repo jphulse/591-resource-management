@@ -64,7 +64,7 @@ func start_placement(tower: PackedScene, cost : int) -> void:
 	add_child(ghost_preview)
 	ghost_preview.sprite_node.modulate.a = 0.5
 	ghost_preview.z_index = 10 
-	
+	ghost_preview.health_bar.visible = false
 	ghost_preview.process_mode = Node.PROCESS_MODE_DISABLED 
 
 func start_destroy(tower: PackedScene)	-> void:
@@ -72,6 +72,7 @@ func start_destroy(tower: PackedScene)	-> void:
 	ghost_preview = tower.instantiate() 
 	add_child(ghost_preview)
 	ghost_preview.sprite_node.modulate.a = 0.5
+	ghost_preview.sprite_node.scale = Vector2(4,4)
 	ghost_preview.z_index = 10 
 	destroy = true
 	ghost_preview.process_mode = Node.PROCESS_MODE_DISABLED 
@@ -114,7 +115,7 @@ func _evaluate_audio() -> void:
 func _lab_audio(entering: bool) -> void:
 	at_lab = entering
 	audio_system.lab(at_lab)
-	
+	cancel_placement()
 	if entering :
 		ui_node._tween_object(camera, Vector2(-2500, 0), 1500)
 	else :

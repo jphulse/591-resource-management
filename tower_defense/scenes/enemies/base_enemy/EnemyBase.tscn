@@ -8,15 +8,19 @@
 [ext_resource type="StyleBox" uid="uid://j4h4udfe7ew3" path="res://background_fill_health_enemy.tres" id="6_2idc5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_coewb"]
-size = Vector2(64, 128)
+size = Vector2(169, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ndb33"]
-size = Vector2(66.00004, 130)
+size = Vector2(172.00009, 130)
 
 [node name="EnemyBase" type="Node2D" unique_id=1221308985]
 script = ExtResource("1_coewb")
+damage = 10.0
+health = 15.0
 movement_speed = 50.0
+attack_cooldown = 1.0
 enemy_value = 50.0
+armour = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=752896387]
 position = Vector2(0, 27)
@@ -28,13 +32,14 @@ collision_mask = 258
 script = ExtResource("3_ndb33")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox" unique_id=1974487812]
+position = Vector2(52.5, 0)
 shape = SubResource("RectangleShape2D_coewb")
 
 [node name="EnemyAttackArea" type="Area2D" parent="." unique_id=1471568512]
 script = ExtResource("4_10dr3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyAttackArea" unique_id=55715416]
-position = Vector2(1.9073486e-06, 8.344649e-06)
+position = Vector2(53, 8.344649e-06)
 scale = Vector2(0.9999994, 0.9999994)
 shape = SubResource("RectangleShape2D_ndb33")
 

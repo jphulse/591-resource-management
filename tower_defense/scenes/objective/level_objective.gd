@@ -11,3 +11,8 @@ func take_damage(incoming_damage: float) -> void:
 	#if health <= 0.0:
 		#queue_free()
 	
+
+
+func _on_objective_area_area_entered(area: Area2D) -> void:
+	if area.get_parent() is Enemy:
+		take_damage(area.get_parent().damage)

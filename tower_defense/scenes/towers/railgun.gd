@@ -24,22 +24,32 @@ func attack() -> void:
 			
 			flash_tween.tween_property(barrel_material, 
 				"shader_parameter/flash_intensity", 0.0, 4).set_ease(Tween.EASE_OUT)
-				
+		
+		#grab link to the physics engine
 		var space_state = get_world_2d().direct_space_state
+		#specify to search for 2D physics shapes (2D colliders I believe)
 		var query = PhysicsShapeQueryParameters2D.new()
 		
+		#this assumes that the collider for the railgun projectile - the thing being used to scan
+		# for enemies exists - checks if it has an assigned shape
 		if railgun_projectile.collider_bar.shape:
+			
+			#grab the ID - will be used to query the physics engine
 			query.shape_rid = railgun_projectile.collider_bar.shape.get_rid()
 			
+			#adjust to be accurate with real space railgun bar
 			query.transform = railgun_projectile.global_transform * railgun_projectile.collider_bar.transform
 			
+			# match collision mask of railgun bar
 			query.collision_mask = railgun_projectile.collision_mask
+			
+			# we want area2D thingies only
 			query.collide_with_areas = true
 			query.collide_with_bodies = false
 			
+			#send it to engine
 			var results = space_state.intersect_shape(query, 1000)
 			
-			# Track hits to avoid double-damaging one enemy with multiple hitboxes
 			var targets_hit = []
 			
 			for dictionary in results:

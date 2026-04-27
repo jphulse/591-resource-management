@@ -7,18 +7,21 @@
 [ext_resource type="PackedScene" uid="uid://cwjk105x6ol4s" path="res://tower_defense/scenes/towers/TowerBase.tscn" id="4_3fy46"]
 [ext_resource type="Texture2D" uid="uid://cdy5r8of8noqd" path="res://tower_defense/resources/Sprites/pew_sprite.png" id="5_2ck2f"]
 [ext_resource type="Texture2D" uid="uid://dexjxls218pxo" path="res://tower_defense/resources/Sprites/info_window.png" id="5_5esc3"]
-[ext_resource type="Texture2D" uid="uid://p1orhg4mgpne" path="res://tower_defense/resources/Sprites/pew_pew.png" id="5_n8y3i"]
 [ext_resource type="PackedScene" uid="uid://cdk8cagq1ydgu" path="res://tower_defense/scenes/towers/Railgun.tscn" id="6_3rgc0"]
 [ext_resource type="PackedScene" uid="uid://bfgyiwr357g2w" path="res://tower_defense/scenes/towers/TowerPoing.tscn" id="6_24gx2"]
 [ext_resource type="Texture2D" uid="uid://nvwtb58h8bko" path="res://tower_defense/resources/Sprites/poing_sprite.png" id="6_uenyj"]
 [ext_resource type="Texture2D" uid="uid://b050p21jnop6t" path="res://tower_defense/resources/Sprites/railgun_sprite.png" id="7_uenyj"]
+[ext_resource type="PackedScene" uid="uid://b1nlnhrh7djt" path="res://tower_defense/scenes/towers/TowerWall.tscn" id="11_nadlh"]
 [ext_resource type="Texture2D" uid="uid://fa7ff3c2vryg" path="res://tower_defense/resources/Sprites/progress_window.png" id="12_6qse1"]
+[ext_resource type="Texture2D" uid="uid://hlf2g3oegfmn" path="res://tower_defense/resources/Sprites/wall.png" id="12_hh8va"]
 [ext_resource type="StyleBox" uid="uid://bp5rpbwor3asu" path="res://background_health_enemy.tres" id="13_lena1"]
 [ext_resource type="PackedScene" uid="uid://dkgyssifedc1w" path="res://tower_defense/scenes/towers/TowerPow.tscn" id="13_mvsil"]
 [ext_resource type="Texture2D" uid="uid://cwlrmbu01stej" path="res://tower_defense/resources/Sprites/pow_sprite.png" id="14_2n4kg"]
 [ext_resource type="Material" uid="uid://jj6c3taoagw4" path="res://shader_material.tres" id="14_w2cth"]
 [ext_resource type="StyleBox" uid="uid://boga42igm305c" path="res://win_progress.tres" id="14_ytucd"]
+[ext_resource type="PackedScene" uid="uid://mm8as3oi15ry" path="res://tower_defense/scenes/towers/tower_brr.tscn" id="15_ctqpj"]
 [ext_resource type="PackedScene" uid="uid://c6x5s6hqq8hr1" path="res://tower_defense/scenes/towers/destroy.tscn" id="16_gabay"]
+[ext_resource type="Texture2D" uid="uid://clryuy5rranuu" path="res://tower_defense/resources/Sprites/brr_sprite.png" id="16_jhyug"]
 [ext_resource type="Shader" uid="uid://snvxlsyeqrbb" path="res://tower_defense/resources/Shaders/vhs_cctv_global_ui.gdshader" id="16_v510m"]
 [ext_resource type="Texture2D" uid="uid://bw36ikf2l8quk" path="res://tower_defense/resources/Sprites/Destroy.png" id="17_pnyad"]
 
@@ -303,16 +306,16 @@ texture_sprite = ExtResource("6_uenyj")
 tower_cost = 15
 cost_label = "15"
 
-[node name="tower_button2" parent="Container/Tower_Menu/SubViewport/Tower_Selection/HBoxContainer" unique_id=557671376 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
+[node name="tower_button5" parent="Container/Tower_Menu/SubViewport/Tower_Selection/HBoxContainer" unique_id=218386404 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
 layout_mode = 2
 theme = ExtResource("2_6qse1")
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 20
-tower_scene = ExtResource("6_3rgc0")
-texture_sprite = ExtResource("7_uenyj")
-tower_cost = 50
-cost_label = "50"
+tower_scene = ExtResource("11_nadlh")
+texture_sprite = ExtResource("12_hh8va")
+tower_cost = 20
+cost_label = "20"
 
 [node name="tower_button4" parent="Container/Tower_Menu/SubViewport/Tower_Selection/HBoxContainer" unique_id=320091000 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
 layout_mode = 2
@@ -322,17 +325,8 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 20
 tower_scene = ExtResource("13_mvsil")
 texture_sprite = ExtResource("14_2n4kg")
-tower_cost = 30
-cost_label = "30"
-
-[node name="tower_button5" parent="Container/Tower_Menu/SubViewport/Tower_Selection/HBoxContainer" unique_id=218386404 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
-layout_mode = 2
-theme = ExtResource("2_6qse1")
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 20
-tower_scene = ExtResource("4_3fy46")
-texture_sprite = ExtResource("5_n8y3i")
+tower_cost = 40
+cost_label = "40"
 
 [node name="tower_button6" parent="Container/Tower_Menu/SubViewport/Tower_Selection/HBoxContainer" unique_id=1898168800 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
 layout_mode = 2
@@ -340,8 +334,21 @@ theme = ExtResource("2_6qse1")
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 20
-tower_scene = ExtResource("4_3fy46")
-texture_sprite = ExtResource("5_n8y3i")
+tower_scene = ExtResource("15_ctqpj")
+texture_sprite = ExtResource("16_jhyug")
+tower_cost = 40
+cost_label = "40"
+
+[node name="tower_button2" parent="Container/Tower_Menu/SubViewport/Tower_Selection/HBoxContainer" unique_id=557671376 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
+layout_mode = 2
+theme = ExtResource("2_6qse1")
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 20
+tower_scene = ExtResource("6_3rgc0")
+texture_sprite = ExtResource("7_uenyj")
+tower_cost = 100
+cost_label = "100"
 
 [node name="tower_button7" parent="Container/Tower_Menu/SubViewport/Tower_Selection/HBoxContainer" unique_id=1396569930 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
 layout_mode = 2
@@ -941,10 +948,10 @@ autostart = true
 [connection signal="pressed" from="Power_Generation" to="." method="_on_power_generation_pressed"]
 [connection signal="tower_button_pressed" from="Container/Tower_Menu/SubViewport/Tower_Selection/HBoxContainer/tower_button" to="." method="_on_tower_button_pressed"]
 [connection signal="tower_button_pressed" from="Container/Tower_Menu/SubViewport/Tower_Selection/HBoxContainer/tower_button3" to="." method="_on_tower_button_pressed"]
-[connection signal="tower_button_pressed" from="Container/Tower_Menu/SubViewport/Tower_Selection/HBoxContainer/tower_button2" to="." method="_on_tower_button_pressed"]
-[connection signal="tower_button_pressed" from="Container/Tower_Menu/SubViewport/Tower_Selection/HBoxContainer/tower_button4" to="." method="_on_tower_button_pressed"]
 [connection signal="tower_button_pressed" from="Container/Tower_Menu/SubViewport/Tower_Selection/HBoxContainer/tower_button5" to="." method="_on_tower_button_pressed"]
+[connection signal="tower_button_pressed" from="Container/Tower_Menu/SubViewport/Tower_Selection/HBoxContainer/tower_button4" to="." method="_on_tower_button_pressed"]
 [connection signal="tower_button_pressed" from="Container/Tower_Menu/SubViewport/Tower_Selection/HBoxContainer/tower_button6" to="." method="_on_tower_button_pressed"]
+[connection signal="tower_button_pressed" from="Container/Tower_Menu/SubViewport/Tower_Selection/HBoxContainer/tower_button2" to="." method="_on_tower_button_pressed"]
 [connection signal="tower_button_pressed" from="Container/Tower_Menu/SubViewport/Tower_Selection/HBoxContainer/tower_button7" to="." method="_on_destroy_button_pressed"]
 [connection signal="timeout" from="Victory_Timer" to="." method="_on_victory_timer_timeout"]
 [connection signal="timeout" from="Update_Timer" to="." method="_on_update_timer_timeout"]

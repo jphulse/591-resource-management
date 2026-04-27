@@ -1,0 +1,354 @@
+[gd_scene format=3 uid="uid://mm8as3oi15ry"]
+
+[ext_resource type="Script" uid="uid://bwj8xa246eyo0" path="res://tower_defense/scenes/towers/brr.gd" id="1_25ist"]
+[ext_resource type="AudioStream" uid="uid://bxhqkhehebfw7" path="res://tower_defense/resources/audio/Towers/621817__gurkenjaeger13__c-ram-firing-echo.mp3" id="2_dq166"]
+[ext_resource type="Texture2D" uid="uid://daqc74u6qxbss" path="res://tower_defense/resources/Sprites/brr.png" id="3_bjhxo"]
+[ext_resource type="Texture2D" uid="uid://fox0yw8bifhj" path="res://tower_defense/resources/Sprites/brr_barrel1.png" id="11_n0ihi"]
+[ext_resource type="Texture2D" uid="uid://bfysu5ifbmppc" path="res://tower_defense/resources/Sprites/brr_barrel2.png" id="12_f3chx"]
+[ext_resource type="Texture2D" uid="uid://bulea5yy8lddk" path="res://tower_defense/resources/Sprites/brr_barrel3.png" id="13_2hs77"]
+[ext_resource type="Texture2D" uid="uid://bvhvy8jowpj0v" path="res://tower_defense/resources/Sprites/brr_barrel4.png" id="14_7gg1h"]
+[ext_resource type="Texture2D" uid="uid://bksnbxmh7xj4c" path="res://tower_defense/resources/Sprites/brr_barrel5.png" id="15_o46xu"]
+[ext_resource type="Texture2D" uid="uid://bt3agiy62pbfv" path="res://tower_defense/resources/Sprites/brr_barrel6.png" id="16_ehqor"]
+[ext_resource type="Texture2D" uid="uid://bwut8i2ciomhh" path="res://tower_defense/resources/Sprites/brr_heat1.png" id="17_7nxwb"]
+[ext_resource type="Texture2D" uid="uid://dahrr4kr482el" path="res://tower_defense/resources/Sprites/brr_heat2.png" id="18_s7daq"]
+[ext_resource type="Texture2D" uid="uid://d3lyeb5o2hq6j" path="res://tower_defense/resources/Sprites/brr_heat3.png" id="19_dd3al"]
+[ext_resource type="Texture2D" uid="uid://bu8mnt21l1eox" path="res://tower_defense/resources/Sprites/brr_heat4.png" id="20_diawf"]
+[ext_resource type="Texture2D" uid="uid://bcpla2iyretj7" path="res://tower_defense/resources/Sprites/pew_radar1.png" id="20_pwgln"]
+[ext_resource type="Texture2D" uid="uid://d3rvus0y55nfj" path="res://tower_defense/resources/Sprites/brr_heat5.png" id="21_gfrle"]
+[ext_resource type="Texture2D" uid="uid://bwur08yn71rit" path="res://tower_defense/resources/Sprites/pew_radar2.png" id="21_uq664"]
+[ext_resource type="Texture2D" uid="uid://12joacshchui" path="res://tower_defense/resources/Sprites/pew_radar3.png" id="22_e6oli"]
+[ext_resource type="Texture2D" uid="uid://c57qr0qc86vve" path="res://tower_defense/resources/Sprites/brr_heat6.png" id="22_pwgln"]
+[ext_resource type="Texture2D" uid="uid://dqr2hen0lki8h" path="res://tower_defense/resources/Sprites/pew_radar4.png" id="23_1e40y"]
+[ext_resource type="Texture2D" uid="uid://2v3s24a0qhj3" path="res://tower_defense/resources/Sprites/brr_heat7.png" id="23_uq664"]
+[ext_resource type="Texture2D" uid="uid://cbsj0273ul6xl" path="res://tower_defense/resources/Sprites/brr_heat8.png" id="24_e6oli"]
+[ext_resource type="Texture2D" uid="uid://bp2evi76fvksw" path="res://tower_defense/resources/Sprites/pew_radar5.png" id="24_uqbo0"]
+[ext_resource type="Texture2D" uid="uid://dlvev7weyarhi" path="res://tower_defense/resources/Sprites/brr_heat9.png" id="25_1e40y"]
+[ext_resource type="Texture2D" uid="uid://df3xqpuod8u0x" path="res://tower_defense/resources/Sprites/pew_radar6.png" id="25_34x3y"]
+[ext_resource type="Texture2D" uid="uid://4oqrqmoraf6" path="res://tower_defense/resources/Sprites/brr_heat10.png" id="26_uqbo0"]
+[ext_resource type="Shader" uid="uid://bkq2bcr8i4u0m" path="res://tower_defense/resources/Shaders/muzzle_flash.gdshader" id="26_xd81u"]
+[ext_resource type="Texture2D" uid="uid://djh8d4vhyg0ib" path="res://tower_defense/resources/Sprites/brr_heat11.png" id="27_34x3y"]
+[ext_resource type="Texture2D" uid="uid://c4v64obs2ppbh" path="res://tower_defense/resources/Sprites/brr_heat12.png" id="28_xd81u"]
+[ext_resource type="Texture2D" uid="uid://cx3tyejmqpwoo" path="res://tower_defense/resources/Sprites/brr_heat13.png" id="29_ux3ix"]
+[ext_resource type="Texture2D" uid="uid://dyiltd34iiw3s" path="res://tower_defense/resources/Sprites/brr_heat14.png" id="30_rkmyx"]
+[ext_resource type="Texture2D" uid="uid://cyp2dfphng101" path="res://tower_defense/resources/Sprites/brr_heat15.png" id="31_vuu87"]
+[ext_resource type="Texture2D" uid="uid://wjdx2w8pdy4a" path="res://tower_defense/resources/Sprites/brr_heat16.png" id="32_o5ejr"]
+[ext_resource type="Texture2D" uid="uid://8j8vbd1vs88k" path="res://tower_defense/resources/Sprites/brr_heat17.png" id="33_cujlg"]
+[ext_resource type="Texture2D" uid="uid://dyohknli503qf" path="res://tower_defense/resources/Sprites/brr_heat18.png" id="34_kb47h"]
+[ext_resource type="Texture2D" uid="uid://b7w55rl5m24uh" path="res://tower_defense/resources/Sprites/brr_heat19.png" id="35_hvkoi"]
+[ext_resource type="Texture2D" uid="uid://clhqw11db5glk" path="res://tower_defense/resources/Sprites/brr_heat20.png" id="36_x4yvw"]
+[ext_resource type="Texture2D" uid="uid://jcnvbei05rk7" path="res://tower_defense/resources/Sprites/brr_heat21.png" id="37_dhju0"]
+[ext_resource type="Texture2D" uid="uid://dm52jdftldreh" path="res://tower_defense/resources/Sprites/brr_heat22.png" id="38_85bg2"]
+[ext_resource type="Texture2D" uid="uid://cwkr0i0kj2k6r" path="res://tower_defense/resources/Sprites/brr_heat23.png" id="39_j6xu5"]
+[ext_resource type="Texture2D" uid="uid://cp28c7rmcq2j2" path="res://tower_defense/resources/Sprites/brr_heat24.png" id="40_wvyjv"]
+[ext_resource type="Texture2D" uid="uid://dax7ibcfpaah1" path="res://tower_defense/resources/Sprites/brr_heat25.png" id="41_goija"]
+[ext_resource type="Script" uid="uid://cs2i413p3lw3d" path="res://tower_defense/scenes/towers/tower_hitbox.gd" id="41_o4oya"]
+[ext_resource type="Script" uid="uid://dmve0q2u5uxl6" path="res://tower_defense/scenes/towers/tower_attack_range.gd" id="42_61n7q"]
+[ext_resource type="Texture2D" uid="uid://cq3sboi7xcw5n" path="res://tower_defense/resources/Sprites/brr_heat26.png" id="42_hbvf8"]
+[ext_resource type="Texture2D" uid="uid://d2jl57612v6y4" path="res://tower_defense/resources/Sprites/brr_heat27.png" id="43_o4oya"]
+[ext_resource type="Texture2D" uid="uid://smwkl7ncr1j3" path="res://tower_defense/resources/Sprites/brr_heat28.png" id="44_61n7q"]
+[ext_resource type="Texture2D" uid="uid://btswcsho73dr2" path="res://tower_defense/resources/Sprites/brr_heat29.png" id="45_ykx2g"]
+[ext_resource type="Texture2D" uid="uid://co2431dvwhshq" path="res://tower_defense/resources/Sprites/pow_barrel1.png" id="46_h45ft"]
+[ext_resource type="Texture2D" uid="uid://ccdj2p8s7g1tb" path="res://tower_defense/resources/Sprites/pow_barrel2.png" id="47_aiwvh"]
+[ext_resource type="Texture2D" uid="uid://bl7fjy6242t7h" path="res://tower_defense/resources/Sprites/pow_barrel3.png" id="48_nmx8x"]
+[ext_resource type="Texture2D" uid="uid://duacasb818tj2" path="res://tower_defense/resources/Sprites/pow_barrel4.png" id="49_x10ft"]
+[ext_resource type="Texture2D" uid="uid://dfutjvyn8wkyw" path="res://tower_defense/resources/Sprites/pow_barrel5.png" id="50_ek002"]
+[ext_resource type="Texture2D" uid="uid://5kohn8m4c7u7" path="res://tower_defense/resources/Sprites/pow_barrel6.png" id="51_4bcob"]
+[ext_resource type="Texture2D" uid="uid://cni78dvgmmdvo" path="res://tower_defense/resources/Sprites/pow_barrel7.png" id="52_y72ab"]
+[ext_resource type="Texture2D" uid="uid://drr4nme7e1qar" path="res://tower_defense/resources/Sprites/pow_barrel8.png" id="53_yog8n"]
+[ext_resource type="Texture2D" uid="uid://ckh35h0wi3u7d" path="res://tower_defense/resources/Sprites/pow_barrel9.png" id="54_0w72d"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6ebu4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_pwgln")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_uq664")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_e6oli")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_1e40y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_uqbo0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_34x3y")
+}],
+"loop": true,
+"name": &"default",
+"speed": 30.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pew07"]
+shader = ExtResource("26_xd81u")
+shader_parameter/flash_intensity = 0.0
+shader_parameter/tightness = 0.20000000787006
+shader_parameter/flash_offset = Vector2(0.9, 0.5)
+shader_parameter/flash_color = Color(0.80496097, 0.6696224, 0, 1)
+shader_parameter/glow_radius_decay = 2.5
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w86bd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_n0ihi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_f3chx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_2hs77")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_7gg1h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_o46xu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_ehqor")
+}],
+"loop": false,
+"name": &"default",
+"speed": 30.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ebhs"]
+shader = ExtResource("26_xd81u")
+shader_parameter/flash_intensity = 0.0
+shader_parameter/tightness = 0.15
+shader_parameter/flash_offset = Vector2(0.9, 0.5)
+shader_parameter/flash_color = Color(0.7473468, 0.6957548, 0, 1)
+shader_parameter/glow_radius_decay = 2.5
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dcouk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_7nxwb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_s7daq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_dd3al")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_diawf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_gfrle")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_pwgln")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_uq664")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_e6oli")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_1e40y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_uqbo0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_34x3y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_xd81u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_ux3ix")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_rkmyx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_vuu87")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_o5ejr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_cujlg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_kb47h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_hvkoi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_x4yvw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_dhju0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_85bg2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_j6xu5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_wvyjv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_goija")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_hbvf8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_o4oya")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_61n7q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_ykx2g")
+}],
+"loop": false,
+"name": &"default",
+"speed": 11.0
+}, {
+"frames": [{
+"duration": 0.2,
+"texture": ExtResource("46_h45ft")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_aiwvh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_nmx8x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_x10ft")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_ek002")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_4bcob")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_y72ab")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_yog8n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_0w72d")
+}],
+"loop": false,
+"name": &"new_animation",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lmoja"]
+size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bils4"]
+size = Vector2(424, 16)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7nxwb"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s7daq"]
+bg_color = Color(0, 0.68314755, 0.7105722, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+
+[node name="TowerBase" type="Node2D" unique_id=879173299]
+script = ExtResource("1_25ist")
+damage = 3.0
+projectile_speed = 800.0
+attack_cooldown = 9.06
+cannon_sounds = Array[AudioStream]([ExtResource("2_dq166")])
+bullet_color = Color(1, 0.9675301, 0.13801557, 1)
+
+[node name="Projectiles" type="Node2D" parent="." unique_id=281360252]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1950465526]
+scale = Vector2(4, 4)
+texture = ExtResource("3_bjhxo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1407166682]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_6ebu4")
+frame_progress = 0.5718703
+
+[node name="AnimatedBarrel" type="AnimatedSprite2D" parent="." unique_id=147636807]
+material = SubResource("ShaderMaterial_pew07")
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_w86bd")
+frame = 5
+frame_progress = 1.0
+speed_scale = 1.25
+
+[node name="AnimatedRadiator" type="AnimatedSprite2D" parent="." unique_id=237677437]
+material = SubResource("ShaderMaterial_4ebhs")
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_dcouk")
+frame = 28
+frame_progress = 1.0
+speed_scale = 0.32
+
+[node name="TowerHitbox" type="Area2D" parent="." unique_id=1402533722]
+collision_layer = 257
+collision_mask = 257
+script = ExtResource("41_o4oya")
+
+[node name="HitboxCollisionShape" type="CollisionShape2D" parent="TowerHitbox" unique_id=1016612673]
+shape = SubResource("RectangleShape2D_lmoja")
+
+[node name="TowerAttackRange" type="Area2D" parent="." unique_id=431727381]
+script = ExtResource("42_61n7q")
+
+[node name="DetectionRangeCollisionShape" type="CollisionShape2D" parent="TowerAttackRange" unique_id=1265304444]
+position = Vector2(204, 0)
+shape = SubResource("RectangleShape2D_bils4")
+
+[node name="AttackCooldownTimer" type="Timer" parent="." unique_id=1251600245]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1749661565]
+volume_db = -12.811
+max_polyphony = 2
+
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=225924659]
+z_index = 105
+offset_left = -39.0
+offset_top = 70.0
+offset_right = 89.0
+offset_bottom = 97.0
+scale = Vector2(0.6, 0.6)
+theme_override_styles/background = SubResource("StyleBoxFlat_7nxwb")
+theme_override_styles/fill = SubResource("StyleBoxFlat_s7daq")
+max_value = 500.0
+value = 500.0
+
+[node name="AttackDurationTimer" type="Timer" parent="." unique_id=288532140]
+wait_time = 4.0
+one_shot = true
+
+[node name="AttackFrequencyTimer" type="Timer" parent="." unique_id=199509071]
+wait_time = 0.05
+one_shot = true
+
+[connection signal="animation_finished" from="AnimatedBarrel" to="." method="_on_animated_barrel_animation_finished"]
+[connection signal="area_entered" from="TowerHitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_entered" from="TowerAttackRange" to="." method="_on_detection_range_area_entered"]
+[connection signal="area_exited" from="TowerAttackRange" to="." method="_on_detection_range_area_exited"]
+[connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_attack_cooldown_timer_timeout"]
+[connection signal="timeout" from="AttackDurationTimer" to="." method="_on_attack_duration_timer_timeout"]
+[connection signal="timeout" from="AttackFrequencyTimer" to="." method="_on_attack_frequency_timer_timeout"]

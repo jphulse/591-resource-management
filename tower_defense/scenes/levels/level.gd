@@ -149,9 +149,14 @@ func request_tower_destroy(global_pos : Vector2) -> bool:
 		return false
 		
 	if is_cell_occupied(cell_coord):
-		tower_grid.get(cell_coord).queue_free()
+		var tower = tower_grid.get(cell_coord)
+		if tower is Wall:
+			if tower.health < 750:
+				return false
+		tower.queue_free()
 		tower_grid.erase(cell_coord)
 		return true
+		
 	return false
 		
 func is_cell_occupied(cell: Vector2i) -> bool:

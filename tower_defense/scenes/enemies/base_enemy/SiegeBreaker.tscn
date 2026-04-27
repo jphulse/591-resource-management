@@ -20,8 +20,9 @@ minion = ExtResource("2_ony3k")
 damage = 100.0
 health = 1000.0
 movement_speed = 5.0
-attack_cooldown = 1.0
+attack_cooldown = 3.0
 enemy_value = 200.0
+armour = 5
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=752896387]
 scale = Vector2(4, 4)

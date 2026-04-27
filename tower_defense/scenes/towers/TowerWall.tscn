@@ -1,0 +1,222 @@
+[gd_scene format=3 uid="uid://b1nlnhrh7djt"]
+
+[ext_resource type="Script" uid="uid://djt0fpehqr0qj" path="res://tower_defense/scenes/towers/wall.gd" id="1_b6i70"]
+[ext_resource type="Texture2D" uid="uid://p1orhg4mgpne" path="res://tower_defense/resources/Sprites/pew_pew.png" id="19_tjgja"]
+[ext_resource type="Texture2D" uid="uid://bcpla2iyretj7" path="res://tower_defense/resources/Sprites/pew_radar1.png" id="20_n3df8"]
+[ext_resource type="Texture2D" uid="uid://bwur08yn71rit" path="res://tower_defense/resources/Sprites/pew_radar2.png" id="21_uldjq"]
+[ext_resource type="Texture2D" uid="uid://12joacshchui" path="res://tower_defense/resources/Sprites/pew_radar3.png" id="22_smvq8"]
+[ext_resource type="Texture2D" uid="uid://dqr2hen0lki8h" path="res://tower_defense/resources/Sprites/pew_radar4.png" id="23_b3n01"]
+[ext_resource type="Texture2D" uid="uid://bp2evi76fvksw" path="res://tower_defense/resources/Sprites/pew_radar5.png" id="24_jcb01"]
+[ext_resource type="Texture2D" uid="uid://df3xqpuod8u0x" path="res://tower_defense/resources/Sprites/pew_radar6.png" id="25_v1eth"]
+[ext_resource type="Texture2D" uid="uid://bgew0f1445wl7" path="res://tower_defense/resources/Sprites/wall1.png" id="25_v4pd7"]
+[ext_resource type="Texture2D" uid="uid://yd0hrpargoi6" path="res://tower_defense/resources/Sprites/wall2.png" id="26_d6dy0"]
+[ext_resource type="Shader" uid="uid://bkq2bcr8i4u0m" path="res://tower_defense/resources/Shaders/muzzle_flash.gdshader" id="26_n55ya"]
+[ext_resource type="Texture2D" uid="uid://bh15aegxrghr0" path="res://tower_defense/resources/Sprites/pew_barrel1.png" id="27_08y2j"]
+[ext_resource type="Texture2D" uid="uid://xot36ogeterb" path="res://tower_defense/resources/Sprites/wall3.png" id="27_cwdon"]
+[ext_resource type="Texture2D" uid="uid://10535r5rcv4h" path="res://tower_defense/resources/Sprites/wall4.png" id="28_3k8ww"]
+[ext_resource type="Texture2D" uid="uid://cb4vt6ha5op57" path="res://tower_defense/resources/Sprites/pew_barrel2.png" id="28_6ls3u"]
+[ext_resource type="Texture2D" uid="uid://b6eloxdaiuh10" path="res://tower_defense/resources/Sprites/pew_barrel3.png" id="29_r0f5s"]
+[ext_resource type="Texture2D" uid="uid://begdgtiwb21yl" path="res://tower_defense/resources/Sprites/wall5.png" id="29_wde0x"]
+[ext_resource type="Texture2D" uid="uid://bpu7f8ew7j63f" path="res://tower_defense/resources/Sprites/pew_barrel4.png" id="30_yyqgu"]
+[ext_resource type="Texture2D" uid="uid://snrdv1msr7rv" path="res://tower_defense/resources/Sprites/pew_barrel5.png" id="31_nn262"]
+[ext_resource type="Texture2D" uid="uid://q5xjvl5t86jj" path="res://tower_defense/resources/Sprites/pew_barrel6.png" id="32_n7fss"]
+[ext_resource type="Texture2D" uid="uid://didpsml2p8ulo" path="res://tower_defense/resources/Sprites/pew_barrel7.png" id="33_ciaq4"]
+[ext_resource type="Texture2D" uid="uid://rh8v4ja4o0j3" path="res://tower_defense/resources/Sprites/pew_barrel8.png" id="34_bw6sa"]
+[ext_resource type="Texture2D" uid="uid://dyd62oe6h6a0w" path="res://tower_defense/resources/Sprites/pew_barrel9.png" id="35_uj6lr"]
+[ext_resource type="Texture2D" uid="uid://b3gy7c07fhwyx" path="res://tower_defense/resources/Sprites/pew_barrel10.png" id="36_py7qh"]
+[ext_resource type="Texture2D" uid="uid://bs4ayqxpmfopm" path="res://tower_defense/resources/Sprites/pew_barrel11.png" id="37_6eitp"]
+[ext_resource type="Texture2D" uid="uid://dk66chm0ee068" path="res://tower_defense/resources/Sprites/pew_barrel12.png" id="38_jkq8u"]
+[ext_resource type="Texture2D" uid="uid://gubeqt8qxnt8" path="res://tower_defense/resources/Sprites/pew_barrel13.png" id="39_o4rd2"]
+[ext_resource type="Texture2D" uid="uid://bajhyrkxyj4m5" path="res://tower_defense/resources/Sprites/pew_barrel14.png" id="40_at8b1"]
+[ext_resource type="Script" uid="uid://cs2i413p3lw3d" path="res://tower_defense/scenes/towers/tower_hitbox.gd" id="41_qwxew"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6ebu4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_n3df8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_uldjq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_smvq8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_b3n01")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_jcb01")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_v1eth")
+}],
+"loop": true,
+"name": &"default",
+"speed": 30.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pew07"]
+shader = ExtResource("26_n55ya")
+shader_parameter/flash_intensity = 0.0
+shader_parameter/tightness = 0.20000000787006
+shader_parameter/flash_offset = Vector2(0.9, 0.5)
+shader_parameter/flash_color = Color(0.80496097, 0.6696224, 0, 1)
+shader_parameter/glow_radius_decay = 2.5
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w86bd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("27_08y2j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_6ls3u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_r0f5s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_yyqgu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_nn262")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_n7fss")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_ciaq4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_bw6sa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_uj6lr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_py7qh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_6eitp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_jkq8u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_o4rd2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_at8b1")
+}],
+"loop": false,
+"name": &"default",
+"speed": 30.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lmoja"]
+size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bils4"]
+size = Vector2(424, 16)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v4pd7"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d6dy0"]
+bg_color = Color(0, 0.68314755, 0.7105722, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pw066"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("25_v4pd7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_d6dy0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_cwdon")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_3k8ww")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_wde0x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="TowerBase" type="Node2D" unique_id=879173299]
+script = ExtResource("1_b6i70")
+max_health = 500.0
+health = 500.0
+
+[node name="Projectiles" type="Node2D" parent="." unique_id=281360252]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1950465526]
+visible = false
+texture = ExtResource("19_tjgja")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1407166682]
+visible = false
+sprite_frames = SubResource("SpriteFrames_6ebu4")
+frame_progress = 0.5718703
+
+[node name="AnimatedBarrel" type="AnimatedSprite2D" parent="." unique_id=147636807]
+visible = false
+material = SubResource("ShaderMaterial_pew07")
+sprite_frames = SubResource("SpriteFrames_w86bd")
+frame = 13
+speed_scale = 1.25
+
+[node name="TowerHitbox" type="Area2D" parent="." unique_id=1402533722]
+collision_layer = 257
+collision_mask = 257
+script = ExtResource("41_qwxew")
+
+[node name="HitboxCollisionShape" type="CollisionShape2D" parent="TowerHitbox" unique_id=1016612673]
+shape = SubResource("RectangleShape2D_lmoja")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=431727381]
+monitoring = false
+monitorable = false
+
+[node name="DetectionRangeCollisionShape" type="CollisionShape2D" parent="Area2D" unique_id=1265304444]
+position = Vector2(204, 0)
+shape = SubResource("RectangleShape2D_bils4")
+disabled = true
+
+[node name="AttackCooldownTimer" type="Timer" parent="." unique_id=1251600245]
+
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=1627208826]
+z_index = 105
+offset_left = -39.0
+offset_top = 70.0
+offset_right = 89.0
+offset_bottom = 97.0
+scale = Vector2(0.6, 0.6)
+theme_override_styles/background = SubResource("StyleBoxFlat_v4pd7")
+theme_override_styles/fill = SubResource("StyleBoxFlat_d6dy0")
+max_value = 500.0
+value = 500.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1749661565]
+volume_db = -15.0
+max_polyphony = 2
+
+[node name="AnimatedWall" type="AnimatedSprite2D" parent="." unique_id=1449426920]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_pw066")
+
+[connection signal="area_entered" from="TowerHitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_detection_range_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_detection_range_area_exited"]
+[connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_attack_cooldown_timer_timeout"]

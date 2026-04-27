@@ -8,10 +8,10 @@
 [ext_resource type="StyleBox" uid="uid://j4h4udfe7ew3" path="res://background_fill_health_enemy.tres" id="6_v7mwp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_coewb"]
-size = Vector2(128, 312)
+size = Vector2(306, 312)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ndb33"]
-size = Vector2(150, 313.00015)
+size = Vector2(333.00015, 313.00015)
 
 [node name="EnemyBase" type="Node2D" unique_id=1221308985]
 position = Vector2(0, 50)
@@ -20,10 +20,9 @@ script = ExtResource("1_s178j")
 damage = 2.0
 health = 4.0
 movement_speed = 100.0
-attack_cooldown = 0.1
+attack_cooldown = 0.3
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=752896387]
-modulate = Color(6.0644747e-06, 0.57930917, 0.8010333, 1)
 position = Vector2(0, 5)
 scale = Vector2(5, 5)
 texture = ExtResource("2_ubxkr")
@@ -32,7 +31,7 @@ texture = ExtResource("2_ubxkr")
 script = ExtResource("3_m5ux1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox" unique_id=1974487812]
-position = Vector2(0, -92)
+position = Vector2(89, -92)
 shape = SubResource("RectangleShape2D_coewb")
 
 [node name="EnemyAttackArea" type="Area2D" parent="." unique_id=1471568512]
@@ -40,7 +39,7 @@ collision_mask = 258
 script = ExtResource("4_tdttk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyAttackArea" unique_id=55715416]
-position = Vector2(4.7683716e-07, -91.500015)
+position = Vector2(91.50002, -91.500015)
 scale = Vector2(0.9999994, 0.9999994)
 shape = SubResource("RectangleShape2D_ndb33")
 

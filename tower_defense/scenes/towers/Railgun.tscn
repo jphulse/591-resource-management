@@ -310,6 +310,17 @@ size = Vector2(128, 128)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bils4"]
 size = Vector2(1998, 16)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_agvma"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ovvl3"]
+bg_color = Color(0, 0.68314755, 0.7105722, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+
 [node name="TowerBase" type="Node2D" unique_id=879173299]
 material = SubResource("ShaderMaterial_ovvl3")
 script = ExtResource("1_n3akg")
@@ -365,18 +376,24 @@ shape = SubResource("RectangleShape2D_bils4")
 
 [node name="AttackCooldownTimer" type="Timer" parent="." unique_id=1251600245]
 
-[node name="HealthBar" type="TextureProgressBar" parent="." unique_id=1494138939]
-offset_left = -64.0
-offset_top = -88.0
-offset_right = 64.0
-offset_bottom = -72.0
-
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1749661565]
 volume_db = -15.0
 max_polyphony = 2
 
 [node name="Delay_Timer" type="Timer" parent="." unique_id=589420036]
 one_shot = true
+
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=1769520002]
+z_index = 105
+offset_left = -39.0
+offset_top = 70.0
+offset_right = 89.0
+offset_bottom = 97.0
+scale = Vector2(0.6, 0.6)
+theme_override_styles/background = SubResource("StyleBoxFlat_agvma")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ovvl3")
+max_value = 500.0
+value = 500.0
 
 [connection signal="body_entered" from="rail_projectile" to="rail_projectile" method="_on_area_entered"]
 [connection signal="area_entered" from="TowerHitbox" to="." method="_on_hitbox_area_entered"]

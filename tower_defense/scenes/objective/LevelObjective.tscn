@@ -10,6 +10,7 @@ size = Vector2(32, 120)
 [node name="LevelObjective" type="Node2D" unique_id=826272776]
 scale = Vector2(1, 6)
 script = ExtResource("1_4fvrb")
+health = 1.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1402185582]
 modulate = Color(1, 0, 1, 1)
@@ -18,7 +19,11 @@ scale = Vector2(0.25, 0.9375)
 texture = ExtResource("2_erl8m")
 
 [node name="ObjectiveArea" type="Area2D" parent="." unique_id=1033847207]
+collision_layer = 257
+collision_mask = 257
 script = ExtResource("3_erl8m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectiveArea" unique_id=1058520318]
 shape = SubResource("RectangleShape2D_y236r")
+
+[connection signal="area_entered" from="ObjectiveArea" to="." method="_on_objective_area_area_entered"]

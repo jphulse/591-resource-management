@@ -161,9 +161,22 @@ size = Vector2(128, 128)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bils4"]
 size = Vector2(2366, 16)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_68jtt"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_an023"]
+bg_color = Color(0, 0.68314755, 0.7105722, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+
 [node name="TowerBase" type="Node2D" unique_id=879173299]
 script = ExtResource("1_r13s6")
 damage = 200.0
+max_health = 20.0
+health = 20.0
 projectile_speed = 2500.0
 attack_cooldown = 5.0
 cannon_sounds = Array[AudioStream]([ExtResource("2_68jtt"), ExtResource("3_an023"), ExtResource("4_2jayd"), ExtResource("5_26331"), ExtResource("6_wgmwb"), ExtResource("7_tek5w"), ExtResource("8_sxijl"), ExtResource("9_hq7md"), ExtResource("10_sdno2"), ExtResource("11_wqtre"), ExtResource("12_ut0cw"), ExtResource("13_cvbqq")])
@@ -213,16 +226,22 @@ shape = SubResource("RectangleShape2D_bils4")
 
 [node name="AttackCooldownTimer" type="Timer" parent="." unique_id=1251600245]
 
-[node name="HealthBar" type="TextureProgressBar" parent="." unique_id=1494138939]
-offset_left = -64.0
-offset_top = -88.0
-offset_right = 64.0
-offset_bottom = -72.0
-
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1749661565]
 volume_db = -10.547
 attenuation = 0.45062515
 max_polyphony = 2
+
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=532940230]
+z_index = 105
+offset_left = -39.0
+offset_top = 70.0
+offset_right = 89.0
+offset_bottom = 97.0
+scale = Vector2(0.6, 0.6)
+theme_override_styles/background = SubResource("StyleBoxFlat_68jtt")
+theme_override_styles/fill = SubResource("StyleBoxFlat_an023")
+max_value = 500.0
+value = 500.0
 
 [connection signal="area_entered" from="TowerHitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_entered" from="TowerAttackRange" to="." method="_on_detection_range_area_entered"]

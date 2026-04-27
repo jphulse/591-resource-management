@@ -5,7 +5,7 @@ class_name TowerBase extends Node2D
 @onready var attack_area: Area2D = $TowerAttackRange
 @onready var attack_cooldown_timer: Timer = $AttackCooldownTimer
 @onready var projectiles_list: Node2D = $Projectiles
-@onready var health_bar: TextureProgressBar = $HealthBar
+@onready var health_bar: ProgressBar = $HealthBar
 @onready var animated_radar : AnimatedSprite2D = $AnimatedSprite2D
 @onready var animated_barrel : AnimatedSprite2D = $AnimatedBarrel
 @onready var audio_player : AudioStreamPlayer2D = $AudioStreamPlayer2D
@@ -30,7 +30,9 @@ func _ready() -> void:
 	if animated_barrel.material:
 		animated_barrel.material = animated_barrel.material.duplicate()
 	animated_radar.play()
-	
+	health_bar.max_value = max_health
+	health_bar.value = health
+
 func _process(delta: float) -> void:
 	if enemies:
 		for enemy in enemies :
@@ -84,10 +86,4 @@ func take_damage(incoming_damage: float) -> void:
 	update_health_bar()
 
 func update_health_bar() -> void:
-	health_bar.min_value = 0
-	health_bar.max_value = max_health
 	health_bar.value = health
-
-func _on_hitbox_area_entered(area: Area2D) -> void:
-	if area is EnemyAttackArea:
-		take_damage(area.damage)
