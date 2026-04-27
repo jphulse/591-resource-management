@@ -8,13 +8,14 @@ signal attempt_storage_upgrade()
 signal attempt_generation_upgrade()
 signal attempt_tech_upgrade()
 signal win()
+signal destroy_mode(tower: PackedScene)
 
 @onready var health_value : Label = self.find_child("health_value")
 @onready var tech_value : Label = self.find_child("tech_value")
 @onready var resource_value : Label = self.find_child("power_value")
 @onready var storage_value : Label = self.find_child("power_storage")
-@onready var tower_bar : PanelContainer = self.find_child("Tower_Selection")
-@onready var progress_bar : PanelContainer = self.find_child("Progress_Bar")
+@onready var tower_bar : SubViewportContainer = self.find_child("Tower_Menu")
+@onready var progress_bar : SubViewportContainer = self.find_child("Progress_Menu")
 @onready var win_bar : ProgressBar = self.find_child("Win_Bar")
 @onready var info_bar : SubViewportContainer = self.find_child("Info_Menu")
 @onready var to_lab_button : Button = $Button
@@ -86,6 +87,9 @@ func _on_tower_button_pressed(tower: PackedScene, cost : int) -> bool:
 	tower_selected.emit(tower, cost)
 	return true
 
+func _on_destroy_button_pressed(tower_scene, cost : int):
+	destroy_mode.emit(tower_scene)
+
 func _on_health_update(value : int) :
 	health_value.text = str(value)
 
@@ -115,7 +119,7 @@ func _on_victory_timer_timeout() -> void:
 	
 func _on_update_timer_timeout() -> void:
 	var raw_progress = victory_timer.wait_time - victory_timer.time_left
-	var step_threshold = 45.0
+	var step_threshold = 9.0
 	var floored_value = floor(raw_progress / step_threshold) * step_threshold
 	
 	win_bar.value = floored_value

@@ -14,15 +14,28 @@
 [ext_resource type="Texture2D" uid="uid://b050p21jnop6t" path="res://tower_defense/resources/Sprites/railgun_sprite.png" id="7_uenyj"]
 [ext_resource type="Texture2D" uid="uid://fa7ff3c2vryg" path="res://tower_defense/resources/Sprites/progress_window.png" id="12_6qse1"]
 [ext_resource type="StyleBox" uid="uid://bp5rpbwor3asu" path="res://background_health_enemy.tres" id="13_lena1"]
+[ext_resource type="PackedScene" uid="uid://dkgyssifedc1w" path="res://tower_defense/scenes/towers/TowerPow.tscn" id="13_mvsil"]
+[ext_resource type="Texture2D" uid="uid://cwlrmbu01stej" path="res://tower_defense/resources/Sprites/pow_sprite.png" id="14_2n4kg"]
 [ext_resource type="Material" uid="uid://jj6c3taoagw4" path="res://shader_material.tres" id="14_w2cth"]
+[ext_resource type="StyleBox" uid="uid://boga42igm305c" path="res://win_progress.tres" id="14_ytucd"]
+[ext_resource type="PackedScene" uid="uid://c6x5s6hqq8hr1" path="res://tower_defense/scenes/towers/destroy.tscn" id="16_gabay"]
 [ext_resource type="Shader" uid="uid://snvxlsyeqrbb" path="res://tower_defense/resources/Shaders/vhs_cctv_global_ui.gdshader" id="16_v510m"]
+[ext_resource type="Texture2D" uid="uid://bw36ikf2l8quk" path="res://tower_defense/resources/Sprites/Destroy.png" id="17_pnyad"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w2cth"]
 bg_color = Color(0.18973774, 0.7204785, 7.70092e-07, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lena1"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ytucd"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 border_width_left = 5
+border_width_top = 5
+border_width_right = 2
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_146i4"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
 border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
@@ -101,218 +114,6 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-
-[node name="Tower_Selection" type="PanelContainer" parent="Container" unique_id=1797068010]
-layout_mode = 0
-offset_top = 908.0
-offset_right = 1288.0
-offset_bottom = 1080.0
-theme = ExtResource("2_6qse1")
-
-[node name="NinePatchRect" type="NinePatchRect" parent="Container/Tower_Selection" unique_id=1106059427]
-layout_mode = 2
-theme = ExtResource("2_6qse1")
-texture = ExtResource("2_38iro")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Container/Tower_Selection" unique_id=1375117703]
-custom_minimum_size = Vector2(128, 128)
-layout_mode = 2
-size_flags_vertical = 4
-theme = ExtResource("2_6qse1")
-theme_override_constants/separation = 0
-
-[node name="tower_button" parent="Container/Tower_Selection/HBoxContainer" unique_id=1108784237 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
-layout_mode = 2
-theme = ExtResource("2_6qse1")
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-tower_scene = ExtResource("4_3fy46")
-texture_sprite = ExtResource("5_2ck2f")
-tower_cost = 10
-cost_label = "10"
-
-[node name="tower_button3" parent="Container/Tower_Selection/HBoxContainer" unique_id=2098349882 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
-layout_mode = 2
-theme = ExtResource("2_6qse1")
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-tower_scene = ExtResource("6_24gx2")
-texture_sprite = ExtResource("6_uenyj")
-tower_cost = 15
-cost_label = "15"
-
-[node name="tower_button2" parent="Container/Tower_Selection/HBoxContainer" unique_id=557671376 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
-layout_mode = 2
-theme = ExtResource("2_6qse1")
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-tower_scene = ExtResource("6_3rgc0")
-texture_sprite = ExtResource("7_uenyj")
-tower_cost = 30
-cost_label = "30"
-
-[node name="tower_button4" parent="Container/Tower_Selection/HBoxContainer" unique_id=320091000 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
-layout_mode = 2
-theme = ExtResource("2_6qse1")
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-tower_scene = ExtResource("4_3fy46")
-texture_sprite = ExtResource("5_n8y3i")
-
-[node name="tower_button5" parent="Container/Tower_Selection/HBoxContainer" unique_id=218386404 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
-layout_mode = 2
-theme = ExtResource("2_6qse1")
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-tower_scene = ExtResource("4_3fy46")
-texture_sprite = ExtResource("5_n8y3i")
-
-[node name="tower_button6" parent="Container/Tower_Selection/HBoxContainer" unique_id=1898168800 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
-layout_mode = 2
-theme = ExtResource("2_6qse1")
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-tower_scene = ExtResource("4_3fy46")
-texture_sprite = ExtResource("5_n8y3i")
-
-[node name="Progress_Bar" type="PanelContainer" parent="Container" unique_id=1717258816]
-layout_mode = 0
-offset_left = -4000.0
-offset_top = 908.0
-offset_right = -2712.0
-offset_bottom = 1080.0
-theme = ExtResource("2_6qse1")
-
-[node name="NinePatchRect" type="NinePatchRect" parent="Container/Progress_Bar" unique_id=571265248]
-layout_mode = 2
-theme = ExtResource("2_6qse1")
-texture = ExtResource("12_6qse1")
-
-[node name="MarginContainer" type="MarginContainer" parent="Container/Progress_Bar" unique_id=1466661649]
-layout_mode = 2
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 60
-theme_override_constants/margin_bottom = 50
-
-[node name="Win_Bar" type="ProgressBar" parent="Container/Progress_Bar/MarginContainer" unique_id=1363285170]
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_styles/background = ExtResource("13_lena1")
-theme_override_styles/fill = SubResource("StyleBoxFlat_w2cth")
-max_value = 900.0
-step = 45.0
-show_percentage = false
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Container/Progress_Bar/MarginContainer" unique_id=998895276]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="Panel" type="Panel" parent="Container/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1174105953]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
-
-[node name="Panel2" type="Panel" parent="Container/Progress_Bar/MarginContainer/HBoxContainer" unique_id=830066997]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
-
-[node name="Panel3" type="Panel" parent="Container/Progress_Bar/MarginContainer/HBoxContainer" unique_id=736009573]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
-
-[node name="Panel4" type="Panel" parent="Container/Progress_Bar/MarginContainer/HBoxContainer" unique_id=892737600]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
-
-[node name="Panel5" type="Panel" parent="Container/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1948709721]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
-
-[node name="Panel6" type="Panel" parent="Container/Progress_Bar/MarginContainer/HBoxContainer" unique_id=732467932]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
-
-[node name="Panel7" type="Panel" parent="Container/Progress_Bar/MarginContainer/HBoxContainer" unique_id=411986356]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
-
-[node name="Panel8" type="Panel" parent="Container/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1173885982]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
-
-[node name="Panel9" type="Panel" parent="Container/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1947509072]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
-
-[node name="Panel10" type="Panel" parent="Container/Progress_Bar/MarginContainer/HBoxContainer" unique_id=950616699]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
-
-[node name="Panel11" type="Panel" parent="Container/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1433886310]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
-
-[node name="Panel12" type="Panel" parent="Container/Progress_Bar/MarginContainer/HBoxContainer" unique_id=713826150]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
-
-[node name="Panel13" type="Panel" parent="Container/Progress_Bar/MarginContainer/HBoxContainer" unique_id=48102665]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
-
-[node name="Panel14" type="Panel" parent="Container/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1107433429]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
-
-[node name="Panel15" type="Panel" parent="Container/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1354700156]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
-
-[node name="Panel16" type="Panel" parent="Container/Progress_Bar/MarginContainer/HBoxContainer" unique_id=113595606]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
-
-[node name="Panel17" type="Panel" parent="Container/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1033349002]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
-
-[node name="Panel18" type="Panel" parent="Container/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1227864675]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
-
-[node name="Panel19" type="Panel" parent="Container/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1490840270]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
-
-[node name="Panel20" type="Panel" parent="Container/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1399250610]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_lena1")
 
 [node name="Info_Menu" type="SubViewportContainer" parent="Container" unique_id=199766996]
 material = ExtResource("14_w2cth")
@@ -443,6 +244,665 @@ theme = ExtResource("2_6qse1")
 theme_override_font_sizes/font_size = 40
 text = "0"
 
+[node name="Tower_Menu" type="SubViewportContainer" parent="Container" unique_id=1237470857]
+material = ExtResource("14_w2cth")
+instance_shader_parameters/chromatic_offset = 0.0
+instance_shader_parameters/desaturate_amount = 0.0
+instance_shader_parameters/horizontal_warp_speed = 1.0000000475
+instance_shader_parameters/horizontal_warp_strength = 0.0010000000475
+instance_shader_parameters/tint_color = Color(1, 1, 1, 1)
+layout_mode = 0
+offset_top = 908.0
+offset_right = 1288.0
+offset_bottom = 1080.0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="Container/Tower_Menu" unique_id=2010365506]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1288, 172)
+size_2d_override = Vector2i(652, 172)
+render_target_update_mode = 4
+
+[node name="Tower_Selection" type="PanelContainer" parent="Container/Tower_Menu/SubViewport" unique_id=1797068010]
+offset_right = 1288.0
+offset_bottom = 172.0
+theme = ExtResource("2_6qse1")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Container/Tower_Menu/SubViewport/Tower_Selection" unique_id=1106059427]
+layout_mode = 2
+theme = ExtResource("2_6qse1")
+texture = ExtResource("2_38iro")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Container/Tower_Menu/SubViewport/Tower_Selection" unique_id=1375117703]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("2_6qse1")
+theme_override_constants/separation = 0
+
+[node name="tower_button" parent="Container/Tower_Menu/SubViewport/Tower_Selection/HBoxContainer" unique_id=1108784237 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
+layout_mode = 2
+theme = ExtResource("2_6qse1")
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 20
+tower_scene = ExtResource("4_3fy46")
+texture_sprite = ExtResource("5_2ck2f")
+tower_cost = 10
+cost_label = "10"
+
+[node name="tower_button3" parent="Container/Tower_Menu/SubViewport/Tower_Selection/HBoxContainer" unique_id=2098349882 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
+layout_mode = 2
+theme = ExtResource("2_6qse1")
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 20
+tower_scene = ExtResource("6_24gx2")
+texture_sprite = ExtResource("6_uenyj")
+tower_cost = 15
+cost_label = "15"
+
+[node name="tower_button2" parent="Container/Tower_Menu/SubViewport/Tower_Selection/HBoxContainer" unique_id=557671376 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
+layout_mode = 2
+theme = ExtResource("2_6qse1")
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 20
+tower_scene = ExtResource("6_3rgc0")
+texture_sprite = ExtResource("7_uenyj")
+tower_cost = 50
+cost_label = "50"
+
+[node name="tower_button4" parent="Container/Tower_Menu/SubViewport/Tower_Selection/HBoxContainer" unique_id=320091000 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
+layout_mode = 2
+theme = ExtResource("2_6qse1")
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 20
+tower_scene = ExtResource("13_mvsil")
+texture_sprite = ExtResource("14_2n4kg")
+tower_cost = 30
+cost_label = "30"
+
+[node name="tower_button5" parent="Container/Tower_Menu/SubViewport/Tower_Selection/HBoxContainer" unique_id=218386404 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
+layout_mode = 2
+theme = ExtResource("2_6qse1")
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 20
+tower_scene = ExtResource("4_3fy46")
+texture_sprite = ExtResource("5_n8y3i")
+
+[node name="tower_button6" parent="Container/Tower_Menu/SubViewport/Tower_Selection/HBoxContainer" unique_id=1898168800 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
+layout_mode = 2
+theme = ExtResource("2_6qse1")
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 20
+tower_scene = ExtResource("4_3fy46")
+texture_sprite = ExtResource("5_n8y3i")
+
+[node name="tower_button7" parent="Container/Tower_Menu/SubViewport/Tower_Selection/HBoxContainer" unique_id=1396569930 groups=["tower_buttons"] instance=ExtResource("3_jnn03")]
+layout_mode = 2
+theme = ExtResource("2_6qse1")
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 20
+tower_scene = ExtResource("16_gabay")
+texture_sprite = ExtResource("17_pnyad")
+
+[node name="Progress_Menu" type="SubViewportContainer" parent="Container" unique_id=607550374]
+material = ExtResource("14_w2cth")
+instance_shader_parameters/chromatic_offset = 0.0
+instance_shader_parameters/desaturate_amount = 0.0
+instance_shader_parameters/horizontal_warp_speed = 1.0000000475
+instance_shader_parameters/horizontal_warp_strength = 0.0010000000475
+instance_shader_parameters/tint_color = Color(1, 1, 1, 1)
+layout_mode = 0
+offset_left = -4000.0
+offset_top = 908.0
+offset_right = -2712.0
+offset_bottom = 1080.0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="Container/Progress_Menu" unique_id=545735948]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1288, 172)
+size_2d_override = Vector2i(652, 172)
+render_target_update_mode = 4
+
+[node name="Progress_Bar" type="PanelContainer" parent="Container/Progress_Menu/SubViewport" unique_id=1717258816]
+offset_right = 1288.0
+offset_bottom = 172.0
+theme = ExtResource("2_6qse1")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Container/Progress_Menu/SubViewport/Progress_Bar" unique_id=571265248]
+layout_mode = 2
+theme = ExtResource("2_6qse1")
+texture = ExtResource("12_6qse1")
+
+[node name="MarginContainer" type="MarginContainer" parent="Container/Progress_Menu/SubViewport/Progress_Bar" unique_id=1466661649]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 60
+theme_override_constants/margin_bottom = 50
+
+[node name="Win_Bar" type="ProgressBar" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer" unique_id=1363285170]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/background = ExtResource("13_lena1")
+theme_override_styles/fill = SubResource("StyleBoxFlat_w2cth")
+max_value = 900.0
+step = 9.0
+show_percentage = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer" unique_id=998895276]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Panel" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1174105953]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_ytucd")
+
+[node name="Panel2" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=830066997]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel3" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=736009573]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel4" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=892737600]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel5" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1948709721]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel6" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=732467932]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel7" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=411986356]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel8" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1173885982]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel9" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1947509072]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel10" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=950616699]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel11" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1433886310]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel12" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=713826150]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel13" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=48102665]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel14" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1107433429]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel15" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1354700156]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel16" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=113595606]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel17" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1033349002]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel18" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1227864675]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel19" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1490840270]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel20" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1399250610]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel21" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1299456012]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel22" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=783828870]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel23" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=464855898]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel24" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=362568812]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel25" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1907037068]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel26" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1696596929]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel27" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=989925581]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel28" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=2102162679]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel29" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=284219522]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel30" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1180757808]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel31" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=44325277]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel32" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1021204868]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel33" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1574702484]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel34" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1824286455]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel35" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=211937121]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel36" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=487594764]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel37" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=409118812]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel38" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=20298019]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel39" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=554979923]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel40" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1240653047]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel41" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1170114456]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel42" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1309566200]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel43" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1085670542]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel44" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=592183456]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel45" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=543992132]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel46" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=797015828]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel47" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=314446241]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel48" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=114000441]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel49" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=378284582]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel50" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1215678980]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel51" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=851458286]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel52" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1417832403]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel53" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=849265886]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel54" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=933471592]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel55" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=92559479]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel56" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=147996299]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel57" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=307270153]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel58" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1722879674]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel59" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=470141291]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel60" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1140278658]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel61" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=864203533]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel62" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1211647600]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel63" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=608864777]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel64" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=105871113]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel65" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=852036355]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel66" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=978748492]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel67" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1866289148]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel68" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1335460635]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel69" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=121639230]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel70" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=658959603]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel71" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1638121644]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel72" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=788826396]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel73" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=196459218]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel74" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=550077819]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel75" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1200583198]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel76" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=202064468]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel77" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=500569800]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel78" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1038762784]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel79" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1241877161]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel80" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=655024535]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel81" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=2070401668]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel82" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=220486284]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel83" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=887041465]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel84" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=2115772850]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel85" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=653560917]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel86" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=910409196]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel87" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1313780486]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel88" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1738317478]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel89" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1589012802]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel90" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=572496964]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel91" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=201912141]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel92" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=717150559]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel93" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=987675825]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel94" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=2046490656]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel95" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=24347038]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel96" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=40770980]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel97" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1487182382]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel98" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=717072472]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel99" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1265943496]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("14_ytucd")
+
+[node name="Panel100" type="Panel" parent="Container/Progress_Menu/SubViewport/Progress_Bar/MarginContainer/HBoxContainer" unique_id=1606480559]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_146i4")
+
 [node name="BackBufferCopy" type="BackBufferCopy" parent="." unique_id=1704553318]
 copy_mode = 2
 
@@ -479,11 +939,12 @@ autostart = true
 [connection signal="pressed" from="Power_Storage" to="." method="_on_power_storage_pressed"]
 [connection signal="pressed" from="Win" to="." method="_on_win_pressed"]
 [connection signal="pressed" from="Power_Generation" to="." method="_on_power_generation_pressed"]
-[connection signal="tower_button_pressed" from="Container/Tower_Selection/HBoxContainer/tower_button" to="." method="_on_tower_button_pressed"]
-[connection signal="tower_button_pressed" from="Container/Tower_Selection/HBoxContainer/tower_button3" to="." method="_on_tower_button_pressed"]
-[connection signal="tower_button_pressed" from="Container/Tower_Selection/HBoxContainer/tower_button2" to="." method="_on_tower_button_pressed"]
-[connection signal="tower_button_pressed" from="Container/Tower_Selection/HBoxContainer/tower_button4" to="." method="_on_tower_button_pressed"]
-[connection signal="tower_button_pressed" from="Container/Tower_Selection/HBoxContainer/tower_button5" to="." method="_on_tower_button_pressed"]
-[connection signal="tower_button_pressed" from="Container/Tower_Selection/HBoxContainer/tower_button6" to="." method="_on_tower_button_pressed"]
+[connection signal="tower_button_pressed" from="Container/Tower_Menu/SubViewport/Tower_Selection/HBoxContainer/tower_button" to="." method="_on_tower_button_pressed"]
+[connection signal="tower_button_pressed" from="Container/Tower_Menu/SubViewport/Tower_Selection/HBoxContainer/tower_button3" to="." method="_on_tower_button_pressed"]
+[connection signal="tower_button_pressed" from="Container/Tower_Menu/SubViewport/Tower_Selection/HBoxContainer/tower_button2" to="." method="_on_tower_button_pressed"]
+[connection signal="tower_button_pressed" from="Container/Tower_Menu/SubViewport/Tower_Selection/HBoxContainer/tower_button4" to="." method="_on_tower_button_pressed"]
+[connection signal="tower_button_pressed" from="Container/Tower_Menu/SubViewport/Tower_Selection/HBoxContainer/tower_button5" to="." method="_on_tower_button_pressed"]
+[connection signal="tower_button_pressed" from="Container/Tower_Menu/SubViewport/Tower_Selection/HBoxContainer/tower_button6" to="." method="_on_tower_button_pressed"]
+[connection signal="tower_button_pressed" from="Container/Tower_Menu/SubViewport/Tower_Selection/HBoxContainer/tower_button7" to="." method="_on_destroy_button_pressed"]
 [connection signal="timeout" from="Victory_Timer" to="." method="_on_victory_timer_timeout"]
 [connection signal="timeout" from="Update_Timer" to="." method="_on_update_timer_timeout"]

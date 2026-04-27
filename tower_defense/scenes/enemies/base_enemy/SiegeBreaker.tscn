@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://iegnvjp2el5o"]
 
 [ext_resource type="Script" uid="uid://cih6ofkmqp41g" path="res://tower_defense/scenes/enemies/base_enemy/siege_breaker.gd" id="1_mkpyu"]
-[ext_resource type="Texture2D" uid="uid://c37pm1sxrecbs" path="res://icon.svg" id="2_hopps"]
 [ext_resource type="PackedScene" uid="uid://cwnqtjx0ht44a" path="res://tower_defense/scenes/enemies/Minions/siege_minion.tscn" id="2_ony3k"]
+[ext_resource type="Texture2D" uid="uid://bcj1lq2axc3a7" path="res://tower_defense/assets/sprites/enemies/mech1.png" id="3_0b2tj"]
 [ext_resource type="Script" uid="uid://cdvwi26nfaljx" path="res://tower_defense/scenes/enemies/base_enemy/enemy_hitbox.gd" id="3_7t0vp"]
 [ext_resource type="Script" uid="uid://l5pesthk0cvw" path="res://tower_defense/scenes/enemies/base_enemy/attack_area.gd" id="4_7psap"]
 [ext_resource type="StyleBox" uid="uid://bp5rpbwor3asu" path="res://background_health_enemy.tres" id="6_0b2tj"]
@@ -24,8 +24,8 @@ attack_cooldown = 1.0
 enemy_value = 200.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=752896387]
-modulate = Color(0.757268, 0.18206504, 0.99999994, 1)
-texture = ExtResource("2_hopps")
+scale = Vector2(4, 4)
+texture = ExtResource("3_0b2tj")
 
 [node name="EnemyHitbox" type="Area2D" parent="." unique_id=938387276]
 collision_mask = 258

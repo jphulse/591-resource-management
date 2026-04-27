@@ -8,13 +8,10 @@
 [ext_resource type="AudioStream" uid="uid://b0y4ep8rgubuh" path="res://tower_defense/resources/audio/Towers/Poing/poing-05.ogg" id="6_mic6t"]
 [ext_resource type="AudioStream" uid="uid://44q6kv1aocx5" path="res://tower_defense/resources/audio/Towers/Poing/poing-06.ogg" id="7_5vu4n"]
 [ext_resource type="AudioStream" uid="uid://cv1p0cd3o4i7n" path="res://tower_defense/resources/audio/Towers/Poing/poing-07.ogg" id="8_qwd3c"]
-[ext_resource type="AudioStream" uid="uid://ddvcwtaxnprk" path="res://tower_defense/resources/audio/Towers/Poing/poing-08.ogg" id="9_wjvoe"]
-[ext_resource type="AudioStream" uid="uid://b4xdqvtp8w3h5" path="res://tower_defense/resources/audio/Towers/Poing/poing-09.ogg" id="10_lpc66"]
 [ext_resource type="AudioStream" uid="uid://cu7jxnknqoim0" path="res://tower_defense/resources/audio/Towers/Poing/poing-10.ogg" id="11_hwd7j"]
 [ext_resource type="AudioStream" uid="uid://bna7k508impcn" path="res://tower_defense/resources/audio/Towers/Poing/poing-11.ogg" id="12_raoav"]
 [ext_resource type="AudioStream" uid="uid://bh8c1xrk3uf65" path="res://tower_defense/resources/audio/Towers/Poing/poing-12.ogg" id="13_pwnts"]
 [ext_resource type="AudioStream" uid="uid://c4pwbxn3kdi7p" path="res://tower_defense/resources/audio/Towers/Poing/poing-13.ogg" id="14_j2po3"]
-[ext_resource type="AudioStream" uid="uid://buqmfn0v7uv3h" path="res://tower_defense/resources/audio/Towers/Poing/poing-14.ogg" id="15_p3odf"]
 [ext_resource type="AudioStream" uid="uid://cxe2qqqufb5sj" path="res://tower_defense/resources/audio/Towers/Poing/poing-15.ogg" id="16_60pp8"]
 [ext_resource type="AudioStream" uid="uid://c6ivns7tqilqu" path="res://tower_defense/resources/audio/Towers/Poing/poing-16.ogg" id="17_to8y7"]
 [ext_resource type="AudioStream" uid="uid://bwpup2rwxcrli" path="res://tower_defense/resources/audio/Towers/Poing/poing-17.ogg" id="18_1jegm"]
@@ -135,9 +132,10 @@ size = Vector2(788, 16)
 
 [node name="TowerBase" type="Node2D" unique_id=879173299]
 script = ExtResource("1_2n1fp")
-projectile_speed = 750.0
-attack_cooldown = 1.1
-cannon_sounds = Array[AudioStream]([ExtResource("2_1isc7"), ExtResource("3_7okwx"), ExtResource("4_rfi2b"), ExtResource("5_6d575"), ExtResource("6_mic6t"), ExtResource("7_5vu4n"), ExtResource("8_qwd3c"), ExtResource("9_wjvoe"), ExtResource("10_lpc66"), ExtResource("11_hwd7j"), ExtResource("12_raoav"), ExtResource("13_pwnts"), ExtResource("14_j2po3"), ExtResource("15_p3odf"), ExtResource("16_60pp8"), ExtResource("17_to8y7"), ExtResource("18_1jegm")])
+projectile_speed = 1000.0
+attack_cooldown = 1.2
+cannon_sounds = Array[AudioStream]([ExtResource("2_1isc7"), ExtResource("3_7okwx"), ExtResource("4_rfi2b"), ExtResource("5_6d575"), ExtResource("6_mic6t"), ExtResource("7_5vu4n"), ExtResource("8_qwd3c"), ExtResource("11_hwd7j"), ExtResource("12_raoav"), ExtResource("13_pwnts"), ExtResource("14_j2po3"), ExtResource("16_60pp8"), ExtResource("17_to8y7"), ExtResource("18_1jegm")])
+bullet_color = Color(7.2677435e-06, 0.75430113, 1.1551381e-06, 1)
 
 [node name="Projectiles" type="Node2D" parent="." unique_id=281360252]
 

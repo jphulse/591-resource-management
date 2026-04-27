@@ -70,8 +70,9 @@ func take_damage(incoming_damage: float) -> void:
 		queue_free()
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
-	if area is Bullet or area is rail_projectile:
+	if area is Bullet:
 		take_damage(area.damage)
+		area.queue_free()
 		
 	# Check to see if this is the end target to attack
 	#if area is Area2D:

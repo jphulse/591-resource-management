@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://dnp43e1e5jakt"]
 
-[ext_resource type="Texture2D" uid="uid://c37pm1sxrecbs" path="res://icon.svg" id="1_8liv5"]
 [ext_resource type="Script" uid="uid://bqaorl5yamn0q" path="res://tower_defense/scenes/projectiles/bullet.gd" id="1_uq68t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uq68t"]
@@ -12,11 +11,13 @@ collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_uq68t")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=599003515]
-modulate = Color(18.892157, 16.568003, 0, 1)
-texture = ExtResource("1_8liv5")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=88937077]
 shape = SubResource("RectangleShape2D_uq68t")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=16529568]
+offset_left = -60.0
+offset_top = -59.999996
+offset_right = 59.999985
+offset_bottom = 59.99999
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

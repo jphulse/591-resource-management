@@ -19,6 +19,7 @@ var combat : int = 0
 var at_lab : bool = false
 var desperation : bool = false
 var ultimate_enemies : int = 0
+var destroy = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -48,8 +49,10 @@ func _process(_delta: float) -> void:
 
 #if in place mode, do not place behind ui, right click to stop
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("left_click") and current_tower_scene:
+	if event.is_action_pressed("left_click") and current_tower_scene and not destroy:
 		place_tower()
+	elif event.is_action_pressed("left_click") and current_tower_scene and destroy:
+		destroy_tower()
 	elif event.is_action_pressed("right_click"):
 		cancel_placement()
 
@@ -60,11 +63,19 @@ func start_placement(tower: PackedScene, cost : int) -> void:
 	ghost_preview = tower.instantiate() 
 	add_child(ghost_preview)
 	ghost_preview.sprite_node.modulate.a = 0.5
-	ghost_preview.z_index = 100 
+	ghost_preview.z_index = 10 
 	
 	ghost_preview.process_mode = Node.PROCESS_MODE_DISABLED 
-	
 
+func start_destroy(tower: PackedScene)	-> void:
+	current_tower_scene = tower
+	ghost_preview = tower.instantiate() 
+	add_child(ghost_preview)
+	ghost_preview.sprite_node.modulate.a = 0.5
+	ghost_preview.z_index = 10 
+	destroy = true
+	ghost_preview.process_mode = Node.PROCESS_MODE_DISABLED 
+	
 func place_tower() -> void:
 	if not is_instance_valid(ghost_preview):
 		return
@@ -74,8 +85,15 @@ func place_tower() -> void:
 	if level_node.request_tower_placement(current_tower_scene, target_pos, current_cost):
 		cancel_placement()
 
+func destroy_tower() -> void:
+	if not is_instance_valid(ghost_preview):
+		return
+	var target_pos = ghost_preview.global_position
+	level_node.request_tower_destroy(target_pos)
+	
 func cancel_placement() -> void:
 	current_tower_scene = null
+	destroy = false
 	if ghost_preview:
 		ghost_preview.queue_free()
 		ghost_preview = null

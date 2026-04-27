@@ -2,6 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://cwxxq8ntwpae4" path="res://addons/jeremy_components/shaders/canvas_item/wave_distort.gdshader" id="1_agvma"]
 [ext_resource type="Script" uid="uid://u2kodhvqtvme" path="res://tower_defense/scenes/towers/railgun.gd" id="1_n3akg"]
+[ext_resource type="AudioStream" uid="uid://c8fyww38thxuq" path="res://tower_defense/resources/audio/Towers/Railgun/railgun.mp3" id="2_366m1"]
 [ext_resource type="Texture2D" uid="uid://fvikn8o5ryii" path="res://tower_defense/resources/Sprites/railgun.png" id="3_kqsw0"]
 [ext_resource type="Texture2D" uid="uid://2o74ayvd3jnh" path="res://tower_defense/resources/Sprites/railgun_radar1.png" id="4_agb44"]
 [ext_resource type="Texture2D" uid="uid://brrdupvls3n6w" path="res://tower_defense/resources/Sprites/railgun_radar2.png" id="5_3wqkm"]
@@ -316,6 +317,7 @@ damage = 20.0
 projectile_speed = 0.0
 attack_cooldown = 10.0
 building_value = 100.0
+cannon_sounds = Array[AudioStream]([ExtResource("2_366m1")])
 
 [node name="Projectiles" type="Node2D" parent="." unique_id=281360252]
 

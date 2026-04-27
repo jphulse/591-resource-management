@@ -48,9 +48,8 @@ func _ready() -> void:
 		tower.connect("tower_attack", _tower_attack)
 	
 	resource_timer.wait_time = generation_rate
-	update_generation.emit(10/generation_rate)
 	update_storage.emit(max_storage/2)
-	update_generation.emit(10/generation_rate)
+	update_generation.emit(10/generation_rate * 1.5)
 
 func _spawn_enemy_timer() -> void:
 	if difficulty_ramp > 0 :
@@ -142,6 +141,19 @@ func request_tower_placement(tower_scene: PackedScene, global_pos: Vector2, cost
 	spawn_tower(tower_scene, level_map.map_to_local(cell_coord))
 	return true
 
+func request_tower_destroy(global_pos : Vector2) -> bool:
+	var local_pos = level_map.to_local(global_pos)
+	var cell_coord = level_map.local_to_map(local_pos)
+	if not is_within_placement_bounds(cell_coord):
+		print("Out of bounds!")
+		return false
+		
+	if is_cell_occupied(cell_coord):
+		tower_grid.get(cell_coord).queue_free()
+		tower_grid.erase(cell_coord)
+		return true
+	return false
+		
 func is_cell_occupied(cell: Vector2i) -> bool:
 	if tower_grid.has(cell):
 		if is_instance_valid(tower_grid[cell]):

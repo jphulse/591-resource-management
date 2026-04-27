@@ -26,7 +26,10 @@ func _process(delta: float) -> void:
 			queue_free()
 
 func take_damage(incoming_damage: float) -> void:
-	health = health - incoming_damage
+	var total_incoming_damage = incoming_damage - 5
+	if total_incoming_damage < .5 :
+		total_incoming_damage = .2
+	health = health - total_incoming_damage
 	health_bar.value = health
 
 	if health <= 0.0:

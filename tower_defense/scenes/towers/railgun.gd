@@ -5,18 +5,10 @@ extends TowerBase
 
 func _ready() -> void:
 	super()
-	animated_radar.play()
 	hitbox.setup(self)
 	attack_area.setup(self, damage)
 	update_health_bar()
 	railgun_projectile.damage = damage
-
-func _process(delta: float) -> void:
-	pass
-
-func _physics_process(delta: float) -> void:
-	if enemies && can_attack:
-		attack()
 
 func attack() -> void:
 	if can_attack:
@@ -39,9 +31,6 @@ func attack() -> void:
 		if railgun_projectile.collider_bar.shape:
 			query.shape_rid = railgun_projectile.collider_bar.shape.get_rid()
 			
-			# THE SMART FIX: Combine the global position with the local offset
-			# We multiply the global_transform by the local transform of the collider node
-			# This ensures the physics 'sees' the 1000px offset you set in the editor!
 			query.transform = railgun_projectile.global_transform * railgun_projectile.collider_bar.transform
 			
 			query.collision_mask = railgun_projectile.collision_mask

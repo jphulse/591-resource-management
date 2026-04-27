@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://c6x5s6hqq8hr1"]
+
+[ext_resource type="Texture2D" uid="uid://bw36ikf2l8quk" path="res://tower_defense/resources/Sprites/Destroy.png" id="1_eex7d"]
+[ext_resource type="Script" uid="uid://becrqp7n3rx5b" path="res://tower_defense/scenes/towers/destroy.gd" id="1_w0rl5"]
+
+[node name="TowerBase" type="Node2D" unique_id=879173299]
+script = ExtResource("1_w0rl5")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1950465526]
+texture = ExtResource("1_eex7d")

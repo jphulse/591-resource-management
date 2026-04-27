@@ -18,6 +18,7 @@ class_name TowerBase extends Node2D
 @export var attack_cooldown: float = 0.5
 @export var building_value: float = 75.0
 @export var cannon_sounds: Array[AudioStream]
+@export var bullet_color: Color
 
 signal defense_built(value : int)
 signal defense_destroyed(value: int)
@@ -28,10 +29,14 @@ var can_attack: bool = true
 func _ready() -> void:
 	if animated_barrel.material:
 		animated_barrel.material = animated_barrel.material.duplicate()
-
+	animated_radar.play()
+	
 func _process(delta: float) -> void:
 	if enemies:
-		attack()
+		for enemy in enemies :
+			if enemy.global_position.x < 1650 :
+				attack()
+				break
 
 func _on_detection_range_area_entered(area: Area2D) -> void:
 	if area is EnemyHitbox and area not in enemies:
@@ -61,7 +66,7 @@ func attack() -> void:
 
 		var bullet: Bullet = bullet_scene.instantiate()
 		projectiles_list.add_child(bullet)
-		bullet.setup(self.global_position, PI/2, damage, projectile_speed)
+		bullet.setup(self.global_position, PI/2, damage, projectile_speed, bullet_color)
 		
 		animated_barrel.frame = 0
 		animated_barrel.play()

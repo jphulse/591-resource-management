@@ -3,17 +3,19 @@ class_name Bullet extends Area2D
 var projectile_speed: float = 500.0
 var direction: Vector2
 var damage: float
+@onready var color_rect : ColorRect = $ColorRect
 
 func _process(delta: float) -> void:
 	global_position += direction * projectile_speed * delta
 	check_despawn()
 
-func setup(new_position: Vector2, new_angle: float, new_damage: float, new_speed: float) -> void:
+func setup(new_position: Vector2, new_angle: float, new_damage: float, new_speed: float, new_color : Color) -> void:
 	global_position = new_position
 	direction = Vector2.UP.rotated(new_angle)
 	rotation = new_angle
 	damage = new_damage
 	projectile_speed = new_speed
+	color_rect.color = new_color
 
 func check_despawn() -> void:
 	if position.x > 2000.0:

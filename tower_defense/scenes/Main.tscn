@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://citkpaec8qvgi" path="res://tower_defense/scenes/lose.tscn" id="3_diwjb"]
 [ext_resource type="PackedScene" uid="uid://baq27ledf3wuj" path="res://tower_defense/scenes/levels/Level.tscn" id="4_76xix"]
 [ext_resource type="Texture2D" uid="uid://d4jpx6ku13iam" path="res://tower_defense/resources/Sprites/expanded_lab_sprite.png" id="5_8bkux"]
+[ext_resource type="Texture2D" uid="uid://bmyclpha6ka2m" path="res://tower_defense/assets/sprites/world/dark_bricks.png" id="8_diwjb"]
 
 [node name="Main" type="Node2D" unique_id=268084963]
 script = ExtResource("1_nqgnm")
@@ -30,8 +31,555 @@ offset = Vector2(960, 540)
 position = Vector2(-1540, 540)
 texture = ExtResource("5_8bkux")
 
+[node name="DarkBricks" type="Sprite2D" parent="." unique_id=977692990]
+z_index = -1
+position = Vector2(-585, 909)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks2" type="Sprite2D" parent="." unique_id=1262655037]
+z_index = -1
+position = Vector2(-585, 999)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks3" type="Sprite2D" parent="." unique_id=1441394758]
+z_index = -1
+position = Vector2(-585, 1089)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks4" type="Sprite2D" parent="." unique_id=779567553]
+z_index = -1
+position = Vector2(-495, 909)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks5" type="Sprite2D" parent="." unique_id=903225201]
+z_index = -1
+position = Vector2(-495, 999)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks6" type="Sprite2D" parent="." unique_id=1801361476]
+z_index = -1
+position = Vector2(-495, 1089)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks7" type="Sprite2D" parent="." unique_id=1488436621]
+z_index = -1
+position = Vector2(-405, 909)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks8" type="Sprite2D" parent="." unique_id=1803408804]
+z_index = -1
+position = Vector2(-405, 999)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks9" type="Sprite2D" parent="." unique_id=2108667548]
+z_index = -1
+position = Vector2(-405, 1089)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks10" type="Sprite2D" parent="." unique_id=1550608376]
+z_index = -1
+position = Vector2(-315, 909)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks11" type="Sprite2D" parent="." unique_id=1179579945]
+z_index = -1
+position = Vector2(-315, 999)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks12" type="Sprite2D" parent="." unique_id=129759607]
+z_index = -1
+position = Vector2(-315, 1089)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks13" type="Sprite2D" parent="." unique_id=1588137950]
+z_index = -1
+position = Vector2(-225, 909)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks14" type="Sprite2D" parent="." unique_id=1924281046]
+z_index = -1
+position = Vector2(-225, 999)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks15" type="Sprite2D" parent="." unique_id=319534500]
+z_index = -1
+position = Vector2(-225, 1089)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks16" type="Sprite2D" parent="." unique_id=1012468500]
+z_index = -1
+position = Vector2(-135, 909)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks17" type="Sprite2D" parent="." unique_id=1395970628]
+z_index = -1
+position = Vector2(-135, 999)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks18" type="Sprite2D" parent="." unique_id=1993866517]
+z_index = -1
+position = Vector2(-135, 1089)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks19" type="Sprite2D" parent="." unique_id=89812162]
+z_index = -1
+position = Vector2(-45, 909)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks20" type="Sprite2D" parent="." unique_id=1688166419]
+z_index = -1
+position = Vector2(-45, 999)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks21" type="Sprite2D" parent="." unique_id=51958409]
+z_index = -1
+position = Vector2(-45, 1089)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks22" type="Sprite2D" parent="." unique_id=1857907428]
+z_index = -1
+position = Vector2(-585, 639)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks23" type="Sprite2D" parent="." unique_id=889888479]
+z_index = -1
+position = Vector2(-585, 729)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks24" type="Sprite2D" parent="." unique_id=1050553883]
+z_index = -1
+position = Vector2(-585, 819)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks25" type="Sprite2D" parent="." unique_id=381414901]
+z_index = -1
+position = Vector2(-495, 639)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks26" type="Sprite2D" parent="." unique_id=2104302221]
+z_index = -1
+position = Vector2(-495, 729)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks27" type="Sprite2D" parent="." unique_id=916503324]
+z_index = -1
+position = Vector2(-495, 819)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks28" type="Sprite2D" parent="." unique_id=156046828]
+z_index = -1
+position = Vector2(-405, 639)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks29" type="Sprite2D" parent="." unique_id=1718411979]
+z_index = -1
+position = Vector2(-405, 729)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks30" type="Sprite2D" parent="." unique_id=236107744]
+z_index = -1
+position = Vector2(-405, 819)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks31" type="Sprite2D" parent="." unique_id=52386841]
+z_index = -1
+position = Vector2(-315, 639)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks32" type="Sprite2D" parent="." unique_id=1580966907]
+z_index = -1
+position = Vector2(-315, 729)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks33" type="Sprite2D" parent="." unique_id=606553137]
+z_index = -1
+position = Vector2(-315, 819)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks34" type="Sprite2D" parent="." unique_id=594381468]
+z_index = -1
+position = Vector2(-225, 639)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks35" type="Sprite2D" parent="." unique_id=340236664]
+z_index = -1
+position = Vector2(-225, 729)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks36" type="Sprite2D" parent="." unique_id=257670885]
+z_index = -1
+position = Vector2(-225, 819)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks37" type="Sprite2D" parent="." unique_id=910034732]
+z_index = -1
+position = Vector2(-135, 639)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks38" type="Sprite2D" parent="." unique_id=1005868609]
+z_index = -1
+position = Vector2(-135, 729)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks39" type="Sprite2D" parent="." unique_id=252877140]
+z_index = -1
+position = Vector2(-135, 819)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks40" type="Sprite2D" parent="." unique_id=1271757225]
+z_index = -1
+position = Vector2(-45, 639)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks41" type="Sprite2D" parent="." unique_id=1201629065]
+z_index = -1
+position = Vector2(-45, 729)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks42" type="Sprite2D" parent="." unique_id=1523000773]
+z_index = -1
+position = Vector2(-45, 819)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks43" type="Sprite2D" parent="." unique_id=1270178857]
+z_index = -1
+position = Vector2(-585, 369)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks44" type="Sprite2D" parent="." unique_id=191386273]
+z_index = -1
+position = Vector2(-585, 459)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks45" type="Sprite2D" parent="." unique_id=1106380976]
+z_index = -1
+position = Vector2(-585, 549)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks46" type="Sprite2D" parent="." unique_id=948889190]
+z_index = -1
+position = Vector2(-495, 369)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks47" type="Sprite2D" parent="." unique_id=1107210506]
+z_index = -1
+position = Vector2(-495, 459)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks48" type="Sprite2D" parent="." unique_id=1469555438]
+z_index = -1
+position = Vector2(-495, 549)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks49" type="Sprite2D" parent="." unique_id=370861614]
+z_index = -1
+position = Vector2(-405, 369)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks50" type="Sprite2D" parent="." unique_id=1817134026]
+z_index = -1
+position = Vector2(-405, 459)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks51" type="Sprite2D" parent="." unique_id=160914906]
+z_index = -1
+position = Vector2(-405, 549)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks52" type="Sprite2D" parent="." unique_id=700135159]
+z_index = -1
+position = Vector2(-315, 369)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks53" type="Sprite2D" parent="." unique_id=583595910]
+z_index = -1
+position = Vector2(-315, 459)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks54" type="Sprite2D" parent="." unique_id=629992153]
+z_index = -1
+position = Vector2(-315, 549)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks55" type="Sprite2D" parent="." unique_id=715275891]
+z_index = -1
+position = Vector2(-225, 369)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks56" type="Sprite2D" parent="." unique_id=1057521239]
+z_index = -1
+position = Vector2(-225, 459)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks57" type="Sprite2D" parent="." unique_id=510024113]
+z_index = -1
+position = Vector2(-225, 549)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks58" type="Sprite2D" parent="." unique_id=253979220]
+z_index = -1
+position = Vector2(-135, 369)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks59" type="Sprite2D" parent="." unique_id=172233905]
+z_index = -1
+position = Vector2(-135, 459)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks60" type="Sprite2D" parent="." unique_id=175993548]
+z_index = -1
+position = Vector2(-135, 549)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks61" type="Sprite2D" parent="." unique_id=1767019334]
+z_index = -1
+position = Vector2(-45, 369)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks62" type="Sprite2D" parent="." unique_id=1261298453]
+z_index = -1
+position = Vector2(-45, 459)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks63" type="Sprite2D" parent="." unique_id=583122912]
+z_index = -1
+position = Vector2(-45, 549)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks64" type="Sprite2D" parent="." unique_id=1080539159]
+z_index = -1
+position = Vector2(-585, 99)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks65" type="Sprite2D" parent="." unique_id=904171166]
+z_index = -1
+position = Vector2(-585, 189)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks66" type="Sprite2D" parent="." unique_id=1971086004]
+z_index = -1
+position = Vector2(-585, 279)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks67" type="Sprite2D" parent="." unique_id=709024332]
+z_index = -1
+position = Vector2(-495, 99)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks68" type="Sprite2D" parent="." unique_id=741331755]
+z_index = -1
+position = Vector2(-495, 189)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks69" type="Sprite2D" parent="." unique_id=4477066]
+z_index = -1
+position = Vector2(-495, 279)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks70" type="Sprite2D" parent="." unique_id=303883691]
+z_index = -1
+position = Vector2(-405, 99)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks71" type="Sprite2D" parent="." unique_id=377171261]
+z_index = -1
+position = Vector2(-405, 189)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks72" type="Sprite2D" parent="." unique_id=174417132]
+z_index = -1
+position = Vector2(-405, 279)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks73" type="Sprite2D" parent="." unique_id=669734859]
+z_index = -1
+position = Vector2(-315, 99)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks74" type="Sprite2D" parent="." unique_id=1391958629]
+z_index = -1
+position = Vector2(-315, 189)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks75" type="Sprite2D" parent="." unique_id=1577001651]
+z_index = -1
+position = Vector2(-315, 279)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks76" type="Sprite2D" parent="." unique_id=1490802497]
+z_index = -1
+position = Vector2(-225, 99)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks77" type="Sprite2D" parent="." unique_id=1180496804]
+z_index = -1
+position = Vector2(-225, 189)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks78" type="Sprite2D" parent="." unique_id=438720710]
+z_index = -1
+position = Vector2(-225, 279)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks79" type="Sprite2D" parent="." unique_id=1122606306]
+z_index = -1
+position = Vector2(-135, 99)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks80" type="Sprite2D" parent="." unique_id=770120449]
+z_index = -1
+position = Vector2(-135, 189)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks81" type="Sprite2D" parent="." unique_id=1244063934]
+z_index = -1
+position = Vector2(-135, 279)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks82" type="Sprite2D" parent="." unique_id=1338585807]
+z_index = -1
+position = Vector2(-45, 99)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks83" type="Sprite2D" parent="." unique_id=289944409]
+z_index = -1
+position = Vector2(-45, 189)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks84" type="Sprite2D" parent="." unique_id=1888516336]
+z_index = -1
+position = Vector2(-45, 279)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks85" type="Sprite2D" parent="." unique_id=1401744846]
+z_index = -1
+position = Vector2(-585, 9)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks86" type="Sprite2D" parent="." unique_id=1588989960]
+z_index = -1
+position = Vector2(-495, 9)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks87" type="Sprite2D" parent="." unique_id=29824703]
+z_index = -1
+position = Vector2(-405, 9)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks88" type="Sprite2D" parent="." unique_id=1300035641]
+z_index = -1
+position = Vector2(-315, 9)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks89" type="Sprite2D" parent="." unique_id=1691461289]
+z_index = -1
+position = Vector2(-225, 9)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks90" type="Sprite2D" parent="." unique_id=847166264]
+z_index = -1
+position = Vector2(-135, 9)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
+[node name="DarkBricks91" type="Sprite2D" parent="." unique_id=173493116]
+z_index = -1
+position = Vector2(-45, 9)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_diwjb")
+
 [connection signal="attempt_generation_upgrade" from="Ui" to="Level" method="_on_generation_increase_attempt"]
 [connection signal="attempt_storage_upgrade" from="Ui" to="Level" method="_on_attempt_storage_upgrade"]
+[connection signal="destroy_mode" from="Ui" to="." method="start_destroy"]
 [connection signal="tower_selected" from="Ui" to="." method="start_placement"]
 [connection signal="win" from="Ui" to="." method="_win"]
 [connection signal="lose" from="Level" to="." method="_lose"]
