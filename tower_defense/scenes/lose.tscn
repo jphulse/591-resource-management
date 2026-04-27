@@ -1,3 +1,11 @@
 [gd_scene format=3 uid="uid://citkpaec8qvgi"]
 
+[ext_resource type="Script" uid="uid://dt8l46bdvtt1u" path="res://tower_defense/scenes/lose.gd" id="1_yst2m"]
+[ext_resource type="Texture2D" uid="uid://b7ll00a7rkogj" path="res://tower_defense/assets/sprites/world/DefeatScreen.png" id="2_h4whh"]
+
 [node name="Lose" type="Node2D" unique_id=738675768]
+script = ExtResource("1_yst2m")
+
+[node name="DefeatScreen" type="Sprite2D" parent="." unique_id=1545986849]
+position = Vector2(960, 540)
+texture = ExtResource("2_h4whh")

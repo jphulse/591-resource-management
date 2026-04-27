@@ -110,7 +110,6 @@ func take_damage(incoming_damage: float) -> void:
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	if area is Bullet:
 		take_damage(area.damage)
-		area.monitorable = false
 		area.monitoring = false
 		area.queue_free()
 		

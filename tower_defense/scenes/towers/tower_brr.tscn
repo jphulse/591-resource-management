@@ -322,7 +322,7 @@ shape = SubResource("RectangleShape2D_bils4")
 [node name="AttackCooldownTimer" type="Timer" parent="." unique_id=1251600245]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1749661565]
-volume_db = -12.811
+volume_db = -15.925
 max_polyphony = 2
 
 [node name="HealthBar" type="ProgressBar" parent="." unique_id=225924659]

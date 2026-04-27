@@ -322,6 +322,7 @@ border_width_bottom = 3
 border_color = Color(0, 0, 0, 1)
 
 [node name="TowerBase" type="Node2D" unique_id=879173299]
+z_index = 1
 material = SubResource("ShaderMaterial_ovvl3")
 script = ExtResource("1_n3akg")
 damage = 20.0

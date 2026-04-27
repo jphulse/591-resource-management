@@ -36,9 +36,9 @@ var objective_complete: bool = false
 var total_resources : int = 0
 var tech_level : int = 0
 
-var difficulty_ramp : int = 3
+var difficulty_ramp : int = 4
 
-var spawn_delay : Array[float] = [0.003, 0.004, 0.01, 25, 0.006, 0.03, 0.08, 25]
+var spawn_delay : Array[float] = [0.003, 0.004, 0.01, 25, 0.006, 0.03, 0.08, 25, 25]
 
 func _ready() -> void:
 	for enemy_path in enemy_paths_node.get_children():

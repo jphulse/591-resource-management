@@ -1,3 +1,11 @@
 [gd_scene format=3 uid="uid://dshbvmngpcixx"]
 
+[ext_resource type="Script" uid="uid://xkdt328vpy7g" path="res://tower_defense/scenes/win.gd" id="1_yens0"]
+[ext_resource type="Texture2D" uid="uid://cfcyp785rrib0" path="res://tower_defense/assets/sprites/world/VictoryScreen.png" id="2_48dmb"]
+
 [node name="Win" type="Node2D" unique_id=722506095]
+script = ExtResource("1_yens0")
+
+[node name="VictoryScreen" type="Sprite2D" parent="." unique_id=935041543]
+position = Vector2(960, 540)
+texture = ExtResource("2_48dmb")
