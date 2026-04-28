@@ -327,7 +327,7 @@ material = SubResource("ShaderMaterial_ovvl3")
 script = ExtResource("1_n3akg")
 damage = 20.0
 projectile_speed = 0.0
-attack_cooldown = 10.0
+attack_cooldown = 4.0
 building_value = 100.0
 cannon_sounds = Array[AudioStream]([ExtResource("2_366m1")])
 
@@ -358,7 +358,7 @@ frame_progress = 0.5718703
 material = SubResource("ShaderMaterial_agvma")
 sprite_frames = SubResource("SpriteFrames_w86bd")
 frame = 16
-speed_scale = 0.7
+speed_scale = 1.4
 
 [node name="TowerHitbox" type="Area2D" parent="." unique_id=1402533722]
 collision_layer = 257

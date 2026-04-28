@@ -1,0 +1,136 @@
+[gd_scene format=3 uid="uid://cykmsgih7n5wn"]
+
+[ext_resource type="Script" uid="uid://pe7qteg782ss" path="res://tower_defense/scenes/enemies/base_enemy/enemy_base.gd" id="1_ljb87"]
+[ext_resource type="Script" uid="uid://cdvwi26nfaljx" path="res://tower_defense/scenes/enemies/base_enemy/enemy_hitbox.gd" id="3_sgqv1"]
+[ext_resource type="Script" uid="uid://l5pesthk0cvw" path="res://tower_defense/scenes/enemies/base_enemy/attack_area.gd" id="4_t1154"]
+[ext_resource type="StyleBox" uid="uid://bp5rpbwor3asu" path="res://background_health_enemy.tres" id="5_lyq1t"]
+[ext_resource type="Texture2D" uid="uid://b7u7ewomm7njb" path="res://tower_defense/resources/Sprites/death_ball1.png" id="6_2we6p"]
+[ext_resource type="StyleBox" uid="uid://j4h4udfe7ew3" path="res://background_fill_health_enemy.tres" id="6_y1ye6"]
+[ext_resource type="Texture2D" uid="uid://ofw5akq8cdvh" path="res://tower_defense/resources/Sprites/death_ball2.png" id="7_32epc"]
+[ext_resource type="Texture2D" uid="uid://cwy0jn6ytrukb" path="res://tower_defense/resources/Sprites/death_ball3.png" id="8_ema5p"]
+[ext_resource type="Texture2D" uid="uid://pp6x8furpfur" path="res://tower_defense/resources/Sprites/death_ball4.png" id="9_escts"]
+[ext_resource type="Texture2D" uid="uid://ht4arwimqasb" path="res://tower_defense/resources/Sprites/death_ball5.png" id="10_i1305"]
+[ext_resource type="Texture2D" uid="uid://oq1ig12f2khf" path="res://tower_defense/resources/Sprites/death_ball6.png" id="11_aytdf"]
+[ext_resource type="Texture2D" uid="uid://ckok8ppnqo6g7" path="res://tower_defense/resources/Sprites/death_ball7.png" id="12_o7tvv"]
+[ext_resource type="Texture2D" uid="uid://b3kyjruyi0pgf" path="res://tower_defense/resources/Sprites/death_ball8.png" id="13_w5kyd"]
+[ext_resource type="Texture2D" uid="uid://bijqsiugle2ty" path="res://tower_defense/resources/Sprites/death_ball9.png" id="14_i0lad"]
+[ext_resource type="Texture2D" uid="uid://dki0863e6w5qi" path="res://tower_defense/resources/Sprites/death_ball10.png" id="15_f5sha"]
+[ext_resource type="Texture2D" uid="uid://8gv6lbaxrqu5" path="res://tower_defense/resources/Sprites/death_ball11.png" id="16_mm7gx"]
+[ext_resource type="Texture2D" uid="uid://b6ycxao752ngc" path="res://tower_defense/resources/Sprites/death_ball12.png" id="17_clmxf"]
+[ext_resource type="Texture2D" uid="uid://cjw0lehpsaymt" path="res://tower_defense/resources/Sprites/death_ball13.png" id="18_bbplw"]
+[ext_resource type="Texture2D" uid="uid://8j1vykfc3j3e" path="res://tower_defense/resources/Sprites/death_ball14.png" id="19_f502t"]
+[ext_resource type="Texture2D" uid="uid://drxkgekgd3frb" path="res://tower_defense/resources/Sprites/death_ball15.png" id="20_40cb2"]
+[ext_resource type="Texture2D" uid="uid://c4o1uffmgenpl" path="res://tower_defense/resources/Sprites/death_ball16.png" id="21_yty6a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_coewb"]
+size = Vector2(169, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ndb33"]
+size = Vector2(172.00009, 130)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jhxtg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_2we6p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_32epc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ema5p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_escts")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_i1305")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_aytdf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_o7tvv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_w5kyd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_i0lad")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_f5sha")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_mm7gx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_clmxf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_bbplw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_f502t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_40cb2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_yty6a")
+}],
+"loop": true,
+"name": &"death_ball_move",
+"speed": 30.0
+}]
+
+[node name="EnemyBase" type="Node2D" unique_id=1221308985]
+script = ExtResource("1_ljb87")
+damage = 10.0
+health = 15.0
+movement_speed = 50.0
+attack_cooldown = 1.0
+enemy_value = 50.0
+armour = 1
+
+[node name="EnemyHitbox" type="Area2D" parent="." unique_id=938387276]
+collision_mask = 258
+script = ExtResource("3_sgqv1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox" unique_id=1974487812]
+position = Vector2(52.5, 0)
+shape = SubResource("RectangleShape2D_coewb")
+
+[node name="EnemyAttackArea" type="Area2D" parent="." unique_id=1471568512]
+script = ExtResource("4_t1154")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyAttackArea" unique_id=55715416]
+position = Vector2(53, 8.344649e-06)
+scale = Vector2(0.9999994, 0.9999994)
+shape = SubResource("RectangleShape2D_ndb33")
+
+[node name="AttackCooldownTimer" type="Timer" parent="." unique_id=501510785]
+process_callback = 0
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=928513638]
+offset_left = -30.0
+offset_top = 65.0
+offset_right = 90.0
+offset_bottom = 88.0
+scale = Vector2(0.5, 0.5)
+theme_override_styles/background = ExtResource("5_lyq1t")
+theme_override_styles/fill = ExtResource("6_y1ye6")
+max_value = 1000.0
+step = 0.0
+show_percentage = false
+
+[node name="Enemy_Sprite" type="AnimatedSprite2D" parent="." unique_id=191844563]
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_jhxtg")
+animation = &"death_ball_move"
+frame_progress = 0.3977499
+
+[connection signal="area_entered" from="EnemyHitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_entered" from="EnemyAttackArea" to="." method="_on_attack_area_area_entered"]
+[connection signal="area_exited" from="EnemyAttackArea" to="." method="_on_attack_area_area_exited"]
+[connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_attack_cooldown_timer_timeout"]

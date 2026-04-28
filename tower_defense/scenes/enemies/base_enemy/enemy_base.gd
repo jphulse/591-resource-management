@@ -4,6 +4,7 @@ class_name Enemy extends Node2D
 @onready var attack_area: Area2D = $EnemyAttackArea
 @onready var attack_cooldown_timer: Timer = $AttackCooldownTimer
 @onready var health_bar : ProgressBar = $ProgressBar
+@onready var enemy_sprite : AnimatedSprite2D = $Enemy_Sprite
 
 @export var damage: float = 5.0
 @export var health: float = 10.0
@@ -27,14 +28,18 @@ func _ready() -> void:
 	attack_area.setup(self, damage)
 	health_bar.value = health
 	health_bar.max_value = health
+	enemy_sprite.play()
 
 func _process(delta: float) -> void:
 	if path_follow:
 		if towers_in_range.size() < 1:
 			current_move_speed = movement_speed
 			path_follow.progress += movement_speed * delta
+			if !enemy_sprite.is_playing() :
+				enemy_sprite.play()
 		else:
 			current_move_speed = 0
+			enemy_sprite.pause()
 			if can_attack:
 				attack()
 		
@@ -78,9 +83,7 @@ func attack() -> void:
 		
 		#send it to engine
 		var results = space_state.intersect_shape(query, 1000)
-		
-		var targets_hit = []
-		
+				
 		for dictionary in results:
 			var hit_area = dictionary["collider"]
 			
@@ -88,9 +91,8 @@ func attack() -> void:
 				var root_node = hit_area.owner
 				
 				if root_node is TowerBase:
-					if not root_node in targets_hit:
-						root_node.take_damage(damage)
-						targets_hit.append(root_node)
+					root_node.take_damage(damage)
+					break
 	
 	attack_cooldown_timer.start(attack_cooldown)
 

@@ -6,6 +6,21 @@
 [ext_resource type="Script" uid="uid://l5pesthk0cvw" path="res://tower_defense/scenes/enemies/base_enemy/attack_area.gd" id="4_10dr3"]
 [ext_resource type="StyleBox" uid="uid://bp5rpbwor3asu" path="res://background_health_enemy.tres" id="5_4q6sc"]
 [ext_resource type="StyleBox" uid="uid://j4h4udfe7ew3" path="res://background_fill_health_enemy.tres" id="6_2idc5"]
+[ext_resource type="Texture2D" uid="uid://cdg5xd7rw7irs" path="res://tower_defense/resources/Sprites/andriod2.png" id="7_2idc5"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5pr1j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_4q6sc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_2idc5")
+}],
+"loop": true,
+"name": &"death_ball_move",
+"speed": 10.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_coewb"]
 size = Vector2(169, 128)
@@ -22,10 +37,11 @@ attack_cooldown = 1.0
 enemy_value = 50.0
 armour = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=752896387]
-position = Vector2(0, 27)
+[node name="Enemy_Sprite" type="AnimatedSprite2D" parent="." unique_id=1267908228]
+position = Vector2(0, 29)
 scale = Vector2(3, 3)
-texture = ExtResource("2_4q6sc")
+sprite_frames = SubResource("SpriteFrames_5pr1j")
+animation = &"death_ball_move"
 
 [node name="EnemyHitbox" type="Area2D" parent="." unique_id=938387276]
 collision_mask = 258
@@ -44,10 +60,7 @@ scale = Vector2(0.9999994, 0.9999994)
 shape = SubResource("RectangleShape2D_ndb33")
 
 [node name="AttackCooldownTimer" type="Timer" parent="." unique_id=501510785]
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=832542231]
-
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." unique_id=2034609650]
+process_callback = 0
 
 [node name="ProgressBar" type="ProgressBar" parent="." unique_id=928513638]
 offset_left = -30.0

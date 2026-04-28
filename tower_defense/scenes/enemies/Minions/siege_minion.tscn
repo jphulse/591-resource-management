@@ -1,17 +1,32 @@
 [gd_scene format=3 uid="uid://cwnqtjx0ht44a"]
 
 [ext_resource type="Script" uid="uid://pe7qteg782ss" path="res://tower_defense/scenes/enemies/base_enemy/enemy_base.gd" id="1_s178j"]
-[ext_resource type="Texture2D" uid="uid://cdg5xd7rw7irs" path="res://tower_defense/resources/Sprites/andriod2.png" id="2_ubxkr"]
 [ext_resource type="Script" uid="uid://cdvwi26nfaljx" path="res://tower_defense/scenes/enemies/base_enemy/enemy_hitbox.gd" id="3_m5ux1"]
 [ext_resource type="Script" uid="uid://l5pesthk0cvw" path="res://tower_defense/scenes/enemies/base_enemy/attack_area.gd" id="4_tdttk"]
 [ext_resource type="StyleBox" uid="uid://bp5rpbwor3asu" path="res://background_health_enemy.tres" id="5_ubxkr"]
+[ext_resource type="Texture2D" uid="uid://bfckvh5av4kfu" path="res://tower_defense/resources/Sprites/minion1.png" id="6_lrjt0"]
 [ext_resource type="StyleBox" uid="uid://j4h4udfe7ew3" path="res://background_fill_health_enemy.tres" id="6_v7mwp"]
+[ext_resource type="Texture2D" uid="uid://ciqy0k6hxkvli" path="res://tower_defense/resources/Sprites/minion2.png" id="7_08qak"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q0mqv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_lrjt0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_08qak")
+}],
+"loop": true,
+"name": &"death_ball_move",
+"speed": 30.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_coewb"]
-size = Vector2(306, 312)
+size = Vector2(306, 278)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ndb33"]
-size = Vector2(333.00015, 313.00015)
+size = Vector2(333.00015, 278.00018)
 
 [node name="EnemyBase" type="Node2D" unique_id=1221308985]
 position = Vector2(0, 50)
@@ -20,16 +35,17 @@ script = ExtResource("1_s178j")
 movement_speed = 100.0
 attack_cooldown = 0.3
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=752896387]
-position = Vector2(0, 5)
+[node name="Enemy_Sprite" type="AnimatedSprite2D" parent="." unique_id=1650052870]
+position = Vector2(0, -13.999998)
 scale = Vector2(5, 5)
-texture = ExtResource("2_ubxkr")
+sprite_frames = SubResource("SpriteFrames_q0mqv")
+animation = &"death_ball_move"
 
 [node name="EnemyHitbox" type="Area2D" parent="." unique_id=938387276]
 script = ExtResource("3_m5ux1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox" unique_id=1974487812]
-position = Vector2(89, -92)
+position = Vector2(89, -93)
 shape = SubResource("RectangleShape2D_coewb")
 
 [node name="EnemyAttackArea" type="Area2D" parent="." unique_id=1471568512]
@@ -37,17 +53,18 @@ collision_mask = 258
 script = ExtResource("4_tdttk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyAttackArea" unique_id=55715416]
-position = Vector2(91.50002, -91.500015)
+position = Vector2(91.50002, -93)
 scale = Vector2(0.9999994, 0.9999994)
 shape = SubResource("RectangleShape2D_ndb33")
 
 [node name="AttackCooldownTimer" type="Timer" parent="." unique_id=501510785]
+process_callback = 0
 
 [node name="ProgressBar" type="ProgressBar" parent="." unique_id=1582177156]
-offset_left = -60.0
-offset_top = 65.0
-offset_right = 180.0
-offset_bottom = 92.0
+offset_left = -58.0
+offset_top = 46.0
+offset_right = 182.0
+offset_bottom = 73.0
 scale = Vector2(0.5, 0.5)
 theme_override_styles/background = ExtResource("5_ubxkr")
 theme_override_styles/fill = ExtResource("6_v7mwp")

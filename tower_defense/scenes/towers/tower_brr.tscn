@@ -256,7 +256,7 @@ animations = [{
 size = Vector2(128, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bils4"]
-size = Vector2(424, 16)
+size = Vector2(603, 16)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7nxwb"]
 bg_color = Color(0, 0, 0, 1)
@@ -317,7 +317,7 @@ shape = SubResource("RectangleShape2D_lmoja")
 script = ExtResource("42_61n7q")
 
 [node name="DetectionRangeCollisionShape" type="CollisionShape2D" parent="TowerAttackRange" unique_id=1265304444]
-position = Vector2(204, 0)
+position = Vector2(293.5, 0)
 shape = SubResource("RectangleShape2D_bils4")
 
 [node name="AttackCooldownTimer" type="Timer" parent="." unique_id=1251600245]

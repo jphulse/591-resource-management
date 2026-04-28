@@ -38,8 +38,8 @@ const GRID_START = Vector2i(1, 1) # Example: starts at tile (2,2)
 const GRID_WIDTH = 10
 const GRID_HEIGHT = 5
 const NORMAL_ODDS = 10
-const DEATH_BALL_ODDS = 25
-const SIEGE_ODDS = 100
+const DEATH_BALL_ODDS = 150
+const SIEGE_ODDS = 350
 
 var tower_grid: Dictionary = {} # Key: Vector2i, Value: Node2D
 var enemies: Array[Node2D] = []
@@ -56,11 +56,15 @@ var wave_active : bool = false
 
 var current_energy_cost : float = 10
 
-@export var difficulty_multiplier = 1.0
+@export var difficulty_multiplier : float = 1.0
 
-var Normal_Spawns : Array = [.3, .2, .18, .14, .1]
+var spawn_rate : Array = [.3, .2, .18, .14, .1]
 var normal_spawned : bool = false
-var normal_odds : float = 10
+var normal_odds : float = NORMAL_ODDS
+var death_ball_spawned : bool = false
+var death_ball_odds : float = DEATH_BALL_ODDS
+var tank_spawned : bool = false
+var tank_odds : float = SIEGE_ODDS
 
 func _set_wave_(increase : bool) -> void:
 	if increase and current_wave_index < 4:
@@ -98,9 +102,9 @@ func _on_resource_timer_timeout() -> void:
 func _on_generation_increase_attempt() :
 	if total_resources >= current_energy_cost :
 		total_resources -= current_energy_cost
-		generation_rate /= 1.2
+		generation_rate /= 1.23
 		resource_timer.wait_time = generation_rate
-		current_energy_cost *= 1.5
+		current_energy_cost *= 1.47
 		update_generation.emit(current_energy_cost)
 
 func _on_attempt_storage_upgrade() -> void:
@@ -244,6 +248,7 @@ func _on_calm_timer_timeout() -> void:
 	spawn_timer.start()
 	frequency_timer.start()
 	current_wave_index += 1
+	frequency_timer.wait_time = spawn_rate[current_wave_index]
 	wave_subgroup_index += 1
 	update_wave.emit(current_wave_index + 1)
 	warning_audio.play()

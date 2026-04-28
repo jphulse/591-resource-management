@@ -57,6 +57,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		cancel_placement()
 
 func start_placement(tower: PackedScene, cost : int) -> void:
+	cancel_placement()
 	current_cost = cost
 	current_tower_scene = tower
 	
