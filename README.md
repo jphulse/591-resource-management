@@ -1,4 +1,6 @@
 # 591-resource-management
+# https://jh2025.itch.io/progenitor-apotheosis
+
 ## Intro
 This game is told in two parts, the first trakes place at the start of our timeline and involves a tower defense game.  
 The second part is a cross between plague inc and cookie clicker involving the takeover of a galxy
