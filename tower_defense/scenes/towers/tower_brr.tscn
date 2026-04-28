@@ -274,6 +274,7 @@ script = ExtResource("1_25ist")
 damage = 3.0
 projectile_speed = 800.0
 attack_cooldown = 9.06
+building_value = 40.0
 cannon_sounds = Array[AudioStream]([ExtResource("2_dq166")])
 bullet_color = Color(1, 0.9675301, 0.13801557, 1)
 

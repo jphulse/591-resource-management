@@ -26,6 +26,7 @@ func attack() -> void:
 		radiator.frame = 0
 		radiator.play()
 		audio_player.stream = cannon_sounds.pick_random()
+		audio_player.pitch_scale = 1 + randf_range(-.2,.1)
 		audio_player.play()
 		
 		attack_cooldown_timer.start(attack_cooldown)

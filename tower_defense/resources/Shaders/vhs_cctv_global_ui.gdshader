@@ -61,15 +61,17 @@ void fragment() {
 	vec2 uv = SCREEN_UV;
 
 	float amount = effect_amount;
-
+	
+	float stable_time = mod(TIME, 100.0); // Keeps time between 0 and 100
+	
 	// Horizontal VHS/CCTV wobble.
 	if (enable_warp) {
-		float wave = sin((uv.y * horizontal_warp_frequency) + TIME * horizontal_warp_speed);
-		float wave_2 = sin((uv.y * horizontal_warp_frequency * 0.37) - TIME * horizontal_warp_speed * 1.7);
+		float wave = sin((uv.y * horizontal_warp_frequency) + stable_time * horizontal_warp_speed);
+		float wave_2 = sin((uv.y * horizontal_warp_frequency * 0.37) - stable_time * horizontal_warp_speed * 1.7);
 		float warp = (wave + wave_2 * 0.5) * horizontal_warp_strength * amount;
 
 		// Add occasional noisy row jitter.
-		float row_noise = noise(vec2(floor(uv.y * 80.0), floor(TIME * 8.0)));
+		float row_noise = noise(vec2(floor(uv.y * 80.0), floor(stable_time * 8.0)));
 		warp += (row_noise - 0.5) * horizontal_warp_strength * 1.5 * amount;
 
 		uv.x += warp;
@@ -106,7 +108,7 @@ void fragment() {
 
 	// Rolling dark bar.
 	if (enable_roll_bar) {
-		float bar_center = fract(TIME * roll_bar_speed);
+		float bar_center = fract(stable_time * roll_bar_speed);
 		float bar_distance = abs(SCREEN_UV.y - bar_center);
 		bar_distance = min(bar_distance, 1.0 - bar_distance);
 
@@ -116,7 +118,7 @@ void fragment() {
 
 	// Static/noise.
 	if (enable_noise) {
-		float time_step = floor(TIME * noise_speed);
+		float time_step = floor(stable_time * noise_speed);
 		float static_noise = hash(vec2(SCREEN_UV.x * 640.0, SCREEN_UV.y * 360.0 + time_step));
 		static_noise = static_noise * 2.0 - 1.0;
 

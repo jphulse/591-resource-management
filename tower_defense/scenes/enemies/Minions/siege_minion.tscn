@@ -17,8 +17,6 @@ size = Vector2(333.00015, 313.00015)
 position = Vector2(0, 50)
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_s178j")
-damage = 2.0
-health = 4.0
 movement_speed = 100.0
 attack_cooldown = 0.3
 

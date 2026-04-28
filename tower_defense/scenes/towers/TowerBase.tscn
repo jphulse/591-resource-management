@@ -151,7 +151,7 @@ max_health = 20.0
 health = 20.0
 projectile_speed = 400.0
 attack_cooldown = 0.2
-building_value = 50.0
+building_value = 10.0
 cannon_sounds = Array[AudioStream]([ExtResource("2_uk4n0"), ExtResource("3_pgi8r"), ExtResource("4_pew07"), ExtResource("5_rc8ip"), ExtResource("6_itfr2"), ExtResource("7_k7tsi"), ExtResource("8_d5k8c"), ExtResource("9_i1uey"), ExtResource("10_kxr6e"), ExtResource("11_6s8gv"), ExtResource("12_wlydn"), ExtResource("13_bgqky"), ExtResource("14_sfleb"), ExtResource("15_mlltw"), ExtResource("16_mdofm"), ExtResource("17_hdfo0"), ExtResource("18_pbpi1")])
 bullet_color = Color(0, 0, 1, 1)
 

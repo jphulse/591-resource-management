@@ -60,7 +60,6 @@ func attack() -> void:
 					target.take_damage(damage)
 					targets_hit.append(target)
 		
-		# Feedback and Juice!
 		railgun_projectile.sprite_rail.frame = 0
 		railgun_projectile.sprite_rail.play()
 		animated_barrel.frame = 0
@@ -71,12 +70,12 @@ func attack() -> void:
 		
 		attack_cooldown_timer.start(attack_cooldown)
 		
-		# Visuals and Feedback
 		railgun_projectile.sprite_rail.play()
 		animated_barrel.frame = 0
 		animated_barrel.play()
 		
 		audio_player.stream = cannon_sounds.pick_random()
+		audio_player.pitch_scale = 1 + randf_range(-.1,.1)
 		audio_player.play()
 		
 		attack_cooldown_timer.start(attack_cooldown)

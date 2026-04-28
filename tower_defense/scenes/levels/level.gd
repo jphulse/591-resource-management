@@ -6,8 +6,14 @@ class_name Level extends Node2D
 @onready var objective: Node2D = $LevelObjective
 @onready var level_map : TileMapLayer = $TileMapLayer
 @onready var spawn_timer : Timer = $spawn_timer
+@onready var boss_timer : Timer = $Timer
 @onready var frequency_timer : Timer = $frequency_timer
 @onready var resource_timer : Timer = $resource_timer
+@onready var wave_timer : Timer = $wave_timer
+@onready var calm_timer : Timer = $calm_timer
+@onready var warning_audio : AudioStreamPlayer = $Warning
+@onready var clear_audio : AudioStreamPlayer = $Clear
+@onready var boss_cue : AudioStreamPlayer = $Alert
 
 @export var enemy_scene: PackedScene = preload("res://tower_defense/scenes/enemies/base_enemy/EnemyBase.tscn")
 @export var siege_scene: PackedScene = preload("res://tower_defense/scenes/enemies/base_enemy/SiegeBreaker.tscn")
@@ -15,19 +21,25 @@ class_name Level extends Node2D
 @export var max_storage : int = 50
 @export var generation_rate : float = .4
 
+
 signal update_enemy(value : int)
 signal update_fortifications(value : int)
 signal ultimateEnemy(spawning : bool)
 signal update_resource(value : int)
 signal update_health(value : int)
-signal update_tech(value : float)
+signal update_tech(value : float, level : int)
 signal update_storage(value : float)
 signal update_generation(value : float)
 signal lose()
+signal update_wave(value : int)
+signal update_subwave(value : int)
 
 const GRID_START = Vector2i(1, 1) # Example: starts at tile (2,2)
 const GRID_WIDTH = 10
 const GRID_HEIGHT = 5
+const NORMAL_ODDS = 10
+const DEATH_BALL_ODDS = 25
+const SIEGE_ODDS = 100
 
 var tower_grid: Dictionary = {} # Key: Vector2i, Value: Node2D
 var enemies: Array[Node2D] = []
@@ -36,9 +48,33 @@ var objective_complete: bool = false
 var total_resources : int = 0
 var tech_level : int = 0
 
-var difficulty_ramp : int = 4
+var tech_costs : Array = [50, 125, 0]
 
-var spawn_delay : Array[float] = [0.003, 0.004, 0.01, 25, 0.006, 0.03, 0.08, 25, 25]
+var current_wave_index : int = -1
+var wave_subgroup_index : int = -1
+var wave_active : bool = false
+
+var current_energy_cost : float = 10
+
+@export var difficulty_multiplier = 1.0
+
+var Normal_Spawns : Array = [.3, .2, .18, .14, .1]
+var normal_spawned : bool = false
+var normal_odds : float = 10
+
+func _set_wave_(increase : bool) -> void:
+	if increase and current_wave_index < 4:
+		current_wave_index += 1
+	elif not increase and current_wave_index > 0:
+		current_wave_index -= 1
+	update_wave.emit(current_wave_index + 1)
+
+func _set_subwave_(increase : bool) -> void:
+	if increase and wave_subgroup_index < 4:
+		wave_subgroup_index += 1
+	elif not increase and wave_subgroup_index > 0:
+		wave_subgroup_index -= 1
+	update_subwave.emit(wave_subgroup_index + 1)
 
 func _ready() -> void:
 	for enemy_path in enemy_paths_node.get_children():
@@ -49,25 +85,10 @@ func _ready() -> void:
 	
 	resource_timer.wait_time = generation_rate
 	update_storage.emit(max_storage/2)
-	update_generation.emit(10/generation_rate * 1.5)
-
-func _spawn_enemy_timer() -> void:
-	if difficulty_ramp > 0 :
-		frequency_timer.wait_time *= 1.5
-		difficulty_ramp -= 1
-		return
-	frequency_timer.wait_time = spawn_delay.pick_random()
-	if frequency_timer.wait_time == 25 && is_instance_valid(objective):
-		for lane in enemy_paths:
-			spawn_enemy(siege_scene, lane)
-			ultimateEnemy.emit(true)
-		frequency_timer.wait_time = .1
-
-func _frequency_timer() -> void:
-	if is_instance_valid(objective) && objective.health > 0.0:
-		if randi() % 10 == 0:
-			var enemy_path: Path2D = enemy_paths.pick_random()
-			spawn_enemy(enemy_scene, enemy_path)
+	update_generation.emit(current_energy_cost)
+	update_subwave.emit(wave_subgroup_index + 1)
+	update_wave.emit(current_wave_index + 1)
+	update_tech.emit(tech_costs[tech_level], tech_level)
 
 func _on_resource_timer_timeout() -> void:
 	if total_resources < max_storage :
@@ -75,17 +96,26 @@ func _on_resource_timer_timeout() -> void:
 		update_resource.emit(total_resources)
 
 func _on_generation_increase_attempt() :
-	if total_resources >= 10/generation_rate * 1.5 :
-		total_resources -= 10/generation_rate * 1.5
-		generation_rate /= 1.1
+	if total_resources >= current_energy_cost :
+		total_resources -= current_energy_cost
+		generation_rate /= 1.2
 		resource_timer.wait_time = generation_rate
-		update_generation.emit(10/generation_rate * 1.5)
+		current_energy_cost *= 1.5
+		update_generation.emit(current_energy_cost)
 
 func _on_attempt_storage_upgrade() -> void:
 	if total_resources >= max_storage/2 :
 		total_resources -= max_storage/2
 		max_storage *= 2
 		update_storage.emit(max_storage/2)
+
+func _on_attempt_tech_upgrade() -> void :
+	if tech_level > 1:
+		return
+	if total_resources >= tech_costs[tech_level] :
+		total_resources -= tech_costs[tech_level]
+		tech_level += 1
+	update_tech.emit(tech_costs[tech_level], tech_level)
 
 func _process(_delta: float) -> void:
 	if objective.health <= 0.0:
@@ -150,9 +180,6 @@ func request_tower_destroy(global_pos : Vector2) -> bool:
 		
 	if is_cell_occupied(cell_coord):
 		var tower = tower_grid.get(cell_coord)
-		if tower is Wall:
-			if tower.health < 750:
-				return false
 		tower.queue_free()
 		tower_grid.erase(cell_coord)
 		return true
@@ -201,3 +228,63 @@ func _update_enemies(value : int):
 
 func _ultimate_death():
 	ultimateEnemy.emit(false)
+
+
+func _on_wave_timer_timeout() -> void:
+	wave_active = false
+	calm_timer.start()
+	wave_subgroup_index = -1
+	update_subwave.emit(wave_subgroup_index + 1)
+	clear_audio.play()
+	difficulty_multiplier += current_wave_index
+	boss_timer.stop()
+
+func _on_calm_timer_timeout() -> void:
+	wave_active = true
+	spawn_timer.start()
+	frequency_timer.start()
+	current_wave_index += 1
+	wave_subgroup_index += 1
+	update_wave.emit(current_wave_index + 1)
+	warning_audio.play()
+	if current_wave_index == 4:
+		wave_timer.start(600)
+		boss_timer.start(60)
+	elif current_wave_index == 3:
+		wave_timer.start(120)
+		boss_timer.start(60)
+	elif current_wave_index == 2:
+		wave_timer.start(120)
+		boss_timer.start(70)
+	else:
+		wave_timer.start(120)
+
+func _spawn_enemy_timer() -> void:
+	if wave_active:
+		spawn_timer.start()
+		wave_subgroup_index += 1
+		update_subwave.emit(wave_subgroup_index + 1)
+		difficulty_multiplier += .1
+
+func _frequency_timer() -> void:
+	if wave_active:
+		frequency_timer.start()	
+		normal_odds = NORMAL_ODDS
+		if normal_spawned :
+			normal_odds += NORMAL_ODDS + 5 - wave_subgroup_index
+		else :
+			normal_odds /= 1.05
+		if randf_range(0, (normal_odds / difficulty_multiplier)) < 1.0:
+			var enemy_path: Path2D = enemy_paths.pick_random()
+			spawn_enemy(enemy_scene, enemy_path)
+
+
+func _on_timer_timeout() -> void:
+	boss_cue.play()
+	for lane in enemy_paths:
+		spawn_enemy(siege_scene, lane)
+		ultimateEnemy.emit(true)
+	var former_wait_time = boss_timer.wait_time - 10
+	if former_wait_time < 10:
+		former_wait_time = 10
+	boss_timer.start(former_wait_time)

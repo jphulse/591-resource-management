@@ -158,6 +158,7 @@ animations = [{
 script = ExtResource("1_b6i70")
 max_health = 500.0
 health = 500.0
+building_value = 10.0
 
 [node name="Projectiles" type="Node2D" parent="." unique_id=281360252]
 
