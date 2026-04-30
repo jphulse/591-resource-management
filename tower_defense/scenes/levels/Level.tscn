@@ -20,9 +20,39 @@ texture = ExtResource("2_jlunc")
 texture_region_size = Vector2i(144, 144)
 0:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bfpmg"]
+texture = ExtResource("4_p81g3")
+texture_region_size = Vector2i(144, 144)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a57er"]
+texture = ExtResource("5_quxmv")
+texture_region_size = Vector2i(144, 144)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6cthw"]
+texture = ExtResource("9_a57er")
+texture_region_size = Vector2i(144, 144)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gelsx"]
+texture = ExtResource("7_quogt")
+texture_region_size = Vector2i(144, 144)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qyanb"]
+texture = ExtResource("8_bfpmg")
+texture_region_size = Vector2i(144, 144)
+0:0/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_dnnkv"]
 tile_size = Vector2i(144, 144)
 sources/0 = SubResource("TileSetAtlasSource_jlunc")
+sources/1 = SubResource("TileSetAtlasSource_bfpmg")
+sources/2 = SubResource("TileSetAtlasSource_a57er")
+sources/3 = SubResource("TileSetAtlasSource_6cthw")
+sources/4 = SubResource("TileSetAtlasSource_gelsx")
+sources/5 = SubResource("TileSetAtlasSource_qyanb")
 
 [sub_resource type="Curve2D" id="Curve2D_7ilpt"]
 _data = {
@@ -44,10 +74,10 @@ instance_shader_parameters/tint_color = Color(1, 1, 1, 1)
 instance_shader_parameters/vignette_radius = 1.2450000591375
 instance_shader_parameters/vignette_strength = 0.0
 script = ExtResource("1_7ilpt")
-generation_rate = 0.01
+generation_rate = 0.62
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1749395261]
-tile_map_data = PackedByteArray("AAABAAEAAAAAAAAAAAACAAEAAAAAAAAAAAADAAEAAAAAAAAAAAAEAAEAAAAAAAAAAAAFAAEAAAAAAAAAAAAGAAEAAAAAAAAAAAAHAAEAAAAAAAAAAAAIAAEAAAAAAAAAAAAJAAEAAAAAAAAAAAAKAAEAAAAAAAAAAAAKAAIAAAAAAAAAAAAKAAMAAAAAAAAAAAAKAAQAAAAAAAAAAAAKAAUAAAAAAAAAAAAJAAUAAAAAAAAAAAAIAAUAAAAAAAAAAAAHAAUAAAAAAAAAAAAGAAUAAAAAAAAAAAAFAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAADAAUAAAAAAAAAAAACAAUAAAAAAAAAAAABAAUAAAAAAAAAAAABAAQAAAAAAAAAAAABAAMAAAAAAAAAAAABAAIAAAAAAAAAAAACAAIAAAAAAAAAAAACAAMAAAAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAAAAAAAAAADAAMAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAAQAAAAAAAAAAAADAAIAAAAAAAAAAAAFAAIAAAAAAAAAAAAGAAIAAAAAAAAAAAAHAAIAAAAAAAAAAAAFAAMAAAAAAAAAAAAGAAMAAAAAAAAAAAAHAAMAAAAAAAAAAAAIAAMAAAAAAAAAAAAJAAMAAAAAAAAAAAAJAAIAAAAAAAAAAAAIAAIAAAAAAAAAAAAFAAQAAAAAAAAAAAAGAAQAAAAAAAAAAAAHAAQAAAAAAAAAAAAIAAQAAAAAAAAAAAAJAAQAAAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAABAAEAAAAAAAAAAAACAAEAAAAAAAAAAAADAAEAAAAAAAAAAAAEAAEAAAAAAAAAAAAFAAEAAAAAAAAAAAAGAAEAAAAAAAAAAAAHAAEAAAAAAAAAAAAIAAEAAAAAAAAAAAAJAAEAAAAAAAAAAAAKAAEAAAAAAAAAAAAKAAIAAAAAAAAAAAAKAAMAAAAAAAAAAAAKAAQAAAAAAAAAAAAKAAUAAAAAAAAAAAAJAAUAAAAAAAAAAAAIAAUAAAAAAAAAAAAHAAUAAAAAAAAAAAAGAAUAAAAAAAAAAAAFAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAADAAUAAAAAAAAAAAACAAUAAAAAAAAAAAABAAUAAAAAAAAAAAABAAQAAAAAAAAAAAABAAMAAAAAAAAAAAABAAIAAAAAAAAAAAACAAIAAAAAAAAAAAACAAMAAAAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAAAAAAAAAADAAMAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAAQAAAAAAAAAAAADAAIAAAAAAAAAAAAFAAIAAAAAAAAAAAAGAAIAAAAAAAAAAAAHAAIAAAAAAAAAAAAFAAMAAAAAAAAAAAAGAAMAAAAAAAAAAAAHAAMAAAAAAAAAAAAIAAMAAAAAAAAAAAAJAAMAAAAAAAAAAAAJAAIAAAAAAAAAAAAIAAIAAAAAAAAAAAAFAAQAAAAAAAAAAAAGAAQAAAAAAAAAAAAHAAQAAAAAAAAAAAAIAAQAAAAAAAAAAAAJAAQAAAAAAAAAAAAAAAYAAQAAAAAAAAABAAYAAQAAAAAAAAACAAYAAQAAAAAAAAADAAYAAQAAAAAAAAAEAAYAAQAAAAAAAAAFAAYAAQAAAAAAAAAGAAYAAQAAAAAAAAAHAAYAAQAAAAAAAAAIAAYAAQAAAAAAAAAJAAYAAQAAAAAAAAAKAAYAAQAAAAAAAAALAAYAAQAAAAAAAAAMAAYAAQAAAAAAAAANAAYAAQAAAAAAAAANAAcAAQAAAAAAAAAMAAcAAQAAAAAAAAALAAcAAQAAAAAAAAAKAAcAAQAAAAAAAAAJAAcAAQAAAAAAAAAIAAcAAQAAAAAAAAAHAAcAAQAAAAAAAAAGAAcAAQAAAAAAAAAFAAcAAQAAAAAAAAAEAAcAAQAAAAAAAAADAAcAAQAAAAAAAAACAAcAAQAAAAAAAAABAAcAAQAAAAAAAAAAAAcAAQAAAAAAAAAAAAAAAgAAAAAAAAABAAAAAwAAAAAAAAADAAAAAwAAAAAAAAAFAAAAAwAAAAAAAAAJAAAAAwAAAAAAAAALAAAAAwAAAAAAAAANAAAABAAAAAAAAAACAAAABQAAAAAAAAAGAAAABQAAAAAAAAAIAAAABQAAAAAAAAAMAAAAAwAAAAAAAAAKAAAABQAAAAAAAAAHAAAABAAAAAAAAAAEAAAAAgAAAAAAAAD//wcAAQAAAAAAAAD+/wcAAQAAAAAAAAD9/wcAAQAAAAAAAAD8/wcAAQAAAAAAAAD8/wYAAQAAAAAAAAD8/wUAAQAAAAAAAAD8/wQAAQAAAAAAAAD8/wMAAQAAAAAAAAD8/wIAAQAAAAAAAAD8/wEAAQAAAAAAAAD8/wAAAQAAAAAAAAD9/wAAAQAAAAAAAAD9/wEAAQAAAAAAAAD9/wIAAQAAAAAAAAD9/wMAAQAAAAAAAAD9/wQAAQAAAAAAAAD9/wUAAQAAAAAAAAD9/wYAAQAAAAAAAAD+/wYAAQAAAAAAAAD+/wUAAQAAAAAAAAD+/wQAAQAAAAAAAAD+/wMAAQAAAAAAAAD+/wIAAQAAAAAAAAD+/wEAAQAAAAAAAAD+/wAAAQAAAAAAAAD//wAAAQAAAAAAAAD//wEAAQAAAAAAAAD//wIAAQAAAAAAAAD//wMAAQAAAAAAAAD//wQAAQAAAAAAAAD//wUAAQAAAAAAAAD//wYAAQAAAAAAAAD7/wcAAQAAAAAAAAD7/wYAAQAAAAAAAAD7/wUAAQAAAAAAAAD7/wQAAQAAAAAAAAD7/wMAAQAAAAAAAAD7/wIAAQAAAAAAAAD7/wEAAQAAAAAAAAD7/wAAAQAAAAAAAAD6/wAAAQAAAAAAAAD6/wEAAQAAAAAAAAD6/wIAAQAAAAAAAAD6/wMAAQAAAAAAAAD6/wQAAQAAAAAAAAD6/wUAAQAAAAAAAAD6/wYAAQAAAAAAAAD6/wcAAQAAAAAAAAD5/wcAAQAAAAAAAAD5/wYAAQAAAAAAAAD5/wUAAQAAAAAAAAD5/wQAAQAAAAAAAAD5/wMAAQAAAAAAAAD5/wIAAQAAAAAAAAD5/wEAAQAAAAAAAAD5/wAAAQAAAAAAAAD4/wAAAQAAAAAAAAD4/wEAAQAAAAAAAAD4/wIAAQAAAAAAAAD4/wMAAQAAAAAAAAD4/wQAAQAAAAAAAAD4/wUAAQAAAAAAAAD4/wYAAQAAAAAAAAD4/wcAAQAAAAAAAAA=")
 tile_set = SubResource("TileSet_dnnkv")
 occlusion_enabled = false
 
@@ -130,463 +160,12 @@ instance_shader_parameters/tint_color = Color(1, 1, 1, 1)
 instance_shader_parameters/vignette_radius = 1.2450000591375
 instance_shader_parameters/vignette_strength = 0.0
 
-[node name="DarkBricks" type="Sprite2D" parent="Node2D" unique_id=924906149]
-z_index = 100
-position = Vector2(45, 909)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks2" type="Sprite2D" parent="Node2D" unique_id=1871997173]
-z_index = 100
-position = Vector2(45, 999)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks3" type="Sprite2D" parent="Node2D" unique_id=1199792561]
-z_index = 100
-position = Vector2(45, 1089)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="StoneBrickWall" type="Sprite2D" parent="Node2D" unique_id=1975716525]
-position = Vector2(90, 54)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("5_quxmv")
-
 [node name="CaveEntrance2" type="Sprite2D" parent="Node2D" unique_id=634226366]
 modulate = Color(0.4117647, 0.41568628, 0.41568628, 1)
 z_index = 100
 position = Vector2(72, 504)
 scale = Vector2(1, 0.989011)
 texture = ExtResource("6_7gewc")
-
-[node name="DarkBricks4" type="Sprite2D" parent="Node2D" unique_id=1400866210]
-z_index = 100
-position = Vector2(135, 909)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks5" type="Sprite2D" parent="Node2D" unique_id=80048265]
-z_index = 100
-position = Vector2(135, 999)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks6" type="Sprite2D" parent="Node2D" unique_id=2084668956]
-z_index = 100
-position = Vector2(135, 1089)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks7" type="Sprite2D" parent="Node2D" unique_id=134438992]
-z_index = 100
-position = Vector2(225, 909)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks8" type="Sprite2D" parent="Node2D" unique_id=1424399836]
-z_index = 100
-position = Vector2(225, 999)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks9" type="Sprite2D" parent="Node2D" unique_id=1077806545]
-z_index = 100
-position = Vector2(225, 1089)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks10" type="Sprite2D" parent="Node2D" unique_id=1548421742]
-z_index = 100
-position = Vector2(315, 909)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks11" type="Sprite2D" parent="Node2D" unique_id=2115403652]
-z_index = 100
-position = Vector2(315, 999)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks12" type="Sprite2D" parent="Node2D" unique_id=2145335727]
-z_index = 100
-position = Vector2(315, 1089)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks13" type="Sprite2D" parent="Node2D" unique_id=1058306699]
-z_index = 100
-position = Vector2(405, 909)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks14" type="Sprite2D" parent="Node2D" unique_id=981042539]
-z_index = 100
-position = Vector2(405, 999)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks15" type="Sprite2D" parent="Node2D" unique_id=990438533]
-z_index = 100
-position = Vector2(405, 1089)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks16" type="Sprite2D" parent="Node2D" unique_id=1403112993]
-z_index = 100
-position = Vector2(495, 909)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks17" type="Sprite2D" parent="Node2D" unique_id=63259383]
-z_index = 100
-position = Vector2(495, 999)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks18" type="Sprite2D" parent="Node2D" unique_id=766154137]
-z_index = 100
-position = Vector2(495, 1089)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks19" type="Sprite2D" parent="Node2D" unique_id=1062707054]
-z_index = 100
-position = Vector2(585, 909)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks20" type="Sprite2D" parent="Node2D" unique_id=1205855365]
-z_index = 100
-position = Vector2(585, 999)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks21" type="Sprite2D" parent="Node2D" unique_id=329583444]
-z_index = 100
-position = Vector2(585, 1089)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks22" type="Sprite2D" parent="Node2D" unique_id=747143595]
-z_index = 100
-position = Vector2(675, 909)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks23" type="Sprite2D" parent="Node2D" unique_id=585250793]
-z_index = 100
-position = Vector2(675, 999)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks24" type="Sprite2D" parent="Node2D" unique_id=1684028251]
-z_index = 100
-position = Vector2(675, 1089)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks25" type="Sprite2D" parent="Node2D" unique_id=957132364]
-z_index = 100
-position = Vector2(765, 909)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks26" type="Sprite2D" parent="Node2D" unique_id=3721630]
-z_index = 100
-position = Vector2(765, 999)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks27" type="Sprite2D" parent="Node2D" unique_id=295199868]
-z_index = 100
-position = Vector2(765, 1089)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks28" type="Sprite2D" parent="Node2D" unique_id=473562954]
-z_index = 100
-position = Vector2(855, 909)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks29" type="Sprite2D" parent="Node2D" unique_id=1561424663]
-z_index = 100
-position = Vector2(855, 999)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks30" type="Sprite2D" parent="Node2D" unique_id=1025055668]
-z_index = 100
-position = Vector2(855, 1089)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks31" type="Sprite2D" parent="Node2D" unique_id=670307420]
-z_index = 100
-position = Vector2(945, 909)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks32" type="Sprite2D" parent="Node2D" unique_id=341513243]
-z_index = 100
-position = Vector2(945, 999)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks33" type="Sprite2D" parent="Node2D" unique_id=85449820]
-z_index = 100
-position = Vector2(945, 1089)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks34" type="Sprite2D" parent="Node2D" unique_id=1082489838]
-z_index = 100
-position = Vector2(1035, 909)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks35" type="Sprite2D" parent="Node2D" unique_id=424349214]
-z_index = 100
-position = Vector2(1035, 999)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks36" type="Sprite2D" parent="Node2D" unique_id=1731846592]
-z_index = 100
-position = Vector2(1035, 1089)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks37" type="Sprite2D" parent="Node2D" unique_id=345386019]
-z_index = 100
-position = Vector2(1125, 909)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks38" type="Sprite2D" parent="Node2D" unique_id=1364254011]
-z_index = 100
-position = Vector2(1125, 999)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks39" type="Sprite2D" parent="Node2D" unique_id=1179630855]
-z_index = 100
-position = Vector2(1125, 1089)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks40" type="Sprite2D" parent="Node2D" unique_id=646591241]
-z_index = 100
-position = Vector2(1215, 909)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks41" type="Sprite2D" parent="Node2D" unique_id=469965507]
-z_index = 100
-position = Vector2(1215, 999)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks42" type="Sprite2D" parent="Node2D" unique_id=437330354]
-z_index = 100
-position = Vector2(1215, 1089)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks43" type="Sprite2D" parent="Node2D" unique_id=1123103710]
-z_index = 100
-position = Vector2(1305, 909)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks44" type="Sprite2D" parent="Node2D" unique_id=7848281]
-z_index = 100
-position = Vector2(1305, 999)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks45" type="Sprite2D" parent="Node2D" unique_id=2026534116]
-z_index = 100
-position = Vector2(1305, 1089)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks46" type="Sprite2D" parent="Node2D" unique_id=1198647468]
-z_index = 100
-position = Vector2(1395, 909)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks47" type="Sprite2D" parent="Node2D" unique_id=1151671947]
-z_index = 100
-position = Vector2(1395, 999)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks48" type="Sprite2D" parent="Node2D" unique_id=2084179274]
-z_index = 100
-position = Vector2(1395, 1089)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks49" type="Sprite2D" parent="Node2D" unique_id=1392420218]
-z_index = 100
-position = Vector2(1485, 909)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks50" type="Sprite2D" parent="Node2D" unique_id=903888779]
-z_index = 100
-position = Vector2(1485, 999)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks51" type="Sprite2D" parent="Node2D" unique_id=1654354580]
-z_index = 100
-position = Vector2(1485, 1089)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks52" type="Sprite2D" parent="Node2D" unique_id=840636561]
-z_index = 100
-position = Vector2(1575, 909)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks53" type="Sprite2D" parent="Node2D" unique_id=198692734]
-z_index = 100
-position = Vector2(1575, 999)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks54" type="Sprite2D" parent="Node2D" unique_id=1243990743]
-z_index = 100
-position = Vector2(1575, 1089)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks55" type="Sprite2D" parent="Node2D" unique_id=1101046827]
-z_index = 100
-position = Vector2(1665, 909)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks56" type="Sprite2D" parent="Node2D" unique_id=973579894]
-z_index = 100
-position = Vector2(1665, 999)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks57" type="Sprite2D" parent="Node2D" unique_id=1106607777]
-z_index = 100
-position = Vector2(1665, 1089)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks58" type="Sprite2D" parent="Node2D" unique_id=1655417654]
-z_index = 100
-position = Vector2(1755, 909)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks59" type="Sprite2D" parent="Node2D" unique_id=1022747843]
-z_index = 100
-position = Vector2(1755, 999)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks60" type="Sprite2D" parent="Node2D" unique_id=720689690]
-z_index = 100
-position = Vector2(1755, 1089)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks61" type="Sprite2D" parent="Node2D" unique_id=1792482090]
-z_index = 100
-position = Vector2(1845, 909)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks62" type="Sprite2D" parent="Node2D" unique_id=1320230391]
-z_index = 100
-position = Vector2(1845, 999)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks63" type="Sprite2D" parent="Node2D" unique_id=2013065034]
-z_index = 100
-position = Vector2(1845, 1089)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks64" type="Sprite2D" parent="Node2D" unique_id=817927142]
-z_index = 100
-position = Vector2(1935, 909)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks65" type="Sprite2D" parent="Node2D" unique_id=1650846300]
-z_index = 100
-position = Vector2(1935, 999)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="DarkBricks66" type="Sprite2D" parent="Node2D" unique_id=914537287]
-z_index = 100
-position = Vector2(1935, 1089)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_p81g3")
-
-[node name="StoneBrickWallVeryOld" type="Sprite2D" parent="Node2D" unique_id=1660412980]
-position = Vector2(990, 54)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("7_quogt")
-
-[node name="StoneBrickWalOld2" type="Sprite2D" parent="Node2D" unique_id=1845004174]
-position = Vector2(810, 54)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("8_bfpmg")
-
-[node name="StoneBrickWalOld" type="Sprite2D" parent="Node2D" unique_id=1984329203]
-position = Vector2(450, 54)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("8_bfpmg")
-
-[node name="StoneBrickWalOld5" type="Sprite2D" parent="Node2D" unique_id=25689692]
-position = Vector2(1710, 54)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("8_bfpmg")
-
-[node name="StoneBrickWallSlightlyOld3" type="Sprite2D" parent="Node2D" unique_id=1914273618]
-position = Vector2(1890, 54)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("9_a57er")
-
-[node name="StoneBrickWallSlightlyOld4" type="Sprite2D" parent="Node2D" unique_id=1286173977]
-position = Vector2(1530, 54)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("9_a57er")
-
-[node name="StoneBrickWallSlightlyOld2" type="Sprite2D" parent="Node2D" unique_id=1601024509]
-position = Vector2(630, 54)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("9_a57er")
-
-[node name="StoneBrickWalOld4" type="Sprite2D" parent="Node2D" unique_id=1807805329]
-position = Vector2(1350, 54)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("8_bfpmg")
-
-[node name="StoneBrickWalOld3" type="Sprite2D" parent="Node2D" unique_id=705291002]
-position = Vector2(1170, 54)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("8_bfpmg")
-
-[node name="StoneBrickWallSlightlyOld" type="Sprite2D" parent="Node2D" unique_id=1576180131]
-position = Vector2(270, 54)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("9_a57er")
 
 [node name="Highway" type="Sprite2D" parent="." unique_id=850594077]
 z_index = -99
@@ -596,11 +175,11 @@ texture = ExtResource("10_6cthw")
 
 [node name="Warning" type="AudioStreamPlayer" parent="." unique_id=1254303868]
 stream = ExtResource("12_quogt")
-volume_db = -7.473
+volume_db = -8.583
 
 [node name="Clear" type="AudioStreamPlayer" parent="." unique_id=1323921775]
 stream = ExtResource("13_bfpmg")
-volume_db = -11.21
+volume_db = -16.01
 
 [node name="Timer" type="Timer" parent="." unique_id=1613972982]
 wait_time = 60.0
@@ -608,10 +187,13 @@ one_shot = true
 
 [node name="Alert" type="AudioStreamPlayer" parent="." unique_id=1869056530]
 stream = ExtResource("14_bfpmg")
-volume_db = -13.078
+volume_db = -15.008
 
 [node name="death_ball_timer" type="Timer" parent="." unique_id=1363691704]
 wait_time = 0.3
+one_shot = true
+
+[node name="Aux_Timer" type="Timer" parent="." unique_id=2063193729]
 one_shot = true
 
 [connection signal="timeout" from="spawn_timer" to="." method="_spawn_enemy_timer"]
@@ -620,3 +202,5 @@ one_shot = true
 [connection signal="timeout" from="wave_timer" to="." method="_on_wave_timer_timeout"]
 [connection signal="timeout" from="calm_timer" to="." method="_on_calm_timer_timeout"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="death_ball_timer" to="." method="_on_death_ball_timer_timeout"]
+[connection signal="timeout" from="Aux_Timer" to="." method="_on_aux_timer_timeout"]

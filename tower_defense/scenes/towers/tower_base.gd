@@ -19,6 +19,7 @@ class_name TowerBase extends Node2D
 @export var building_value: float = 75.0
 @export var cannon_sounds: Array[AudioStream]
 @export var bullet_color: Color
+@export var cost : int
 
 signal defense_built(value : int)
 signal defense_destroyed(value: int)

@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://cykbf6ck1lare"]
+
+[ext_resource type="Script" uid="uid://pe7qteg782ss" path="res://tower_defense/scenes/enemies/base_enemy/enemy_base.gd" id="1_4rfdp"]
+[ext_resource type="Texture2D" uid="uid://dj8disisbxqrn" path="res://tower_defense/assets/sprites/enemies/carrier1.png" id="2_2rwgi"]
+[ext_resource type="Texture2D" uid="uid://uxbrobtlmkfm" path="res://tower_defense/assets/sprites/enemies/carrier2.png" id="3_muti3"]
+[ext_resource type="Script" uid="uid://cdvwi26nfaljx" path="res://tower_defense/scenes/enemies/base_enemy/enemy_hitbox.gd" id="4_muti3"]
+[ext_resource type="Texture2D" uid="uid://cacs1mt1ff1d8" path="res://tower_defense/assets/sprites/enemies/carrier3.png" id="4_reqfh"]
+[ext_resource type="Texture2D" uid="uid://7kv1nrbr7fxp" path="res://tower_defense/assets/sprites/enemies/carrier4.png" id="5_lcfbx"]
+[ext_resource type="Script" uid="uid://l5pesthk0cvw" path="res://tower_defense/scenes/enemies/base_enemy/attack_area.gd" id="5_reqfh"]
+[ext_resource type="StyleBox" uid="uid://bp5rpbwor3asu" path="res://background_health_enemy.tres" id="6_lcfbx"]
+[ext_resource type="StyleBox" uid="uid://j4h4udfe7ew3" path="res://background_fill_health_enemy.tres" id="7_7avn3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5pr1j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2rwgi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_muti3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_reqfh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_lcfbx")
+}],
+"loop": true,
+"name": &"death_ball_move",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_coewb"]
+size = Vector2(223, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ndb33"]
+size = Vector2(230.00015, 130)
+
+[node name="EnemyBase" type="Node2D" unique_id=1221308985]
+script = ExtResource("1_4rfdp")
+damage = 50.0
+health = 150.0
+movement_speed = 20.0
+attack_cooldown = 5.0
+armour = 1
+
+[node name="Enemy_Sprite" type="AnimatedSprite2D" parent="." unique_id=1267908228]
+position = Vector2(0, -14.999999)
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_5pr1j")
+animation = &"death_ball_move"
+frame = 2
+frame_progress = 0.28571302
+
+[node name="EnemyHitbox" type="Area2D" parent="." unique_id=938387276]
+position = Vector2(-66, 0)
+collision_mask = 258
+script = ExtResource("4_muti3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox" unique_id=1974487812]
+position = Vector2(39.5, 0)
+shape = SubResource("RectangleShape2D_coewb")
+
+[node name="EnemyAttackArea" type="Area2D" parent="." unique_id=1471568512]
+position = Vector2(-66, 0)
+script = ExtResource("5_reqfh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyAttackArea" unique_id=55715416]
+position = Vector2(39.999992, 8.344649e-06)
+scale = Vector2(0.9999994, 0.9999994)
+shape = SubResource("RectangleShape2D_ndb33")
+
+[node name="AttackCooldownTimer" type="Timer" parent="." unique_id=501510785]
+process_callback = 0
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=928513638]
+offset_left = -30.0
+offset_top = 65.0
+offset_right = 90.0
+offset_bottom = 88.0
+scale = Vector2(0.5, 0.5)
+theme_override_styles/background = ExtResource("6_lcfbx")
+theme_override_styles/fill = ExtResource("7_7avn3")
+max_value = 1000.0
+step = 0.0
+show_percentage = false
+
+[connection signal="area_entered" from="EnemyHitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_entered" from="EnemyAttackArea" to="." method="_on_attack_area_area_entered"]
+[connection signal="area_exited" from="EnemyAttackArea" to="." method="_on_attack_area_area_exited"]
+[connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_attack_cooldown_timer_timeout"]

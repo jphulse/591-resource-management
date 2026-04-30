@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://cxby1rpj5kclj"]
 
 [ext_resource type="Script" uid="uid://cw57xyc622x31" path="res://main_menu/game_button.gd" id="1_oa53l"]
-[ext_resource type="PackedScene" uid="uid://dlb8clby3j6aw" path="res://tower_defense/scenes/Main.tscn" id="2_3shxk"]
+[ext_resource type="PackedScene" uid="uid://cg66ay8348sjw" path="res://tower_defense/scenes/ui/Intro_Final_Zenith.tscn" id="2_bws42"]
 [ext_resource type="PackedScene" uid="uid://cn5blsogqeywr" path="res://infection_spreading/main/main.tscn" id="2_d3a7t"]
 [ext_resource type="AudioStream" uid="uid://kdc3qjcbsc36" path="res://tower_defense/music/Harbinger.ogg" id="4_bws42"]
+
+[sub_resource type="Theme" id="Theme_bws42"]
 
 [node name="MainMenu" type="Control" unique_id=1551978367]
 layout_mode = 3
@@ -24,14 +26,18 @@ grow_vertical = 2
 [node name="GameButton" type="Button" parent="VBoxContainer" unique_id=486813423]
 layout_mode = 2
 size_flags_vertical = 3
+theme = SubResource("Theme_bws42")
+theme_override_font_sizes/font_size = 99
 text = "Final Zenith - Tower Defense"
 script = ExtResource("1_oa53l")
-packed_scene = ExtResource("2_3shxk")
+packed_scene = ExtResource("2_bws42")
 
 [node name="GameButton2" type="Button" parent="VBoxContainer" unique_id=273885239]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Infection Spreading
+theme = SubResource("Theme_bws42")
+theme_override_font_sizes/font_size = 99
+text = "Cookie Clicker Infection Spreading
 "
 script = ExtResource("1_oa53l")
 packed_scene = ExtResource("2_d3a7t")

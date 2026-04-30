@@ -88,9 +88,8 @@ animations = [{
 script = ExtResource("1_ljb87")
 damage = 10.0
 health = 15.0
-movement_speed = 50.0
 attack_cooldown = 1.0
-enemy_value = 50.0
+enemy_value = 15.0
 armour = 1
 
 [node name="EnemyHitbox" type="Area2D" parent="." unique_id=938387276]
@@ -128,7 +127,7 @@ show_percentage = false
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_jhxtg")
 animation = &"death_ball_move"
-frame_progress = 0.3977499
+frame_progress = 0.10035765
 
 [connection signal="area_entered" from="EnemyHitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_entered" from="EnemyAttackArea" to="." method="_on_attack_area_area_entered"]

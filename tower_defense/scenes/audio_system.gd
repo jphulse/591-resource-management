@@ -99,9 +99,9 @@ func _tween_volume(node: AudioStreamPlayer, target_vol: float) -> void:
 	var duration = diff / TWEEN_SPEED
 	
 	if duration > 0:
-		var t = create_tween()
-		active_tweens[node] = t
-		t.tween_property(node, "volume_linear", target_vol, duration)
+		var tween = create_tween()
+		active_tweens[node] = tween
+		tween.tween_property(node, "volume_linear", target_vol, duration)
 	else:
 		node.volume_linear = target_vol
 	

@@ -1,0 +1,277 @@
+[gd_scene format=3 uid="uid://cg66ay8348sjw"]
+
+[ext_resource type="Script" uid="uid://wriqbkc5qrl6" path="res://tower_defense/scenes/ui/intro_final_zenith.gd" id="1_sgdgv"]
+[ext_resource type="Theme" uid="uid://dgnp4nqf51qkl" path="res://tower_defense/resources/UI/Default.tres" id="2_gqwv7"]
+[ext_resource type="PackedScene" uid="uid://dlb8clby3j6aw" path="res://tower_defense/scenes/Main.tscn" id="2_t777b"]
+[ext_resource type="Shader" uid="uid://snvxlsyeqrbb" path="res://tower_defense/resources/Shaders/vhs_cctv_global_ui.gdshader" id="3_0m120"]
+[ext_resource type="Shader" uid="uid://c3w842aqov3h" path="res://tower_defense/resources/Shaders/vhs_cctv_ui.gdshader" id="3_ap6ix"]
+[ext_resource type="AudioStream" uid="uid://c2aw1uotm16q6" path="res://tower_defense/music/Call To Arms.ogg" id="3_mxmkn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0m120"]
+shader = ExtResource("3_0m120")
+shader_parameter/enable_scanlines = true
+shader_parameter/enable_noise = true
+shader_parameter/enable_chromatic_aberration = true
+shader_parameter/enable_warp = true
+shader_parameter/enable_roll_bar = true
+shader_parameter/enable_vignette = true
+shader_parameter/enable_desaturate = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t777b"]
+shader = ExtResource("3_ap6ix")
+shader_parameter/enable_scanlines = true
+shader_parameter/enable_noise = true
+shader_parameter/enable_chromatic_aberration = true
+shader_parameter/enable_warp = true
+shader_parameter/enable_roll_bar = true
+shader_parameter/enable_vignette = true
+shader_parameter/enable_desaturate = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cvbgs"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s81wp"]
+bg_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0dhbr"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ch8gj"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bwk5b"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="IntroFinalZenith" type="Control" unique_id=630421229]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sgdgv")
+next_scene = ExtResource("2_t777b")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=282300014]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=1939627694]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control" unique_id=1167993850]
+layout_mode = 0
+offset_left = -861.0
+offset_right = 3219.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer/Control" unique_id=1562585715]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 20.0
+offset_top = 45.0
+offset_right = 1308.0
+offset_bottom = 89.0
+theme = ExtResource("2_gqwv7")
+theme_override_font_sizes/font_size = 50
+text = "The last grand army was routed, no survivors"
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control" unique_id=820490799]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 20.0
+offset_top = 139.0
+offset_right = 1659.0
+offset_bottom = 183.0
+theme = ExtResource("2_gqwv7")
+theme_override_font_sizes/font_size = 50
+text = "We only have one last card to play, deploy the bioweapon"
+
+[node name="Label3" type="Label" parent="CanvasLayer/Control" unique_id=1947574070]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 20.0
+offset_top = 231.0
+offset_right = 2186.0
+offset_bottom = 322.0
+theme = ExtResource("2_gqwv7")
+theme_override_font_sizes/font_size = 50
+text = "You are charged with defending our final stronghold"
+
+[node name="Label4" type="Label" parent="CanvasLayer/Control" unique_id=2112940625]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 20.0
+offset_top = 331.0
+offset_right = 2186.0
+offset_bottom = 422.0
+theme = ExtResource("2_gqwv7")
+theme_override_font_sizes/font_size = 50
+text = "Time must be bought for the bioweapon's 
+completion and activation"
+
+[node name="Label5" type="Label" parent="CanvasLayer/Control" unique_id=2088839195]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 20.0
+offset_top = 470.0
+offset_right = 1893.0
+offset_bottom = 561.0
+theme = ExtResource("2_gqwv7")
+theme_override_font_sizes/font_size = 50
+text = "These scientists are the last of the best and brightest of us
+"
+
+[node name="Label6" type="Label" parent="CanvasLayer/Control" unique_id=1208211818]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 20.0
+offset_top = 598.0
+offset_right = 1893.0
+offset_bottom = 689.0
+theme = ExtResource("2_gqwv7")
+theme_override_font_sizes/font_size = 60
+text = "Commander, you are defending our civilization's "
+horizontal_alignment = 1
+
+[node name="Label7" type="Label" parent="CanvasLayer/Control" unique_id=1773260619]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 644.0
+offset_top = 766.0
+offset_right = 937.0
+offset_bottom = 854.0
+theme = ExtResource("2_gqwv7")
+theme_override_font_sizes/font_size = 100
+text = "FINAL"
+
+[node name="Label8" type="Label" parent="CanvasLayer/Control" unique_id=1513727980]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 994.0
+offset_top = 766.0
+offset_right = 1346.0
+offset_bottom = 854.0
+theme = ExtResource("2_gqwv7")
+theme_override_font_sizes/font_size = 100
+text = "ZENITH"
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="CanvasLayer" unique_id=1207043475]
+rect = Rect2(0, 0, 1920, 1080)
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer" unique_id=1644432498]
+z_index = 1
+material = SubResource("ShaderMaterial_0m120")
+instance_shader_parameters/chromatic_offset = 0.0010000000475
+instance_shader_parameters/desaturate_amount = 0.0
+instance_shader_parameters/effect_amount = 1.0
+instance_shader_parameters/horizontal_warp_frequency = 0.0
+instance_shader_parameters/horizontal_warp_speed = 0.0
+instance_shader_parameters/horizontal_warp_strength = 0.0010000000475
+instance_shader_parameters/noise_speed = 0.0
+instance_shader_parameters/noise_strength = 0.0
+instance_shader_parameters/roll_bar_size = 0.00999999977648
+instance_shader_parameters/roll_bar_speed = 5.0
+instance_shader_parameters/roll_bar_strength = 0.0350000016625
+instance_shader_parameters/scanline_count = 402.3390143611025
+instance_shader_parameters/scanline_strength = 0.010000000475
+instance_shader_parameters/tint_color = Color(1, 1, 1, 1)
+instance_shader_parameters/vignette_radius = 0.9750000463125
+instance_shader_parameters/vignette_strength = 0.1510000071725
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+
+[node name="Button" type="Button" parent="CanvasLayer" unique_id=203672841]
+z_index = 2
+material = SubResource("ShaderMaterial_t777b")
+instance_shader_parameters/chromatic_offset = 10.0
+instance_shader_parameters/desaturate_amount = 0.0
+instance_shader_parameters/effect_amount = 1.0
+instance_shader_parameters/horizontal_warp_frequency = 0.0
+instance_shader_parameters/horizontal_warp_speed = 0.0
+instance_shader_parameters/horizontal_warp_strength = 0.0050000002375
+instance_shader_parameters/noise_speed = 60.0
+instance_shader_parameters/noise_strength = 1.0
+instance_shader_parameters/roll_bar_size = 0.00999999977648
+instance_shader_parameters/roll_bar_speed = -5.0
+instance_shader_parameters/roll_bar_strength = 0.0
+instance_shader_parameters/scanline_count = 100.0
+instance_shader_parameters/scanline_strength = 0.0
+instance_shader_parameters/tint_color = Color(0.4274927, 0.42749316, 0.42749307, 1)
+instance_shader_parameters/vignette_radius = 0.4650000220875
+instance_shader_parameters/vignette_strength = 1.4110000670225
+offset_top = 987.0
+offset_right = 42.0
+offset_bottom = 1018.0
+scale = Vector2(3, 3)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 0.5019608)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_cvbgs")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_s81wp")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0dhbr")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_ch8gj")
+theme_override_styles/focus = SubResource("StyleBoxFlat_bwk5b")
+text = "Skip"
+
+[node name="Timer" type="Timer" parent="." unique_id=1738625299]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="Timer2" type="Timer" parent="." unique_id=1916782999]
+wait_time = 6.0
+one_shot = true
+autostart = true
+
+[node name="Timer3" type="Timer" parent="." unique_id=1010978227]
+wait_time = 9.0
+one_shot = true
+autostart = true
+
+[node name="Timer4" type="Timer" parent="." unique_id=1127670683]
+wait_time = 12.0
+one_shot = true
+autostart = true
+
+[node name="Timer5" type="Timer" parent="." unique_id=1151544693]
+wait_time = 18.0
+one_shot = true
+autostart = true
+
+[node name="Timer6" type="Timer" parent="." unique_id=1356841368]
+wait_time = 19.5
+one_shot = true
+autostart = true
+
+[node name="Timer7" type="Timer" parent="." unique_id=1576485977]
+wait_time = 20.6
+one_shot = true
+autostart = true
+
+[node name="Timer8" type="Timer" parent="." unique_id=2083801051]
+wait_time = 25.700000000000003
+one_shot = true
+autostart = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1663370367]
+stream = ExtResource("3_mxmkn")
+autoplay = true
+
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_audio_stream_player_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
+[connection signal="timeout" from="Timer3" to="." method="_on_timer_3_timeout"]
+[connection signal="timeout" from="Timer4" to="." method="_on_timer_4_timeout"]
+[connection signal="timeout" from="Timer5" to="." method="_on_timer_5_timeout"]
+[connection signal="timeout" from="Timer6" to="." method="_on_timer_6_timeout"]
+[connection signal="timeout" from="Timer7" to="." method="_on_timer_7_timeout"]
+[connection signal="timeout" from="Timer8" to="." method="_on_timer_8_timeout"]
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]

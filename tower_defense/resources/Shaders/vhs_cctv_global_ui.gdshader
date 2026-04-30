@@ -24,8 +24,8 @@ instance uniform float roll_bar_speed : hint_range(-5.0, 5.0) = 0.25;
 instance uniform float roll_bar_size : hint_range(0.01, 0.5) = 0.12;
 
 uniform bool enable_vignette = true;
-instance uniform float vignette_strength : hint_range(0.0, 1.0) = 0.35;
-instance uniform float vignette_radius : hint_range(0.0, 1.5) = 0.75;
+instance uniform float vignette_strength : hint_range(0.0, 2.0) = 0.35;
+instance uniform float vignette_radius : hint_range(0.0, 2.5) = 0.75;
 
 uniform bool enable_desaturate = true;
 instance uniform float desaturate_amount : hint_range(0.0, 1.0) = 0.25;

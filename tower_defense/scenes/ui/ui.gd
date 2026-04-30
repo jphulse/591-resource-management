@@ -35,7 +35,6 @@ signal change_subwave(increase : bool)
 @onready var door_tech1_1 : AnimatedSprite2D = self.find_child("tower_door4")
 @onready var door_tech1_2 : AnimatedSprite2D = self.find_child("tower_door5")
 @onready var door_tech2_1 : AnimatedSprite2D = self.find_child("tower_door6")
-@onready var door_nodes : Control = $Control
 
 var ui_tweens : Dictionary = {}
 
@@ -69,7 +68,6 @@ func _tween_object(node: Node, target_pos: Vector2, pixels_per_second: int) -> v
 func _on_button_2_pressed() -> void:
 	at_lab = false
 	to_lab.emit(at_lab)
-	_tween_object(door_nodes, Vector2(0, 0.0), 700)
 	_tween_object(to_lab_button, Vector2(33, 33), 400)
 	_tween_object(from_lab_button, Vector2(2260.0, 33.0), 400)
 	_tween_object(tower_bar, Vector2(0, 908.0), 700)
@@ -84,7 +82,6 @@ func _on_button_pressed() -> void:
 	to_lab.emit(at_lab)
 	
 	_tween_object(tower_bar, Vector2(0, 1808.0), 500)
-	_tween_object(door_nodes, Vector2(0, 900.0), 500)
 	_tween_object(progress_bar, Vector2(0, 908.0), 1700)
 	_tween_object(to_lab_button, Vector2(-550, 33), 400)
 	_tween_object(from_lab_button, Vector2(1680.0, 33.0), 400)

@@ -34,35 +34,7 @@
 [ext_resource type="Texture2D" uid="uid://d22w5tnw1v0sx" path="res://tower_defense/resources/Sprites/turret_trap_door8.png" id="32_2whdd"]
 [ext_resource type="Texture2D" uid="uid://b4dcft78c7dql" path="res://tower_defense/resources/Sprites/turret_trap_door9.png" id="33_fxgmp"]
 [ext_resource type="Script" uid="uid://dvjq137irlp4j" path="res://tower_defense/scenes/ui/tower_door.gd" id="34_cqeud"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w2cth"]
-bg_color = Color(0.18973774, 0.7204785, 7.70092e-07, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ytucd"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 2
-border_width_bottom = 5
-border_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_146i4"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 2
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0, 0, 0, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ytucd"]
-shader = ExtResource("16_v510m")
-shader_parameter/enable_scanlines = true
-shader_parameter/enable_noise = true
-shader_parameter/enable_chromatic_aberration = true
-shader_parameter/enable_warp = true
-shader_parameter/enable_roll_bar = true
-shader_parameter/enable_vignette = true
-shader_parameter/enable_desaturate = true
+[ext_resource type="Script" uid="uid://ru1rop2llfue" path="res://tower_defense/scenes/ui/panel.gd" id="35_yjbvj"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6p17c"]
 animations = [{
@@ -100,6 +72,35 @@ animations = [{
 }]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a7eom"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w2cth"]
+bg_color = Color(0.18973774, 0.7204785, 7.70092e-07, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ytucd"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 2
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_146i4"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ytucd"]
+shader = ExtResource("16_v510m")
+shader_parameter/enable_scanlines = true
+shader_parameter/enable_noise = true
+shader_parameter/enable_chromatic_aberration = true
+shader_parameter/enable_warp = true
+shader_parameter/enable_roll_bar = true
+shader_parameter/enable_vignette = true
+shader_parameter/enable_desaturate = true
 
 [node name="Ui" type="CanvasLayer" unique_id=1856254877]
 script = ExtResource("1_wgpra")
@@ -433,6 +434,108 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 20
 tower_scene = ExtResource("16_gabay")
 texture_sprite = ExtResource("17_pnyad")
+
+[node name="Control" type="Control" parent="Container/Tower_Menu/SubViewport" unique_id=318570820]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_behavior_recursive = 2
+
+[node name="tower_door" type="AnimatedSprite2D" parent="Container/Tower_Menu/SubViewport/Control" unique_id=991340997]
+position = Vector2(70.00001, 86)
+scale = Vector2(3.5, 3.5)
+sprite_frames = SubResource("SpriteFrames_6p17c")
+script = ExtResource("34_cqeud")
+destroy_on_start = true
+
+[node name="Panel" type="Panel" parent="Container/Tower_Menu/SubViewport/Control/tower_door" unique_id=1635319300]
+offset_left = -18.000002
+offset_top = -18.00001
+offset_right = 17.999994
+offset_bottom = 17.99999
+theme_override_styles/panel = SubResource("StyleBoxTexture_a7eom")
+
+[node name="tower_door2" type="AnimatedSprite2D" parent="Container/Tower_Menu/SubViewport/Control" unique_id=1974208541]
+position = Vector2(210.00002, 86)
+scale = Vector2(3.5, 3.5)
+sprite_frames = SubResource("SpriteFrames_6p17c")
+script = ExtResource("34_cqeud")
+destroy_on_start = true
+
+[node name="Panel" type="Panel" parent="Container/Tower_Menu/SubViewport/Control/tower_door2" unique_id=426666651]
+offset_left = -18.000002
+offset_top = -18.00001
+offset_right = 17.999994
+offset_bottom = 17.99999
+theme_override_styles/panel = SubResource("StyleBoxTexture_a7eom")
+
+[node name="tower_door3" type="AnimatedSprite2D" parent="Container/Tower_Menu/SubViewport/Control" unique_id=451597534]
+position = Vector2(349, 86)
+scale = Vector2(3.5, 3.5)
+sprite_frames = SubResource("SpriteFrames_6p17c")
+script = ExtResource("34_cqeud")
+destroy_on_start = true
+
+[node name="Panel" type="Panel" parent="Container/Tower_Menu/SubViewport/Control/tower_door3" unique_id=889469235]
+offset_left = -18.000002
+offset_top = -18.00001
+offset_right = 17.999994
+offset_bottom = 17.99999
+theme_override_styles/panel = SubResource("StyleBoxTexture_a7eom")
+
+[node name="tower_door4" type="AnimatedSprite2D" parent="Container/Tower_Menu/SubViewport/Control" unique_id=354874434]
+position = Vector2(489.00003, 86)
+scale = Vector2(3.5, 3.5)
+sprite_frames = SubResource("SpriteFrames_6p17c")
+script = ExtResource("34_cqeud")
+
+[node name="Panel" type="Panel" parent="Container/Tower_Menu/SubViewport/Control/tower_door4" unique_id=1957363249]
+offset_left = -18.000002
+offset_top = -18.00001
+offset_right = 17.999994
+offset_bottom = 17.99999
+theme_override_styles/panel = SubResource("StyleBoxTexture_a7eom")
+
+[node name="tower_door5" type="AnimatedSprite2D" parent="Container/Tower_Menu/SubViewport/Control" unique_id=2017543907]
+position = Vector2(629.00006, 86)
+scale = Vector2(3.5, 3.5)
+sprite_frames = SubResource("SpriteFrames_6p17c")
+script = ExtResource("34_cqeud")
+
+[node name="Panel" type="Panel" parent="Container/Tower_Menu/SubViewport/Control/tower_door5" unique_id=165103974]
+offset_left = -18.000002
+offset_top = -18.00001
+offset_right = 17.999994
+offset_bottom = 17.99999
+theme_override_styles/panel = SubResource("StyleBoxTexture_a7eom")
+
+[node name="tower_door6" type="AnimatedSprite2D" parent="Container/Tower_Menu/SubViewport/Control" unique_id=784642726]
+position = Vector2(768.00006, 86)
+scale = Vector2(3.5, 3.5)
+sprite_frames = SubResource("SpriteFrames_6p17c")
+script = ExtResource("34_cqeud")
+
+[node name="Panel" type="Panel" parent="Container/Tower_Menu/SubViewport/Control/tower_door6" unique_id=1281103848]
+offset_left = -18.000002
+offset_top = -18.00001
+offset_right = 17.999994
+offset_bottom = 17.99999
+theme_override_styles/panel = SubResource("StyleBoxTexture_a7eom")
+
+[node name="tower_door7" type="AnimatedSprite2D" parent="Container/Tower_Menu/SubViewport/Control" unique_id=583423889]
+position = Vector2(908.00006, 86)
+scale = Vector2(3.5, 3.5)
+sprite_frames = SubResource("SpriteFrames_6p17c")
+script = ExtResource("34_cqeud")
+destroy_on_start = true
+
+[node name="Panel" type="Panel" parent="Container/Tower_Menu/SubViewport/Control/tower_door7" unique_id=2144206707]
+offset_left = -18.000002
+offset_top = -18.00001
+offset_right = 17.999994
+offset_bottom = 17.99999
+theme_override_styles/panel = SubResource("StyleBoxTexture_a7eom")
 
 [node name="Progress_Menu" type="SubViewportContainer" parent="Container" unique_id=607550374]
 material = ExtResource("14_w2cth")
@@ -1076,114 +1179,68 @@ theme = ExtResource("2_6qse1")
 theme_override_font_sizes/font_size = 16
 text = "wave"
 
-[node name="Control" type="Control" parent="." unique_id=318570820]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-mouse_behavior_recursive = 2
+[node name="Panel" type="Panel" parent="." unique_id=1491628790]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -199.5
+offset_top = -123.0
+offset_right = 283.0
+offset_bottom = 119.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("35_yjbvj")
 
-[node name="tower_door" type="AnimatedSprite2D" parent="Control" unique_id=991340997]
-material = ExtResource("14_w2cth")
-position = Vector2(70.00001, 993)
-scale = Vector2(3.5, 3.5)
-sprite_frames = SubResource("SpriteFrames_6p17c")
-script = ExtResource("34_cqeud")
-destroy_on_start = true
+[node name="Panel" type="Panel" parent="Panel" unique_id=599606261]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1133.75
+offset_top = -620.0
+offset_right = 1118.25
+offset_bottom = 665.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("35_yjbvj")
 
-[node name="Panel" type="Panel" parent="Control/tower_door" unique_id=1635319300]
-offset_left = -18.000002
-offset_top = -18.00001
-offset_right = 17.999994
-offset_bottom = 17.99999
-theme_override_styles/panel = SubResource("StyleBoxTexture_a7eom")
+[node name="Label" type="Label" parent="Panel" unique_id=768357335]
+layout_mode = 0
+offset_left = 36.5
+offset_top = 15.0
+offset_right = 373.5
+offset_bottom = 60.0
+theme = ExtResource("2_6qse1")
+theme_override_font_sizes/font_size = 32
+text = "Mission Parameters"
 
-[node name="tower_door2" type="AnimatedSprite2D" parent="Control" unique_id=1974208541]
-material = ExtResource("14_w2cth")
-position = Vector2(210.00002, 993.00006)
-scale = Vector2(3.5, 3.5)
-sprite_frames = SubResource("SpriteFrames_6p17c")
-script = ExtResource("34_cqeud")
-destroy_on_start = true
+[node name="Label2" type="Label" parent="Panel" unique_id=1967776136]
+layout_mode = 0
+offset_left = 15.5
+offset_top = 56.0
+offset_right = 418.5
+offset_bottom = 177.0
+theme = ExtResource("2_6qse1")
+theme_override_font_sizes/font_size = 19
+text = "- Hostiles cannot breach the facility
+- Allow scientists 15 minutes to prepare
+  the bioweapon for activation
+- Activate the bioweapon 
 
-[node name="Panel" type="Panel" parent="Control/tower_door2" unique_id=426666651]
-offset_left = -18.000002
-offset_top = -18.00001
-offset_right = 17.999994
-offset_bottom = 17.99999
-theme_override_styles/panel = SubResource("StyleBoxTexture_a7eom")
+You have 30 seconds before the first wave"
 
-[node name="tower_door3" type="AnimatedSprite2D" parent="Control" unique_id=451597534]
-material = ExtResource("14_w2cth")
-position = Vector2(349, 993.00006)
-scale = Vector2(3.5, 3.5)
-sprite_frames = SubResource("SpriteFrames_6p17c")
-script = ExtResource("34_cqeud")
-destroy_on_start = true
-
-[node name="Panel" type="Panel" parent="Control/tower_door3" unique_id=889469235]
-offset_left = -18.000002
-offset_top = -18.00001
-offset_right = 17.999994
-offset_bottom = 17.99999
-theme_override_styles/panel = SubResource("StyleBoxTexture_a7eom")
-
-[node name="tower_door4" type="AnimatedSprite2D" parent="Control" unique_id=354874434]
-material = ExtResource("14_w2cth")
-position = Vector2(489.00003, 993.00006)
-scale = Vector2(3.5, 3.5)
-sprite_frames = SubResource("SpriteFrames_6p17c")
-script = ExtResource("34_cqeud")
-
-[node name="Panel" type="Panel" parent="Control/tower_door4" unique_id=1957363249]
-offset_left = -18.000002
-offset_top = -18.00001
-offset_right = 17.999994
-offset_bottom = 17.99999
-theme_override_styles/panel = SubResource("StyleBoxTexture_a7eom")
-
-[node name="tower_door5" type="AnimatedSprite2D" parent="Control" unique_id=2017543907]
-material = ExtResource("14_w2cth")
-position = Vector2(629.00006, 993.00006)
-scale = Vector2(3.5, 3.5)
-sprite_frames = SubResource("SpriteFrames_6p17c")
-script = ExtResource("34_cqeud")
-
-[node name="Panel" type="Panel" parent="Control/tower_door5" unique_id=165103974]
-offset_left = -18.000002
-offset_top = -18.00001
-offset_right = 17.999994
-offset_bottom = 17.99999
-theme_override_styles/panel = SubResource("StyleBoxTexture_a7eom")
-
-[node name="tower_door6" type="AnimatedSprite2D" parent="Control" unique_id=784642726]
-material = ExtResource("14_w2cth")
-position = Vector2(768.00006, 993.00006)
-scale = Vector2(3.5, 3.5)
-sprite_frames = SubResource("SpriteFrames_6p17c")
-script = ExtResource("34_cqeud")
-
-[node name="Panel" type="Panel" parent="Control/tower_door6" unique_id=1281103848]
-offset_left = -18.000002
-offset_top = -18.00001
-offset_right = 17.999994
-offset_bottom = 17.99999
-theme_override_styles/panel = SubResource("StyleBoxTexture_a7eom")
-
-[node name="tower_door7" type="AnimatedSprite2D" parent="Control" unique_id=583423889]
-material = ExtResource("14_w2cth")
-position = Vector2(908.00006, 993.00006)
-scale = Vector2(3.5, 3.5)
-sprite_frames = SubResource("SpriteFrames_6p17c")
-script = ExtResource("34_cqeud")
-destroy_on_start = true
-
-[node name="Panel" type="Panel" parent="Control/tower_door7" unique_id=2144206707]
-offset_left = -18.000002
-offset_top = -18.00001
-offset_right = 17.999994
-offset_bottom = 17.99999
-theme_override_styles/panel = SubResource("StyleBoxTexture_a7eom")
+[node name="Button" type="Button" parent="Panel" unique_id=1811784001]
+layout_mode = 0
+offset_left = 63.5
+offset_top = 189.0
+offset_right = 407.5
+offset_bottom = 232.0
+theme = ExtResource("2_6qse1")
+text = "Affirmative"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
@@ -1198,16 +1255,17 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_a7eom")
 [connection signal="tower_button_pressed" from="Container/Tower_Menu/SubViewport/Tower_Selection/HBoxContainer/tower_button6" to="." method="_on_tower_button_pressed"]
 [connection signal="tower_button_pressed" from="Container/Tower_Menu/SubViewport/Tower_Selection/HBoxContainer/tower_button2" to="." method="_on_tower_button_pressed"]
 [connection signal="tower_button_pressed" from="Container/Tower_Menu/SubViewport/Tower_Selection/HBoxContainer/tower_button7" to="." method="_on_destroy_button_pressed"]
+[connection signal="animation_finished" from="Container/Tower_Menu/SubViewport/Control/tower_door" to="Container/Tower_Menu/SubViewport/Control/tower_door" method="_on_animation_finished"]
+[connection signal="animation_finished" from="Container/Tower_Menu/SubViewport/Control/tower_door2" to="Container/Tower_Menu/SubViewport/Control/tower_door2" method="_on_animation_finished"]
+[connection signal="animation_finished" from="Container/Tower_Menu/SubViewport/Control/tower_door3" to="Container/Tower_Menu/SubViewport/Control/tower_door3" method="_on_animation_finished"]
+[connection signal="animation_finished" from="Container/Tower_Menu/SubViewport/Control/tower_door4" to="Container/Tower_Menu/SubViewport/Control/tower_door4" method="_on_animation_finished"]
+[connection signal="animation_finished" from="Container/Tower_Menu/SubViewport/Control/tower_door5" to="Container/Tower_Menu/SubViewport/Control/tower_door5" method="_on_animation_finished"]
+[connection signal="animation_finished" from="Container/Tower_Menu/SubViewport/Control/tower_door6" to="Container/Tower_Menu/SubViewport/Control/tower_door6" method="_on_animation_finished"]
+[connection signal="animation_finished" from="Container/Tower_Menu/SubViewport/Control/tower_door7" to="Container/Tower_Menu/SubViewport/Control/tower_door7" method="_on_animation_finished"]
 [connection signal="timeout" from="Victory_Timer" to="." method="_on_victory_timer_timeout"]
 [connection signal="timeout" from="Update_Timer" to="." method="_on_update_timer_timeout"]
 [connection signal="pressed" from="wave_up" to="." method="_on_wave_up_pressed"]
 [connection signal="pressed" from="subwave_down" to="." method="_on_subwave_down_pressed"]
 [connection signal="pressed" from="subwave_up" to="." method="_on_subwave_up_pressed"]
 [connection signal="pressed" from="wave_down" to="." method="_on_wave_down_pressed"]
-[connection signal="animation_finished" from="Control/tower_door" to="Control/tower_door" method="_on_animation_finished"]
-[connection signal="animation_finished" from="Control/tower_door2" to="Control/tower_door2" method="_on_animation_finished"]
-[connection signal="animation_finished" from="Control/tower_door3" to="Control/tower_door3" method="_on_animation_finished"]
-[connection signal="animation_finished" from="Control/tower_door4" to="Control/tower_door4" method="_on_animation_finished"]
-[connection signal="animation_finished" from="Control/tower_door5" to="Control/tower_door5" method="_on_animation_finished"]
-[connection signal="animation_finished" from="Control/tower_door6" to="Control/tower_door6" method="_on_animation_finished"]
-[connection signal="animation_finished" from="Control/tower_door7" to="Control/tower_door7" method="_on_animation_finished"]
+[connection signal="pressed" from="Panel/Button" to="Panel" method="_on_accept"]

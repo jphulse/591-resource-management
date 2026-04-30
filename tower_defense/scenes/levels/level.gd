@@ -14,9 +14,13 @@ class_name Level extends Node2D
 @onready var warning_audio : AudioStreamPlayer = $Warning
 @onready var clear_audio : AudioStreamPlayer = $Clear
 @onready var boss_cue : AudioStreamPlayer = $Alert
+@onready var aux_timer : Timer = $Aux_Timer
+@onready var death_ball_timer : Timer = $death_ball_timer
 
 @export var enemy_scene: PackedScene = preload("res://tower_defense/scenes/enemies/base_enemy/EnemyBase.tscn")
 @export var siege_scene: PackedScene = preload("res://tower_defense/scenes/enemies/base_enemy/SiegeBreaker.tscn")
+@export var death_ball_scene: PackedScene = preload("res://tower_defense/scenes/enemies/base_enemy/Death_Ball.tscn")
+@export var tank_scene: PackedScene = preload("res://tower_defense/scenes/enemies/base_enemy/Carrier.tscn")
 @export var wave_component: Node2D = null
 @export var max_storage : int = 50
 @export var generation_rate : float = .4
@@ -39,7 +43,7 @@ const GRID_WIDTH = 10
 const GRID_HEIGHT = 5
 const NORMAL_ODDS = 10
 const DEATH_BALL_ODDS = 150
-const SIEGE_ODDS = 350
+const TANK_ODDS = 350
 
 var tower_grid: Dictionary = {} # Key: Vector2i, Value: Node2D
 var enemies: Array[Node2D] = []
@@ -63,8 +67,11 @@ var normal_spawned : bool = false
 var normal_odds : float = NORMAL_ODDS
 var death_ball_spawned : bool = false
 var death_ball_odds : float = DEATH_BALL_ODDS
+var death_balls_left : int = 0
+var death_ball_spawning : bool = false
+var current_path : Path2D
 var tank_spawned : bool = false
-var tank_odds : float = SIEGE_ODDS
+var tank_odds : float = TANK_ODDS
 
 func _set_wave_(increase : bool) -> void:
 	if increase and current_wave_index < 4:
@@ -102,9 +109,9 @@ func _on_resource_timer_timeout() -> void:
 func _on_generation_increase_attempt() :
 	if total_resources >= current_energy_cost :
 		total_resources -= current_energy_cost
-		generation_rate /= 1.23
+		generation_rate /= 1.20
 		resource_timer.wait_time = generation_rate
-		current_energy_cost *= 1.47
+		current_energy_cost *= 1.5
 		update_generation.emit(current_energy_cost)
 
 func _on_attempt_storage_upgrade() -> void:
@@ -160,6 +167,8 @@ func is_within_placement_bounds(cell_coord: Vector2i) -> bool:
 	return inside_x and inside_y
 
 func request_tower_placement(tower_scene: PackedScene, global_pos: Vector2, cost : int) -> bool:
+	if cost > total_resources:
+		return false
 	var local_pos = level_map.to_local(global_pos)
 	var cell_coord = level_map.local_to_map(local_pos)
 	
@@ -197,19 +206,19 @@ func is_cell_occupied(cell: Vector2i) -> bool:
 		else:
 			tower_grid.erase(cell)
 	
-	for i in range(enemies.size() - 1, -1, -1):
-		var e = enemies[i]
-		if not is_instance_valid(e) or not e.is_inside_tree():
-			if not is_instance_valid(e):
-				enemies.remove_at(i)
-			continue
-			
-		var enemy_local = level_map.to_local(e.global_position)
-		var enemy_cell = level_map.local_to_map(enemy_local)
-		
-		if enemy_cell == cell:
-			print("Collision with enemy at: ", cell)
-			return true
+	#for i in range(enemies.size() - 1, -1, -1):
+		#var e = enemies[i]
+		#if not is_instance_valid(e) or not e.is_inside_tree():
+			#if not is_instance_valid(e):
+				#enemies.remove_at(i)
+			#continue
+			#
+		#var enemy_local = level_map.to_local(e.global_position)
+		#var enemy_cell = level_map.local_to_map(enemy_local)
+		#
+		#if enemy_cell == cell:
+			#print("Collision with enemy at: ", cell)
+			#return true
 			
 	return false 
 
@@ -261,6 +270,10 @@ func _on_calm_timer_timeout() -> void:
 	elif current_wave_index == 2:
 		wave_timer.start(120)
 		boss_timer.start(70)
+		aux_timer.start(30)
+	elif current_wave_index == 1:
+		wave_timer.start(120)
+		aux_timer.start(90)
 	else:
 		wave_timer.start(120)
 
@@ -274,15 +287,38 @@ func _spawn_enemy_timer() -> void:
 func _frequency_timer() -> void:
 	if wave_active:
 		frequency_timer.start()	
-		normal_odds = NORMAL_ODDS
 		if normal_spawned :
 			normal_odds += NORMAL_ODDS + 5 - wave_subgroup_index
+			normal_spawned = false
 		else :
 			normal_odds /= 1.05
 		if randf_range(0, (normal_odds / difficulty_multiplier)) < 1.0:
 			var enemy_path: Path2D = enemy_paths.pick_random()
 			spawn_enemy(enemy_scene, enemy_path)
-
+			normal_spawned = true
+		if current_wave_index > 1:
+			if not death_ball_spawning:
+				if death_ball_spawned :
+					death_ball_odds += DEATH_BALL_ODDS + 5 - wave_subgroup_index
+					death_ball_spawned = false
+				else :
+					death_ball_odds /= 1.05
+				if randf_range(0, (death_ball_odds / difficulty_multiplier)) < 1.0:
+					if death_ball_spawning == false || death_ball_timer.is_stopped():
+						death_balls_left = 3
+						death_ball_spawning = true
+						death_ball_spawned = true
+						death_ball_timer.start()
+		if current_wave_index > 2:
+			if tank_spawned :
+				tank_odds += TANK_ODDS + 5 - wave_subgroup_index
+				tank_spawned = false
+			else :
+				tank_odds /= 1.05
+			if randf_range(0, (tank_odds / difficulty_multiplier)) < 1.0:
+				var enemy_path: Path2D = enemy_paths.pick_random()
+				spawn_enemy(tank_scene, enemy_path)
+				tank_spawned = true
 
 func _on_timer_timeout() -> void:
 	boss_cue.play()
@@ -293,3 +329,26 @@ func _on_timer_timeout() -> void:
 	if former_wait_time < 10:
 		former_wait_time = 10
 	boss_timer.start(former_wait_time)
+
+func _on_aux_timer_timeout() -> void:
+	if current_wave_index == 1:
+		death_balls_left = 3
+		death_ball_timer.start()
+	elif current_wave_index == 2:
+		for lane in enemy_paths:
+			spawn_enemy(tank_scene, lane)
+	boss_cue.play()
+	
+func _on_death_ball_timer_timeout() -> void:
+	if death_balls_left < 1:
+		death_ball_spawning = false
+		return
+	if current_wave_index > 1:
+		if death_balls_left == 3:
+			current_path = enemy_paths.pick_random()
+		spawn_enemy(death_ball_scene, current_path)
+	else:
+		for lane in enemy_paths:
+			spawn_enemy(death_ball_scene, lane)
+	death_balls_left -=1
+	death_ball_timer.start()

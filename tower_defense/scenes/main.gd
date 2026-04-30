@@ -84,8 +84,7 @@ func place_tower() -> void:
 
 	var target_pos = ghost_preview.global_position
 	
-	if level_node.request_tower_placement(current_tower_scene, target_pos, current_cost):
-		cancel_placement()
+	level_node.request_tower_placement(current_tower_scene, target_pos, current_cost)
 
 func destroy_tower() -> void:
 	if not is_instance_valid(ghost_preview):
